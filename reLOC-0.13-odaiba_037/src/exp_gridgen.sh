@@ -2,8 +2,8 @@ seeds=`cat seeds`
 
 SIZE=$1
 MAX_ROBOTS=$((SIZE * SIZE / 2))	
-OBSTACLES=$2
 ROBOT_LIST=`cat $3`
+OBSTACLES=$2
 
 echo 'grid size  =' $SIZE
 echo 'max robots =' $MAX_ROBOTS
