@@ -1,0 +1,34 @@
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#1.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#1_redundant.txt --cnf-level=5 --cnf-file=../../cnfs/08x08/random/grid_8x8#1.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#2.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#2_redundant.txt --cnf-level=6 --cnf-file=../../cnfs/08x08/random/grid_8x8#2.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#4.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#4_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#4.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#6.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#6_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#6.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#8.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#8_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#8.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#10.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#10_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#10.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#12.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#12_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#12.cnf
+
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#14.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#14_redundant.txt --cnf-level=10 --cnf-file=../../cnfs/08x08/random/grid_8x8#14.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#16.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#16_redundant.txt --cnf-level=10 --cnf-file=../../cnfs/08x08/random/grid_8x8#16.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#18.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#18_redundant.txt --cnf-level=10 --cnf-file=../../cnfs/08x08/random/grid_8x8#18.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#20.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#20_redundant.txt --cnf-level=10 --cnf-file=../../cnfs/08x08/random/grid_8x8#20.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#22.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#22_redundant.txt --cnf-level=10 --cnf-file=../../cnfs/08x08/random/grid_8x8#22.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#24.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#24_redundant.txt --cnf-level=10 --cnf-file=../../cnfs/08x08/random/grid_8x8#24.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#26.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#26_redundant.txt --cnf-level=10 --cnf-file=../../cnfs/08x08/random/grid_8x8#26.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#28.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#28_redundant.txt --cnf-level=10 --cnf-file=../../cnfs/08x08/random/grid_8x8#28.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#30.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#30_redundant.txt --cnf-level=10 --cnf-file=../../cnfs/08x08/random/grid_8x8#30.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#32.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#32_redundant.txt --cnf-level=14 --cnf-file=../../cnfs/08x08/random/grid_8x8#32.cnf
+
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#34.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#34_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#34.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#36.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#36_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#36.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#38.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#38_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#38.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#40.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#40_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#40.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#42.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#42_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#42.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#44.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#44_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#44.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#46.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#46_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#46.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#48.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#48_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#48.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#50.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#50_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#50.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#52.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#52_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#52.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#54.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#54_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#54.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#56.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#56_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#56.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#58.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#58_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#58.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#60.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#60_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#60.cnf
+./resolver_reLOC --pddl-problem-file=../../pddls/08x08/random/grid_8x8#62.pddl --solution-file=../../bibox/08x08/random/bibox_grid_8x8#62_redundant.txt --cnf-level=8 --cnf-file=../../cnfs/08x08/random/grid_8x8#62.cnf
