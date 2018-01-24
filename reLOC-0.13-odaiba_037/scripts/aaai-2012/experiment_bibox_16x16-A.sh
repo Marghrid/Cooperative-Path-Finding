@@ -1,0 +1,16 @@
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#1_redundant.txt > ../../experiments/bibox_grid_16x16#1_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#8_redundant.txt > ../../experiments/bibox_grid_16x16#8_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#16_redundant.txt > ../../experiments/bibox_grid_16x16#16_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#24_redundant.txt > ../../experiments/bibox_grid_16x16#24_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#32_redundant.txt > ../../experiments/bibox_grid_16x16#32_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#40_redundant.txt > ../../experiments/bibox_grid_16x16#40_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#48_redundant.txt > ../../experiments/bibox_grid_16x16#48_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#56_redundant.txt > ../../experiments/bibox_grid_16x16#56_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#64_redundant.txt > ../../experiments/bibox_grid_16x16#64_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#72_redundant.txt > ../../experiments/bibox_grid_16x16#72_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#80_redundant.txt > ../../experiments/bibox_grid_16x16#80_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#88_redundant.txt > ../../experiments/bibox_grid_16x16#88_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#96_redundant.txt > ../../experiments/bibox_grid_16x16#96_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#104_redundant.txt > ../../experiments/bibox_grid_16x16#104_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#112_redundant.txt > ../../experiments/bibox_grid_16x16#112_optimized.txt
+./optimizer_reLOC --minisat-timeout=8 --makespan-bound=6 --number-of-threads=12 --solution-file=../../bibox/16x16/bibox_grid_16x16#120_redundant.txt > ../../experiments/bibox_grid_16x16#120_optimized.txt
