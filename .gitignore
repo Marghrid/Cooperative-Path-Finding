@@ -1,0 +1,12 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.o_opt
+*.o_dbg
+
+# Executables
+*.exe
+*.out
+*.app
