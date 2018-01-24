@@ -23,5 +23,3 @@ for dim in [3, 9, 12]:
 			aux += " --multirobot-file=instances/hyper_dim" + str(dim) + "_r" + str(n_robots) + "_" + str(seed) + ".cpf"
 			print ("reLOC-0.13-odaiba_037/src/hypergen_reLOC " + aux)
 			system("reLOC-0.13-odaiba_037/src/hypergen_reLOC " + aux)
-
-			
