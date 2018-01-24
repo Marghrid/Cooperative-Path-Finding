@@ -1,4 +1,4 @@
-seeds=`cat puzzseeds`
+seeds=`cat seeds`
 
 SIZE=$1
 ROBOTS=$((SIZE * SIZE - 1))
