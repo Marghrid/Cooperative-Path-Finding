@@ -10,3 +10,7 @@
 *.exe
 *.out
 *.app
+
+reLOC-0.13-odaiba_037/src/*.o
+reLOC-0.13-odaiba_037/src/*.o_opt
+reLOC-0.13-odaiba_037/src/*.o_dbg
