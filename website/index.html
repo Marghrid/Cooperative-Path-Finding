@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <title> Cooperative Path-Finding Instance Viewer </title>
+  <style>
+  	body {
+  		font-family: sans-serif;
+  	}
+
+  	h1 {
+  		font-size: 18pt;
+  	}
+
+  	h2 {
+  		font-size: 16pt;
+  	}
+  </style>
+  <script src="js/three.js">    </script>
+  <script src="js/agent.js">    </script>
+  <script src="js/instance.js"> </script>
+  <script src="js/parse.js">    </script>
+  <script src="js/materials.js"></script>
+  <script src="js/agent3D.js">    </script>
+  <script src="js/board.js">    </script>
+  <script src="js/init.js">     </script>
+</head>
+
+<body>
+	<h1> Cooperative Path-Finding </h1>
+	<h2> Instance viewer </h2>
+	<p> Instance file: <input type="file" id="cpf_file"> </p>
+	<p> Solution file: <input type="file" id="solution_file"> </p>
+  <p><button type="button" onclick="refresh_button()"> Refresh </button></p>
+
+</body>
+</html>
