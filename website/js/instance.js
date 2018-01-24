@@ -70,6 +70,10 @@ class Instance {
 				return false;
 			}
 		}
+
+		for(a in this.adjacencies) {
+			this.adjacencies[a].sort();
+		}
 		return true;
 	}
 }
