@@ -22,6 +22,9 @@ function init(cpf) {
     document.body.appendChild( renderer.domElement );
 
     camera.position.z = CAMERA_Z;
+    camera.position.x = 30;
+    camera.position.y = 30;
+    camera.up.set(0, 0, 1);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     scene.board = new Board3D(instance);
