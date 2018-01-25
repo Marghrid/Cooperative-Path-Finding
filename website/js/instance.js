@@ -12,7 +12,7 @@ class Instance {
 	n_vertices() { return this.adjacencies.length; }
 
 	add_agent(id) {
-		var a = new Agent(id);
+		let a = new Agent(id);
 		this.agents[a.id] = a;
 		//console.log("added agent " + a.id);
 	}
@@ -38,7 +38,7 @@ class Instance {
 	set_agent_goal_pos(id, pos) { this.agents[id].set_goal_pos(pos); }
 
 	print_agents() {
-		for(var a in this.agents) {
+		for(let a in this.agents) {
 			console.log("agent " + this.agents[a].id +
 				" : (" + this.agents[a].start_pos +
 				", " + this.agents[a].goal_pos + ")");
@@ -46,20 +46,20 @@ class Instance {
 	}
 
 	print_edges() {
-		for(var e in this.adjacencies) {
+		for(let e in this.adjacencies) {
 			console.log(e + ": " + this.adjacencies[e]);
 		}
 	}
 
 	check() {
-		for(var e in this.adjacencies) {
+		for(let e in this.adjacencies) {
 			if(this.adjacencies == null) {
 				console.log("error: Vertex with no edges: " + e);
 				return false;
 			}
 		}
 
-		for(var a in this.agents) {
+		for(let a in this.agents) {
 			if(this.agents == null) {
 				console.log("error: unexistent agent: " + a);
 				return false;
@@ -71,8 +71,8 @@ class Instance {
 			}
 		}
 
-		for(a in this.adjacencies) {
-			this.adjacencies[a] = this.adjacencies[a].sort(function (a, b) { return a - b; });
+		for(let a in this.adjacencies) {
+			this.adjacencies[a] = this.adjacencies[a].sort(function (x, y) { return x - y; });
 		}
 		return true;
 	}
