@@ -1,9 +1,10 @@
-var renderer, scene, camera, board;
+var renderer, scene, camera, board, clock;
 var instance;
 
 function animate() {
     requestAnimationFrame( animate );
-    board.animate();
+    var dt = clock.getDelta();
+    board.animate(dt);
     renderer.render(scene, camera);
 }
 
@@ -28,6 +29,8 @@ function init() {
     sun.position.y = 10;
     scene.add( sun );
 
+    clock = new THREE.Clock();
+    clock.start();
     animate();
 }
 
