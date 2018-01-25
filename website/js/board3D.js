@@ -134,8 +134,6 @@ function find_leftmost_column(instance, squares) {
 				break;
 			}
 		}
-		console.log("leftmost_column:");
-		console.log(leftmost_column);
 	}
 
 	for(let i = 0; i < leftmost_column.length; ++i) {
@@ -153,7 +151,7 @@ function get_height_squares(squares) {
 		ys.push(squares[i].y);
 	}
 
-	return ys.sort()[ys.length-1];
+	return ys.sort(function (a, b) { return a - b; })[ys.length-1] + 1;
 }
 
 function get_width_squares(squares) {
@@ -163,7 +161,7 @@ function get_width_squares(squares) {
 		xs.push(squares[i].x);
 	}
 
-	return xs.sort()[xs.length-1];
+	return xs.sort(function (a, b) { return a - b; })[xs.length-1] + 1;
 }
 
 function check_squares(squares) {
@@ -171,7 +169,7 @@ function check_squares(squares) {
 	let ok = true;
 	for(let i in squares) {
 		if(squares[i].x == -1 || squares[i].y == -1) {
-			console.log("Isolated square! Square: " + i);
+			console.log("Isolated square: " + i);
 			okay = false;
 		}
 	}
@@ -207,9 +205,9 @@ class Board3D extends THREE.Object3D {
 		this.height_squares = get_height_squares(squares);
 		this.width_squares  = get_width_squares(squares);
 
-		this.square_length = (this.width_squares > this.height_squares ?
-			BOARD_LENGTH  / this.width_squares :
-			BOARD_LENGTH) / this.height_squares;
+		this.square_length = this.width_squares > this.height_squares ?
+			BOARD_LENGTH / this.width_squares :
+			BOARD_LENGTH / this.height_squares;
 
 		this.height = this.height_squares * this.square_length;
 		this.width  = this.width_squares  * this.square_length;
@@ -218,8 +216,8 @@ class Board3D extends THREE.Object3D {
 
 		for(let i in squares) {
 			if(squares[i].x == -1 || squares[i].y == -1) continue;
-			let square_pos_x =  (squares[i].x) * this.square_length - 0.5 * this.width;
-			let square_pos_y = -(squares[i].y) * this.square_length + 0.5 * this.height;
+			let square_pos_x =  (squares[i].x + .5) * this.square_length - 0.5 * this.width;
+			let square_pos_y = -(squares[i].y + .5) * this.square_length + 0.5 * this.height;
 			let s3D = new Square3D(this.square_length, square_pos_x, square_pos_y);
 			this.squares3D.push(s3D);
 			this.add(s3D);
