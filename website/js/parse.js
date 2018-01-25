@@ -1,10 +1,10 @@
 
 
-function parse(cpf, solution) {
-	var instance = new Instance();
+function parse(cpf) {
+	let instance = new Instance();
 
     // parse CPF:
-    var lines = cpf.split("\n");
+    let lines = cpf.split("\n");
     lines.splice(0, 1);
 
     for(l in lines) {
@@ -12,7 +12,7 @@ function parse(cpf, solution) {
     		lines.splice(0, l);
     		break;
     	}
-    	var line = lines[l];
+    	let line = lines[l];
     	line = line.replace("[", " ");
     	line = line.replace("]", " ");
     	line = line.replace("(", " ");
@@ -30,9 +30,9 @@ function parse(cpf, solution) {
     	// 5: something
     	// 6: agent that finishes here
 
-    	var v_id       = parseInt(line[1]);
-    	var a_start_id = parseInt(line[4]);
-    	var a_goal_id  = parseInt(line[6]);
+    	let v_id       = parseInt(line[1]);
+    	let a_start_id = parseInt(line[4]);
+    	let a_goal_id  = parseInt(line[6]);
 
     	if(a_start_id > 0) {
     		--a_start_id;
@@ -58,7 +58,7 @@ function parse(cpf, solution) {
     lines.splice(-1, 1);
 
     for(l in lines) {
-    	var line = lines[l];
+    	let line = lines[l];
     	line = line.slice(0,-6);
     	line = line.slice(1);
     	line = line.split(",");

@@ -16,6 +16,8 @@
   		font-size: 16pt;
   	}
   </style>
+  <script src="js/files_management.js"></script>
+
   <script src="js/three.js">    </script>
   <script src="js/global.js">   </script>
   <script src="js/agent.js">    </script>
@@ -24,6 +26,7 @@
   <script src="js/materials.js"></script>
   <script src="js/agent3D.js">  </script>
   <script src="js/goal3D.js">   </script>
+  <script src="js/square3D.js"> </script>
   <script src="js/board3D.js">  </script>
   <script src="js/init.js">     </script>
 </head>
@@ -31,8 +34,8 @@
 <body>
 	<h1> Cooperative Path-Finding </h1>
 	<h2> Instance viewer </h2>
-	<p> Instance file: <input type="file" id="cpf_file"> </p>
-	<p> Solution file: <input type="file" id="solution_file"> </p>
+	<p> Instance file: <input type="file" id="cpf_file" onchange="update_cpf_file_flag()"> </p>
+	<p> Solution file: <input type="file" id="sol_file" onchange="update_sol_file_flag()"> </p>
   <p><button type="button" onclick="refresh_button()"> Refresh </button></p>
     <button type="button" onclick="example1_button()"> Example1 </button>
     <button type="button" onclick="example2_button()"> Example2 </button>
