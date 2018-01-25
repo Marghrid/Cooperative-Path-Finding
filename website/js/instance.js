@@ -6,7 +6,7 @@ class Instance {
 
 	agent(id) { return this.agents[id]; }
 
-	get_edges(vertex_id) { return this.adjacencies[vertex_id]; }
+	get_neighbours(vertex_id) { return this.adjacencies[vertex_id]; }
 
 	n_agents() { return this.agents.length; }
 	n_vertices() { return this.adjacencies.length; }
@@ -72,7 +72,7 @@ class Instance {
 		}
 
 		for(a in this.adjacencies) {
-			this.adjacencies[a].sort();
+			this.adjacencies[a] = this.adjacencies[a].sort(function (a, b) { return a - b; });
 		}
 		return true;
 	}
