@@ -1,5 +1,5 @@
 // parse: given a string with and instance read from a file, returns an Instance Object.
-function parse(cpf) {
+function parse_cpf(cpf) {
 	let instance = new Instance();
 
     // parse CPF:
@@ -12,26 +12,23 @@ function parse(cpf) {
     		break;
     	}
     	let line = lines[l];
-    	line = line.replace("[", " ");
-    	line = line.replace("]", " ");
-    	line = line.replace("(", " ");
-    	line = line.replace(")", " ");
+        // (0:-1)[0:0:0]
+    	line = line.slice(1);
+    	line = line.replace(":-1)[", " ");
+        line = line.replace(":", " ");
     	line = line.replace(":", " ");
-    	line = line.replace(":", " ");
-    	line = line.replace(":", " ");
-    	line = line.split(" ");
-    	//console.log(line);
-    	// 0: empty
-    	// 1: vertex_id
-    	// 2: -1
-    	// 3: empty
-    	// 4: agent that starts here
-    	// 5: something
-    	// 6: agent that finishes here
+        line = line.slice(0, -1);
+        // 0 0 0 0
 
-    	let v_id       = parseInt(line[1]);
-    	let a_start_id = parseInt(line[4]);
-    	let a_goal_id  = parseInt(line[6]);
+    	line = line.split(" ");
+    	// 0: vertex_id
+    	// 1: agent that starts here
+    	// 2: something
+    	// 3: agent that finishes here
+
+    	let v_id       = parseInt(line[0]);
+    	let a_start_id = parseInt(line[1]);
+    	let a_goal_id  = parseInt(line[3]);
 
     	if(a_start_id > 0) {
     		--a_start_id;
@@ -77,4 +74,36 @@ function parse(cpf) {
     	return null;
     }
     return instance;
+}
+
+function parse_solution(sol_str) {
+    let lines = sol_str.split("\n");
+
+    lines.splice(0, 1);
+
+    let solution_length = parseInt(lines[0].split(":")[1]); //pretty sure this is useless.
+
+    let solution = new Solution();
+
+    for(l in lines) {
+        // 1 # 2 ---> 1 (0)
+        line = lines[l];
+        line = line.replace(" # ", " ");
+        line = line.replace(" ---> ", " ");
+        line = line.replace(" (", " ");
+        line = line.slice(0, -1);
+        // 1 2 1 0
+
+        line = line.split(" ");
+
+        let a_id        = parseInt(line[0]);
+        // ignore oringin vertex.
+        let dest_vertex = parseInt(line[2]);
+        let timestep    = parseInt(line[3]);
+
+        solution.add_action_to_move(timestep, a_id, dest_vertex);
+    }
+
+    return solution;
+
 }

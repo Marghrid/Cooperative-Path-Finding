@@ -116,6 +116,10 @@ class Board3D extends THREE.Object3D {
 	animate(dt) {
 		this.rotateZ(0.03*dt);
 	}
+
+	animate_with_solution(dt) {
+		this.rotateZ(-0.03*dt);
+	}
 }
 
 
