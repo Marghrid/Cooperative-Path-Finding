@@ -61,6 +61,10 @@ function example4_button() {
     get_example_file("grid_16x16_r25_5");
 }
 
+function example5_button() {
+    get_example_file("grid_32x32_r102_5");
+}
+
 function get_example_file(ex_name) {
     let cpf_blob = null;
     let sol_blob = null;
