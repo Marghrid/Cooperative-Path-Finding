@@ -6,11 +6,11 @@ class Square3D extends THREE.Object3D {
 		this.geometry = new THREE.BoxGeometry(length, length, BOARD_HEIGHT);
 		this.material = board_material_e;
 		if(odd) {
-			material = board_material_o;
+			this.material = board_material_o;
 		}
 
-		this.square_mesh = new THREE.Mesh(geometry, material);
-		this.add(square_mesh);
+		this.square_mesh = new THREE.Mesh(this.geometry, this.material);
+		this.add(this.square_mesh);
 		this.position.x = pos_x;
 		this.position.y = pos_y;
 		this.position.z = - BOARD_HEIGHT/2;
