@@ -1,6 +1,8 @@
 let cpf_file_change = false;
 let sol_file_change = false;
 
+let solve_button;
+
 function update_cpf_file_flag() {
     cpf_file_change = true;
     sol_file_change = false;
@@ -16,7 +18,13 @@ function start_reading_cpf(cpf_file) {
     cpf_reader.onload = function(e) {
         // cpf is a string with the file's contents
         cpf = cpf_reader.result;
-        init(cpf);
+        show(cpf);
+        solve_button = document. createElement("button");
+        solve_button.innerHTML = "Solve";
+        solve_button.disabled = true;
+        solve_button.id = "solve_button";
+        solve_button.onclick = solve_button_onclick;
+        document.body.appendChild(solve_button);
     }
     cpf_reader.readAsText(cpf_file);
 }
@@ -27,7 +35,9 @@ function start_reading_sol(sol_file) {
     sol_reader.onload = function(e) {
         // solution is a string with the file's contents
         solution = sol_reader.result;
-        //Do something
+        if(solve(solution)) {
+            solve_button.disabled = false;
+        }
     }
     sol_reader.readAsText(sol_file);
 }
@@ -42,8 +52,14 @@ function refresh_button() {
     if(sol_file_change) {
         sol_file_change = false;
         let solution_file = document.getElementById('sol_file').files[0];
+        start_reading_sol(solution_file);
     }
 
+}
+
+function solve_button_onclick() {
+    console.log("Start solving!");
+    run_solution();
 }
 
 function example1_button() {
