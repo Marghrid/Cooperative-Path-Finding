@@ -1,6 +1,6 @@
 from os import system
 
-for size in [ 64]:
+for size in [4, 8, 16, 32, 64]:
 
 	for robots in (4, 8, 16, 32):
 		for obst_prob in [0.1]:
@@ -17,7 +17,7 @@ for size in [ 64]:
 				filename += "_o" + str(obst_prob)
 				filename += "_s" + str(seed)
 
-				aux += " --multirobot-file=simple_instances/" + filename  + ".cpf"
+				aux += " --multirobot-file=instances/" + filename  + ".cpf"
 				print ("reLOC-0.13-odaiba_037/src/gridgen_reLOC" + aux)
 				system("reLOC-0.13-odaiba_037/src/gridgen_reLOC" + aux)
 
@@ -29,6 +29,6 @@ for dim in (3, 9):
 			aux  = " --dimmension=" + str(dim)
 			aux += " --N-robots=" + str(robots)
 			aux += " --seed=" + str(seed)
-			aux += " --multirobot-file=simple_instances/hyper_dim" + str(dim) + "_a" + str(robots) + "_" + str(seed) + ".cpf"
+			aux += " --multirobot-file=instances/hyper_dim" + str(dim) + "_a" + str(robots) + "_" + str(seed) + ".cpf"
 			print ("reLOC-0.13-odaiba_037/src/hypergen_reLOC " + aux)
 			system("reLOC-0.13-odaiba_037/src/hypergen_reLOC " + aux)
