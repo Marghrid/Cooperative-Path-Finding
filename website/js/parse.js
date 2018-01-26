@@ -1,5 +1,4 @@
-
-
+// parse: given a string with and instance read from a file, returns an Instance Object.
 function parse(cpf) {
 	let instance = new Instance();
 
@@ -78,5 +77,4 @@ function parse(cpf) {
     	return null;
     }
     return instance;
-
 }
