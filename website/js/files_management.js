@@ -10,25 +10,6 @@ function update_sol_file_flag() {
     sol_file_change = true;
 }
 
-/*function start(cpf_file, solution_file) {
-    let cpf, solution;
-    let cpf_reader = new FileReader();
-    let sol_reader = new FileReader();
-
-    cpf_reader.onload = function(e) {
-        cpf = cpf_reader.result;
-        //console.log("CPF:");
-        //console.log(cpf);
-        sol_reader.onload = function(e) {
-            solution = sol_reader.result;
-            //console.log("Solution:");
-            //console.log(solution);
-        }
-        sol_reader.readAsText(solution_file);
-    }
-    cpf_reader.readAsText(cpf_file);
-}*/
-
 function start_reading_cpf(cpf_file) {
 	let cpf;
     let cpf_reader = new FileReader();

@@ -1,3 +1,4 @@
+// Goal3D is the 3D representation of the agents' goals on the Board.
 class Goal3D extends THREE.Object3D {
 	constructor(a_id, radius, pos_x, pos_y, a_color) {
 		super();

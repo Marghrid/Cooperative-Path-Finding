@@ -1,6 +1,9 @@
+// Represents a CPF instance.
 class Instance {
 	constructor() {
 		this.agents = new Array();
+
+		// The graph used to describe the environment:
 		this.adjacencies = new Array();
 	}
 
@@ -51,28 +54,31 @@ class Instance {
 		}
 	}
 
+	// Checks for inconsistencies, and prepares the instance to be drawn.
 	check() {
-		for(let e in this.adjacencies) {
-			if(this.adjacencies == null) {
-				console.log("error: Vertex with no edges: " + e);
-				return false;
-			}
-		}
 
-		for(let a in this.agents) {
-			if(this.agents == null) {
-				console.log("error: unexistent agent: " + a);
+		for(let i = 0; i < this.agents.length; ++i) {
+			if(this.agents[i] == null) {
+				console.log("error: unexistent agent: " + i);
 				return false;
 			}
-			else if(this.agents[a].id != a) {
+			else if(this.agents[i].id != i) {
 				console.log("error: incorrectly stored agent: id = " +
-					this.agents[a].id + "; index = " + a);
+					this.agents[i].id + "; index = " + i);
 				return false;
 			}
 		}
 
-		for(let a in this.adjacencies) {
-			this.adjacencies[a] = this.adjacencies[a].sort(function (x, y) { return x - y; });
+		for(let i = 0; i < this.adjacencies.length; ++i) {
+			if(this.adjacencies[i] == null)
+				// It's a vertex with no edges, an isolated vertex.
+				// It's adjacency list is initialized, just to prevent
+				//  it from being undefined or null.
+				this.adjacencies[i] = new Array();
+			
+			else
+				this.adjacencies[i] = this.adjacencies[i].sort(function (x, y) { return x - y; });
+				// Orders the adjacencies so  it's easy to find the largest.
 		}
 		return true;
 	}
