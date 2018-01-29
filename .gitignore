@@ -20,3 +20,6 @@ reLOC-0.13-odaiba_037/src/*.o_dbg
 
 code/build
 code/bin
+
+glucose/*
+minisat/*
