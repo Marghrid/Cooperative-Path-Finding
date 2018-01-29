@@ -2,7 +2,7 @@
 #include "instance.h"
 #include "graph.h"
 #include "parser.h"
-#include "direct_encoder.h"
+#include "simplified_encoder.h"
 
 int main() {
 	Graph env;

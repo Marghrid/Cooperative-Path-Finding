@@ -10,13 +10,13 @@ Instance Parser::parse() {
 
 	int v_id;
 	int initial_a_id;
-	int unknown_a_id;
+	// int unknown_a_id;
 	int goal_a_id;
 	int largest_agent_id = 0;
 
 	int e_start_id;
 	int e_end_id;
-	int e_unknown;
+	// int e_unknown;
 	
 	std::string aux1;
 	std::string aux2;
@@ -47,7 +47,7 @@ Instance Parser::parse() {
 
 		v_id         = std::stoi(aux2);
 		initial_a_id = std::stoi(aux4);
-		unknown_a_id = std::stoi(aux5);
+		// unknown_a_id = std::stoi(aux5);
 		goal_a_id    = std::stoi(aux6);
 
 		inst.add_vertex(v_id);
@@ -88,7 +88,7 @@ Instance Parser::parse() {
 
 		e_start_id = std::stoi(aux2);
 		e_end_id   = std::stoi(aux3);
-		e_unknown  = std::stoi(aux5);
+		// e_unknown  = std::stoi(aux5);
 
 		inst.add_edge(e_start_id, e_end_id);
 
