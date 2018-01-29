@@ -5,7 +5,6 @@
 #include <fstream>
 #include <string>
 
-#include "cnf.h"
 #include "instance.h"
 
 
@@ -13,7 +12,6 @@ class Direct_encoder {
 private:
 	// std::ostream* fp = &cout
 	Instance _instance;
-	Formula _formula;
 	int _makespan;
 	std::ofstream _cnf_file_stream;
 	std::string   _cnf_file;

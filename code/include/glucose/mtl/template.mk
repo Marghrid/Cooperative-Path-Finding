@@ -62,7 +62,7 @@ $(EXEC)_static:		$(RCOBJS)
 
 lib$(LIB)_standard.a:	$(filter-out */Main.o,  $(COBJS))
 lib$(LIB)_profile.a:	$(filter-out */Main.op, $(PCOBJS))
-lib$(LIB)_debug.a:	$(filter-out */Main.od, $(DCOBJS))
+lib$(LIB)_debug.a:	    $(filter-out */Main.od, $(DCOBJS))
 lib$(LIB)_release.a:	$(filter-out */Main.or, $(RCOBJS))
 
 
@@ -74,7 +74,7 @@ lib$(LIB)_release.a:	$(filter-out */Main.or, $(RCOBJS))
 ## Linking rules (standard/profile/debug/release)
 $(EXEC) $(EXEC)_profile $(EXEC)_debug $(EXEC)_release $(EXEC)_static:
 	@echo Linking: "$@ ( $(foreach f,$^,$(subst $(MROOT)/,,$f)) )"
-	@$(CXX) $^ $(LFLAGS) -o $@
+	##@$(CXX) $^ $(LFLAGS) -o $@
 
 ## Library rules (standard/profile/debug/release)
 lib$(LIB)_standard.a lib$(LIB)_profile.a lib$(LIB)_release.a lib$(LIB)_debug.a:

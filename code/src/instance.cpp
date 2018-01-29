@@ -4,7 +4,7 @@
 #include <iostream>
 
 void Instance::add_agent(int a_id) {
-	if(a_id >= _agents.size()) {
+	if((size_t)a_id >= _agents.size()) {
 		for(int i = _agents.size(); i <= a_id; ++i) {
 			Agent a(i);
 			_agents.push_back(a);

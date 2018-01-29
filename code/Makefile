@@ -1,11 +1,12 @@
 FLAGS = -Wall -std=c++11
-INC   = -I src/ -I include/
+INC   = -I src/ -I include/glucose/
+LIB   = -L include/glucose/simp
 
-all: directories build/graph.o build/instance.o build/parser.o build/direct_encoder.o
-	g++ $(FLAGS) $(INC) -o bin/a.out build/graph.o build/instance.o build/parser.o build/direct_encoder.o src/main.cpp
+all: directories build/graph.o build/instance.o build/parser.o build/simplified_encoder.o
+	g++ $(FLAGS) $(INC) $(LIB) -o bin/a.out build/graph.o build/instance.o build/parser.o build/simplified_encoder.o -l_standard src/main.cpp 
 
 directories:
-	mkdir -p build
+	mkdir -p build 
 	mkdir -p bin
 
 build/graph.o: src/graph.cpp src/graph.h
@@ -17,8 +18,8 @@ build/instance.o: src/instance.cpp src/instance.h src/agent.h src/graph.h
 build/parser.o: src/parser.cpp src/parser.h src/instance.h
 	g++ $(FLAGS) -c $(INC) -o build/parser.o src/parser.cpp
 
-build/direct_encoder.o: src/direct_encoder.cpp src/direct_encoder.h src/cnf.h
-	g++ $(FLAGS) -c $(INC) -o build/direct_encoder.o src/direct_encoder.cpp
+build/simplified_encoder.o: src/simplified_encoder.cpp src/simplified_encoder.h
+	g++ $(FLAGS) -c $(INC) -o build/simplified_encoder.o src/simplified_encoder.cpp
 
 clean:
 	rm -f build/*.o

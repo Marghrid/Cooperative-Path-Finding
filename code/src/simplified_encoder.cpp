@@ -72,7 +72,21 @@ void Direct_encoder::convert() {
 	for(int i = 0; i < _instance.n_agents(); ++i) {
 		for(int j = 0; j < _instance.n_vertices(); ++i) {
 			for(int k = 0; k < _makespan; ++k) {
-				Variable v = make_var_id(k, j, i);
+				//Variable v = make_var_id(k, j, i);
+			}
+		}
+	}
+
+	// at most one agent is placed in each vertex at each time step
+
+	for(int i = 0; i < _makespan; ++i) {
+		for(int j = 0; j < _instance.n_vertices(); ++j){
+			for(int h = 0; h < _instance.n_agents(); ++h) {
+				for(int k = 0; k < _instance.n_agents(); ++k) {
+					Minisat::Lit l1 = Minisat::mkLit(make_var_id(k, j, i), true);
+					Minisat::Lit l2 = Minisat::mkLit(make_var_id(h, j, i), true);
+					solver.addClause(l1, l2);
+				}
 			}
 		}
 	}
