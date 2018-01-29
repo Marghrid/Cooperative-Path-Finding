@@ -7,9 +7,15 @@
 
 class Vertex {
 public:
-	int id;
+	int _id;
 
-	Vertex(int vid) { id = vid; }
+	Vertex(int id) { _id = id; }
+
+	int id() const { return _id;	}
+
+	bool operator<(const Vertex& o) const {
+		return this->_id < o._id;
+	}
 
 	friend std::ostream& operator<<(std::ostream& os, const Vertex& v);
 };
@@ -47,6 +53,8 @@ public:
 	int n_edges() const { return _n_edges; }
 
 	std::vector<Edge> edges() const;
+
+	std::vector<Edge> bidirectional_edges() const;
 
 	std::vector<Vertex> get_neighbours(int v_id) const;
 
