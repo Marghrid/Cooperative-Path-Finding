@@ -27,12 +27,15 @@ public:
 	Edge(int start_id, int end_id, int weight = 0)
 	: _start(start_id), _end(end_id) { _weight = weight; }
 
+	Vertex start() const { return _start; }
+	Vertex end()   const { return _end; }
+
 	friend std::ostream& operator<<(std::ostream& os, const Edge& e);
 };
 
 class Graph {
 private:
-	std::vector< std::list<Edge> > _edges;
+	std::vector< std::list<Edge> > _adjacencies;
 	int _n_vertices = 0;
 	int _n_edges = 0;
 
@@ -44,6 +47,8 @@ public:
 	int n_edges() const { return _n_edges; }
 
 	std::vector<Edge> edges() const;
+
+	std::vector<Vertex> get_neighbours(int v_id) const;
 
 	void add_edge(Vertex start, Vertex end, int weight = 0, bool directed = false);
 

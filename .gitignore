@@ -6,6 +6,7 @@
 *.obj
 *.o_opt
 *.o_dbg
+*.a
 
 # Executables
 *.exe
