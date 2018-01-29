@@ -82,11 +82,21 @@ void Direct_encoder::convert() {
 	for(int i = 0; i < _makespan; ++i) {
 		for(int j = 0; j < _instance.n_vertices(); ++j){
 			for(int h = 0; h < _instance.n_agents(); ++h) {
-				for(int k = 0; k < _instance.n_agents(); ++k) {
+				for(int k = 0; k < h; ++k) {
 					Minisat::Lit l1 = Minisat::mkLit(make_var_id(k, j, i), true);
 					Minisat::Lit l2 = Minisat::mkLit(make_var_id(h, j, i), true);
 					solver.addClause(l1, l2);
 				}
+			}
+		}
+	}
+
+	for(int i = 0; i < _makespan - 1; ++i) {
+		for(int j = 0; j < _instance.n_vertices(); ++j){
+			for(int k = 0; k < _instance.n_agents(); ++k) {
+				Minisat::Lit l1 = Minisat::mkLit(make_var_id(k, j, i), true);
+				Minisat::Lit l2 = Minisat::mkLit(make_var_id(k, j, i+1), true);
+
 			}
 		}
 	}

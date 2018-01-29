@@ -12,12 +12,20 @@ std::ostream& operator<<(std::ostream& os, const Edge& e) {
 
 std::vector<Edge> Graph::edges() const {
 	std::vector<Edge> ret;
-	for(auto& ee: _edges) {
+	for(auto& ee: _adjacencies) {
 		for(auto& e: ee) {
 			ret.push_back(e);
 		}
 	}
 	return ret;
+}
+
+std::vector<Vertex> Graph::get_neighbours(int v_id) const {
+	std::vector<Vertex> neighbours;
+	for(auto& a: _adjacencies[v_id]) {
+		neighbours.push_back(a.end());
+	}
+	return neighbours;
 }
 
 void Graph::add_edge(Vertex start, Vertex end, int weight, bool directed) {
@@ -30,11 +38,11 @@ void Graph::add_edge(Vertex start, Vertex end, int weight, bool directed) {
 	}
 
 	Edge e(start, end, weight);
-	_edges.at(start.id).push_back(e);
+	_adjacencies.at(start.id).push_back(e);
 
 	if(!directed) {
 		Edge e(end, start, weight);
-		_edges.at(end.id).push_back(e);
+		_adjacencies.at(end.id).push_back(e);
 	}
 
 	++_n_edges;
@@ -46,7 +54,7 @@ void Graph::add_edge(int start_id, int end_id, int weight, bool directed) {
 
 void Graph::add_vertex(int id) {
 	if (id >= _n_vertices) {
-		_edges.resize(id+1);
+		_adjacencies.resize(id+1);
 		_n_vertices = id+1;
 	}
 }

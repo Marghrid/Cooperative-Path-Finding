@@ -30,15 +30,17 @@ public:
 
 	Agent agent(int id) const { return _agents.at(id); }
 
+	std::vector<Vertex> get_neighbours(int v_id) {
+		return _environment.get_neighbours(v_id);
+	}
+
 	void add_vertex(int v_id) { _environment.add_vertex(v_id); }
 
 	void add_edge(int start_id, int end_id) { _environment.add_edge(start_id, end_id); }
  	
  	void add_agent(int a_id);
 
-	void add_agent(Agent a) {
-
-	}
+	// void add_agent(Agent a) { }
 
 	void set_agent_initial_position(int aid, int initial_pos_id) {
 		_agents.at(aid).set_initial_position(initial_pos_id);
