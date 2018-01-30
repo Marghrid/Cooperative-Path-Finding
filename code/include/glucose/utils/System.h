@@ -18,8 +18,8 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************/
 
-#ifndef Minisat_System_h
-#define Minisat_System_h
+#ifndef Glucose_System_h
+#define Glucose_System_h
 
 #if defined(__linux__)
 #include <fpu_control.h>
@@ -29,9 +29,10 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 
 //-------------------------------------------------------------------------------------------------
 
-namespace Minisat {
+namespace Glucose {
 
 static inline double cpuTime(void); // CPU-time in seconds.
+static inline double realTime(void);
 extern double memUsed();            // Memory in mega bytes (returns 0 for unsupported architectures).
 extern double memUsedPeak();        // Peak-memory in mega bytes (returns 0 for unsupported architectures).
 
@@ -43,18 +44,24 @@ extern double memUsedPeak();        // Peak-memory in mega bytes (returns 0 for 
 #if defined(_MSC_VER) || defined(__MINGW32__)
 #include <time.h>
 
-static inline double Minisat::cpuTime(void) { return (double)clock() / CLOCKS_PER_SEC; }
+static inline double Glucose::cpuTime(void) { return (double)clock() / CLOCKS_PER_SEC; }
 
 #else
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <unistd.h>
 
-static inline double Minisat::cpuTime(void) {
+static inline double Glucose::cpuTime(void) {
     struct rusage ru;
     getrusage(RUSAGE_SELF, &ru);
     return (double)ru.ru_utime.tv_sec + (double)ru.ru_utime.tv_usec / 1000000; }
 
 #endif
+
+// Laurent: I know that this will not compile directly under Windows... sorry for that
+static inline double Glucose::realTime() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (double)tv.tv_sec + (double) tv.tv_usec / 1000000; }
 
 #endif

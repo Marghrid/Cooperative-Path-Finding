@@ -17,8 +17,8 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************/
 
-#ifndef Minisat_Options_h
-#define Minisat_Options_h
+#ifndef Glucose_Options_h
+#define Glucose_Options_h
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -29,7 +29,7 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #include "mtl/Vec.h"
 #include "utils/ParseUtils.h"
 
-namespace Minisat {
+namespace Glucose {
 
 //==================================================================================================
 // Top-level option parse/help functions:
@@ -290,7 +290,7 @@ class Int64Option : public Option
         else
             fprintf(stderr, "%4" PRIi64, range.end);
 
-        fprintf(stderr, "] (default: %" PRIi64 ")\n", value);
+        fprintf(stderr, "] (default: %" PRIi64")\n", value);
         if (verbose){
             fprintf(stderr, "\n        %s\n", description);
             fprintf(stderr, "\n");

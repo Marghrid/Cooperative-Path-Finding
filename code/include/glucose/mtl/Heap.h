@@ -18,12 +18,12 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************/
 
-#ifndef Minisat_Heap_h
-#define Minisat_Heap_h
+#ifndef Glucose_Heap_h
+#define Glucose_Heap_h
 
 #include "mtl/Vec.h"
 
-namespace Minisat {
+namespace Glucose {
 
 //=================================================================================================
 // A heap implementation with support for decrease/increase key.
@@ -39,6 +39,7 @@ class Heap {
     static inline int left  (int i) { return i*2+1; }
     static inline int right (int i) { return (i+1)*2; }
     static inline int parent(int i) { return (i-1) >> 1; }
+
 
 
     void percolateUp(int i)
@@ -84,6 +85,7 @@ class Heap {
     void decrease  (int n) { assert(inHeap(n)); percolateUp  (indices[n]); }
     void increase  (int n) { assert(inHeap(n)); percolateDown(indices[n]); }
 
+    void copyTo(Heap& copy) const {heap.copyTo(copy.heap);indices.copyTo(copy.indices);}
 
     // Safe variant of insert/decrease/increase:
     void update(int n)

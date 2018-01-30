@@ -18,16 +18,17 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **************************************************************************************************/
 
-#ifndef Minisat_Vec_h
-#define Minisat_Vec_h
+#ifndef Glucose_Vec_h
+#define Glucose_Vec_h
 
 #include <assert.h>
 #include <new>
 
 #include "mtl/IntTypes.h"
 #include "mtl/XAlloc.h"
+#include<string.h>
 
-namespace Minisat {
+namespace Glucose {
 
 //=================================================================================================
 // Automatically resizable arrays
@@ -74,6 +75,21 @@ public:
     void     push  (const T& elem)     { if (sz == cap) capacity(sz+1); data[sz++] = elem; }
     void     push_ (const T& elem)     { assert(sz < cap); data[sz++] = elem; }
     void     pop   (void)              { assert(sz > 0); sz--, data[sz].~T(); }
+    
+    void     remove(const T &elem) {
+        int tmp;
+        for(tmp = 0;tmp<sz;tmp++) {
+            if(data[tmp]==elem) 
+                break;
+        }
+        if(tmp<sz) {
+            assert(data[tmp] == elem);
+            data[tmp] = data[sz-1];
+            sz = sz - 1;
+        }
+        
+    }
+    
     // NOTE: it seems possible that overflow can happen in the 'sz+1' expression of 'push()', but
     // in fact it can not since it requires that 'cap' is equal to INT_MAX. This in turn can not
     // happen given the way capacities are calculated (below). Essentially, all capacities are
@@ -89,6 +105,12 @@ public:
     // Duplicatation (preferred instead):
     void copyTo(vec<T>& copy) const { copy.clear(); copy.growTo(sz); for (int i = 0; i < sz; i++) copy[i] = data[i]; }
     void moveTo(vec<T>& dest) { dest.clear(true); dest.data = data; dest.sz = sz; dest.cap = cap; data = NULL; sz = 0; cap = 0; }
+    void memCopyTo(vec<T>& copy) const{
+        copy.capacity(cap);
+        copy.sz = sz;
+        memcpy(copy.data,data,sizeof(T)*cap);
+    }
+
 };
 
 
@@ -96,7 +118,7 @@ template<class T>
 void vec<T>::capacity(int min_cap) {
     if (cap >= min_cap) return;
     int add = imax((min_cap - cap + 1) & ~1, ((cap >> 1) + 2) & ~1);   // NOTE: grow by approximately 3/2
-    if (add > INT_MAX - cap || (((data = (T*)::realloc(data, (cap += add) * sizeof(T))) == NULL) && errno == ENOMEM))
+    if (add > INT_MAX - cap || ( ( (data = (T*)::realloc(data, (cap += add) * sizeof(T) ) ) == NULL) && errno == ENOMEM) )
         throw OutOfMemoryException();
  }
 
