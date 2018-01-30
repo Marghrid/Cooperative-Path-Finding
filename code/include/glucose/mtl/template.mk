@@ -17,10 +17,9 @@ PCOBJS     = $(addsuffix p,  $(COBJS))
 DCOBJS     = $(addsuffix d,  $(COBJS))
 RCOBJS     = $(addsuffix r,  $(COBJS))
 
-
 CXX       ?= g++
-CFLAGS    ?= -Wall -Wno-parentheses
-LFLAGS    ?= -Wall
+CFLAGS    ?= -Wall -Wno-parentheses -std=c++11
+LFLAGS    ?= -Wall -lpthread 
 
 COPTIMIZE ?= -O3
 
@@ -62,7 +61,7 @@ $(EXEC)_static:		$(RCOBJS)
 
 lib$(LIB)_standard.a:	$(filter-out */Main.o,  $(COBJS))
 lib$(LIB)_profile.a:	$(filter-out */Main.op, $(PCOBJS))
-lib$(LIB)_debug.a:	    $(filter-out */Main.od, $(DCOBJS))
+lib$(LIB)_debug.a:	$(filter-out */Main.od, $(DCOBJS))
 lib$(LIB)_release.a:	$(filter-out */Main.or, $(RCOBJS))
 
 
@@ -74,7 +73,7 @@ lib$(LIB)_release.a:	$(filter-out */Main.or, $(RCOBJS))
 ## Linking rules (standard/profile/debug/release)
 $(EXEC) $(EXEC)_profile $(EXEC)_debug $(EXEC)_release $(EXEC)_static:
 	@echo Linking: "$@ ( $(foreach f,$^,$(subst $(MROOT)/,,$f)) )"
-	##@$(CXX) $^ $(LFLAGS) -o $@
+	@$(CXX) $^ $(LFLAGS) -o $@
 
 ## Library rules (standard/profile/debug/release)
 lib$(LIB)_standard.a lib$(LIB)_profile.a lib$(LIB)_release.a lib$(LIB)_debug.a:
@@ -87,8 +86,11 @@ libs libp libd libr:
 	@ln -sf $^ lib$(LIB).a
 
 ## Clean rule
+allclean: clean
+	
+	@rm -f ../simp/*.o ../simp/*.or ../simp/*.od  ../core/*.o ../core/*.or ../core/*.od
 clean:
-	@rm -f $(EXEC) $(EXEC)_profile $(EXEC)_debug $(EXEC)_release $(EXEC)_static \
+	rm -f $(EXEC) $(EXEC)_profile $(EXEC)_debug $(EXEC)_release $(EXEC)_static \
 	  $(COBJS) $(PCOBJS) $(DCOBJS) $(RCOBJS) *.core depend.mk 
 
 ## Make dependencies
