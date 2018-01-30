@@ -7,7 +7,7 @@
 int main() {
 	Graph env;
 
-	Parser parser("simple_grid.cpf");
+	//Parser parser("simple_grid.cpf");
 
 	env.add_edge(0, 1, 1);
 	env.add_edge(0, 2, 1);
@@ -21,13 +21,15 @@ int main() {
 	agents.push_back(a1);
 	agents.push_back(a2);
 
-	Instance i(env, agents);
+	Instance inst(env, agents);
 
-	Instance i2 = parser.parse();
+	//Instance i2 = parser.parse();
 
-	//std::cout << i;
+	//std::cout << inst;
 
+	std::cout << inst << std::endl;
 	std::cout << "------\n" << std::endl;
 
-	std::cout << i2 << std::endl;
+	Simplified_solver s(inst, 5);
+	s.convert();
 }
