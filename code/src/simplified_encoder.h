@@ -1,5 +1,5 @@
-#ifndef _DIRECT_ENCODER_
-#define	_DIRECT_ENCODER_
+#ifndef __SIMPLIFIED_SOLVER__
+#define	__SIMPLIFIED_SOLVER__
 
 #include <iostream>
 #include <fstream>
@@ -8,13 +8,13 @@
 #include "instance.h"
 
 
-class Direct_encoder {
+class Simplified_solver {
 private:
 	// std::ostream* fp = &cout
 	Instance _instance;
 	int _makespan;
-	std::ofstream _cnf_file_stream;
-	std::string   _cnf_file;
+	//std::ofstream _cnf_file_stream;
+	//std::string   _cnf_file;
 
 	int make_xvar_id(int agent_id, int vertex_id, int timestep);
 
@@ -27,24 +27,24 @@ private:
 	int get_timestep_x(int var_id);
 
 public:
-	Direct_encoder(Instance inst, int makespan, std::string cnf_file);
+	Simplified_solver(Instance inst, int makespan);
 
 	void convert();
 
 	// std::ostream* fp = &cout
 
-//	Direct_encoder(std::string instance_file) {
+//	Simplified_solver(std::string instance_file) {
 //		_instance_file = instance_file;
 //		initialize(false);
 //	}
 
-/*	Direct_encoder(std::string instance_file, std::string cnf_file) {
+/*	Simplified_solver(std::string instance_file, std::string cnf_file) {
 		_instance_file = instance_file;
 		_cnf_file      = cnf_file;
 		initialize(true);
 	}
 */
-/*	Direct_encoder(Instance &inst):
+/*	Simplified_solver(Instance &inst):
 		_instance(inst) {
 //		initialize(false);
 	}
