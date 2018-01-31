@@ -6,7 +6,7 @@
 #include <string>
 
 #include "instance.h"
-
+#include "simp/SimpSolver.h"
 
 class Simplified_solver {
 private:
@@ -16,9 +16,9 @@ private:
 	//std::ofstream _cnf_file_stream;
 	//std::string   _cnf_file;
 
-	int make_xvar_id(int agent_id, int vertex_id, int timestep);
+	Glucose::Var make_xvar(int agent_id, int vertex_id, int timestep);
 
-	int make_evar_id(int vertex_id, int timestep);
+	Glucose::Var make_evar(int vertex_id, int timestep);
 
 	int get_agent_id_x(int var_id);
 

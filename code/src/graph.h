@@ -24,14 +24,13 @@ class Edge {
 private:
 	Vertex _start;
 	Vertex _end;
-	int _weight;
 
 public:
-	Edge(Vertex start, Vertex end, int weight = 0)
-	: _start(start), _end(end) { _weight = weight; }
+	Edge(Vertex start, Vertex end)
+	: _start(start), _end(end) { }
 
-	Edge(int start_id, int end_id, int weight = 0)
-	: _start(start_id), _end(end_id) { _weight = weight; }
+	Edge(int start_id, int end_id)
+	: _start(start_id), _end(end_id) {}
 
 	Vertex start() const { return _start; }
 	Vertex end()   const { return _end; }
@@ -58,9 +57,9 @@ public:
 
 	std::vector<Vertex> get_neighbours(int v_id) const;
 
-	void add_edge(Vertex start, Vertex end, int weight = 0, bool directed = false);
+	void add_edge(Vertex start, Vertex end, bool directed = false);
 
-	void add_edge(int start_id, int end_id, int weight = 0, bool directed = false);
+	void add_edge(int start_id, int end_id, bool directed = false);
 
 	void add_vertex(int id);
 };
