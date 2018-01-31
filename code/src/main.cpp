@@ -54,6 +54,6 @@ int main() {
 	std::cout << inst1 << std::endl;
 	std::cout << "------\n" << std::endl;
 
-	Simplified_solver s(inst2, 5);
-	s.convert();
+	Simplified_solver s(inst2, 10);
+	s.solve();
 }

@@ -12,24 +12,26 @@ class Simplified_solver {
 private:
 	// std::ostream* fp = &cout
 	Instance _instance;
-	int _makespan;
+	int _max_makespan;
 	//std::ofstream _cnf_file_stream;
 	//std::string   _cnf_file;
 
-	Glucose::Var make_xvar(int agent_id, int vertex_id, int timestep);
+	Glucose::Var make_xvar(int agent_id, int vertex_id, int timestep, int eta);
 
-	Glucose::Var make_evar(int vertex_id, int timestep);
+	Glucose::Var make_evar(int vertex_id, int timestep, int eta);
 
-	int get_agent_id_x(int var_id);
+	int get_agent_id_x(int var_id, int eta);
 
-    int get_vertex_id_x(int var_id);
+    int get_vertex_id_x(int var_id, int eta);
 
-	int get_timestep_x(int var_id);
+	int get_timestep_x(int var_id, int eta);
+
+	bool solve_for_makespan(Glucose::SimpSolver solver, int eta);
 
 public:
 	Simplified_solver(Instance inst, int makespan);
 
-	void convert();
+	bool solve();
 
 	// std::ostream* fp = &cout
 
