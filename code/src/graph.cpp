@@ -39,7 +39,7 @@ std::vector<Vertex> Graph::get_neighbours(int v_id) const {
 	return neighbours;
 }
 
-void Graph::add_edge(Vertex start, Vertex end, int weight, bool directed) {
+void Graph::add_edge(Vertex start, Vertex end, bool directed) {
 	if(start.id() > _n_vertices-1) {
 		add_vertex(start.id());
 
@@ -48,19 +48,19 @@ void Graph::add_edge(Vertex start, Vertex end, int weight, bool directed) {
 		add_vertex(end.id());
 	}
 
-	Edge e(start, end, weight);
+	Edge e(start, end);
 	_adjacencies.at(start.id()).push_back(e);
 
 	if(!directed) {
-		Edge e(end, start, weight);
+		Edge e(end, start);
 		_adjacencies.at(end.id()).push_back(e);
 	}
 
 	++_n_edges;
 }
 
-void Graph::add_edge(int start_id, int end_id, int weight, bool directed) {
-	add_edge(Vertex(start_id), Vertex(end_id), weight, directed);
+void Graph::add_edge(int start_id, int end_id, bool directed) {
+	add_edge(Vertex(start_id), Vertex(end_id), directed);
 }
 
 void Graph::add_vertex(int id) {

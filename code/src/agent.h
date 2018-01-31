@@ -29,6 +29,9 @@ public:
 		_id = aid;
 	}
 
+	Vertex initial_position() { return _initial_position; }
+	Vertex goal_position() { return _goal_position; }
+
 	void set_initial_position(Vertex v) {
 		_initial_position = v;
 	}
