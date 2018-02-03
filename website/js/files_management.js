@@ -35,7 +35,10 @@ function start_reading_sol(sol_file) {
     sol_reader.onload = function(e) {
         // solution is a string with the file's contents
         solution = sol_reader.result;
+
+        //nao podes fazer isto antes de teres uma cena!
         if(solve(solution)) {
+            scene.board.animation_controller.load_from_solution(scene.solution);
             solve_button.disabled = false;
         }
     }
@@ -66,7 +69,7 @@ function example1_button() {
     get_example_file("grid_4x4_r6_5");
 }
 function example2_button() {
-    get_example_file("grid_8x8_r6_5");
+    get_example_file("grid_8x8_a16_o0.1_s31");
 }
 
 function example3_button() {
