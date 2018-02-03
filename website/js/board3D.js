@@ -111,6 +111,9 @@ class Board3D extends THREE.Object3D {
 			this.add(a3d);
 			this.add(g3d);
 		}
+
+		this.animation_controller = new AnimationController(1);
+		this.animation_controller.targets = this.agents3d;
 	}
 
 	animate(dt) {
@@ -118,6 +121,7 @@ class Board3D extends THREE.Object3D {
 	}
 
 	animate_with_solution(dt) {
+		this.animation_controller.update(dt);
 		this.rotateZ(-0.03*dt);
 	}
 }
