@@ -16,6 +16,9 @@ class Agent3D extends THREE.Object3D {
 
 		// So it sits on top of the board
 		this.position.z = radius;
+		this.base_pos_z = radius;
+
+		this.animation_data = new AnimationData([new THREE.Vector3(pos_x, pos_y)], radius);
 	}
 
 }
