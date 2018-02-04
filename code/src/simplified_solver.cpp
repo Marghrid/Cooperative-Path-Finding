@@ -50,16 +50,18 @@ bool Simplified_solver::solve_for_makespan(Glucose::SimpSolver solver, int eta) 
 	for(int j = 0; j < n; ++j) {
 		for(int i = 0; i < eta; ++i) {
 			for(int k = 0; k < mu; ++k) {
-				std::cout << "var x for agent " << k
+/*				std::cout << "var x for agent " << k
 					<< ", vertex " << j
 					<< ", and timestep " << i
 					<< " has id " << make_xvar(k, j, i, eta) << std::endl;
+					*/
 					while (make_xvar(k, j, i, eta) >= solver.nVars()) solver.newVar();
 			}
 
-			std::cout << "var epsilon for vertex " << j
+/*			std::cout << "var epsilon for vertex " << j
 					<< ", and timestep " << i
 					<< " has id " << make_evar(j, i, eta) << std::endl;
+					*/
 					while (make_evar(j, i, eta) >= solver.nVars()) solver.newVar();
 		}
 	}
@@ -136,10 +138,8 @@ bool Simplified_solver::solve_for_makespan(Glucose::SimpSolver solver, int eta) 
 		for(int j = 0; j < n; ++j) {
 			if(j == _instance.agent(k).initial_position().id()) {
 				solver.addClause(Glucose::mkLit(make_xvar(k, j, 0, eta)));
-				std::cout << "Agent " << k << " starts at " << j << std::endl;
 			} else {
 				solver.addClause(Glucose::mkLit(make_xvar(k, j, 0, eta), true));
-				std::cout << "Agent " << k << " does not start at " << j << std::endl;
 			}
 
 			if(j == _instance.agent(k).goal_position().id()) {
