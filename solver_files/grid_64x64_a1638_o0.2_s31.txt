@@ -1,0 +1,44 @@
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 4/1/4 (2)
+Open/close/exp size (steps): 16/4/16 (5)
+Open/close/exp size (steps): 20/8/20 (9)
+Open/close/exp size (steps): 36/13/36 (14)
+Open/close/exp size (steps): 56/19/56 (20)
+Open/close/exp size (steps): 80/27/80 (28)
+Open/close/exp size (steps): 17/5/17 (38)
+Open/close/exp size (steps): 39/17/39 (50)
+Open/close/exp size (steps): 72/32/72 (65)
+Open/close/exp size (steps): 101/50/101 (83)
+Open/close/exp size (steps): 148/72/148 (105)
+Open/close/exp size (steps): 206/99/206 (132)
+Open/close/exp size (steps): 286/132/286 (165)
+Open/close/exp size (steps): 356/172/356 (205)
+Open/close/exp size (steps): 1/0/1 (253)
+Open/close/exp size (steps): 122/58/122 (311)
+Open/close/exp size (steps): 285/128/285 (381)
+Open/close/exp size (steps): 131/62/131 (465)
+Open/close/exp size (steps): 360/163/360 (566)
+Open/close/exp size (steps): 215/110/215 (688)
+Open/close/exp size (steps): 479/257/479 (835)
+Open/close/exp size (steps): 790/434/790 (1012)
+Open/close/exp size (steps): 1154/647/1154 (1225)
+Open/close/exp size (steps): 430/226/430 (1481)
+Open/close/exp size (steps): 1001/534/1001 (1789)
+Open/close/exp size (steps): 120/59/120 (2159)
+Open/close/exp size (steps): 374/197/374 (2603)
+Open/close/exp size (steps): 1290/730/1290 (3136)
+Open/close/exp size (steps): 2391/1370/2391 (3776)
+Aborted (core dumped)

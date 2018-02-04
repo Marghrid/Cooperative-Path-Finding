@@ -1,0 +1,193 @@
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 3/1/3 (2)
+Open/close/exp size (steps): 4/1/4 (5)
+Open/close/exp size (steps): 4/2/4 (9)
+0 0 0 0 1 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 1 0 0 0 0 0 
+0 0 0 0 0 0 1 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 1 0 0 
+
+Groups 0 and 1 collide.
+Solution of group 0
+Mulirobot solution: (|moves| = 3, paralellism = 1.000) [
+    Step 0: 1#4->7 
+    Step 1: 1#7->6 
+    Step 2: 1#6->10 
+]
+Solution of group 1
+Mulirobot solution: (|moves| = 3, paralellism = 1.000) [
+    Step 0: 1#5->6 
+    Step 1: 1#6->7 
+    Step 2: 1#7->4 
+]
+Occupation table complementary for group 0
+1 0 0 0 0 1 0 0 0 0 0 0 0 
+0 0 0 1 0 0 1 0 0 0 0 0 0 
+0 0 0 0 0 1 0 1 0 0 0 0 0 
+0 0 0 0 1 0 0 0 0 1 0 0 0 
+0 0 0 0 1 0 0 0 0 0 1 0 0 
+0 0 0 0 1 0 0 0 0 0 0 1 0 
+
+** Open/close/exp size (steps): 2/1/2 (2)
+** Open/close/exp size (steps): 1/4/1 (5)
+Occupation table complementary for group 1
+1 0 0 0 1 0 0 0 0 0 0 0 0 
+0 0 0 1 0 0 0 1 0 0 0 0 0 
+0 0 0 0 0 1 1 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 1 1 0 0 
+0 0 0 0 0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 0 0 0 0 0 1 1 0 
+
+** Open/close/exp size (steps): 1/1/1 (9)
+Unable to resolve collision between groups 0 and 1.
+Merging groups 0 and 1.
+Searching solution for merged group 0+1.
+Open/close/exp size (steps): 3/1/3 (14)
+Open/close/exp size (steps): 23/7/23 (20)
+Open/close/exp size (steps): 41/15/41 (28)
+Open/close/exp size (steps): 59/25/59 (38)
+Open/close/exp size (steps): 59/37/59 (50)
+Open/close/exp size (steps): 77/52/77 (65)
+Open/close/exp size (steps): 73/70/73 (83)
+Open/close/exp size (steps): 119/92/119 (105)
+0 0 0 0 1 2 0 0 0 0 0 0 0 
+0 0 0 0 0 2 0 1 0 0 0 0 0 
+0 0 0 0 0 0 2 0 0 0 0 1 0 
+0 0 0 0 0 0 0 2 0 0 1 0 0 
+0 0 0 0 2 0 0 0 0 0 1 0 0 
+0 0 0 0 2 0 0 0 0 0 1 0 0 
+
+Groups 0 and 1 collide.
+Solution of group 0
+Mulirobot solution: (|moves| = 6, paralellism = 1.500) [
+    Step 0: 1#4->7 
+    Step 1: 1#7->11 2#5->6 
+    Step 2: 1#11->10 2#6->7 
+    Step 3: 2#7->4 
+]
+Solution of group 1
+Mulirobot solution: (|moves| = 5, paralellism = 1.000) [
+    Step 0: 1#0->3 
+    Step 1: 1#3->5 
+    Step 2: 1#5->9 
+    Step 3: 1#9->10 
+    Step 4: 1#10->11 
+]
+Occupation table complementary for group 0
+1 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 1 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 1 0 0 0 
+0 0 0 0 0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 0 0 0 0 0 0 1 0 
+
+** Open/close/exp size (steps): 11/4/11 (14)
+** Open/close/exp size (steps): 17/10/17 (20)
+** Open/close/exp size (steps): 24/18/24 (28)
+** Open/close/exp size (steps): 36/28/36 (38)
+** Open/close/exp size (steps): 46/40/46 (50)
+** Open/close/exp size (steps): 58/55/58 (65)
+** Open/close/exp size (steps): 60/73/60 (83)
+** Open/close/exp size (steps): 60/95/60 (105)
+** Open/close/exp size (steps): 71/122/71 (132)
+** Open/close/exp size (steps): 66/155/66 (165)
+** Open/close/exp size (steps): 58/195/58 (205)
+** Open/close/exp size (steps): 56/243/56 (253)
+** Open/close/exp size (steps): 58/301/58 (311)
+** Open/close/exp size (steps): 29/371/29 (381)
+Occupation table complementary for group 1
+0 0 0 0 1 2 0 0 0 0 0 0 0 
+0 0 0 0 0 2 0 1 0 0 0 0 0 
+0 0 0 0 0 0 2 0 0 0 0 1 0 
+0 0 0 0 0 0 0 2 0 0 1 0 0 
+0 0 0 0 2 0 0 0 0 0 1 0 0 
+0 0 0 0 2 0 0 0 0 0 1 0 0 
+
+** Open/close/exp size (steps): 5/10/5 (465)
+Unable to resolve collision between groups 0 and 1.
+Merging groups 0 and 1.
+Searching solution for merged group 0+1.
+Open/close/exp size (steps): 55/24/55 (132)
+Open/close/exp size (steps): 86/57/86 (165)
+Open/close/exp size (steps): 109/97/109 (205)
+Open/close/exp size (steps): 120/145/120 (253)
+Open/close/exp size (steps): 144/203/144 (311)
+Open/close/exp size (steps): 201/273/201 (381)
+Open/close/exp size (steps): 297/357/297 (465)
+Open/close/exp size (steps): 420/458/420 (566)
+Open/close/exp size (steps): 548/580/548 (688)
+Open/close/exp size (steps): 460/727/460 (835)
+Open/close/exp size (steps): 448/904/448 (1012)
+Open/close/exp size (steps): 567/1117/567 (1225)
+Open/close/exp size (steps): 440/1373/440 (1481)
+Open/close/exp size (steps): 798/1681/798 (1789)
+Open/close/exp size (steps): 1176/2051/1176 (2159)
+Open/close/exp size (steps): 1312/2495/1312 (2603)
+Open/close/exp size (steps): 1470/3028/1470 (3136)
+Open/close/exp size (steps): 1371/3668/1371 (3776)
+Open/close/exp size (steps): 1329/4436/1329 (4544)
+Open/close/exp size (steps): 868/5358/868 (5466)
+Open/close/exp size (steps): 1606/6465/1606 (6573)
+Computed optimal makespan:6
+Makespan optimal solution:
+Mulirobot solution: (|moves| = 13, paralellism = 2.167) [
+    Step 0: 1#4->7 2#5->9 3#0->3 
+    Step 1: 1#7->6 2#9->10 3#3->5 
+    Step 2: 2#10->11 3#5->9 
+    Step 3: 2#11->7 3#9->10 
+    Step 4: 2#7->4 3#10->11 
+    Step 5: 1#6->10 
+]
+Total cost: 16
+Multirobot solution analysis: (
+    total makespan           = 6
+    total distance           = 6
+    total trajectory         = 13
+    total cost               = 16
+    average parallelism      = 2.167
+    average distance         = 2.000
+    average trajectory       = 4.333
+    parallelism distribution  = [ 1 3 2 ]
+    distance distribution     = [ 0 0 2 ]
+    trajectory distribution   = [ 0 0 1 0 2 ]
+)
+Phase statistics (current phase = 'root_phase') [
+        Phase (name = 'root_phase') [
+            Total SAT solver calls         = 0
+            Satisfiable SAT solver calls   = 0
+            Unsatisfiable SAT solver calls = 0
+            Indeterminate SAT solver calls = 0
+            Move executions                = 13
+            Produced CNF variables         = 0
+            Produced CNF clauses           = 0
+            Search steps                   = 0
+            Wall clock TIME (seconds)      = 0.018
+            CPU/machine TIME (seconds)     = 0.010
+        ]
+        Sub-phases {
+            Phase (name = 'independent_solving') [
+                Total SAT solver calls         = 0
+                Satisfiable SAT solver calls   = 0
+                Unsatisfiable SAT solver calls = 0
+                Indeterminate SAT solver calls = 0
+                Move executions                = 14571
+                Produced CNF variables         = 0
+                Produced CNF clauses           = 0
+                Search steps                   = 0
+                Wall clock TIME (seconds)      = 0.488
+                CPU/machine TIME (seconds)     = 0.480
+            ]
+        }
+]
+----------------------------------------------------------------
