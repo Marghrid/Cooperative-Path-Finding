@@ -66,7 +66,7 @@ class Board3D extends THREE.Object3D {
 				odd = true;
 
 			let s3D = new Square3D(this.square_length, square_pos_x, square_pos_y, odd);
-			this.squares3D.push(s3D);
+			this.squares3D[i] = s3D;
 			this.add(s3D);
 		}
 
@@ -99,7 +99,7 @@ class Board3D extends THREE.Object3D {
 			let agent_pos_x = this.squares3D[this.instance.agents[a].start_pos].position.x;
 			let agent_pos_y = this.squares3D[this.instance.agents[a].start_pos].position.y;
 			
-			//console.log("Agent's " + a + " goal is " + this.instance.agents[a].start_pos);
+			//console.log("Agent's " + a + " goal is " + this.instance.agents[a].goal_pos);
 			let goal_pos_x = this.squares3D[this.instance.agents[a].goal_pos].position.x;
 			let goal_pos_y = this.squares3D[this.instance.agents[a].goal_pos].position.y;
 
@@ -112,17 +112,17 @@ class Board3D extends THREE.Object3D {
 			this.add(g3d);
 		}
 
-		this.animation_controller = new AnimationController(1);
+		this.animation_controller = new AnimationController(2);
 		this.animation_controller.targets = this.agents3d;
 	}
 
 	animate(dt) {
-		this.rotateZ(0.03*dt);
+		this.rotateZ(0.02*dt);
 	}
 
 	animate_with_solution(dt) {
 		this.animation_controller.update(dt);
-		this.rotateZ(-0.03*dt);
+		this.rotateZ(-0.01*dt);
 	}
 }
 

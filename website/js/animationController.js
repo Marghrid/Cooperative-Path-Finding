@@ -10,7 +10,7 @@ class AnimationController{
 	}
 
 	update(dt){
-		console.log(this.current_frame);
+		//console.log(this.current_frame);
 		for (let i = 0; i<this.targets.length; i++){
 			let pos = this.targets[i].animation_data.get_frame(this.current_frame);
 			this.targets[i].position.x = pos.x;
@@ -45,8 +45,8 @@ class AnimationController{
 				if (typeof solution.moves[j].actions[i] != 'undefined'){
 
 					let vert = solution.moves[j].actions[i].dest;
-					console.log("timestep= " + j + ", agent = " + i);
-					console.log(vert);
+					//console.log("timestep= " + j + ", agent = " + i);
+					//console.log(vert);
 					if (vert != -1){
 						let pos = scene.board.squares3D[vert].position;
 						pos_array.push(new THREE.Vector2(pos.x, pos.y));
