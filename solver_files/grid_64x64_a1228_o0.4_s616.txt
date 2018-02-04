@@ -1,0 +1,72 @@
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 4/1/4 (2)
+Open/close/exp size (steps): 12/4/12 (5)
+Open/close/exp size (steps): 21/8/21 (9)
+Open/close/exp size (steps): 34/13/34 (14)
+Open/close/exp size (steps): 41/19/41 (20)
+Open/close/exp size (steps): 50/27/50 (28)
+Open/close/exp size (steps): 80/37/80 (38)
+Open/close/exp size (steps): 109/49/109 (50)
+Open/close/exp size (steps): 150/64/150 (65)
+Open/close/exp size (steps): 187/82/187 (83)
+Open/close/exp size (steps): 242/104/242 (105)
+Open/close/exp size (steps): 305/131/305 (132)
+Open/close/exp size (steps): 13/5/13 (165)
+Open/close/exp size (steps): 106/45/106 (205)
+Open/close/exp size (steps): 214/93/214 (253)
+Open/close/exp size (steps): 99/42/99 (311)
+Open/close/exp size (steps): 9/42/9 (381)
+Unable to find solution.
+Total cost: 0
+Multirobot solution analysis: (
+    total makespan           = 0
+    total distance           = 0
+    total trajectory         = 0
+    total cost               = 0
+    average parallelism      = -nan
+    average distance         = 0.000
+    average trajectory       = 0.000
+    parallelism distribution  = [ ]
+    distance distribution     = [ 1227 ]
+    trajectory distribution   = [ ]
+)
+Phase statistics (current phase = 'root_phase') [
+        Phase (name = 'root_phase') [
+            Total SAT solver calls         = 0
+            Satisfiable SAT solver calls   = 0
+            Unsatisfiable SAT solver calls = 0
+            Indeterminate SAT solver calls = 0
+            Move executions                = 0
+            Produced CNF variables         = 0
+            Produced CNF clauses           = 0
+            Search steps                   = 0
+            Wall clock TIME (seconds)      = 6.288
+            CPU/machine TIME (seconds)     = 6.290
+        ]
+        Sub-phases {
+            Phase (name = 'independent_solving') [
+                Total SAT solver calls         = 0
+                Satisfiable SAT solver calls   = 0
+                Unsatisfiable SAT solver calls = 0
+                Indeterminate SAT solver calls = 0
+                Move executions                = 1252
+                Produced CNF variables         = 0
+                Produced CNF clauses           = 0
+                Search steps                   = 0
+                Wall clock TIME (seconds)      = 13.022
+                CPU/machine TIME (seconds)     = 13.010
+            ]
+        }
+]
+----------------------------------------------------------------

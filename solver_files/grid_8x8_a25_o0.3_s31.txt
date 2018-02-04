@@ -1,0 +1,69 @@
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 5/1/5 (2)
+Open/close/exp size (steps): 13/4/13 (5)
+Open/close/exp size (steps): 21/8/21 (9)
+Open/close/exp size (steps): 2/1/2 (14)
+Open/close/exp size (steps): 18/7/18 (20)
+Open/close/exp size (steps): 13/4/13 (28)
+Open/close/exp size (steps): 7/2/7 (38)
+Open/close/exp size (steps): 22/10/22 (50)
+Open/close/exp size (steps): 10/5/10 (65)
+Open/close/exp size (steps): 4/1/4 (83)
+Open/close/exp size (steps): 11/23/11 (105)
+Open/close/exp size (steps): 12/50/12 (132)
+Open/close/exp size (steps): 19/83/19 (165)
+Open/close/exp size (steps): 14/123/14 (205)
+Unable to find solution.
+Total cost: 0
+Multirobot solution analysis: (
+    total makespan           = 0
+    total distance           = 0
+    total trajectory         = 0
+    total cost               = 0
+    average parallelism      = -nan
+    average distance         = 0.000
+    average trajectory       = 0.000
+    parallelism distribution  = [ ]
+    distance distribution     = [ 24 ]
+    trajectory distribution   = [ ]
+)
+Phase statistics (current phase = 'root_phase') [
+        Phase (name = 'root_phase') [
+            Total SAT solver calls         = 0
+            Satisfiable SAT solver calls   = 0
+            Unsatisfiable SAT solver calls = 0
+            Indeterminate SAT solver calls = 0
+            Move executions                = 0
+            Produced CNF variables         = 0
+            Produced CNF clauses           = 0
+            Search steps                   = 0
+            Wall clock TIME (seconds)      = 0.005
+            CPU/machine TIME (seconds)     = 0.000
+        ]
+        Sub-phases {
+            Phase (name = 'independent_solving') [
+                Total SAT solver calls         = 0
+                Satisfiable SAT solver calls   = 0
+                Unsatisfiable SAT solver calls = 0
+                Indeterminate SAT solver calls = 0
+                Move executions                = 642
+                Produced CNF variables         = 0
+                Produced CNF clauses           = 0
+                Search steps                   = 0
+                Wall clock TIME (seconds)      = 0.027
+                CPU/machine TIME (seconds)     = 0.020
+            ]
+        }
+]
+----------------------------------------------------------------
