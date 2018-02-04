@@ -2,7 +2,7 @@ from os import system
 
 for size in (4, 8, 16, 32, 64):
 	makespan_limit = size * size *2
-	for robots_prob in (0.1, 0.2, 0.3, 0.4):
+	for robots_prob in (0.2, 0.3, 0.4):
 		for obst_prob in (0.1, 0.2, 0.3, 0.4):
 			n_robots = int(size * size * robots_prob);
 			for seed in (5, 31, 327, 616, 895):
