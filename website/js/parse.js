@@ -96,12 +96,14 @@ function parse_solution(sol_str) {
 
         line = line.split(" ");
 
-        let a_id        = parseInt(line[0]);
+        let a_id        = parseInt(line[0]) - 1;
         // ignore oringin vertex.
         let dest_vertex = parseInt(line[2]);
         let timestep    = parseInt(line[3]);
-
-        solution.add_action_to_move(timestep, a_id, dest_vertex);
+        if(a_id >= 0) {
+            solution.add_action_to_move(timestep, a_id, dest_vertex);
+            //TEST ELSE
+        }
     }
 
     return solution;

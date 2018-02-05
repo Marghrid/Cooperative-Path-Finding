@@ -1,5 +1,34 @@
-/***********************************************************************************[SimpSolver.cc]
-Copyright (c) 2006,      Niklas Een, Niklas Sorensson
+/***************************************************************************************[SimpSolver.cc]
+ Glucose -- Copyright (c) 2009-2014, Gilles Audemard, Laurent Simon
+                                CRIL - Univ. Artois, France
+                                LRI  - Univ. Paris Sud, France (2009-2013)
+                                Labri - Univ. Bordeaux, France
+
+ Syrup (Glucose Parallel) -- Copyright (c) 2013-2014, Gilles Audemard, Laurent Simon
+                                CRIL - Univ. Artois, France
+                                Labri - Univ. Bordeaux, France
+
+Glucose sources are based on MiniSat (see below MiniSat copyrights). Permissions and copyrights of
+Glucose (sources until 2013, Glucose 3.0, single core) are exactly the same as Minisat on which it
+is based on. (see below).
+
+Glucose-Syrup sources are based on another copyright. Permissions and copyrights for the parallel
+version of Glucose-Syrup (the "Software") are granted, free of charge, to deal with the Software
+without restriction, including the rights to use, copy, modify, merge, publish, distribute,
+sublicence, and/or sell copies of the Software, and to permit persons to whom the Software is 
+furnished to do so, subject to the following conditions:
+
+- The above and below copyrights notices and this permission notice shall be included in all
+copies or substantial portions of the Software;
+- The parallel version of Glucose (all files modified since Glucose 3.0 releases, 2013) cannot
+be used in any competitive event (sat competitions/evaluations) without the express permission of 
+the authors (Gilles Audemard / Laurent Simon). This is also the case for any competitive event
+using Glucose Parallel as an embedded SAT engine (single core or not).
+
+
+--------------- Original Minisat Copyrights
+
+Copyright (c) 2003-2006, Niklas Een, Niklas Sorensson
 Copyright (c) 2007-2010, Niklas Sorensson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
@@ -16,13 +45,13 @@ NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPO
 NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
 DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
 OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-**************************************************************************************************/
+ **************************************************************************************************/
 
 #include "mtl/Sort.h"
 #include "simp/SimpSolver.h"
 #include "utils/System.h"
 
-using namespace Minisat;
+using namespace Glucose;
 
 //=================================================================================================
 // Options:
@@ -44,7 +73,8 @@ static DoubleOption opt_simp_garbage_frac(_cat, "simp-gc-frac", "The fraction of
 
 
 SimpSolver::SimpSolver() :
-    grow               (opt_grow)
+   Solver()
+  , grow               (opt_grow)
   , clause_lim         (opt_clause_lim)
   , subsumption_lim    (opt_subsumption_lim)
   , simp_garbage_frac  (opt_simp_garbage_frac)
@@ -54,8 +84,8 @@ SimpSolver::SimpSolver() :
   , merges             (0)
   , asymm_lits         (0)
   , eliminated_vars    (0)
-  , elimorder          (1)
   , use_simplification (true)
+  , elimorder          (1)
   , occurs             (ClauseDeleted(ca))
   , elim_heap          (ElimLt(n_occ))
   , bwdsub_assigns     (0)
@@ -73,9 +103,54 @@ SimpSolver::~SimpSolver()
 }
 
 
+
+SimpSolver::SimpSolver(const SimpSolver &s) : Solver(s)
+  , grow               (s.grow)
+  , clause_lim         (s.clause_lim)
+  , subsumption_lim    (s.subsumption_lim)
+  , simp_garbage_frac  (s.simp_garbage_frac)
+  , use_asymm          (s.use_asymm)
+  , use_rcheck         (s.use_rcheck)
+  , use_elim           (s.use_elim)
+  , merges             (s.merges)
+  , asymm_lits         (s.asymm_lits)
+  , eliminated_vars    (s.eliminated_vars)
+  , use_simplification (s.use_simplification)
+  , elimorder          (s.elimorder)
+  , occurs             (ClauseDeleted(ca))
+  , elim_heap          (ElimLt(n_occ))
+  , bwdsub_assigns     (s.bwdsub_assigns)
+  , n_touched          (s.n_touched)
+{
+    // TODO: Copy dummy... what is it???
+    vec<Lit> dummy(1,lit_Undef);
+    ca.extra_clause_field = true; // NOTE: must happen before allocating the dummy clause below.
+    bwdsub_tmpunit        = ca.alloc(dummy);
+    remove_satisfied      = false;
+    //End TODO  
+    
+
+    s.elimclauses.memCopyTo(elimclauses);
+    s.touched.memCopyTo(touched);
+    s.occurs.copyTo(occurs);
+    s.n_occ.memCopyTo(n_occ);
+    s.elim_heap.copyTo(elim_heap);
+    s.subsumption_queue.copyTo(subsumption_queue);
+    s.frozen.memCopyTo(frozen);
+    s.eliminated.memCopyTo(eliminated);
+
+    use_simplification = s.use_simplification;
+    bwdsub_assigns = s.bwdsub_assigns;
+    n_touched = s.n_touched;
+    bwdsub_tmpunit = s.bwdsub_tmpunit;
+    qhead = s.qhead;
+    ok = s.ok;
+}
+
+
+
 Var SimpSolver::newVar(bool sign, bool dvar) {
     Var v = Solver::newVar(sign, dvar);
-
     frozen    .push((char)false);
     eliminated.push((char)false);
 
@@ -88,13 +163,10 @@ Var SimpSolver::newVar(bool sign, bool dvar) {
     }
     return v; }
 
-
-
 lbool SimpSolver::solve_(bool do_simp, bool turn_off_simp)
 {
     vec<Var> extra_frozen;
     lbool    result = l_True;
-
     do_simp &= use_simplification;
 
     if (do_simp){
@@ -127,6 +199,7 @@ lbool SimpSolver::solve_(bool do_simp, bool turn_off_simp)
         for (int i = 0; i < extra_frozen.size(); i++)
             setFrozen(extra_frozen[i], false);
 
+
     return result;
 }
 
@@ -138,7 +211,6 @@ bool SimpSolver::addClause_(vec<Lit>& ps)
     for (int i = 0; i < ps.size(); i++)
         assert(!isEliminated(var(ps[i])));
 #endif
-
     int nclauses = clauses.size();
 
     if (use_rcheck && implied(ps))
@@ -146,6 +218,20 @@ bool SimpSolver::addClause_(vec<Lit>& ps)
 
     if (!Solver::addClause_(ps))
         return false;
+
+    if(!parsing && certifiedUNSAT) {
+        if (vbyte) {
+            write_char('a');
+            for (int i = 0; i < ps.size(); i++)
+                write_lit(2*(var(ps[i])+1) + sign(ps[i]));
+            write_lit(0);
+        }
+        else {
+            for (int i = 0; i < ps.size(); i++)
+                fprintf(certifiedOutput, "%i " , (var(ps[i]) + 1) * (-2 * sign(ps[i]) + 1) );
+            fprintf(certifiedOutput, "0\n");
+        }
+    }
 
     if (use_simplification && clauses.size() == nclauses + 1){
         CRef          cr = clauses.last();
@@ -172,7 +258,8 @@ bool SimpSolver::addClause_(vec<Lit>& ps)
 }
 
 
-void SimpSolver::removeClause(CRef cr)
+
+void SimpSolver::removeClause(CRef cr,bool inPurgatory)
 {
     const Clause& c = ca[cr];
 
@@ -183,7 +270,7 @@ void SimpSolver::removeClause(CRef cr)
             occurs.smudge(var(c[i]));
         }
 
-    Solver::removeClause(cr);
+    Solver::removeClause(cr,inPurgatory);
 }
 
 
@@ -197,10 +284,39 @@ bool SimpSolver::strengthenClause(CRef cr, Lit l)
     // if (!find(subsumption_queue, &c))
     subsumption_queue.insert(cr);
 
+    if (certifiedUNSAT) {
+        if (vbyte) {
+            write_char('a');
+            for (int i = 0; i < c.size(); i++)
+                if (c[i] != l) write_lit(2*(var(c[i])+1) + sign(c[i]));
+            write_lit(0);
+        }
+        else {
+            for (int i = 0; i < c.size(); i++)
+                if (c[i] != l) fprintf(certifiedOutput, "%i " , (var(c[i]) + 1) * (-2 * sign(c[i]) + 1) );
+            fprintf(certifiedOutput, "0\n");
+        }
+    }
+
     if (c.size() == 2){
         removeClause(cr);
         c.strengthen(l);
     }else{
+        if (certifiedUNSAT) {
+            if (vbyte) {
+                write_char('d');
+                for (int i = 0; i < c.size(); i++)
+                    write_lit(2*(var(c[i])+1) + sign(c[i]));
+                write_lit(0);
+            }
+            else {
+                fprintf(certifiedOutput, "d ");
+                for (int i = 0; i < c.size(); i++)
+                    fprintf(certifiedOutput, "%i " , (var(c[i]) + 1) * (-2 * sign(c[i]) + 1) );
+                fprintf(certifiedOutput, "0\n");
+            }
+        }
+
         detachClause(cr, true);
         c.strengthen(l);
         attachClause(cr);
@@ -492,7 +608,7 @@ bool SimpSolver::eliminateVar(Var v)
                 (++cnt > cls.size() + grow || (clause_lim != -1 && clause_size > clause_lim)))
                 return true;
 
-    // Delete and store old clauses:
+    // Delete and store old clauses
     eliminated[v] = true;
     setDecisionVar(v, false);
     eliminated_vars++;
@@ -507,8 +623,6 @@ bool SimpSolver::eliminateVar(Var v)
         mkElimClause(elimclauses, ~mkLit(v));
     }
 
-    for (int i = 0; i < cls.size(); i++)
-        removeClause(cls[i]); 
 
     // Produce clauses in cross product:
     vec<Lit>& resolvent = add_tmp;
@@ -517,9 +631,12 @@ bool SimpSolver::eliminateVar(Var v)
             if (merge(ca[pos[i]], ca[neg[j]], v, resolvent) && !addClause_(resolvent))
                 return false;
 
+    for (int i = 0; i < cls.size(); i++)
+        removeClause(cls[i]);
+
     // Free occurs list for this variable:
     occurs[v].clear(true);
-    
+
     // Free watchers lists for this variable, if possible:
     if (watches[ mkLit(v)].size() == 0) watches[ mkLit(v)].clear(true);
     if (watches[~mkLit(v)].size() == 0) watches[~mkLit(v)].clear(true);
@@ -550,11 +667,13 @@ bool SimpSolver::substitute(Var v, Lit x)
             subst_clause.push(var(p) == v ? x ^ sign(p) : p);
         }
 
-        removeClause(cls[i]);
-
+ 
         if (!addClause_(subst_clause))
             return ok = false;
-    }
+
+       removeClause(cls[i]);
+ 
+   }
 
     return true;
 }
@@ -564,6 +683,8 @@ void SimpSolver::extendModel()
 {
     int i, j;
     Lit x;
+
+    if(model.size()==0) model.growTo(nVars());
 
     for (i = elimclauses.size()-1; i > 0; i -= j){
         for (j = elimclauses[i--]; j > 1; j--, i--)
@@ -579,14 +700,23 @@ void SimpSolver::extendModel()
 
 bool SimpSolver::eliminate(bool turn_off_elim)
 {
-    if (!simplify())
+    if (!simplify()) {
+        ok = false;
         return false;
+    }
     else if (!use_simplification)
         return true;
 
     // Main simplification loop:
     //
-    while (n_touched > 0 || bwdsub_assigns < trail.size() || elim_heap.size() > 0){
+
+    int toPerform = clauses.size()<=4800000;
+    
+    if(!toPerform) {
+      printf("c Too many clauses... No preprocessing\n");
+    }
+
+    while (toPerform && (n_touched > 0 || bwdsub_assigns < trail.size() || elim_heap.size() > 0)){
 
         gatherTouchedClauses();
         // printf("  ## (time = %6.2f s) BWD-SUB: queue = %d, trail = %d\n", cpuTime(), subsumption_queue.size(), trail.size() - bwdsub_assigns);
@@ -654,11 +784,14 @@ bool SimpSolver::eliminate(bool turn_off_elim)
         checkGarbage();
     }
 
-    if (verbosity >= 1 && elimclauses.size() > 0)
-        printf("|  Eliminated clauses:     %10.2f Mb                                      |\n", 
+    if (verbosity >= 0 && elimclauses.size() > 0)
+        printf("c |  Eliminated clauses:     %10.2f Mb                                                                |\n", 
                double(elimclauses.size() * sizeof(uint32_t)) / (1024*1024));
 
+               
     return ok;
+
+    
 }
 
 

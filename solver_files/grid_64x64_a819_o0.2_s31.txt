@@ -1,0 +1,80 @@
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 5/1/5 (2)
+Open/close/exp size (steps): 15/4/15 (5)
+Open/close/exp size (steps): 21/8/21 (9)
+Open/close/exp size (steps): 37/13/37 (14)
+Open/close/exp size (steps): 53/19/53 (20)
+Open/close/exp size (steps): 69/27/69 (28)
+Open/close/exp size (steps): 90/37/90 (38)
+Open/close/exp size (steps): 113/49/113 (50)
+Open/close/exp size (steps): 142/64/142 (65)
+Open/close/exp size (steps): 175/82/175 (83)
+Open/close/exp size (steps): 217/104/217 (105)
+Open/close/exp size (steps): 15/4/15 (132)
+Open/close/exp size (steps): 83/37/83 (165)
+Open/close/exp size (steps): 162/77/162 (205)
+Open/close/exp size (steps): 243/125/243 (253)
+Open/close/exp size (steps): 341/183/341 (311)
+Open/close/exp size (steps): 466/253/466 (381)
+Open/close/exp size (steps): 606/337/606 (465)
+Open/close/exp size (steps): 783/438/783 (566)
+Open/close/exp size (steps): 993/560/993 (688)
+Open/close/exp size (steps): 68/31/68 (835)
+Open/close/exp size (steps): 56/23/56 (1012)
+Open/close/exp size (steps): 472/236/472 (1225)
+Open/close/exp size (steps): 175/86/175 (1481)
+Open/close/exp size (steps): 7/2/7 (1789)
+Unable to find solution.
+Total cost: 0
+Multirobot solution analysis: (
+    total makespan           = 0
+    total distance           = 0
+    total trajectory         = 0
+    total cost               = 0
+    average parallelism      = -nan
+    average distance         = 0.000
+    average trajectory       = 0.000
+    parallelism distribution  = [ ]
+    distance distribution     = [ 818 ]
+    trajectory distribution   = [ ]
+)
+Phase statistics (current phase = 'root_phase') [
+        Phase (name = 'root_phase') [
+            Total SAT solver calls         = 0
+            Satisfiable SAT solver calls   = 0
+            Unsatisfiable SAT solver calls = 0
+            Indeterminate SAT solver calls = 0
+            Move executions                = 0
+            Produced CNF variables         = 0
+            Produced CNF clauses           = 0
+            Search steps                   = 0
+            Wall clock TIME (seconds)      = 14.665
+            CPU/machine TIME (seconds)     = 14.660
+        ]
+        Sub-phases {
+            Phase (name = 'independent_solving') [
+                Total SAT solver calls         = 0
+                Satisfiable SAT solver calls   = 0
+                Unsatisfiable SAT solver calls = 0
+                Indeterminate SAT solver calls = 0
+                Move executions                = 7356
+                Produced CNF variables         = 0
+                Produced CNF clauses           = 0
+                Search steps                   = 0
+                Wall clock TIME (seconds)      = 105.447
+                CPU/machine TIME (seconds)     = 105.440
+            ]
+        }
+]
+----------------------------------------------------------------

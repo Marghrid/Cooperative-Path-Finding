@@ -2,8 +2,8 @@ FLAGS = -Wall -std=c++11
 INC   = -I src/ -I include/glucose/
 LIB   = -L include/glucose/simp
 
-all: directories build/graph.o build/instance.o build/parser.o build/simplified_encoder.o
-	g++ $(FLAGS) $(INC) $(LIB) -o bin/a.out build/graph.o build/instance.o build/parser.o build/simplified_encoder.o -l_standard src/main.cpp 
+all: directories build/graph.o build/instance.o build/parser.o build/simplified_solver.o
+	g++ $(FLAGS) $(INC) $(LIB) -o bin/a.out build/graph.o build/instance.o build/parser.o build/simplified_solver.o -l_standard src/main.cpp 
 
 directories:
 	mkdir -p build 
@@ -18,8 +18,8 @@ build/instance.o: src/instance.cpp src/instance.h src/agent.h src/graph.h
 build/parser.o: src/parser.cpp src/parser.h src/instance.h
 	g++ $(FLAGS) -c $(INC) -o build/parser.o src/parser.cpp
 
-build/simplified_encoder.o: src/simplified_encoder.cpp src/simplified_encoder.h
-	g++ $(FLAGS) -c $(INC) -o build/simplified_encoder.o src/simplified_encoder.cpp
+build/simplified_solver.o: src/simplified_solver.cpp src/simplified_solver.h
+	g++ $(FLAGS) -c $(INC) -o build/simplified_solver.o src/simplified_solver.cpp
 
 clean:
 	rm -f build/*.o
