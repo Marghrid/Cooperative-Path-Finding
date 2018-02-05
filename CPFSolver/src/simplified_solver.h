@@ -16,9 +16,9 @@ private:
 	//std::ofstream _cnf_file_stream;
 	//std::string   _cnf_file;
 
-	Glucose::Var make_xvar(int agent_id, int vertex_id, int timestep, int eta);
+	Glucose::Var make_xvar_id(int agent_id, int vertex_id, int timestep, int eta);
 
-	Glucose::Var make_evar(int vertex_id, int timestep, int eta);
+	Glucose::Var make_evar_id(int vertex_id, int timestep, int eta);
 
 	int get_agent_id_x(int var_id, int eta);
 

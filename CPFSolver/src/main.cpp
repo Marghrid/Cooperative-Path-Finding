@@ -6,13 +6,11 @@
 #include "simplified_solver.h"
 
 int main(int argc, const char **argv) {
-	std::string filename;
-	int 		max_makespan;
+	std::string filename = "../instances/grid_4x4_a6_o0.1_s616.cpf";
+	int 		max_makespan = 10;
 
 	if(argc == 1) {
 		std::cout << "solving for default file: grid_4x4_a6_o0.1_s616.cpf" << std::endl;
-		filename = "../instances/grid_4x4_a6_o0.1_s616.cpf";
-		max_makespan = 10;
 	}
 	else if(argc == 2) {
 		filename = argv[1];
@@ -25,7 +23,7 @@ int main(int argc, const char **argv) {
 	else {
 		std::cout << "unused arguments" << std::endl;
 	}
-/*	Graph env1;
+	Graph env1;
 
 	env1.add_edge(0, 1);
 	env1.add_edge(0, 2);
@@ -43,6 +41,9 @@ int main(int argc, const char **argv) {
 
 
 	Graph env2;
+	/* 0 1 2 *
+	 * 3 4 5 *
+	 * 6 7 8 */
 
 	env2.add_edge(0, 1);
 	env2.add_edge(1, 2);
@@ -68,19 +69,20 @@ int main(int argc, const char **argv) {
 	agents2.push_back(a5);
 
 	Instance inst2(env2, agents2);
-*/
 
-	Parser parser(filename);
 
-	Instance inst = parser.parse();
+	//Parser parser(filename);
 
-	std::cout << inst << std::endl;
-/*
-	std::cout << "Solving instance 2:" << std::endl;
+	//Instance inst = parser.parse();
+
+	//std::cout << inst << std::endl;
+
+	std::cout << "Solving instance 1:" << std::endl;
 	Simplified_solver s1(inst2, 10);
 	s1.solve();
-*/
-	std::cout << "Solving instance:" << std::endl;
+
+/*	std::cout << "Solving instance:" << std::endl;
 	Simplified_solver s1(inst, max_makespan);
 	s1.solve();
+	*/
 }
