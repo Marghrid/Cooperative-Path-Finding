@@ -7,6 +7,7 @@
 *.o_opt
 *.o_dbg
 *.a
+code/include/glucose/simp/lib_standard.a
 
 # Executables
 *.exe
@@ -14,7 +15,7 @@
 
 # Makefile dependencies:
 *.mk
-include/glucose/mtl/template.mk
+code/include/glucose/mtl/template.mk
 
 #Specifics:
 reLOC-0.13-odaiba_037/src/*.o
