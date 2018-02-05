@@ -28,6 +28,7 @@ Instance Parser::parse() {
 	_instance_file_stream >> aux1 >> aux2;
 
 	if(aux1 != "V" || aux2 != "=") {
+		std::cerr << "Error in Parsing" << std::endl;
 		// exception
 	}
 

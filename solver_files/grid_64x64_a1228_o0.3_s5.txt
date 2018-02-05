@@ -1,0 +1,89 @@
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 3/1/3 (2)
+Open/close/exp size (steps): 12/4/12 (5)
+Open/close/exp size (steps): 24/8/24 (9)
+Open/close/exp size (steps): 38/13/38 (14)
+Open/close/exp size (steps): 7/2/7 (20)
+Open/close/exp size (steps): 6/3/6 (28)
+Open/close/exp size (steps): 17/13/17 (38)
+Open/close/exp size (steps): 22/25/22 (50)
+Open/close/exp size (steps): 21/40/21 (65)
+Open/close/exp size (steps): 21/58/21 (83)
+Open/close/exp size (steps): 22/80/22 (105)
+Open/close/exp size (steps): 36/107/36 (132)
+Open/close/exp size (steps): 40/140/40 (165)
+Open/close/exp size (steps): 44/180/44 (205)
+Open/close/exp size (steps): 54/228/54 (253)
+Open/close/exp size (steps): 51/286/51 (311)
+Open/close/exp size (steps): 44/356/44 (381)
+Open/close/exp size (steps): 71/440/71 (465)
+Open/close/exp size (steps): 78/541/78 (566)
+Open/close/exp size (steps): 100/663/100 (688)
+Open/close/exp size (steps): 110/810/110 (835)
+Open/close/exp size (steps): 144/987/144 (1012)
+Open/close/exp size (steps): 143/1200/143 (1225)
+Open/close/exp size (steps): 178/1456/178 (1481)
+Open/close/exp size (steps): 189/1764/189 (1789)
+Open/close/exp size (steps): 200/2134/200 (2159)
+Open/close/exp size (steps): 201/2578/201 (2603)
+Open/close/exp size (steps): 216/3111/216 (3136)
+Open/close/exp size (steps): 191/3751/191 (3776)
+Open/close/exp size (steps): 181/4519/181 (4544)
+Open/close/exp size (steps): 203/5441/203 (5466)
+Open/close/exp size (steps): 201/6548/201 (6573)
+Open/close/exp size (steps): 138/7877/138 (7902)
+Open/close/exp size (steps): 121/9472/121 (9497)
+Unable to find solution.
+Total cost: 0
+Multirobot solution analysis: (
+    total makespan           = 0
+    total distance           = 0
+    total trajectory         = 0
+    total cost               = 0
+    average parallelism      = -nan
+    average distance         = 0.000
+    average trajectory       = 0.000
+    parallelism distribution  = [ ]
+    distance distribution     = [ 1227 ]
+    trajectory distribution   = [ ]
+)
+Phase statistics (current phase = 'root_phase') [
+        Phase (name = 'root_phase') [
+            Total SAT solver calls         = 0
+            Satisfiable SAT solver calls   = 0
+            Unsatisfiable SAT solver calls = 0
+            Indeterminate SAT solver calls = 0
+            Move executions                = 0
+            Produced CNF variables         = 0
+            Produced CNF clauses           = 0
+            Search steps                   = 0
+            Wall clock TIME (seconds)      = 12.925
+            CPU/machine TIME (seconds)     = 12.920
+        ]
+        Sub-phases {
+            Phase (name = 'independent_solving') [
+                Total SAT solver calls         = 0
+                Satisfiable SAT solver calls   = 0
+                Unsatisfiable SAT solver calls = 0
+                Indeterminate SAT solver calls = 0
+                Move executions                = 31321
+                Produced CNF variables         = 0
+                Produced CNF clauses           = 0
+                Search steps                   = 0
+                Wall clock TIME (seconds)      = 23.673
+                CPU/machine TIME (seconds)     = 23.670
+            ]
+        }
+]
+----------------------------------------------------------------

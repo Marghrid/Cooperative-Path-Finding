@@ -34,6 +34,10 @@ public:
 		return _environment.get_neighbours(v_id);
 	}
 
+	std::vector<Edge> edges() const { return _environment.edges(); }
+	
+	std::vector<Edge> bidirectional_edges() const { return _environment.bidirectional_edges(); }
+
 	void add_vertex(int v_id) { _environment.add_vertex(v_id); }
 
 	void add_edge(int start_id, int end_id) { _environment.add_edge(start_id, end_id); }

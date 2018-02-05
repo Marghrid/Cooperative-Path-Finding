@@ -3,6 +3,8 @@ let sol_file_change = false;
 
 let solve_button;
 
+let showing_cpf = false;
+
 function update_cpf_file_flag() {
     cpf_file_change = true;
     sol_file_change = false;
@@ -19,8 +21,11 @@ function start_reading_cpf(cpf_file) {
         // cpf is a string with the file's contents
         cpf = cpf_reader.result;
         show(cpf);
-        solve_button = document. createElement("button");
-        solve_button.innerHTML = "Solve";
+        showing_cpf = true;
+        if(solve_button != null)
+            document.body.removeChild(solve_button);
+        solve_button = document.createElement("button");
+        solve_button.innerHTML = "Show Solution";
         solve_button.disabled = true;
         solve_button.id = "solve_button";
         solve_button.onclick = solve_button_onclick;
@@ -35,7 +40,9 @@ function start_reading_sol(sol_file) {
     sol_reader.onload = function(e) {
         // solution is a string with the file's contents
         solution = sol_reader.result;
+
         if(solve(solution)) {
+            scene.board.animation_controller.load_from_solution(scene.solution);
             solve_button.disabled = false;
         }
     }
@@ -63,22 +70,23 @@ function solve_button_onclick() {
 }
 
 function example1_button() {
-    get_example_file("grid_4x4_r6_5");
+    get_example_file("grid_4x4_a4_o0.3_s31");
 }
+
 function example2_button() {
-    get_example_file("grid_8x8_r6_5");
+    get_example_file("grid_4x4_a6_o0.1_s616");
 }
 
 function example3_button() {
-    get_example_file("grid_8x8_r6_895");
+    get_example_file("grid_8x8_a16_o0.1_s31");
 }
 
 function example4_button() {
-    get_example_file("grid_16x16_r25_5");
+    get_example_file("grid_16x16_a25_o0.1_s5");
 }
 
 function example5_button() {
-    get_example_file("grid_32x32_r102_5");
+    get_example_file("grid_32x32_a32_o0.1_s895");
 }
 
 function get_example_file(ex_name) {
@@ -95,10 +103,10 @@ function get_example_file(ex_name) {
 
     cpf_request.onload = function() {
         cpf_blob = cpf_request.response;//cpf_request.response is now a blob object
+        start_reading_cpf(cpf_blob);
 
         sol_request.onload = function() {
             sol_blob = sol_request.response;//sol_request.response is now a blob object
-            start_reading_cpf(cpf_blob);
             start_reading_sol(sol_blob);
 
         }

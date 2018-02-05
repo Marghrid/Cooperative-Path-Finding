@@ -18,13 +18,13 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 **************************************************************************************************/
 
 
-#ifndef Minisat_Alloc_h
-#define Minisat_Alloc_h
+#ifndef Glucose_Alloc_h
+#define Glucose_Alloc_h
 
 #include "mtl/XAlloc.h"
 #include "mtl/Vec.h"
 
-namespace Minisat {
+namespace Glucose {
 
 //=================================================================================================
 // Simple Region-based memory allocator:
@@ -54,6 +54,7 @@ class RegionAllocator
 
 
     uint32_t size      () const      { return sz; }
+    uint32_t getCap    () const      { return cap;}
     uint32_t wasted    () const      { return wasted_; }
 
     Ref      alloc     (int size); 
@@ -79,6 +80,16 @@ class RegionAllocator
         sz = cap = wasted_ = 0;
     }
 
+    void copyTo(RegionAllocator& to) const {
+     //   if (to.memory != NULL) ::free(to.memory);
+        to.memory = (T*)xrealloc(to.memory, sizeof(T)*cap);
+        memcpy(to.memory,memory,sizeof(T)*cap);        
+        to.sz = sz;
+        to.cap = cap;
+        to.wasted_ = wasted_;
+    }
+
+
 
 };
 
@@ -86,7 +97,6 @@ template<class T>
 void RegionAllocator<T>::capacity(uint32_t min_cap)
 {
     if (cap >= min_cap) return;
-
     uint32_t prev_cap = cap;
     while (cap < min_cap){
         // NOTE: Multiply by a factor (13/8) without causing overflow, then add 2 and make the
@@ -99,7 +109,7 @@ void RegionAllocator<T>::capacity(uint32_t min_cap)
         if (cap <= prev_cap)
             throw OutOfMemoryException();
     }
-    // printf(" .. (%p) cap = %u\n", this, cap);
+    //printf(" .. (%p) cap = %u\n", this, cap);
 
     assert(cap > 0);
     memory = (T*)xrealloc(memory, sizeof(T)*cap);
@@ -110,7 +120,7 @@ template<class T>
 typename RegionAllocator<T>::Ref
 RegionAllocator<T>::alloc(int size)
 { 
-    // printf("ALLOC called (this = %p, size = %d)\n", this, size); fflush(stdout);
+    //printf("ALLOC called (this = %p, size = %d)\n", this, size); fflush(stdout);
     assert(size > 0);
     capacity(sz + size);
 
