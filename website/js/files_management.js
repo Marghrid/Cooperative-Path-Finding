@@ -1,8 +1,6 @@
 let cpf_file_change = false;
 let sol_file_change = false;
 
-let solve_button;
-
 let showing_cpf = false;
 
 function update_cpf_file_flag() {
@@ -22,14 +20,9 @@ function start_reading_cpf(cpf_file) {
         cpf = cpf_reader.result;
         show(cpf);
         showing_cpf = true;
-        if(solve_button != null)
-            document.body.removeChild(solve_button);
-        solve_button = document.createElement("button");
-        solve_button.innerHTML = "Show Solution";
-        solve_button.disabled = true;
-        solve_button.id = "solve_button";
-        solve_button.onclick = solve_button_onclick;
-        document.body.appendChild(solve_button);
+        let show_solution_button = document.getElementById('show_solution_button');
+        show_solution_button.style.visibility = "visible";
+        show_solution_button.disabled = true;
     }
     cpf_reader.readAsText(cpf_file);
 }
@@ -43,7 +36,8 @@ function start_reading_sol(sol_file) {
 
         if(solve(solution)) {
             scene.board.animation_controller.load_from_solution(scene.solution);
-            solve_button.disabled = false;
+            let show_solution_button = document.getElementById('show_solution_button');
+            show_solution_button.disabled = false;
         }
     }
     sol_reader.readAsText(sol_file);

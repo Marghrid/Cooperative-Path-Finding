@@ -2,11 +2,29 @@
 <html>
 <head>
 	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title> Cooperative Path-Finding Instance Viewer </title>
   <style>
-  	body {
-  		font-family: sans-serif;
+    body, button {
+      font-family: sans-serif;
+      font-size: 13px;
+    }
+
+    p {
+      font-size: 15px;
+    }
+
+  	main {
+      display: -webkit-flex; /* Safari */
+      -webkit-flex-direction: row; /* Safari 6.1+ */
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap
   	}
+
+    header {
+      margin: 10px;
+    }
 
   	h1 {
   		font-size: 18pt;
@@ -15,6 +33,51 @@
   	h2 {
   		font-size: 16pt;
   	}
+
+    #file_loading_interface {
+      max-width: 250px;
+      margin:10px;
+    }
+    #renderer_interface {
+      display: -webkit-flex; /* Safari */
+      -webkit-flex-direction: column; /* Safari 6.1+ */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      margin: 20px;
+    }
+
+    #renderer_div {
+      margin: 20px;
+    }
+
+    #example_buttons_div {
+      display: -webkit-flex; /* Safari */
+      -webkit-flex-direction: row; /* Safari 6.1+ */
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .example_button {
+      flex-grow: 1;
+      margin: 5px;
+      padding: 5px;
+    }
+
+    #refresh_button {
+      flex-grow: 1;
+      margin: 5px;
+      padding: 5px;
+    }    
+
+    #show_solution_button {
+      padding: 10px;
+      font-weight: bold;
+      flex-grow: 1;
+    }
+
   </style>
   <script src="js/files_management.js"></script>
 
@@ -35,17 +98,33 @@
 </head>
 
 <body>
-	<h1> Cooperative Path-Finding </h1>
-	<h2> Instance viewer </h2>
-	<p> Instance file: <input type="file" id="cpf_file" onchange="update_cpf_file_flag()"> </p>
-	<p> Solution file: <input type="file" id="sol_file" onchange="update_sol_file_flag()"> </p>
+  <header>
+	 <h1> Cooperative Path-Finding </h1>
+	 <h2> Instance viewer </h2>
+  </header>
+  <main>
+    <div id="file_loading_interface">
+      <div id="file_load_div">
+  	   <p> Instance file: <input type="file" id="cpf_file" onchange="update_cpf_file_flag()"> </p>
+  	   <p> Solution file: <input type="file" id="sol_file" onchange="update_sol_file_flag()"> </p>
+       <button type="button" id="refresh_button" onclick="refresh_button()"> Refresh </button></p>
+      </div>
+      <div id="example_buttons_div">
+        <button type="button" class="example_button" onclick="example1_button()"> Example 1 </button>
+        <button type="button" class="example_button" onclick="example2_button()"> Example 2 </button>
+        <button type="button" class="example_button" onclick="example3_button()"> Example 3 </button>
+        <button type="button" class="example_button" onclick="example4_button()"> Example 4 </button>
+        <button type="button" class="example_button" onclick="example5_button()"> Example 5 </button>
+      </div>
+    </div>
   
-  <p><button type="button" onclick="refresh_button()"> Refresh </button></p>
-     <button type="button" onclick="example1_button()"> Example1 </button>
-     <button type="button" onclick="example2_button()"> Example2 </button>
-     <button type="button" onclick="example3_button()"> Example3 </button>
-     <button type="button" onclick="example4_button()"> Example4 </button>
-     <button type="button" onclick="example5_button()"> Example5 </button></p>
+    <div id="renderer_interface">
+      <div id="renderer_div">
+       <!-- Will have renderer here -->
+      </div>
+      <button type="button" id="show_solution_button" style="visibility: hidden;" onclick="solve_button_onclick()"> Show solution </button>
+    </div>
+  </main>
 
 </body>
 </html>
