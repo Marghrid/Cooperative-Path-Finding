@@ -7,7 +7,7 @@
 *.o_opt
 *.o_dbg
 *.a
-code/include/glucose/simp/lib_standard.a
+CPFSolver/include/glucose/simp/lib_standard.a
 
 # Executables
 *.exe
@@ -15,13 +15,14 @@ code/include/glucose/simp/lib_standard.a
 
 # Makefile dependencies:
 *.mk
-code/include/glucose/mtl/template.mk
+CPFSolver/include/glucose/mtl/template.mk
 
 #Specifics:
 reLOC-0.13-odaiba_037/src/*.o
 reLOC-0.13-odaiba_037/src/*.o_opt
 reLOC-0.13-odaiba_037/src/*.o_dbg
 
-code/build
-code/bin
-code/core
+CPFSolver/build
+CPFSolver/bin
+CPFSolver/bin/a.out
+CPFSolver/core
