@@ -402,13 +402,13 @@ sResult sMultirobotSolutionCompressor::compute_OptimalMakespan(const sRobotArran
 
 
 sResult sMultirobotSolutionCompressor::compute_OptimalMakespan(const sRobotArrangement           &start_arrangement,
- const sRobotGoal                  &final_arrangement,
- const sUndirectedGraph            &environment,
- const sUndirectedGraph            &sparse_environment,
- int                                makespan_upper_bound,
- int                               &optimal_makespan,
- sMultirobotEncodingContext_CNFsat &final_encoding_context,
- int                                thread_id)
+                                                               const sRobotGoal                  &final_arrangement,
+                                                               const sUndirectedGraph            &environment,
+                                                               const sUndirectedGraph            &sparse_environment,
+                                                               int                                makespan_upper_bound,
+                                                               int                               &optimal_makespan,
+                                                               sMultirobotEncodingContext_CNFsat &final_encoding_context,
+                                                               int                                thread_id)
 {
 	sResult result;
 	sMultirobotInstance instance(environment, sparse_environment, start_arrangement, final_arrangement);

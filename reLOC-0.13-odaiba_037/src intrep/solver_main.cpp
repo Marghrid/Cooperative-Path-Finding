@@ -244,11 +244,11 @@ namespace sReloc
 				sASSERT(command_parameters.m_cnf_encoding == sMultirobotSolutionCompressor::ENCODING_PLURAL2 || command_parameters.m_cnf_encoding == sMultirobotSolutionCompressor::ENCODING_PLURAL)
 
 				sMultirobotSolutionCompressor compressor(sRELOC_SAT_SOLVER_PATH,
-					command_parameters.m_minisat_timeout,
-					command_parameters.m_total_timeout,
-					command_parameters.m_makespan_upper_bound,
-					sDEFAULT_N_PARALLEL_THREADS,
-					command_parameters.m_cnf_encoding);	    
+									    				 command_parameters.m_minisat_timeout,
+									    				 command_parameters.m_total_timeout,
+									    				 command_parameters.m_makespan_upper_bound,
+									    				 sDEFAULT_N_PARALLEL_THREADS,
+									    				 command_parameters.m_cnf_encoding);	    
 				
 				result = compressor.compute_UnirobotsSolution(initial_arrangement,
 					robot_goal,
