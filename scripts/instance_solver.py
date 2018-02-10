@@ -1,5 +1,14 @@
 from os import system
 
+for filename in ["subway"]:
+	aux  = " --input-file=../handmade_instances/"  + filename + ".cpf"
+	aux += " --output-file=../handmade_instances/" + filename + ".out"
+	aux += " --makespan-limit=64"
+
+output = " > ../solver_files/" + filename + ".txt 2>&1"
+print ("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
+system("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
+
 for size in (4, 8, 16, 32, 64):
 	makespan_limit = size * size *2
 	for robots_prob in (0.2, 0.3, 0.4):
@@ -17,7 +26,7 @@ for size in (4, 8, 16, 32, 64):
 				aux += " --output-file=../instances/" + filename + ".out"
 				aux += " --makespan-limit=" + str(makespan_limit)
 
-				output = " > solver_files/" + filename + ".txt 2>&1"
+				output = " > ../solver_files/" + filename + ".txt 2>&1"
 				print ("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
 				system("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
 
@@ -30,6 +39,6 @@ for dim in (3, 9):
 			aux = " --input-file=../instances/hyper_dim" + str(dim) + "_a" + str(n_robots) + "_" + str(seed) + ".cpf"
 			aux += " --output-file=../solutions/hyper_dim" + str(dim) + "_a" + str(n_robots) + "_" + str(seed) + ".out"
 			aux += " --makespan-limit=" + str(makespan_limit)
-			output = " > solver_files/hyper_dim" + str(dim) + "_a" + str(n_robots) + "_" + str(seed) + ".txt 2>&1"
+			output = " > ../solver_files/hyper_dim" + str(dim) + "_a" + str(n_robots) + "_" + str(seed) + ".txt 2>&1"
 			print ("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
 			system("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
