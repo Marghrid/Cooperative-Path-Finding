@@ -4794,7 +4794,7 @@ Open/close/exp size (steps): 34989/131338/34989 (147494)
 Open/close/exp size (steps): 101405/160857/101405 (177013)
 Open/close/exp size (steps): 142633/196280/142633 (212436)
 Open/close/exp size (steps): 107871/238788/107871 (254944)
-Open/close/exp size (steps): 67773terminate called after throwing an instance of 'St9bad_alloc'
+Open/close/exp size (steps): 67773terminate called after throwing an instance of 'std::bad_alloc'
   what():  std::bad_alloc
 /289798/67773 (305954)
 Aborted (core dumped)

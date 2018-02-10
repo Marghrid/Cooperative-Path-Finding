@@ -245,7 +245,7 @@ Occupation table complementary for group 0
 Occupation table complementary for group 1
 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 1 0 0 0 2 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 3 0 0 0 0 1 0 0 0 0 1 0 1 0 0 0 1 
 0 0 0 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 2 0 0 3 0 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 0 1 0 0 0 0 
-0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 terminate called after throwing an instance of 'std::bad_alloc'
+0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 terminate called after throwing an instance of 'St9bad_alloc'
   what():  std::bad_alloc
 0 0 0 0 0 0 0 0 0 0 0 0 1 0 3 0 0 0 2 0 0 1 0 0 0 1 0 1 0 1 0 0 0 0 1 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 2 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0 0 
