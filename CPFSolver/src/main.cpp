@@ -7,10 +7,12 @@
 
 int main(int argc, const char **argv) {
 	std::string filename = "../instances/grid_4x4_a6_o0.1_s616.cpf";
-	int 		max_makespan = 10;
+	int max_makespan = 10;
+	int verbose = 0;
 
 	if(argc == 1) {
 		std::cout << "solving for default file: grid_4x4_a6_o0.1_s616.cpf" << std::endl;
+		verbose = 2;
 	}
 	else if(argc == 2) {
 		filename = argv[1];
@@ -21,8 +23,14 @@ int main(int argc, const char **argv) {
 		max_makespan = atoi(argv[2]);
 	}
 	else {
-		std::cout << "unused arguments" << std::endl;
+		for(int i = 3; i < argc; ++i) {
+			std::string arg(argv[i]);
+			if(arg == "-v") {
+				verbose = atoi(argv[i+1]);
+			}
+		}
 	}
+
 	Graph env1;
 
 	env1.add_edge(0, 1);
@@ -38,7 +46,6 @@ int main(int argc, const char **argv) {
 	agents1.push_back(a2);
 
 	Instance inst1(env1, agents1);
-
 
 	Graph env2;
 	/* 0 1 2 *
@@ -77,12 +84,8 @@ int main(int argc, const char **argv) {
 
 	//std::cout << inst << std::endl;
 
-	std::cout << "Solving instance 1:" << std::endl;
-	Simplified_solver s1(inst2, 10);
+	std::cout << "Solving instance:" << std::endl;
+	Simplified_solver s1(inst2, max_makespan, verbose);
 	s1.solve();
 
-/*	std::cout << "Solving instance:" << std::endl;
-	Simplified_solver s1(inst, max_makespan);
-	s1.solve();
-	*/
 }
