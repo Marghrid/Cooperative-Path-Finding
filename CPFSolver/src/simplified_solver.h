@@ -13,12 +13,19 @@ private:
 	// std::ostream* fp = &cout
 	Instance _instance;
 	int _max_makespan;
+	int _created_vars_makespan;
+	int _created_clauses_makespan;
+	Glucose::SimpSolver _solver;
+	bool _verbose;
 	//std::ofstream _cnf_file_stream;
 	//std::string   _cnf_file;
 
-	Glucose::Var make_xvar_id(int agent_id, int vertex_id, int timestep, int eta);
 
-	Glucose::Var make_evar_id(int vertex_id, int timestep, int eta);
+	int get_initial_makespan() { return 0; }
+
+	Glucose::Var make_xvar_id(int agent_id, int vertex_id, int timestep);
+
+	Glucose::Var make_evar_id(int vertex_id, int timestep);
 
 	int get_agent_id_x(int var_id, int eta);
 
@@ -26,10 +33,12 @@ private:
 
 	int get_timestep_x(int var_id, int eta);
 
-	bool solve_for_makespan(Glucose::SimpSolver solver, int eta);
+	bool solve_for_makespan(int eta);
+
+	void create_vars(int current_makespan);
 
 public:
-	Simplified_solver(Instance inst, int makespan);
+	Simplified_solver(Instance inst, int makespan, int verbose = 0);
 
 	bool solve();
 
