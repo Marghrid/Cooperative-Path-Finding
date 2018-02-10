@@ -582,7 +582,6 @@ static void mkElimClause(vec<uint32_t>& elimclauses, Var v, Clause& c)
 }
 
 
-
 bool SimpSolver::eliminateVar(Var v)
 {
     assert(!frozen[v]);
@@ -789,9 +788,7 @@ bool SimpSolver::eliminate(bool turn_off_elim)
                double(elimclauses.size() * sizeof(uint32_t)) / (1024*1024));
 
                
-    return ok;
-
-    
+    return ok; 
 }
 
 
