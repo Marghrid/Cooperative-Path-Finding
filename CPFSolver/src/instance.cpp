@@ -8,8 +8,15 @@ void Instance::add_agent(int a_id) {
 		for(int i = _agents.size(); i <= a_id; ++i) {
 			Agent a(i);
 			_agents.push_back(a);
+			_vertex_starts_empty.push_back(true);
 		}
 	}
+}
+
+void Instance::set_start_empty(int a_id, bool b) {
+	if((size_t)a_id >= _agents.size())
+		return; //exception: unexistent agent
+	_vertex_starts_empty[a_id] = b;
 }
 
 std::ostream& operator<<(std::ostream& os, const Instance& inst) {
