@@ -9,6 +9,7 @@ class Instance {
 private:
 	Graph _environment;
 	std::vector<Agent> _agents;
+	std::vector<bool>  _vertex_starts_empty;
 
 public:
 	Instance(Graph environment, std::vector<Agent> agents) {
@@ -43,6 +44,10 @@ public:
 	void add_edge(int start_id, int end_id) { _environment.add_edge(start_id, end_id); }
  	
  	void add_agent(int a_id);
+
+ 	void set_start_empty(int v_id, bool b);
+
+ 	bool starts_empty(int v_id) { return _vertex_starts_empty[v_id]; }
 
 	// void add_agent(Agent a) { }
 

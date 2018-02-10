@@ -59,6 +59,9 @@ Instance Parser::parse() {
 				largest_agent_id = initial_a_id;
 			}
 			inst.set_agent_initial_position(initial_a_id-1, v_id);
+			inst.set_start_empty(v_id, false);
+		} else {
+			inst.set_start_empty(v_id, true);
 		}
 
 		if(goal_a_id > 0) {

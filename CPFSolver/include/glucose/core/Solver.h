@@ -117,11 +117,11 @@ public:
     // Problem specification:
     //
     virtual Var     newVar    (bool polarity = true, bool dvar = true); // Add a new variable with parameters specifying variable mode.
-    bool    addClause (const vec<Lit>& ps);                     // Add a clause to the solver. 
-    bool    addEmptyClause();                                   // Add the empty clause, making the solver contradictory.
-    bool    addClause (Lit p);                                  // Add a unit clause to the solver. 
-    bool    addClause (Lit p, Lit q);                           // Add a binary clause to the solver. 
-    bool    addClause (Lit p, Lit q, Lit r);                    // Add a ternary clause to the solver. 
+    bool            addClause (const vec<Lit>& ps);                     // Add a clause to the solver. 
+    bool            addEmptyClause();                                   // Add the empty clause, making the solver contradictory.
+    bool            addClause (Lit p);                                  // Add a unit clause to the solver. 
+    bool            addClause (Lit p, Lit q);                           // Add a binary clause to the solver. 
+    bool            addClause (Lit p, Lit q, Lit r);                    // Add a ternary clause to the solver. 
     virtual bool    addClause_(      vec<Lit>& ps);                     // Add a clause to the solver without making superflous internal copy. Will
                                                                 // change the passed vector 'ps'.
     // Solving:
@@ -274,14 +274,14 @@ protected:
     long curRestart;
 
     // Alpha variables
-    bool glureduce;
+    bool     glureduce;
     uint32_t restart_inc;
-    bool  luby_restart;
-    bool adaptStrategies;
+    bool     luby_restart;
+    bool     adaptStrategies;
     uint32_t luby_restart_factor;
-    bool randomize_on_restarts, fixed_randomize_on_restarts, newDescent;
+    bool     randomize_on_restarts, fixed_randomize_on_restarts, newDescent;
     uint32_t randomDescentAssignments;
-    bool forceUnsatOnNewDescent;
+    bool     forceUnsatOnNewDescent;
     // Helper structures:
     //
     struct VarData { CRef reason; int level; };
