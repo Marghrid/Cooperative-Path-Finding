@@ -135,7 +135,7 @@ Phase statistics (current phase = 'root_phase') [
             Produced CNF variables         = 0
             Produced CNF clauses           = 0
             Search steps                   = 0
-            Wall clock TIME (seconds)      = 0.017
+            Wall clock TIME (seconds)      = 0.039
             CPU/machine TIME (seconds)     = 0.000
         ]
         Sub-phases {
@@ -148,8 +148,8 @@ Phase statistics (current phase = 'root_phase') [
                 Produced CNF variables         = 0
                 Produced CNF clauses           = 0
                 Search steps                   = 0
-                Wall clock TIME (seconds)      = 0.043
-                CPU/machine TIME (seconds)     = 0.040
+                Wall clock TIME (seconds)      = 0.087
+                CPU/machine TIME (seconds)     = 0.080
             ]
         }
 ]

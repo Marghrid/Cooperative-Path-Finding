@@ -220,7 +220,7 @@ Occupation table complementary for group 9
 Unable to resolve collision between groups 0 and 9.
 Merging groups 0 and 9.
 Searching solution for merged group 0+9.
-Open/close/exp size (steps): 126/53/126terminate called after throwing an instance of 'St9bad_alloc'
+Open/close/exp size (steps): 126/53/126terminate called after throwing an instance of 'std::bad_alloc'
   what():  std::bad_alloc
  (381)
 Open/close/exp size (steps): 268/137/268 (465)

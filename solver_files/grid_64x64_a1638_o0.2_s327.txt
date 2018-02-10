@@ -1,4 +1,4 @@
-terminate called after throwing an instance of 'std::bad_alloc'
+terminate called after throwing an instance of 'St9bad_alloc'
   what():  std::bad_alloc
 ================================================================
 reLOC 0.13-odaiba : Multirobot Solver

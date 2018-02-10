@@ -262,7 +262,7 @@ Unable to resolve collision between groups 0 and 6.
 Merging groups 0 and 6.
 Searching solution for merged group 0+6.
 Open/close/exp size (steps): 1092/389/1092 (16465)
-Open/close/exp size (sterminate called after throwing an instance of 'std::bad_alloc'
+Open/close/exp size (sterminate called after throwing an instance of 'St9bad_alloc'
   what():  std::bad_alloc
 teps): 4674/3698/4674 (19774)
 Open/close/exp size (steps): 4667/7669/4667 (23745)

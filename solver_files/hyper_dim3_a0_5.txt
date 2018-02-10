@@ -3,4 +3,4 @@ reLOC 0.13-odaiba : Multirobot Solver
 (C) Copyright 2016 Pavel Surynek
 ----------------------------------------------------------------
 Reading graph...
-Error: Reading graph from file instances/hyper_dim3_a0_5.cpf failed (code = -1001).
+Error: Reading graph from file ../instances/hyper_dim3_a0_5.cpf failed (code = -1001).

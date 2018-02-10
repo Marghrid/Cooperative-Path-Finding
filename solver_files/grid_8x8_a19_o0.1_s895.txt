@@ -401,7 +401,7 @@ Occupation table complementary for group 4
 1 0 0 0 1 1 0 1 0 0 1 0 1 1 0 0 0 0 0 0 1 1 0 0 1 0 0 0 0 1 0 2 0 1 0 1 0 0 1 0 0 0 0 0 1 0 0 0 3 0 1 0 0 
 1 0 0 0 1 1 0 1 0 0 1 0 1 1 0 0 0 0 0 0 1 1 0 0 1 0 0 0 0 0 2 0 0 1 0 1 1 0 1 0 0 0 0 0 1 0 0 0 3 0 1 0 0 
 
-Unable to resolve collision betwterminate called after throwing an instance of 'St9bad_alloc'
+Unable to resolve collision betwterminate called after throwing an instance of 'std::bad_alloc'
   what():  std::bad_alloc
 een groups 0 and 4.
 Merging groups 0 and 4.
