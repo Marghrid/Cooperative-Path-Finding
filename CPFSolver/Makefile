@@ -1,25 +1,25 @@
 FLAGS = -Wall -std=c++11
-INC   = -I src/ -I include/glucose/
+INC   = -I src/ -I include/glucose/ -I src/searches -I src/encoders
 LIB   = -L include/glucose/simp
 
-all: directories build/graph.o build/instance.o build/parser.o build/simplified_solver.o
-	g++ $(FLAGS) $(INC) $(LIB) -o bin/a.out build/graph.o build/instance.o build/parser.o build/simplified_solver.o -l_standard src/main.cpp 
+all: directories build/Graph.o build/Instance.o build/Parser.o build/Simplified_solver.o
+	g++ $(FLAGS) $(INC) $(LIB) -o bin/a.out build/Graph.o build/Instance.o build/Parser.o build/Simplified_solver.o -l_standard src/main.cpp 
 
 directories:
 	mkdir -p build 
 	mkdir -p bin
 
-build/graph.o: src/graph.cpp src/graph.h
-	g++ $(FLAGS) -c $(INC) -o build/graph.o src/graph.cpp
+build/Graph.o: src/Graph.cpp src/Graph.h
+	g++ $(FLAGS) -c $(INC) -o build/Graph.o src/Graph.cpp
 
-build/instance.o: src/instance.cpp src/instance.h src/agent.h src/graph.h
-	g++ $(FLAGS) -c $(INC) -o build/instance.o src/instance.cpp
+build/Instance.o: src/Instance.cpp src/Instance.h src/Agent.h src/Graph.h
+	g++ $(FLAGS) -c $(INC) -o build/Instance.o src/Instance.cpp
 
-build/parser.o: src/parser.cpp src/parser.h src/instance.h
-	g++ $(FLAGS) -c $(INC) -o build/parser.o src/parser.cpp
+build/Parser.o: src/Parser.cpp src/Parser.h src/Instance.h
+	g++ $(FLAGS) -c $(INC) -o build/Parser.o src/Parser.cpp
 
-build/simplified_solver.o: src/simplified_solver.cpp src/simplified_solver.h
-	g++ $(FLAGS) -c $(INC) -o build/simplified_solver.o src/simplified_solver.cpp
+build/Simplified_solver.o: src/Simplified_solver.cpp src/Simplified_solver.h
+	g++ $(FLAGS) -c $(INC) -o build/Simplified_solver.o src/Simplified_solver.cpp
 
 clean:
 	rm -f build/*.o

@@ -1,9 +1,9 @@
 #include <iostream>
 #include <cstdlib>
-#include "instance.h"
-#include "graph.h"
-#include "parser.h"
-#include "simplified_solver.h"
+#include "Instance.h"
+#include "Graph.h"
+#include "Parser.h"
+#include "Simplified_solver.h"
 
 int main(int argc, const char **argv) {
     std::string filename = "../instances/grid_4x4_a6_o0.1_s616.cpf";

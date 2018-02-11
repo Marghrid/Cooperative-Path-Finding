@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "Graph.h"
 
 std::ostream& operator<<(std::ostream& os, const Vertex& v) {
     os << v.id();

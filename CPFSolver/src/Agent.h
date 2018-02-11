@@ -1,7 +1,7 @@
 #ifndef __AGENT__
 #define __AGENT__
 
-#include "graph.h"
+#include "Graph.h"
 
 class Agent {
 private:

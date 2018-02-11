@@ -1,5 +1,5 @@
-#include "parser.h"
-#include "instance.h"
+#include "Parser.h"
+#include "Instance.h"
 
 #include <iostream>
 #include <sstream>
@@ -74,7 +74,7 @@ Instance Parser::parse() {
         }
     }
 
-    read edges:
+    //read edges:
     while(std::getline(_instance_file_stream, aux1)) {
 
         std::stringstream ss(aux1);

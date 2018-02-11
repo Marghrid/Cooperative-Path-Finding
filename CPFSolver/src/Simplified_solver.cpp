@@ -1,4 +1,4 @@
-#include "simplified_solver.h"
+#include "Simplified_solver.h"
 //#include "cnf.h"
 #include "simp/SimpSolver.h"
 #include <cmath>
@@ -18,22 +18,22 @@ Glucose::Var Simplified_solver::make_xvar_id(int agent_id, int vertex_id, int ti
 }
 
 Glucose::Var Simplified_solver::make_evar_id(int vertex_id, int timestep) {
-    return timestep * _instance.n_vertices() * (_instance.n_agents() + 1)
+    return timestep * _instance.n_vertices() * (_instance.n_agents()+1)
     + vertex_id * (_instance.n_agents() + 1)
     + _instance.n_agents();
 }
 
-int Simplified_solver::get_agent_id_x(int var_id, int eta) {
-    return -1;//std::floor(var_id/(_instance.n_vertices()*eta));
+int Simplified_solver::get_agent_id_x(int var_id) {
+    return var_id % (_instance.n_vertices() * (_instance.n_agents()+1) );
 }
 
-int Simplified_solver::get_vertex_id_x(int var_id, int eta) {
-    //int argvar = std::floor(var_id/eta);
-    return -1;//argvar % _instance.n_vertices();
+int Simplified_solver::get_vertex_id_x(int var_id) {
+    int intdiv = std::floor( var_id/ (_instance.n_agents() + 1) );
+    return intdiv % _instance.n_vertices();
 }
 
-int Simplified_solver::get_timestep_x(int var_id, int eta) {
-    return -1;//var_id%eta;
+int Simplified_solver::get_timestep_x(int var_id) {
+    return std::floor(var_id / ( _instance.n_vertices() * (_instance.n_agents()+1) ) );
 }
 
 void Simplified_solver::create_vars(int current_makespan) {
@@ -67,7 +67,6 @@ void Simplified_solver::create_vars(int current_makespan) {
     }
 }
 
-
 bool Simplified_solver::solve_for_makespan(int eta) {
     int mu  = _instance.n_agents();
     int n   = _instance.n_vertices();
@@ -100,9 +99,7 @@ bool Simplified_solver::solve_for_makespan(int eta) {
             }
         }
 
-        
-        if(i > 0) {
-
+        if(i > 0) /* Clause that relate current timestep i with timestep i-1 */{
             // An agent moves along an edge, or not at all:
             if(_verbose > 0)
                 std::cout << "An agent moves along an edge, or not at all..."
@@ -227,7 +224,6 @@ bool Simplified_solver::solve_for_makespan(int eta) {
             }
         }
     }
-
     return satisfiable;
 }
 
@@ -282,7 +278,4 @@ bool Simplified_solver::solve() {
         std::cout << "Solved for makespan = " << --current_makespan << std::endl;
     }
     return solved;
-    // Create variables: In Minisat/Glucose variables are but integers.
-
-    
 }
