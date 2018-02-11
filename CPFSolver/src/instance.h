@@ -3,6 +3,7 @@
 
 #include "graph.h"
 #include "agent.h"
+
 #include <iostream>
 
 class Instance {
