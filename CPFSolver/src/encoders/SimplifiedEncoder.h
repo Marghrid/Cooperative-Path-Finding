@@ -15,13 +15,13 @@ public:
 	SimplifiedEncoder(Instance instance, Glucose::SimpSolver *solver, int verbose = 0)
 	: Encoder(instance, solver, verbose) {}
 
-	virtual void create_vars_for_makespan(int makespan) override;
+	void create_vars_for_makespan(int makespan) override;
 
-	virtual void create_clauses_for_makespan(int makespan) override;
+	void create_clauses_for_makespan(int makespan) override;
 
-	virtual void create_goal_assumptions(Glucose::vec<Glucose:: Lit> &assumptions, int makespan) override;
+	void create_goal_assumptions(Glucose::vec<Glucose:: Lit> &assumptions, int makespan) override;
 
-	virtual void show_results(int makespan) override;
+	void show_results(int makespan) override;
 
 public:
 
