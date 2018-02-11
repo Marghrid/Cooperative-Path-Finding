@@ -9,6 +9,10 @@ NTIA project: Cooperative Path-Finding
 
 **instances**: Contains a few instances generated with Surynek's generator and their solution file, when available.
 
+**simple_instances**: Contains simpler instances, to be solved by fragile solvers.
+
+**handmade_instances**: Instances created using Duarte's [CPFMaker](https://github.com/drcd1/CPFMaker).
+
 **solver_files**: Contains Surynek's solver's output for each instance (both to stdout and stderr).
 
 **website**: All files related to the insatnce viewer website.
