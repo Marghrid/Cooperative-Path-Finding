@@ -3,7 +3,7 @@
 #include "Instance.h"
 #include "Graph.h"
 #include "Parser.h"
-#include "Simplified_solver.h"
+#include "CPFSolver.h"
 
 int main(int argc, const char **argv) {
     std::string filename = "../instances/grid_4x4_a6_o0.1_s616.cpf";
@@ -76,7 +76,7 @@ int main(int argc, const char **argv) {
 //  agents2.push_back(a5);
 //
 //  Instance inst2(env2, agents2);
-
+//
     Parser parser(filename);
 
     Instance inst = parser.parse();
@@ -85,7 +85,7 @@ int main(int argc, const char **argv) {
         std::cout << inst << std::endl;
 
     std::cout << "Solving instance:" << std::endl;
-    Simplified_solver s1(inst, max_makespan, verbose);
+    CPFSolver s1(inst, max_makespan, verbose);
     s1.solve();
 
 }

@@ -32,7 +32,7 @@ public:
 
     Agent agent(int id) const { return _agents.at(id); }
 
-    std::vector<Vertex> get_neighbours(int v_id) {
+    std::vector<Vertex> get_neighbours(int v_id) const {
         return _environment.get_neighbours(v_id);
     }
 
@@ -48,7 +48,7 @@ public:
 
     void set_start_empty(int v_id, bool b);
 
-    bool starts_empty(int v_id) { return _vertex_starts_empty[v_id]; }
+    bool starts_empty(int v_id) const { return _vertex_starts_empty[v_id]; }
 
     // void add_agent(Agent a) { }
 

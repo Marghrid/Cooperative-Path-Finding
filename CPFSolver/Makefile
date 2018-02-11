@@ -1,9 +1,9 @@
 FLAGS = -Wall -std=c++11
-INC   = -I src/ -I include/glucose/ -I src/searches -I src/encoders
+INC   = -I src/ -I include/glucose/ -I src/searches/ -I src/encoders/
 LIB   = -L include/glucose/simp
 
-all: directories build/Graph.o build/Instance.o build/Parser.o build/Simplified_solver.o
-	g++ $(FLAGS) $(INC) $(LIB) -o bin/a.out build/Graph.o build/Instance.o build/Parser.o build/Simplified_solver.o -l_standard src/main.cpp 
+all: directories build/Graph.o build/Instance.o build/Parser.o build/SimplifiedEncoder.o build/CPFSolver.o
+	g++ $(FLAGS) $(INC) $(LIB) -o bin/a.out build/Graph.o build/Instance.o build/Parser.o build/CPFSolver.o build/SimplifiedEncoder.o  src/main.cpp -l_standard
 
 directories:
 	mkdir -p build 
@@ -18,8 +18,11 @@ build/Instance.o: src/Instance.cpp src/Instance.h src/Agent.h src/Graph.h
 build/Parser.o: src/Parser.cpp src/Parser.h src/Instance.h
 	g++ $(FLAGS) -c $(INC) -o build/Parser.o src/Parser.cpp
 
-build/Simplified_solver.o: src/Simplified_solver.cpp src/Simplified_solver.h
-	g++ $(FLAGS) -c $(INC) -o build/Simplified_solver.o src/Simplified_solver.cpp
+build/SimplifiedEncoder.o: src/encoders/SimplifiedEncoder.cpp src/encoders/SimplifiedEncoder.h src/Encoder.h src/Instance.h
+	g++ $(FLAGS) -c $(INC) -o build/SimplifiedEncoder.o src/encoders/SimplifiedEncoder.cpp
+
+build/CPFSolver.o: src/CPFSolver.cpp src/CPFSolver.h src/Instance.h src/encoders/SimplifiedEncoder.h src/Parser.h
+	g++ $(FLAGS) -c $(INC) -o build/CPFSolver.o src/CPFSolver.cpp
 
 clean:
 	rm -f build/*.o
