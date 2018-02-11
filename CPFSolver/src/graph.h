@@ -7,61 +7,61 @@
 
 class Vertex {
 public:
-	int _id;
+    int _id;
 
-	Vertex(int id) { _id = id; }
+    Vertex(int id) { _id = id; }
 
-	int id() const { return _id;	}
+    int id() const { return _id;    }
 
-	bool operator<(const Vertex& o) const {
-		return this->_id < o._id;
-	}
+    bool operator<(const Vertex& o) const {
+        return this->_id < o._id;
+    }
 
-	friend std::ostream& operator<<(std::ostream& os, const Vertex& v);
+    friend std::ostream& operator<<(std::ostream& os, const Vertex& v);
 };
 
 class Edge {
 private:
-	Vertex _start;
-	Vertex _end;
+    Vertex _start;
+    Vertex _end;
 
 public:
-	Edge(Vertex start, Vertex end)
-	: _start(start), _end(end) { }
+    Edge(Vertex start, Vertex end)
+    : _start(start), _end(end) { }
 
-	Edge(int start_id, int end_id)
-	: _start(start_id), _end(end_id) {}
+    Edge(int start_id, int end_id)
+    : _start(start_id), _end(end_id) {}
 
-	Vertex start() const { return _start; }
-	Vertex end()   const { return _end; }
+    Vertex start() const { return _start; }
+    Vertex end()   const { return _end; }
 
-	friend std::ostream& operator<<(std::ostream& os, const Edge& e);
+    friend std::ostream& operator<<(std::ostream& os, const Edge& e);
 };
 
 class Graph {
 private:
-	std::vector< std::list<Edge> > _adjacencies;
-	int _n_vertices = 0;
-	int _n_edges = 0;
+    std::vector< std::list<Edge> > _adjacencies;
+    int _n_vertices = 0;
+    int _n_edges = 0;
 
 public:
-	Graph() {}
+    Graph() {}
 
-	int n_vertices() const { return _n_vertices; }
+    int n_vertices() const { return _n_vertices; }
 
-	int n_edges() const { return _n_edges; }
+    int n_edges() const { return _n_edges; }
 
-	std::vector<Edge> edges() const;
+    std::vector<Edge> edges() const;
 
-	std::vector<Edge> bidirectional_edges() const;
+    std::vector<Edge> bidirectional_edges() const;
 
-	std::vector<Vertex> get_neighbours(int v_id) const;
+    std::vector<Vertex> get_neighbours(int v_id) const;
 
-	void add_edge(Vertex start, Vertex end, bool directed = false);
+    void add_edge(Vertex start, Vertex end, bool directed = false);
 
-	void add_edge(int start_id, int end_id, bool directed = false);
+    void add_edge(int start_id, int end_id, bool directed = false);
 
-	void add_vertex(int id);
+    void add_vertex(int id);
 };
 
 #endif
