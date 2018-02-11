@@ -48,12 +48,13 @@ void Graph::add_edge(Vertex start, Vertex end, bool directed) {
 		add_vertex(end.id());
 	}
 
-	Edge e(start, end);
-	_adjacencies.at(start.id()).push_back(e);
+	//std::cout << "Adding (" << start.id() << ", " << end.id() << ")" << std::endl;
+	Edge e1(start, end);
+	_adjacencies.at(start.id()).push_back(e1);
 
 	if(!directed) {
-		Edge e(end, start);
-		_adjacencies.at(end.id()).push_back(e);
+		Edge e2(end, start);
+		_adjacencies.at(end.id()).push_back(e2);
 	}
 
 	++_n_edges;

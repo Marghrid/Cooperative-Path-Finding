@@ -16,7 +16,7 @@ private:
 	int _created_vars_makespan;
 	int _created_clauses_makespan;
 	Glucose::SimpSolver _solver;
-	bool _verbose;
+	int _verbose;
 	//std::ofstream _cnf_file_stream;
 	//std::string   _cnf_file;
 

@@ -14,8 +14,9 @@ void Instance::add_agent(int a_id) {
 }
 
 void Instance::set_start_empty(int a_id, bool b) {
-	if((size_t)a_id >= _agents.size())
-		return; //exception: unexistent agent
+	while((size_t)a_id >= _vertex_starts_empty.size()) {
+		_vertex_starts_empty.push_back(false);
+;	}
 	_vertex_starts_empty[a_id] = b;
 }
 
@@ -24,7 +25,7 @@ std::ostream& operator<<(std::ostream& os, const Instance& inst) {
 	os << "Environment: " << std::endl;
 	os << "N vertices: "  << inst.n_vertices() << std::endl;
 	os << "N edges: "     << inst.n_edges()    << std::endl;
-	for (auto& e: inst._environment.edges()) {
+	for (auto& e: inst._environment.bidirectional_edges()) {
 		os << e << std::endl;
 	}
 	os << std::endl;

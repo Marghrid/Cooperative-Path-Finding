@@ -25,17 +25,18 @@ Instance Parser::parse() {
 	std::string aux5;
 	std::string aux6;
 
-	_instance_file_stream >> aux1 >> aux2;
 
-	if(aux1 != "V" || aux2 != "=") {
+		std::getline(_instance_file_stream, aux1);
+
+	if(aux1.at(0) != 'V') {
 		std::cerr << "Error in Parsing" << std::endl;
 		// exception
 	}
 
 	//Read vertices and agents:
-	while(_instance_file_stream >> aux1) {
+	while(std::getline(_instance_file_stream, aux1)) {
 
-		if(aux1 == "E") break;
+		if(aux1.at(0) == 'E') break;
 
 		std::stringstream ss(aux1);
 
@@ -73,17 +74,10 @@ Instance Parser::parse() {
 		}
 	}
 
-	//read edges:
-	_instance_file_stream >> aux1;
-	if(aux1 != "=") {
-		//exception
-		std::cerr << "Error in parsing" << std::endl;
-	}
-
-	while(_instance_file_stream >> aux1) {
+	read edges:
+	while(std::getline(_instance_file_stream, aux1)) {
 
 		std::stringstream ss(aux1);
-
 		std::getline(ss, aux1, '{');
 		std::getline(ss, aux2, ',');
 		std::getline(ss, aux3, '}');
@@ -93,7 +87,6 @@ Instance Parser::parse() {
 		e_start_id = std::stoi(aux2);
 		e_end_id   = std::stoi(aux3);
 		// e_unknown  = std::stoi(aux5);
-
 		inst.add_edge(e_start_id, e_end_id);
 
 	}
