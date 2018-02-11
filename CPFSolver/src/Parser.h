@@ -1,7 +1,7 @@
 #ifndef _PARSER_
 #define _PARSER_
 
-#include "instance.h"
+#include "Instance.h"
 #include <iostream>
 #include <fstream>
 #include <string>

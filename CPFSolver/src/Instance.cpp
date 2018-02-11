@@ -1,4 +1,4 @@
-#include "instance.h"
+#include "Instance.h"
 
 #include <vector>
 #include <iostream>

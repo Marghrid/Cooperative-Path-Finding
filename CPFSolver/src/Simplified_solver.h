@@ -5,7 +5,7 @@
 #include <fstream>
 #include <string>
 
-#include "instance.h"
+#include "Instance.h"
 #include "simp/SimpSolver.h"
 
 class Simplified_solver {
@@ -27,11 +27,11 @@ private:
 
     Glucose::Var make_evar_id(int vertex_id, int timestep);
 
-    int get_agent_id_x(int var_id, int eta);
+    int get_agent_id_x(int var_id);
 
-    int get_vertex_id_x(int var_id, int eta);
+    int get_vertex_id_x(int var_id);
 
-    int get_timestep_x(int var_id, int eta);
+    int get_timestep_x(int var_id);
 
     bool solve_for_makespan(int eta);
 

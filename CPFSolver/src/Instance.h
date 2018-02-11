@@ -1,8 +1,8 @@
 #ifndef _INSTANCE_
 #define _INSTANCE_
 
-#include "graph.h"
-#include "agent.h"
+#include "Graph.h"
+#include "Agent.h"
 
 #include <iostream>
 
