@@ -85,7 +85,7 @@ int main(int argc, const char **argv) {
         std::cout << inst << std::endl;
 
     std::cout << "Solving instance:" << std::endl;
-    CPFSolver s1(inst, max_makespan, verbose);
+    CPFSolver s1(inst, "simplified", "UNSAT-SAT", max_makespan, verbose);
     s1.solve();
 
 }
