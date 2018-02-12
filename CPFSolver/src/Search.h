@@ -10,9 +10,9 @@ public:
 
 	virtual bool get_initial_solved() = 0;
 	virtual int  get_initial_makespan() = 0;
-	virtual int  get_next_makespan() = 0;
-	virtual int  get_previous_makespan() = 0;
-	virtual bool break_test(int makespan, bool solved) = 0;
+	virtual int  get_next_makespan(bool solved) = 0;
+	virtual int  get_successful_makespan() = 0;
+	virtual bool break_test(bool solved) = 0;
 
 	virtual bool success() = 0;
 };
