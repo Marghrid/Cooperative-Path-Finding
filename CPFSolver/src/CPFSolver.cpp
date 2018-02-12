@@ -1,5 +1,12 @@
 #include "CPFSolver.h"
+
 #include "Encoder.h"
+#include "SimplifiedEncoder.h"
+
+#include "Search.h"
+#include "UNSAT_SATSearch.h"
+#include "SAT_UNSATSearch.h"
+#include "BinarySearch.h"
 
 bool CPFSolver::solve() {
     // DIRECT:
@@ -13,17 +20,18 @@ bool CPFSolver::solve() {
     int current_makespan = _search->get_initial_makespan();
 
     std::cout << "Starting search:" << std::endl;
-    while(!_search->break_test(current_makespan, solved)) {
+    while(!_search->break_test(solved)) {
 
         if(current_makespan < 0) break;
 
         std::cout << "Trying makespan = " << current_makespan << std::endl;
         solved = solve_for_makespan(current_makespan);
-        current_makespan = _search->get_next_makespan();
+        current_makespan = _search->get_next_makespan(solved);
     }
     
     if(_search->success()) {
-        std::cout << "Solved for makespan = " << _search->get_previous_makespan() << std::endl;
+        std::cout << "Solved for makespan = " << _search->get_successful_makespan() << std::endl;
+        _encoder->show_results(_search->get_successful_makespan());
     }
     return solved;
 }
@@ -52,7 +60,30 @@ bool CPFSolver::solve_for_makespan(int makespan) {
         return false;
     }
 
-    _encoder->show_results(makespan);
-
     return satisfiable;
+}
+
+void CPFSolver::create_encoder(std::string encoding) {
+    for(auto &a: encoding) a = tolower(a);
+
+    if(encoding == "simplified")
+        _encoder = new SimplifiedEncoder(_instance, &_solver, _verbose);
+    else
+        std::cerr << "Unknown encoding: " << encoding << std::endl;
+}
+
+void CPFSolver::create_search(std::string search) {
+    for(auto &a: search) a = tolower(a);
+
+    if(search == "unsat-sat")
+        _search = new UNSAT_SATSearch(_max_makespan);
+
+    else if(search == "sat-unsat")
+        _search = new SAT_UNSATSearch(_max_makespan);
+
+    else if(search == "binary")
+      _search = new BinarySearch(_max_makespan);
+
+    else
+        std::cerr << "Unknown search: " << search << std::endl;
 }

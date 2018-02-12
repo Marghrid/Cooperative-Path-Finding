@@ -12,7 +12,7 @@ int main(int argc, const char **argv) {
 
     if(argc == 1) {
         std::cout << "solving for default file: grid_4x4_a6_o0.1_s616.cpf" << std::endl;
-        verbose = 2;
+        verbose = 0;
     }
     else if(argc == 2) {
         filename = argv[1];
@@ -85,7 +85,7 @@ int main(int argc, const char **argv) {
         std::cout << inst << std::endl;
 
     std::cout << "Solving instance:" << std::endl;
-    CPFSolver s1(inst, "simplified", "UNSAT-SAT", max_makespan, verbose);
+    CPFSolver s1(inst, "simplified", "binary", 8, verbose);
     s1.solve();
 
 }

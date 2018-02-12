@@ -527,9 +527,10 @@ inline int      Solver::nAssigns      ()      const   { return trail.size(); }
 inline int      Solver::nClauses      ()      const   { return clauses.size(); }
 inline int      Solver::nLearnts      ()      const   { return learnts.size(); }
 inline int      Solver::nVars         ()      const   { return vardata.size(); }
-inline int      Solver::nFreeVars     ()         { 
+inline int      Solver::nFreeVars     ()              { 
     int a = stats[dec_vars];
-    return (int)(a) - (trail_lim.size() == 0 ? trail.size() : trail_lim[0]); }
+    return (int)(a) - (trail_lim.size() == 0 ? trail.size() : trail_lim[0]);
+}
 inline void     Solver::setPolarity   (Var v, bool b) { polarity[v] = b; }
 inline void     Solver::setDecisionVar(Var v, bool b) 
 { 

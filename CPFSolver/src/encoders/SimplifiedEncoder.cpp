@@ -209,27 +209,27 @@ void SimplifiedEncoder::show_results(int makespan) {
     }
 }
 
-Glucose::Var SimplifiedEncoder::make_xvar_id(int agent_id, int vertex_id, int timestep) {
+inline Glucose::Var SimplifiedEncoder::make_xvar_id(int agent_id, int vertex_id, int timestep) {
     return timestep * _instance.n_vertices() * (_instance.n_agents() + 1)
         + vertex_id * (_instance.n_agents() + 1)
         + agent_id;
 }
 
-Glucose::Var SimplifiedEncoder::make_evar_id(int vertex_id, int timestep) {
+inline Glucose::Var SimplifiedEncoder::make_evar_id(int vertex_id, int timestep) {
     return timestep * _instance.n_vertices() * (_instance.n_agents()+1)
         + vertex_id * (_instance.n_agents() + 1)
         + _instance.n_agents();
 }
 
-int SimplifiedEncoder::get_agent_id_x(int var_id) {
+inline int SimplifiedEncoder::get_agent_id_x(int var_id) {
     return var_id % (_instance.n_vertices() * (_instance.n_agents()+1) );
 }
 
-int SimplifiedEncoder::get_vertex_id_x(int var_id) {
+inline int SimplifiedEncoder::get_vertex_id_x(int var_id) {
     int intdiv = std::floor( var_id/ (_instance.n_agents() + 1) );
     return intdiv % _instance.n_vertices();
 }
 
-int SimplifiedEncoder::get_timestep_x(int var_id) {
+inline int SimplifiedEncoder::get_timestep_x(int var_id) {
     return std::floor(var_id / ( _instance.n_vertices() * (_instance.n_agents()+1) ) );
 }
