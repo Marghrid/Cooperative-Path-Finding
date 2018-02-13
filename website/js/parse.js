@@ -76,30 +76,27 @@ function parse_cpf(cpf) {
     return instance;
 }
 
-function parse_solution(sol_str) {
-    let lines = sol_str.split("\n");
-
-    lines.splice(0, 1);
-
-    let solution_length = parseInt(lines[0].split(":")[1]); //pretty sure this is useless.
-
+function parse_Surynek_solution(sol_lines) {
+    let solution_length = parseInt(sol_lines[0].split(":")[1]); //pretty sure this is useless.
+    console.log("Parsing Sury solution");
+    console.log(sol_lines);
     let solution = new Solution();
 
-    for(l in lines) {
+    for(l in sol_lines) {
         // 1 # 2 ---> 1 (0)
-        line = lines[l];
+        line = sol_lines[l];
         line = line.replace(" # ", " ");
         line = line.replace(" ---> ", " ");
         line = line.replace(" (", " ");
         line = line.slice(0, -1);
         // 1 2 1 0
 
-        line = line.split(" ");
+        let words = line.split(" ");
 
-        let a_id        = parseInt(line[0]) - 1;
+        let a_id        = parseInt(words[0]) - 1;
         // ignore oringin vertex.
-        let dest_vertex = parseInt(line[2]);
-        let timestep    = parseInt(line[3]);
+        let dest_vertex = parseInt(words[2]);
+        let timestep    = parseInt(words[3]);
         if(a_id >= 0) {
             solution.add_action_to_move(timestep, a_id, dest_vertex);
             //TEST ELSE
@@ -107,5 +104,63 @@ function parse_solution(sol_str) {
     }
 
     return solution;
+}
 
+function parse_M_solution(sol_lines) {
+    let solution = new Solution();
+
+    console.log("Parsing M solution");
+    console.log(sol_lines);
+
+    let timestep = -1;
+
+    for(l in sol_lines) {
+    /*  Timestep 0:
+            0 # 5
+            1 # 8
+            2 # 1   */
+
+        line = sol_lines[l];
+
+        if(line.slice(0, 8) == "Timestep") {
+            line = line.replace("Timestep ", "");
+            timestep = parseInt(line);
+            continue;
+        }
+
+        line = line.replace(" # ", " ");
+        /* 0 5
+           1 8
+           2 1  */
+
+        let words = line.split(" ");
+
+        let a_id        = parseInt(words[0]);
+        // ignore origin vertex.
+        let dest_vertex = parseInt(words[1]);
+        if(a_id >= 0) {
+            solution.add_action_to_move(timestep, a_id, dest_vertex);
+            //TEST ELSE
+        }
+    }
+
+    return solution;
+}
+
+function parse_solution(sol_str) {
+    let lines = sol_str.split("\n");
+
+    console.log(lines[0]);
+    if(lines[0] == "Fine solution") {
+        lines.splice(0, 1);
+        return parse_Surynek_solution(lines);
+    }
+    
+    lines[0] = lines[0].slice(0, 17);
+    if(lines[0] == "Solution makespan") {
+        lines.splice(0, 1);
+        return parse_M_solution(lines);
+    }
+
+    console.log("Unknown solution format.");
 }
