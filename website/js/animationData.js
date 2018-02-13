@@ -14,7 +14,7 @@ class AnimationData {
 		this.base_pos_z = base_pos_z;
 
 
-		this.interpolation_type = 2; //0 means linear, 1 means smoothstep (first order derivatives = 0 at edges), 2 means smootheststep
+		this.interpolation_type = 0; //0 means linear, 1 means smoothstep (first order derivatives = 0 at edges), 2 means smootheststep
 									 // (second order derivatives = 0 at edges);
 				
 		this.jumping = false;

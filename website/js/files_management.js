@@ -76,11 +76,15 @@ function example3_button() {
 }
 
 function example4_button() {
-    get_example_file("grid_16x16_a25_o0.1_s5");
+    get_example_file("subway");
 }
 
 function example5_button() {
-    get_example_file("grid_32x32_a32_o0.1_s895");
+    get_example_file("untitled");
+}
+
+function example6_button() {
+    get_example_file("grid_16x16_a25_o0.1_s5");
 }
 
 function get_example_file(ex_name) {

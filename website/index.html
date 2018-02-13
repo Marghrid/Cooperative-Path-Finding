@@ -19,11 +19,11 @@
       -webkit-flex-direction: row; /* Safari 6.1+ */
       display: flex;
       flex-direction: row;
-      flex-wrap: wrap
+      flex-wrap: wrap;
+      margin: 10px;
   	}
 
     header {
-      margin: 10px;
     }
 
   	h1 {
@@ -35,8 +35,8 @@
   	}
 
     #file_loading_interface {
-      max-width: 250px;
-      margin:10px;
+      max-width: 300px;
+      padding-right: 20px;
     }
     #renderer_interface {
       display: -webkit-flex; /* Safari */
@@ -45,11 +45,9 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: stretch;
-      margin: 20px;
     }
 
     #renderer_div {
-      margin: 20px;
     }
 
     #example_buttons_div {
@@ -62,13 +60,12 @@
 
     .example_button {
       flex-grow: 1;
-      margin: 5px;
+      margin: 2px;
       padding: 5px;
     }
 
     #refresh_button {
       flex-grow: 1;
-      margin: 5px;
       padding: 5px;
     }    
 
@@ -98,12 +95,14 @@
 </head>
 
 <body>
-  <header>
+  <!--<header>
 	 <h1> Cooperative Path-Finding </h1>
 	 <h2> Instance viewer </h2>
-  </header>
+  </header>-->
   <main>
     <div id="file_loading_interface">
+      <h1> Cooperative Path-Finding </h1>
+      <h2> Instance viewer </h2>
       <div id="file_load_div">
   	   <p> Instance file: <input type="file" id="cpf_file" onchange="update_cpf_file_flag()"> </p>
   	   <p> Solution file: <input type="file" id="sol_file" onchange="update_sol_file_flag()"> </p>
@@ -115,6 +114,7 @@
         <button type="button" class="example_button" onclick="example3_button()"> Example 3 </button>
         <button type="button" class="example_button" onclick="example4_button()"> Example 4 </button>
         <button type="button" class="example_button" onclick="example5_button()"> Example 5 </button>
+        <button type="button" class="example_button" onclick="example6_button()"> Example 6 </button>
       </div>
     </div>
   
