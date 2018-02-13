@@ -15,6 +15,10 @@ public:
     Parser(std::string instance_file) {
         _instance_file = instance_file;
         _instance_file_stream.open(instance_file);
+        if(!_instance_file_stream.is_open()) {
+            std::cerr << "Could not open the file " << _instance_file << std::endl;
+            exit(-1);
+        }
     }
 
     ~Parser() {

@@ -59,8 +59,9 @@ int main(int argc, const char **argv) {
         max_makespan = atoi(argv[2]);
     }
     else {
-        for(int i = 3; i < argc-1; ++i) {
+        for(int i = 1; i < argc-1; ++i) {
             std::string arg(argv[i]);
+
             if(arg == "-i" || arg == "-input") {
                 input_file = argv[i+1];
             }
@@ -81,8 +82,10 @@ int main(int argc, const char **argv) {
 
     Parser parser(input_file);
 
+    std::cout << input_file << std::endl;
+
     Instance inst = parser.parse();
-    
+
     if(verbose > 0)
         std::cout << inst << std::endl;
 
@@ -91,7 +94,7 @@ int main(int argc, const char **argv) {
 
     std::cout << "Solving instance:" << std::endl;
 
-    CPFSolver s1(inst, "simplified", "binary", max_makespan, verbose);
+    CPFSolver s1(inst, "simplified", "unsat-sat", max_makespan, verbose);
 
     Solution s = s1.solve();
 

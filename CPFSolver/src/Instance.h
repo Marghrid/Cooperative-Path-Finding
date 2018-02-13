@@ -11,6 +11,7 @@ private:
     Graph _environment;
     std::vector<Agent> _agents;
     std::vector<bool>  _vertex_starts_empty;
+	std::vector<bool>  _vertex_ends_empty;
 
 public:
     Instance(Graph environment, std::vector<Agent> agents) {
@@ -49,6 +50,10 @@ public:
     void set_start_empty(int v_id, bool b);
 
     bool starts_empty(int v_id) const { return _vertex_starts_empty[v_id]; }
+
+	void set_end_empty(int v_id, bool b);
+
+	bool ends_empty(int v_id) const { return _vertex_ends_empty[v_id]; }
 
     // void add_agent(Agent a) { }
 

@@ -25,8 +25,12 @@ Instance Parser::parse() {
     std::string aux5;
     std::string aux6;
 
+    std::getline(_instance_file_stream, aux1);
 
-        std::getline(_instance_file_stream, aux1);
+    if(aux1.size() == 0) {
+        std::cerr << "File empty!" << std::endl;
+        exit(-1);
+    }
 
     if(aux1.at(0) != 'V') {
         std::cerr << "Error in Parsing" << std::endl;
@@ -35,7 +39,6 @@ Instance Parser::parse() {
 
     //Read vertices and agents:
     while(std::getline(_instance_file_stream, aux1)) {
-
         if(aux1.at(0) == 'E') break;
 
         std::stringstream ss(aux1);
@@ -71,6 +74,9 @@ Instance Parser::parse() {
                 largest_agent_id = goal_a_id;
             }
             inst.set_agent_goal_position(goal_a_id-1, v_id);
+            inst.set_end_empty(v_id, false);
+        } else {
+            inst.set_end_empty(v_id, true);
         }
     }
 

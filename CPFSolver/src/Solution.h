@@ -20,8 +20,16 @@ private:
 	// int on the inner vertex represents the agent's
 	//  position (vertex#) on each timestep.
 
+	Instance _instance;
+	int _current_timestep = -1;
+
 public:
-	void add(int timestep, int agent, int position);
+
+	Solution(Instance instance) : _instance(instance) {};
+
+	void add(int agent, int position);
+
+	void increment_timestep();
 
 	int get_position(int timestep, int agent) {
 		return _positions.at(timestep).at(agent);
