@@ -31,14 +31,14 @@ public:
 	CPFSolver(Instance instance, std::string encoding, std::string search, int verbose = 0)
 	: _instance(instance), _solver() {
 		_verbose = verbose;
-		_max_makespan = 64;
+		_max_makespan = _instance.n_vertices();
 		create_encoder(encoding);
 		create_search(search);
 	}
 
 	CPFSolver(Instance instance, int verbose = 0)
 	: _instance(instance), _solver() {
-		_max_makespan = 64;
+		_max_makespan = _instance.n_vertices();
 		create_encoder("simplified");
 		create_encoder("UNSAT-SAT");
 	}
@@ -48,15 +48,14 @@ public:
 		Parser p(filename);
 		_instance = p.parse();
 		_verbose = verbose;
+		_max_makespan = _instance.n_vertices();
 		create_encoder(encoding);
 		create_search(search);
 	}
 
 	~CPFSolver() { delete _encoder; delete _search; }
 
-	bool solve();
-
-	 int get_initial_makespan() { return 0; }
+	Solution solve();
 
 private:
 	bool solve_for_makespan(int makespan);

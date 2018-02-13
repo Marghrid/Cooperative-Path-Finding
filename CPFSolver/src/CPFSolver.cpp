@@ -1,5 +1,7 @@
 #include "CPFSolver.h"
 
+#include "Instance.h"
+#include "Solution.h"
 #include "Encoder.h"
 #include "SimplifiedEncoder.h"
 
@@ -8,32 +10,37 @@
 #include "SAT_UNSATSearch.h"
 #include "BinarySearch.h"
 
-bool CPFSolver::solve() {
+Solution CPFSolver::solve() {
     // DIRECT:
     if(!_instance.check()) {
         //exception
         std::cerr << "The instance wasn't ready to convert" << std::endl;
     }
 
-    bool solved = _search->get_initial_solved();
+    bool current_solved = _search->get_initial_solved();
 
     int current_makespan = _search->get_initial_makespan();
 
-    std::cout << "Starting search:" << std::endl;
-    while(!_search->break_test(solved)) {
+    while(!_search->break_test(current_solved)) {
 
         if(current_makespan < 0) break;
 
-        std::cout << "Trying makespan = " << current_makespan << std::endl;
-        solved = solve_for_makespan(current_makespan);
-        current_makespan = _search->get_next_makespan(solved);
+        if(_verbose > 0)
+        	std::cout << "Trying makespan = " << current_makespan << std::endl;
+        current_solved = solve_for_makespan(current_makespan);
+        current_makespan = _search->get_next_makespan(current_solved);
     }
+
+    Solution solution;
     
     if(_search->success()) {
         std::cout << "Solved for makespan = " << _search->get_successful_makespan() << std::endl;
-        _encoder->show_results(_search->get_successful_makespan());
+        solution = _encoder->get_solution(_search->get_successful_makespan());
     }
-    return solved;
+
+    _solver.printIncrementalStats();
+
+    return solution;
 }
 
 bool CPFSolver::solve_for_makespan(int makespan) {
@@ -56,7 +63,8 @@ bool CPFSolver::solve_for_makespan(int makespan) {
     bool satisfiable = _solver.solve(assumptions, false, true);
     
     if(!satisfiable) {
-        std::cout << "No solution for makespan " << makespan << std::endl;
+    	if(_verbose > 0)
+        	std::cout << "No solution for makespan " << makespan << std::endl;
         return false;
     }
 
