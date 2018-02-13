@@ -50,8 +50,8 @@ Phase statistics (current phase = 'root_phase') [
             Produced CNF variables         = 0
             Produced CNF clauses           = 0
             Search steps                   = 0
-            Wall clock TIME (seconds)      = 5.196
-            CPU/machine TIME (seconds)     = 5.170
+            Wall clock TIME (seconds)      = 1.165
+            CPU/machine TIME (seconds)     = 1.160
         ]
         Sub-phases {
             Phase (name = 'independent_solving') [
@@ -63,8 +63,8 @@ Phase statistics (current phase = 'root_phase') [
                 Produced CNF variables         = 0
                 Produced CNF clauses           = 0
                 Search steps                   = 0
-                Wall clock TIME (seconds)      = 10.067
-                CPU/machine TIME (seconds)     = 10.070
+                Wall clock TIME (seconds)      = 2.462
+                CPU/machine TIME (seconds)     = 2.460
             ]
         }
 ]
