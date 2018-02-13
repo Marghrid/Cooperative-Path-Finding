@@ -20,6 +20,7 @@ Solution CPFSolver::solve() {
     bool current_solved = _search->get_initial_solved();
 
     int current_makespan = _search->get_initial_makespan();
+    int saved_makespan = 0;
 
     while(!_search->break_test(current_solved)) {
 
@@ -28,19 +29,21 @@ Solution CPFSolver::solve() {
         if(_verbose > 0)
         	std::cout << "Trying makespan = " << current_makespan << std::endl;
         current_solved = solve_for_makespan(current_makespan);
+        if(current_solved) {
+            _solution = _encoder->get_solution(current_makespan);
+            saved_makespan = current_makespan;
+        }
         current_makespan = _search->get_next_makespan(current_solved);
     }
-
-    Solution solution;
     
     if(_search->success()) {
         std::cout << "Solved for makespan = " << _search->get_successful_makespan() << std::endl;
-        solution = _encoder->get_solution(_search->get_successful_makespan());
+        std::cout << "This should be one: " << (_search->get_successful_makespan() == saved_makespan) << std::endl;
     }
 
     _solver.printIncrementalStats();
 
-    return solution;
+    return _solution;
 }
 
 bool CPFSolver::solve_for_makespan(int makespan) {

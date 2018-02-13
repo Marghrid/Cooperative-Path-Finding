@@ -72,7 +72,12 @@ void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
 			            std::cout << "adding clause: e(" << j << ", "
 			                << 0 << ", " << make_evar_id(j, 0) << ")" << std::endl;
 			        _solver->addClause(Glucose::mkLit(make_evar_id(j, 0)));
-			    }
+			    } else {
+                    if(_verbose > 1)
+                        std::cout << "adding clause: -e(" << j << ", "
+                            << 0 << ", " << make_evar_id(j, 0) << ")" << std::endl;
+                    _solver->addClause(Glucose::mkLit(make_evar_id(j, 0), true));
+                }
 			}
         }
 
@@ -113,12 +118,12 @@ void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
                             << j << ", " << i-1 << ", "
                             << make_xvar_id(k, j, i-1) << ") V x("
                             << k << ", " << j << ", " << i << ", "
-                            << make_xvar_id(k, j, i) << ") ";
+                            << make_xvar_id(k, j, i) << ")";
 
                     for(auto &v: _instance.get_neighbours(j)) {
                         lit_vec.push( Glucose::mkLit(make_xvar_id(k, v.id(), i)) );
                         if(_verbose > 1)
-                            std::cout << "V x(" << k << ", "
+                            std::cout << " V x(" << k << ", "
                                 << v.id() << ", " << i << ", "
                                 << make_xvar_id(k, v.id(), i) << ")";
                     }
@@ -176,8 +181,8 @@ void SimplifiedEncoder::create_goal_assumptions(Glucose::vec<Glucose:: Lit> &ass
 	if(_verbose > 0)
         std::cout << "Goal arragements..." << std::endl;
     
-    for(int k = 0; k < _instance.n_agents(); ++k) {
-        for(int j = 0; j < _instance.n_vertices(); ++j) {
+    for(int j = 0; j < _instance.n_vertices(); ++j) {
+        for(int k = 0; k < _instance.n_agents(); ++k) {
             if(j == _instance.agent(k).goal_position().id()) {
                 assumptions.push(Glucose::mkLit(make_xvar_id(k, j, makespan), false) );
                 
@@ -191,18 +196,32 @@ void SimplifiedEncoder::create_goal_assumptions(Glucose::vec<Glucose:: Lit> &ass
                     std::cout << "Creating assumption: ~x(" << k << ", " << j << ", "
                         << makespan << ", " << make_xvar_id(k, j, makespan) << ")" << std::endl;
             }
-            // Missing the empty vertices!
+        }
+        if(_instance.ends_empty(j)) {
+            if(_verbose > 1)
+                std::cout << "adding clause: e(" << j << ", "
+                    << 0 << ", " << make_evar_id(j, makespan) << ")" << std::endl;
+            assumptions.push(Glucose::mkLit(make_evar_id(j, makespan)));
+        } else {
+            if(_verbose > 1)
+                std::cout << "adding clause: -e(" << j << ", "
+                    << 0 << ", " << make_evar_id(j, makespan) << ")" << std::endl;
+            assumptions.push(Glucose::mkLit(make_evar_id(j, makespan), true));
         }
     }
 }
 
 Solution SimplifiedEncoder::get_solution(int makespan) {
-    Solution sol;
-    for(int i = 0; i < makespan; ++i) {
+    Solution sol(_instance);
+    for(int i = 0; i < makespan+1; ++i) {
+        sol.increment_timestep();
         for(int k = 0; k < _instance.n_agents(); ++k) {
             for(int j = 0; j < _instance.n_vertices(); ++j) {
-                if(_solver->modelValue(make_xvar_id(k, j, i)) == l_True)
-                    sol.add(i, k, j);
+                if(_solver->modelValue(make_xvar_id(k, j, i)) == l_True) {
+                    if(_verbose > 1)
+                        std::cout << "var " << i << " " << j << " " << k << " " << make_xvar_id(k, j, i) << " is true" << std::endl;
+                    sol.add(k, j);
+                }
             }
         }
     }

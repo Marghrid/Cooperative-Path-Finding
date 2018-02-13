@@ -7,16 +7,35 @@
 
 #include "Solution.h"
 #include "Instance.h"
+#include "Graph.h"
 
-void Solution::add(int timestep, int agent, int position)  {
-	if((unsigned)timestep+1 > _positions.size()) {
-		_positions.resize(timestep+1);
-	}
-	if((unsigned)agent+1 > _positions.at(timestep).size()) {
-		_positions.at(timestep).resize(agent+1, -1);
+void Solution::add(int agent, int position)  {
+	if((unsigned)agent+1 > _positions.at(_current_timestep).size()) {
+		_positions.at(_current_timestep).resize(agent+1, -1);
 	}
 
-	_positions.at(timestep).at(agent) = position;
+	if(_current_timestep == 0) {
+		_positions.at(_current_timestep).at(agent) = position;
+		return;
+	}
+
+	int previous = _positions.at(_current_timestep-1).at(agent);
+	if(previous == position) {
+		_positions.at(_current_timestep).at(agent) = position;
+		return;
+	}
+
+	for(auto &v: _instance.get_neighbours(previous)) {
+		if(v.id() == position) {
+			_positions.at(_current_timestep).at(agent) = position;
+			return;
+		}
+	}
+}
+
+void Solution::increment_timestep() {
+	_positions.resize(_positions.size() + 1);
+	_current_timestep = _positions.size()-1;
 }
 
 bool Solution::check(Instance instance) {

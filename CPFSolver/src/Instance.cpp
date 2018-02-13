@@ -16,9 +16,17 @@ void Instance::add_agent(int a_id) {
 void Instance::set_start_empty(int a_id, bool b) {
     while((size_t)a_id >= _vertex_starts_empty.size()) {
         _vertex_starts_empty.push_back(false);
-;   }
+    }
     _vertex_starts_empty[a_id] = b;
 }
+
+void Instance::set_end_empty(int a_id, bool b) {
+	while((size_t)a_id >= _vertex_ends_empty.size()) {
+		_vertex_ends_empty.push_back(false);
+	}
+	_vertex_ends_empty[a_id] = b;
+}
+
 
 std::ostream& operator<<(std::ostream& os, const Instance& inst) {
     os << "---- CPF INSTANCE ----" << std::endl;
