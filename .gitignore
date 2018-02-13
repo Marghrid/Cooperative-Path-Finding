@@ -44,3 +44,5 @@ CPFSolver/build
 CPFSolver/bin
 CPFSolver/bin/a.out
 CPFSolver/core
+
+scripts/core
