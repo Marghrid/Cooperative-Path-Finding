@@ -21,10 +21,10 @@ for size in (4, 8, 16, 32, 64):
 				filename += "_o" + str(obst_prob)
 				filename += "_s" + str(seed)
 
-
 				aux  = " --input-file=../instances/"  + filename + ".cpf"
 				aux += " --output-file=../instances/" + filename + ".out"
 				aux += " --makespan-limit=" + str(makespan_limit)
+				aux += " --strategy=binary"
 
 				output = " > ../solver_files/" + filename + ".txt 2>&1"
 				print ("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
@@ -39,6 +39,8 @@ for dim in (3, 9):
 			aux = " --input-file=../instances/hyper_dim" + str(dim) + "_a" + str(n_robots) + "_" + str(seed) + ".cpf"
 			aux += " --output-file=../solutions/hyper_dim" + str(dim) + "_a" + str(n_robots) + "_" + str(seed) + ".out"
 			aux += " --makespan-limit=" + str(makespan_limit)
+			aux += " --strategy=binary"
+
 			output = " > ../solver_files/hyper_dim" + str(dim) + "_a" + str(n_robots) + "_" + str(seed) + ".txt 2>&1"
 			print ("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
 			system("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
