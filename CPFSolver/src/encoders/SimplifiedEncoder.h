@@ -21,7 +21,7 @@ public:
 
 	void create_goal_assumptions(Glucose::vec<Glucose:: Lit> &assumptions, int makespan) override;
 
-	void show_results(int makespan) override;
+	Solution get_solution(int makespan) override;
 
 public:
 

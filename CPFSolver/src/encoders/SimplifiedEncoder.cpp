@@ -1,5 +1,7 @@
 #include "SimplifiedEncoder.h"
 
+#include "Instance.h"
+#include "Solution.h"
 #include "core/SolverTypes.h"
 #include "mtl/Vec.h"
 #include "simp/SimpSolver.h"
@@ -194,19 +196,20 @@ void SimplifiedEncoder::create_goal_assumptions(Glucose::vec<Glucose:: Lit> &ass
     }
 }
 
-void SimplifiedEncoder::show_results(int makespan) {
-	std::cout << "Solution found for makespan " << makespan << std::endl;
+Solution SimplifiedEncoder::get_solution(int makespan) {
+    Solution sol;
     for(int i = 0; i < makespan; ++i) {
-        std::cout << "On timestep " << i << ":" << std::endl;
         for(int k = 0; k < _instance.n_agents(); ++k) {
             for(int j = 0; j < _instance.n_vertices(); ++j) {
                 if(_solver->modelValue(make_xvar_id(k, j, i)) == l_True)
-                    std::cout << "\tAgent " << k
-                        << " is on vertex " << j
-                        << std::endl;
+                    sol.add(i, k, j);
             }
         }
     }
+    if(!sol.check(_instance))
+        std::cerr << "Something went wrong with solution." << std::endl;
+
+    return sol;
 }
 
 inline Glucose::Var SimplifiedEncoder::make_xvar_id(int agent_id, int vertex_id, int timestep) {
