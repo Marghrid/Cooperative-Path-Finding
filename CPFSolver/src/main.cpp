@@ -101,7 +101,7 @@ int main(int argc, const char **argv) {
     Instance inst = parser.parse();
 
     //parsing_wall = std::get_wall_time() - wall0;
-    parsing_cpu  = std::clock() - cpu0;
+    parsing_cpu  = 1000.0 * (std::clock() - cpu0) / CLOCKS_PER_SEC; 
 
     if(verbose > 0)
         std::cout << inst << std::endl;
