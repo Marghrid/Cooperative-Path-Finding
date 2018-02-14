@@ -1,6 +1,6 @@
 from os import system
 
-for size in (4, 8, 16, 32, 64):
+for size in (4, 8, 16, 32):
 	makespan_limit = size * size *2
 	for robots_prob in (0.2, 0.3, 0.4):
 		for obst_prob in (0.1, 0.2, 0.3, 0.4):
@@ -14,6 +14,9 @@ for size in (4, 8, 16, 32, 64):
 
 				aux  = " -i ../M_instances/"  + filename + ".cpf"
 				aux += " -o ../M_instances/" + filename + ".out"
+				aux += " -s ../M_stats_files/" + filename + ".txt"
+				aux += " -e simplified"
+				aux += " -search binary"
 				aux += " -v 0"
 
 				output = ""
@@ -27,8 +30,12 @@ for dim in (3, 9):
 		n_robots = int(aux);
 		for seed in (5, 31, 327, 616, 895):
 			filename = "hyper_dim" + str(dim) + "_a" + str(n_robots) + "_" + str(seed)
+			
 			aux  = " -i ../M_instances/"  + filename + ".cpf"
 			aux += " -o ../M_instances/" + filename + ".out"
+			aux += " -s ../M_stats_files/" + filename + ".txt"
+			aux += " -e simplified"
+			aux += " -search binary"
 			aux += " -v 0"
 
 			print ("../CPFSolver/bin/a.out" + aux)
