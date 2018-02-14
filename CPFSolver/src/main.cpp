@@ -21,23 +21,30 @@ void print_usage_instructions() {
     std::cout << "\t <max-makespan> is an integer." << std::endl;
     std::cout << "\t Will solve <input-file> with maximum makespan <max-makespan>." << std::endl;
     std::cout << "" << std::endl;
-    std::cout << "bin/CPFSolver -i|-input-file   <input-file>" << std::endl;
-    std::cout << "              -o|-output-file  <output-file>" << std::endl;
-    std::cout << "              -s|-stats-file   <stats-file>" << std::endl;
+    std::cout << "bin/CPFSolver -i|-input-file   <input-file>"   << std::endl;
+    std::cout << "              -o|-output-file  <output-file>"  << std::endl;
+    std::cout << "              -s|-stats-file   <stats-file>"   << std::endl;
     std::cout << "            -max|-max-makespan <max-makespan>" << std::endl;
-    std::cout << "              -v|-verbose      <verbosity>" << std::endl;
-    std::cout << "\t <input-file> is a path to an existing CPF file." << std::endl;
-    std::cout << "\t <output-file> is a path where the solution file will be created." << std::endl;
-    std::cout << "\t <stats-file> is a path where the statistics file will be created." << std::endl;
-    std::cout << "\t <max-makespan> is an integer." << std::endl;
-    std::cout << "\t <verbosity> is an integer from 0 to 2." << std::endl;
+    std::cout << "              -e|-encoding     <encoding>"     << std::endl;
+    std::cout << "                 -search       <search>"       << std::endl;
+    std::cout << "              -v|-verbose      <verbosity>"    << std::endl;
+
+    std::cout << "\t <input-file>:   the path to an existing CPF file." << std::endl;
+    std::cout << "\t <output-file>:  the path to where the solution file will be created." << std::endl;
+    std::cout << "\t <stats-file>:   the path to where the statistics file will be created." << std::endl;
+    std::cout << "\t <max-makespan>: an integer" << std::endl;
+    std::cout << "\t <encoding>:     simplified|other_encoding_that_i_will_implement_soon" << std::endl;
+    std::cout << "\t <search>:       UNSAT-SAT|SAT-UNSAT|binary" << std::endl;
+    std::cout << "\t <verbosity>:    0|1|2" << std::endl;
     std::cout << "\t Will solve <input-file> with maximum makespan <max-makespan>" << std::endl;
     std::cout << "\t with <verbosity> verbosity level. The solution will be saved" << std::endl;
-    std::cout << "\t at <output-file> and the SAT-solver statistics at <stats-file>." << std::endl;
+    std::cout << "\t at <output-file> and the SAT solver statistics at <stats-file>." << std::endl;
     std::cout << "" << std::endl;
     std::cout << "Default values:" << std::endl;
     std::cout << "\t <input-file>: ../instances/grid_4x4_a6_o0.1_s616.cpf" << std::endl;
     std::cout << "\t <max-makespan>: the number of vertices of the instance." << std::endl;
+    std::cout << "\t <encoding>: simplified." << std::endl;
+    std::cout << "\t <search>: UNSAT-SAT." << std::endl;
     std::cout << "\t <verbose>: 0" << std::endl;
     std::cout << "" << std::endl;
 }
@@ -46,6 +53,9 @@ int main(int argc, const char **argv) {
     std::string input_file = "../instances/grid_4x4_a6_o0.1_s616.cpf";
     std::string output_file = "";
     std::string stats_file = "";
+    std::string encoding = "simplified";
+    std::string search = "unsat-sat";
+
     int max_makespan = -1;
     int verbose = 0;
 
@@ -84,7 +94,13 @@ int main(int argc, const char **argv) {
                 stats_file = argv[i+1];
             }
             else if(arg == "-max" || arg == "-max-makespan") {
-                 max_makespan = atoi(argv[i+1]);
+                max_makespan = atoi(argv[i+1]);
+            }
+            else if(arg == "-e" || arg == "-encoding") {
+                encoding = atoi(argv[i+1]);
+            }
+            else if(arg == "-search") {
+                search = atoi(argv[i+1]);
             }
             else if(arg == "-v" || arg == "-verbose") {
                 verbose = atoi(argv[i+1]);
@@ -109,12 +125,13 @@ int main(int argc, const char **argv) {
     if(max_makespan < 0)
         max_makespan = inst.n_vertices();
 
-    std::cout << "Solving instance:" << std::endl;
+    std::cout << "Solving instance with encoding " << encoding
+    	<< " and search " << search << "." << std::endl;
 
     //wall0 = std::get_wall_time();
 	cpu0  = std::clock();
 
-    CPFSolver s1(inst, "simplified", "unsat-sat", max_makespan, verbose);
+    CPFSolver s1(inst, encoding, search, max_makespan, verbose);
 
     Solution s = s1.solve();
 
