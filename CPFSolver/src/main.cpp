@@ -123,7 +123,7 @@ int main(int argc, const char **argv) {
         std::cout << inst << std::endl;
 
     if(max_makespan < 0)
-        max_makespan = inst.n_vertices() * _inst.n_agents();
+        max_makespan = inst.n_vertices() * inst.n_agents();
 
     std::cout << "Solving instance with encoding " << encoding
     	<< " and search " << search << "." << std::endl;
@@ -136,7 +136,7 @@ int main(int argc, const char **argv) {
     Solution s = s1.solve();
 
 	//solving_wall = std::get_wall_time() - wall0;
-	solving_cpu  = std::clock() - cpu0;
+	solving_cpu  = 1000.0 * (std::clock() - cpu0) / CLOCKS_PER_SEC;
 
     if(s.is_empty()) {
         std::cout << "No solution found." << std::endl;
