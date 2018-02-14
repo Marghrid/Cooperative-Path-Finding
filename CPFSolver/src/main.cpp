@@ -1,9 +1,11 @@
-#include <iostream>
-#include <cstdlib>
 #include "Instance.h"
 #include "Graph.h"
 #include "Parser.h"
 #include "CPFSolver.h"
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 void print_usage_instructions() {
     std::cout << "-------->>>  CPFSolver  <<<--------" << std::endl;
@@ -47,6 +49,16 @@ int main(int argc, const char **argv) {
     int max_makespan = -1;
     int verbose = 0;
 
+
+    //double wall0;
+    double cpu0;
+
+    //double parsing_wall;
+	double parsing_cpu;
+
+	//double solving_wall;
+	double solving_cpu;
+
     if(argc == 1) {
         print_usage_instructions();
         std::cout << "solving for default file: grid_4x4_a6_o0.1_s616.cpf" << std::endl;
@@ -80,11 +92,16 @@ int main(int argc, const char **argv) {
         }
     }
 
+
+    //wall0 = std::get_wall_time();
+	cpu0  = std::clock();
+
     Parser parser(input_file);
 
-    std::cout << input_file << std::endl;
-
     Instance inst = parser.parse();
+
+    //parsing_wall = std::get_wall_time() - wall0;
+    parsing_cpu  = std::clock() - cpu0;
 
     if(verbose > 0)
         std::cout << inst << std::endl;
@@ -94,9 +111,15 @@ int main(int argc, const char **argv) {
 
     std::cout << "Solving instance:" << std::endl;
 
+    //wall0 = std::get_wall_time();
+	cpu0  = std::clock();
+
     CPFSolver s1(inst, "simplified", "unsat-sat", max_makespan, verbose);
 
     Solution s = s1.solve();
+
+	//solving_wall = std::get_wall_time() - wall0;
+	solving_cpu  = std::clock() - cpu0;
 
     if(s.is_empty()) {
         std::cout << "No solution found." << std::endl;
@@ -111,6 +134,31 @@ int main(int argc, const char **argv) {
 
     if(verbose > 0 || output_file == "") {
         std::cout << s << std::endl;
+    }
+
+	// Unfortunately, the solver statistics cannot be written to a file, since
+	// the glucose function writes them directly to standard output.
+	// NOTE: Redirect standard output? Use dup().
+	s1.write_stats();
+
+    if(stats_file != "") {
+    	std::ofstream ofs;
+    	ofs.open(stats_file);
+    	//ofs << "Wall clock time:" << std::endl;
+    	//ofs << "  Parsing: " << parsing_wall << std::endl;
+    	//ofs << "  Solving: " << solving_wall << std::endl;
+    	ofs << "CPU time:"   << std::endl;
+    	ofs << "  Parsing: " << parsing_cpu  << std::endl;
+		ofs << "  Solving: " << solving_cpu  << std::endl;
+    }
+
+    if(verbose > 0 || stats_file == "") {
+		//std::cout << "Wall clock time:" << std::endl;
+		//std::cout << "  Parsing: " << parsing_wall << std::endl;
+		//std::cout << "  Solving: " << solving_wall << std::endl;
+		std::cout << "CPU time:"   << std::endl;
+		std::cout << "  Parsing: " << parsing_cpu  << std::endl;
+		std::cout << "  Solving: " << solving_cpu  << std::endl;
     }
 
     return 0;
