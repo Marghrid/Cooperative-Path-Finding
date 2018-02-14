@@ -97,10 +97,10 @@ int main(int argc, const char **argv) {
                 max_makespan = atoi(argv[i+1]);
             }
             else if(arg == "-e" || arg == "-encoding") {
-                encoding = atoi(argv[i+1]);
+                encoding = argv[i+1];
             }
             else if(arg == "-search") {
-                search = atoi(argv[i+1]);
+                search = argv[i+1];
             }
             else if(arg == "-v" || arg == "-verbose") {
                 verbose = atoi(argv[i+1]);
