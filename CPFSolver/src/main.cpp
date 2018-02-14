@@ -173,6 +173,15 @@ int main(int argc, const char **argv) {
 		//std::cout << "Wall clock time:" << std::endl;
 		//std::cout << "  Parsing: " << parsing_wall << std::endl;
 		//std::cout << "  Solving: " << solving_wall << std::endl;
+		std::cout << "Instance size:" << std::endl;
+		std::cout << "  agents: "  << inst.n_agents << std::endl;
+		std::cout << "  vertices:" << inst.n_vertices << std::endl;
+		std::cout << "  edges:"    << inst.n_edges << std::endl;
+		std::cout << "" << std::endl;
+		std::cout << "Solver settings:" << std::endl;
+		std::cout << "  encoding:" << encoding << std::endl;
+		std::cout << "  search: "  << search << std::endl;
+		std::cout << "" << std::endl;
 		std::cout << "CPU time:"   << std::endl;
 		std::cout << "  Parsing: " << parsing_cpu  << std::endl;
 		std::cout << "  Solving: " << solving_cpu  << std::endl;
