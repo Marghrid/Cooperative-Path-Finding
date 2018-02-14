@@ -123,7 +123,7 @@ int main(int argc, const char **argv) {
         std::cout << inst << std::endl;
 
     if(max_makespan < 0)
-        max_makespan = inst.n_vertices();
+        max_makespan = inst.n_vertices() * _inst.n_agents();
 
     std::cout << "Solving instance with encoding " << encoding
     	<< " and search " << search << "." << std::endl;
