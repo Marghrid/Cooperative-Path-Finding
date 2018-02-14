@@ -34,7 +34,7 @@ public:
 	CPFSolver(Instance instance, std::string encoding, std::string search, int verbose = 0)
 	: _instance(instance), _solution(instance), _solver() {
 		_verbose = verbose;
-		_max_makespan = _instance.n_vertices();
+		_max_makespan = _instance.n_vertices() * _instance.n_agents();
 		create_encoder(encoding);
 		create_search(search);
 	}
@@ -42,7 +42,7 @@ public:
 	// Minimal constructor. Default encoding, search, and maximum makespan.
 	CPFSolver(Instance instance, int verbose = 0)
 	: _instance(instance), _solution(instance), _solver() {
-		_max_makespan = _instance.n_vertices();
+		_max_makespan = _instance.n_vertices() * _instance.n_agents();
 		create_encoder("simplified");
 		create_encoder("UNSAT-SAT");
 	}
