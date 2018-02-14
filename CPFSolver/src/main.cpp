@@ -183,8 +183,8 @@ int main(int argc, const char **argv) {
 		std::cout << "  search: "  << search << std::endl;
 		std::cout << "" << std::endl;
 		std::cout << "CPU time:"   << std::endl;
-		std::cout << "  Parsing: " << parsing_cpu  << std::endl;
-		std::cout << "  Solving: " << solving_cpu  << std::endl;
+		std::cout << "  Parsing: " << parsing_cpu << "ms" << std::endl;
+		std::cout << "  Solving: " << solving_cpu << "ms" << std::endl;
     }
 
     return 0;
