@@ -11,37 +11,44 @@
 #include "BinarySearch.h"
 
 Solution CPFSolver::solve() {
-    // DIRECT:
     if(!_instance.check()) {
         //exception
         std::cerr << "The instance wasn't ready to convert" << std::endl;
     }
 
-    bool current_solved = _search->get_initial_solved();
-
+    // The initial values of currently_solved and current_makespan must be
+    //  attributed by the Search, so they will be coherent with the break test.
+    bool currently_solved = _search->get_initial_solved();
     int current_makespan = _search->get_initial_makespan();
+    
+    // This variable is useful to perform a test (make sure that the solution
+    //  returned is the optimal one.)
     int saved_makespan = 0;
 
-    while(!_search->break_test(current_solved)) {
+    // break test delegated to Search
+    while(!_search->break_test(currently_solved)) {
 
+        // Just a precaution. Sould not happen.
         if(current_makespan < 0) break;
 
         if(_verbose > 0)
         	std::cout << "Trying makespan = " << current_makespan << std::endl;
-        current_solved = solve_for_makespan(current_makespan);
-        if(current_solved) {
+
+        currently_solved = solve_for_makespan(current_makespan);
+
+        if(currently_solved) {
+            // _solution dependent on the Encoder's interpretation of the variables.
             _solution = _encoder->get_solution(current_makespan);
             saved_makespan = current_makespan;
         }
-        current_makespan = _search->get_next_makespan(current_solved);
+
+        current_makespan = _search->get_next_makespan(currently_solved);
     }
     
     if(_search->success()) {
         std::cout << "Solved for makespan = " << _search->get_successful_makespan() << std::endl;
         std::cout << "This should be one: " << (_search->get_successful_makespan() == saved_makespan) << std::endl;
     }
-
-    _solver.printIncrementalStats();
 
     return _solution;
 }
@@ -61,8 +68,8 @@ bool CPFSolver::solve_for_makespan(int makespan) {
     // This is a problem because I use variables from one iteration to another,
     //  resulting in a call of solve() between their creation, and the creation
     //  of clauses containing them.
-    // I should find out how much impact these optimizations I'm preventing
-    //  actually have.
+    // NOTE: I should find out how much impact these optimizations I'm
+    //  preventing actually have.
     bool satisfiable = _solver.solve(assumptions, false, true);
     
     if(!satisfiable) {
@@ -74,6 +81,7 @@ bool CPFSolver::solve_for_makespan(int makespan) {
     return satisfiable;
 }
 
+// Used on constructors.
 void CPFSolver::create_encoder(std::string encoding) {
     for(auto &a: encoding) a = tolower(a);
 
@@ -83,6 +91,7 @@ void CPFSolver::create_encoder(std::string encoding) {
         std::cerr << "Unknown encoding: " << encoding << std::endl;
 }
 
+// Used on constructors.
 void CPFSolver::create_search(std::string search) {
     for(auto &a: search) a = tolower(a);
 
