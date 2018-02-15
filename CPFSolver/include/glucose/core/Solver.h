@@ -122,7 +122,7 @@ public:
     bool            addClause (Lit p);                                  // Add a unit clause to the solver. 
     bool            addClause (Lit p, Lit q);                           // Add a binary clause to the solver. 
     bool            addClause (Lit p, Lit q, Lit r);                    // Add a ternary clause to the solver. 
-    virtual bool    addClause_(      vec<Lit>& ps);                     // Add a clause to the solver without making superflous internal copy. Will
+    virtual bool    addClause_(vec<Lit>& ps);                     // Add a clause to the solver without making superflous internal copy. Will
                                                                 // change the passed vector 'ps'.
     // Solving:
     //

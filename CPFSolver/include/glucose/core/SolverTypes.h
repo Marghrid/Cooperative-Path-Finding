@@ -51,6 +51,8 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #ifndef Glucose_SolverTypes_h
 #define Glucose_SolverTypes_h
 
+#define INCREMENTAL
+
 #include <assert.h>
 #include <stdint.h>
 #include <pthread.h>
@@ -264,7 +266,7 @@ public:
     unsigned int getExported() {return header.exported;}
     void setOneWatched(bool b) {header.oneWatched = b;}
     bool getOneWatched() {return header.oneWatched;}
-#ifdef INCREMNENTAL
+#ifdef INCREMENTAL
     void setSizeWithoutSelectors   (unsigned int n)              {header.szWithoutSelectors = n; }
     unsigned int        sizeWithoutSelectors   () const        { return header.szWithoutSelectors; }
 #endif
