@@ -1,0 +1,83 @@
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 5/1/5 (2)
+Open/close/exp size (steps): 17/4/17 (5)
+Open/close/exp size (steps): 28/8/28 (9)
+Open/close/exp size (steps): 38/13/38 (14)
+Open/close/exp size (steps): 47/19/47 (20)
+Open/close/exp size (steps): 64/27/64 (28)
+Open/close/exp size (steps): 83/37/83 (38)
+Open/close/exp size (steps): 104/49/104 (50)
+Open/close/exp size (steps): 129/64/129 (65)
+Open/close/exp size (steps): 164/82/164 (83)
+Open/close/exp size (steps): 27/8/27 (105)
+Open/close/exp size (steps): 77/35/77 (132)
+Open/close/exp size (steps): 137/68/137 (165)
+Open/close/exp size (steps): 207/108/207 (205)
+Open/close/exp size (steps): 297/156/297 (253)
+Open/close/exp size (steps): 39/14/39 (311)
+Open/close/exp size (steps): 172/84/172 (381)
+Open/close/exp size (steps): 309/168/309 (465)
+Open/close/exp size (steps): 485/269/485 (566)
+Open/close/exp size (steps): 675/391/675 (688)
+Open/close/exp size (steps): 55/21/55 (835)
+Open/close/exp size (steps): 90/43/90 (1012)
+Open/close/exp size (steps): 82/35/82 (1225)
+Open/close/exp size (steps): 530/291/530 (1481)
+Open/close/exp size (steps): 268/142/268 (1789)
+Open/close/exp size (steps): 110/45/110 (2159)
+Open/close/exp size (steps): 431/241/431 (2603)
+Open/close/exp size (steps): 120/58/120 (3136)
+Unable to find solution.
+Total cost: 0
+Multirobot solution analysis: (
+    total makespan           = 0
+    total distance           = 0
+    total trajectory         = 0
+    total cost               = 0
+    average parallelism      = -nan
+    average distance         = 0.000
+    average trajectory       = 0.000
+    parallelism distribution  = [ ]
+    distance distribution     = [ 613 ]
+    trajectory distribution   = [ ]
+)
+Phase statistics (current phase = 'root_phase') [
+        Phase (name = 'root_phase') [
+            Total SAT solver calls         = 0
+            Satisfiable SAT solver calls   = 0
+            Unsatisfiable SAT solver calls = 0
+            Indeterminate SAT solver calls = 0
+            Move executions                = 0
+            Produced CNF variables         = 0
+            Produced CNF clauses           = 0
+            Search steps                   = 0
+            Wall clock TIME (seconds)      = 0.520
+            CPU/machine TIME (seconds)     = 0.520
+        ]
+        Sub-phases {
+            Phase (name = 'independent_solving') [
+                Total SAT solver calls         = 0
+                Satisfiable SAT solver calls   = 0
+                Unsatisfiable SAT solver calls = 0
+                Indeterminate SAT solver calls = 0
+                Move executions                = 14032
+                Produced CNF variables         = 0
+                Produced CNF clauses           = 0
+                Search steps                   = 0
+                Wall clock TIME (seconds)      = 5.684
+                CPU/machine TIME (seconds)     = 5.680
+            ]
+        }
+]
+----------------------------------------------------------------

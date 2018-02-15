@@ -1,0 +1,81 @@
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 4/1/4 (2)
+Open/close/exp size (steps): 3/4/3 (5)
+Open/close/exp size (steps): 4/8/4 (9)
+Open/close/exp size (steps): 16/13/16 (14)
+Open/close/exp size (steps): 14/19/14 (20)
+Open/close/exp size (steps): 22/27/22 (28)
+Open/close/exp size (steps): 22/37/22 (38)
+Open/close/exp size (steps): 22/49/22 (50)
+Open/close/exp size (steps): 30/64/30 (65)
+Open/close/exp size (steps): 39/82/39 (83)
+Open/close/exp size (steps): 47/104/47 (105)
+Open/close/exp size (steps): 49/131/49 (132)
+Open/close/exp size (steps): 55/164/55 (165)
+Open/close/exp size (steps): 59/204/59 (205)
+Open/close/exp size (steps): 55/252/55 (253)
+Open/close/exp size (steps): 47/310/47 (311)
+Open/close/exp size (steps): 45/380/45 (381)
+Open/close/exp size (steps): 46/464/46 (465)
+Open/close/exp size (steps): 32/565/32 (566)
+Open/close/exp size (steps): 61/687/61 (688)
+Open/close/exp size (steps): 96/834/96 (835)
+Open/close/exp size (steps): 93/1011/93 (1012)
+Open/close/exp size (steps): 87/1224/87 (1225)
+Open/close/exp size (steps): 105/1480/105 (1481)
+Open/close/exp size (steps): 47/1788/47 (1789)
+Open/close/exp size (steps): 57/2158/57 (2159)
+Unable to find solution.
+Total cost: 0
+Multirobot solution analysis: (
+    total makespan           = 0
+    total distance           = 0
+    total trajectory         = 0
+    total cost               = 0
+    average parallelism      = -nan
+    average distance         = 0.000
+    average trajectory       = 0.000
+    parallelism distribution  = [ ]
+    distance distribution     = [ 613 ]
+    trajectory distribution   = [ ]
+)
+Phase statistics (current phase = 'root_phase') [
+        Phase (name = 'root_phase') [
+            Total SAT solver calls         = 0
+            Satisfiable SAT solver calls   = 0
+            Unsatisfiable SAT solver calls = 0
+            Indeterminate SAT solver calls = 0
+            Move executions                = 0
+            Produced CNF variables         = 0
+            Produced CNF clauses           = 0
+            Search steps                   = 0
+            Wall clock TIME (seconds)      = 0.299
+            CPU/machine TIME (seconds)     = 0.290
+        ]
+        Sub-phases {
+            Phase (name = 'independent_solving') [
+                Total SAT solver calls         = 0
+                Satisfiable SAT solver calls   = 0
+                Unsatisfiable SAT solver calls = 0
+                Indeterminate SAT solver calls = 0
+                Move executions                = 7211
+                Produced CNF variables         = 0
+                Produced CNF clauses           = 0
+                Search steps                   = 0
+                Wall clock TIME (seconds)      = 0.128
+                CPU/machine TIME (seconds)     = 0.130
+            ]
+        }
+]
+----------------------------------------------------------------

@@ -1,0 +1,81 @@
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 4/1/4 (2)
+Open/close/exp size (steps): 4/4/4 (5)
+Open/close/exp size (steps): 5/8/5 (9)
+Open/close/exp size (steps): 10/13/10 (14)
+Open/close/exp size (steps): 4/19/4 (20)
+Open/close/exp size (steps): 3/27/3 (28)
+Open/close/exp size (steps): 13/37/13 (38)
+Open/close/exp size (steps): 20/49/20 (50)
+Open/close/exp size (steps): 20/64/20 (65)
+Open/close/exp size (steps): 27/82/27 (83)
+Open/close/exp size (steps): 36/104/36 (105)
+Open/close/exp size (steps): 29/131/29 (132)
+Open/close/exp size (steps): 32/164/32 (165)
+Open/close/exp size (steps): 34/204/34 (205)
+Open/close/exp size (steps): 45/252/45 (253)
+Open/close/exp size (steps): 60/310/60 (311)
+Open/close/exp size (steps): 59/380/59 (381)
+Open/close/exp size (steps): 59/464/59 (465)
+Open/close/exp size (steps): 51/565/51 (566)
+Open/close/exp size (steps): 78/687/78 (688)
+Open/close/exp size (steps): 58/834/58 (835)
+Open/close/exp size (steps): 57/1011/57 (1012)
+Open/close/exp size (steps): 85/1224/85 (1225)
+Open/close/exp size (steps): 122/1480/122 (1481)
+Open/close/exp size (steps): 88/1788/88 (1789)
+Open/close/exp size (steps): 49/2158/49 (2159)
+Unable to find solution.
+Total cost: 0
+Multirobot solution analysis: (
+    total makespan           = 0
+    total distance           = 0
+    total trajectory         = 0
+    total cost               = 0
+    average parallelism      = -nan
+    average distance         = 0.000
+    average trajectory       = 0.000
+    parallelism distribution  = [ ]
+    distance distribution     = [ 408 ]
+    trajectory distribution   = [ ]
+)
+Phase statistics (current phase = 'root_phase') [
+        Phase (name = 'root_phase') [
+            Total SAT solver calls         = 0
+            Satisfiable SAT solver calls   = 0
+            Unsatisfiable SAT solver calls = 0
+            Indeterminate SAT solver calls = 0
+            Move executions                = 0
+            Produced CNF variables         = 0
+            Produced CNF clauses           = 0
+            Search steps                   = 0
+            Wall clock TIME (seconds)      = 0.269
+            CPU/machine TIME (seconds)     = 0.260
+        ]
+        Sub-phases {
+            Phase (name = 'independent_solving') [
+                Total SAT solver calls         = 0
+                Satisfiable SAT solver calls   = 0
+                Unsatisfiable SAT solver calls = 0
+                Indeterminate SAT solver calls = 0
+                Move executions                = 7211
+                Produced CNF variables         = 0
+                Produced CNF clauses           = 0
+                Search steps                   = 0
+                Wall clock TIME (seconds)      = 0.136
+                CPU/machine TIME (seconds)     = 0.130
+            ]
+        }
+]
+----------------------------------------------------------------
