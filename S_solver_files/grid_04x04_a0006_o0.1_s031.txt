@@ -1,0 +1,293 @@
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 4/1/4 (2)
+Open/close/exp size (steps): 1/0/1 (5)
+Open/close/exp size (steps): 1/0/1 (9)
+Open/close/exp size (steps): 1/0/1 (14)
+Open/close/exp size (steps): 17/6/17 (20)
+0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 
+
+Groups 0 and 1 collide.
+Solution of group 0
+Mulirobot solution: (|moves| = 3, paralellism = 1.000) [
+    Step 0: 1#1->5 
+    Step 1: 1#5->9 
+    Step 2: 1#9->10 
+]
+Solution of group 1
+Mulirobot solution: (|moves| = 3, paralellism = 1.000) [
+    Step 0: 1#7->6 
+    Step 1: 1#6->5 
+    Step 2: 1#5->9 
+]
+Occupation table complementary for group 0
+0 0 0 0 1 1 0 1 0 0 0 0 1 0 1 
+0 0 0 0 0 0 1 0 1 0 0 1 0 0 0 
+0 0 0 0 1 1 0 1 0 1 0 0 0 0 0 
+0 0 0 1 0 1 0 1 0 1 1 0 0 0 0 
+0 0 0 1 0 0 1 1 0 1 0 1 0 0 0 
+
+** Open/close/exp size (steps): 3/1/3 (2)
+** Open/close/exp size (steps): 2/4/2 (5)
+Occupation table complementary for group 1
+0 1 0 0 1 1 0 0 0 0 0 0 1 0 1 
+0 0 0 0 0 1 1 0 1 0 0 1 0 0 0 
+0 0 0 0 1 0 0 1 0 1 0 0 0 0 0 
+0 0 0 1 0 1 0 1 0 0 1 0 0 0 0 
+0 0 0 1 0 0 1 1 0 0 1 1 0 0 0 
+
+** Open/close/exp size (steps): 1/0/1 (9)
+** Open/close/exp size (steps): 3/5/3 (14)
+Unable to resolve collision between groups 0 and 1.
+Merging groups 0 and 1.
+Searching solution for merged group 0+1.
+Open/close/exp size (steps): 7/2/7 (28)
+Open/close/exp size (steps): 38/12/38 (38)
+Open/close/exp size (steps): 68/24/68 (50)
+Open/close/exp size (steps): 82/39/82 (65)
+Open/close/exp size (steps): 85/57/85 (83)
+Open/close/exp size (steps): 119/79/119 (105)
+Open/close/exp size (steps): 122/106/122 (132)
+Open/close/exp size (steps): 186/139/186 (165)
+0 1 0 0 0 0 0 2 0 0 0 0 0 0 0 
+0 0 0 0 0 1 0 0 0 0 0 2 0 0 0 
+0 0 0 0 0 0 1 0 0 0 2 0 0 0 0 
+0 0 0 0 0 0 1 0 0 2 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 2 1 0 0 0 0 
+
+Groups 0 and 1 collide.
+Solution of group 0
+Mulirobot solution: (|moves| = 6, paralellism = 1.500) [
+    Step 0: 1#1->5 2#7->11 
+    Step 1: 1#5->6 2#11->10 
+    Step 2: 2#10->9 
+    Step 3: 1#6->10 
+]
+Solution of group 1
+Mulirobot solution: (|moves| = 4, paralellism = 1.000) [
+    Step 0: 1#12->8 
+    Step 1: 1#8->4 
+    Step 2: 1#4->5 
+    Step 3: 1#5->6 
+]
+Occupation table complementary for group 0
+0 0 0 0 1 1 0 0 0 0 0 0 1 0 1 
+0 0 0 0 0 0 1 0 1 0 0 1 0 0 0 
+0 0 0 0 1 0 0 1 0 1 0 0 0 0 0 
+0 0 0 1 0 1 0 1 0 0 1 0 0 0 0 
+0 0 0 1 0 0 1 1 0 0 0 1 0 0 0 
+
+** Open/close/exp size (steps): 4/3/4 (20)
+** Open/close/exp size (steps): 4/11/4 (28)
+** Open/close/exp size (steps): 5/21/5 (38)
+** Open/close/exp size (steps): 2/33/2 (50)
+Occupation table complementary for group 1
+0 1 0 0 1 1 0 2 0 0 0 0 0 0 1 
+0 0 0 0 0 1 1 0 1 0 0 1 0 0 0 
+0 0 0 0 0 0 1 1 0 1 2 0 0 0 0 
+0 0 0 1 0 0 1 1 0 2 1 0 0 0 0 
+0 0 0 1 0 0 0 1 0 2 1 1 0 0 0 
+
+Unable to resolve collision between groups 0 and 1.
+Merging groups 0 and 1.
+Searching solution for merged group 0+1.
+Open/close/exp size (steps): 62/25/62 (205)
+Open/close/exp size (steps): 156/73/156 (253)
+Open/close/exp size (steps): 281/131/281 (311)
+Open/close/exp size (steps): 282/201/282 (381)
+Open/close/exp size (steps): 249/285/249 (465)
+Open/close/exp size (steps): 387/386/387 (566)
+Open/close/exp size (steps): 614/508/614 (688)
+Open/close/exp size (steps): 562/655/562 (835)
+Open/close/exp size (steps): 437/832/437 (1012)
+Open/close/exp size (steps): 723/1045/723 (1225)
+Open/close/exp size (steps): 1043/1301/1043 (1481)
+Open/close/exp size (steps): 1354/1609/1354 (1789)
+Open/close/exp size (steps): 1841/1979/1841 (2159)
+Open/close/exp size (steps): 2637/2423/2637 (2603)
+Open/close/exp size (steps): 2863/2956/2863 (3136)
+Open/close/exp size (steps): 2718/3596/2718 (3776)
+Open/close/exp size (steps): 2407/4364/2407 (4544)
+0 1 0 0 0 0 0 2 0 0 0 0 3 0 0 
+0 0 0 0 0 1 0 0 3 0 0 2 0 0 0 
+0 0 0 0 3 0 1 0 0 0 2 0 0 0 0 
+0 0 0 0 0 3 0 1 0 2 0 0 0 0 0 
+0 0 0 0 0 0 3 0 0 2 0 1 0 0 0 
+0 0 0 0 0 0 3 0 0 2 1 0 0 0 0 
+
+Groups 0 and 1 collide.
+Solution of group 0
+Mulirobot solution: (|moves| = 12, paralellism = 2.400) [
+    Step 0: 1#1->5 2#7->11 3#12->8 
+    Step 1: 1#5->6 2#11->10 3#8->4 
+    Step 2: 1#6->7 2#10->9 3#4->5 
+    Step 3: 1#7->11 3#5->6 
+    Step 4: 1#11->10 
+]
+Solution of group 1
+Mulirobot solution: (|moves| = 4, paralellism = 1.000) [
+    Step 0: 1#4->8 
+    Step 1: 1#8->9 
+    Step 2: 1#9->10 
+    Step 3: 1#10->11 
+]
+Occupation table complementary for group 0
+0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 
+0 0 0 0 0 0 1 0 1 0 0 1 0 0 0 
+0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 
+0 0 0 1 0 0 0 1 0 0 1 0 0 0 0 
+0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 
+0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 
+
+** Open/close/exp size (steps): 5/11/5 (65)
+** Open/close/exp size (steps): 28/29/28 (83)
+** Open/close/exp size (steps): 64/51/64 (105)
+** Open/close/exp size (steps): 81/78/81 (132)
+** Open/close/exp size (steps): 117/111/117 (165)
+** Open/close/exp size (steps): 187/151/187 (205)
+** Open/close/exp size (steps): 275/199/275 (253)
+** Open/close/exp size (steps): 261/257/261 (311)
+** Open/close/exp size (steps): 191/327/191 (381)
+** Open/close/exp size (steps): 107/411/107 (465)
+** Open/close/exp size (steps): 177/512/177 (566)
+** Open/close/exp size (steps): 125/634/125 (688)
+** Open/close/exp size (steps): 259/781/259 (835)
+** Open/close/exp size (steps): 426/958/426 (1012)
+** Open/close/exp size (steps): 614/1171/614 (1225)
+** Open/close/exp size (steps): 557/1427/557 (1481)
+** Open/close/exp size (steps): 404/1735/404 (1789)
+** Open/close/exp size (steps): 241/2105/241 (2159)
+** Open/close/exp size (steps): 490/2549/490 (2603)
+** Open/close/exp size (steps): 386/3082/386 (3136)
+** Open/close/exp size (steps): 172/3722/172 (3776)
+Occupation table complementary for group 1
+0 1 0 0 0 1 0 2 0 0 0 0 3 0 1 
+0 0 0 0 0 1 1 0 3 0 0 1 0 0 0 
+0 0 0 0 3 0 1 1 0 0 2 0 0 0 0 
+0 0 0 1 0 3 0 1 0 2 0 0 0 0 0 
+0 0 0 1 0 0 3 1 0 2 0 1 0 0 0 
+0 0 0 1 0 0 3 1 0 2 1 0 0 0 0 
+
+Unable to resolve collision between groups 0 and 1.
+Merging groups 0 and 1.
+Searching solution for merged group 0+1.
+Open/close/exp size (steps): 780/410/780 (5466)
+Open/close/exp size (steps): 1211/1517/1211 (6573)
+Open/close/exp size (steps): 2278/2846/2278 (7902)
+Open/close/exp size (steps): 4100/4441/4100 (9497)
+Open/close/exp size (steps): 2747/6355/2747 (11411)
+Open/close/exp size (steps): 2765/8652/2765 (13708)
+Open/close/exp size (steps): 4803/11409/4803 (16465)
+Open/close/exp size (steps): 8752/14718/8752 (19774)
+Open/close/exp size (steps): 14738/18689/14738 (23745)
+Open/close/exp size (steps): 21321/23455/21321 (28511)
+Open/close/exp size (steps): 21042/29175/21042 (34231)
+Open/close/exp size (steps): 17073/36039/17073 (41095)
+Open/close/exp size (steps): 14003/44276/14003 (49332)
+Open/close/exp size (steps): 16719/54161/16719 (59217)
+Open/close/exp size (steps): 13391/66023/13391 (71079)
+Open/close/exp size (steps): 22169/80258/22169 (85314)
+Open/close/exp size (steps): 41398/97340/41398 (102396)
+Open/close/exp size (steps): 66496/117839/66496 (122895)
+Open/close/exp size (steps): 80500/142438/80500 (147494)
+Open/close/exp size (steps): 103947/171957/103947 (177013)
+Open/close/exp size (steps): 112741/207380/112741 (212436)
+Open/close/exp size (steps): 119716/249888/119716 (254944)
+Open/close/exp size (steps): 116984/300898/116984 (305954)
+Open/close/exp size (steps): 148939/362110/148939 (367166)
+Open/close/exp size (steps): 180391/435565/180391 (440621)
+Open/close/exp size (steps): 160958/523711/160958 (528767)
+Open/close/exp size (steps): 168109/629487/168109 (634543)
+Open/close/exp size (steps): 169823/756419/169823 (761475)
+0 1 0 0 3 0 0 2 0 0 0 0 4 0 0 
+0 0 1 0 0 3 0 2 4 0 0 0 0 0 0 
+0 1 0 2 0 0 3 0 0 4 0 0 0 0 0 
+0 0 2 0 0 1 0 3 0 0 4 0 0 0 0 
+0 2 0 0 0 0 4 0 0 1 0 3 0 0 0 
+0 0 0 0 0 2 4 0 0 0 1 3 0 0 0 
+0 0 0 0 0 0 4 0 0 2 1 3 0 0 0 
+
+Groups 0 and 1 collide.
+Solution of group 0
+Mulirobot sterminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+olution: (|moves| = 18, paralellism = 3.000) [
+    Step 0: 1#1->2 3#4->5 4#12->8 
+    Step 1: 1#2->1 2#7->3 3#5->6 4#8->9 
+    Step 2: 1#1->5 2#3->2 3#6->7 4#9->10 
+    Step 3: 1#5->9 2#2->1 3#7->11 4#10->6 
+    Step 4: 1#9->10 2#1->5 
+    Step 5: 2#5->9 
+]
+Solution of group 1
+Mulirobot solution: (|moves| = 3, paralellism = 1.000) [
+    Step 0: 1#14->11 
+    Step 1: 1#11->7 
+    Step 2: 1#7->3 
+]
+Occupation table complementary for group 0
+0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 
+0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 
+0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 
+0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 
+0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 
+0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 
+
+** Open/close/exp size (steps): 491/533/491 (4544)
+** Open/close/exp size (steps): 750/1455/750 (5466)
+** Open/close/exp size (steps): 2168/2562/2168 (6573)
+** Open/close/exp size (steps): 4156/3891/4156 (7902)
+** Open/close/exp size (steps): 5504/5486/5504 (9497)
+** Open/close/exp size (steps): 5524/7400/5524 (11411)
+** Open/close/exp size (steps): 5436/9697/5436 (13708)
+** Open/close/exp size (steps): 9349/12454/9349 (16465)
+** Open/close/exp size (steps): 9709/15763/9709 (19774)
+** Open/close/exp size (steps): 11712/19734/11712 (23745)
+** Open/close/exp size (steps): 11521/24500/11521 (28511)
+** Open/close/exp size (steps): 12526/30220/12526 (34231)
+** Open/close/exp size (steps): 17485/37084/17485 (41095)
+** Open/close/exp size (steps): 20746/45321/20746 (49332)
+** Open/close/exp size (steps): 25913/55206/25913 (59217)
+** Open/close/exp size (steps): 34734/67068/34734 (71079)
+** Open/close/exp size (steps): 52998/81303/52998 (85314)
+** Open/close/exp size (steps): 67706/98385/67706 (102396)
+** Open/close/exp size (steps): 57534/118884/57534 (122895)
+** Open/close/exp size (steps): 42326/143483/42326 (147494)
+** Open/close/exp size (steps): 45961/173002/45961 (177013)
+** Open/close/exp size (steps): 37421/208425/37421 (212436)
+** Open/close/exp size (steps): 42748/250933/42748 (254944)
+** Open/close/exp size (steps): 65614/301943/65614 (305954)
+** Open/close/exp size (steps): 78085/363155/78085 (367166)
+** Open/close/exp size (steps): 48716/436610/48716 (440621)
+** Open/close/exp size (steps): 19761/524756/19761 (528767)
+Occupation table complementary for group 1
+0 1 0 0 3 1 0 2 0 0 0 0 4 0 0 
+0 0 1 0 0 3 1 2 4 0 0 0 0 0 0 
+0 1 0 2 0 0 3 1 0 4 0 0 0 0 0 
+0 0 2 0 0 1 0 1 0 0 4 0 0 0 0 
+0 2 0 0 0 0 4 1 0 1 0 3 0 0 0 
+0 0 0 0 0 2 4 1 0 0 1 3 0 0 0 
+0 0 0 0 0 0 4 1 0 2 1 3 0 0 0 
+
+Unable to resolve collision between groups 0 and 1.
+Merging groups 0 and 1.
+Searching solution for merged group 0+1.
+Open/close/exp size (steps): 59904/127201/59904 (913794)
+Open/close/exp size (steps): 213115/309984/213115 (1096577)
+Open/close/exp size (steps): 179826/529324/179826 (1315917)
+Open/close/exp size (steps): 97767/792532/97767 (1579125)
+Aborted (core dumped)
