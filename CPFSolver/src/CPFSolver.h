@@ -20,12 +20,16 @@ private:
 	int _verbose;
 	int _max_makespan;
 
+	int _n_sat_calls   = 0;
+	int _n_unsat_calls = 0;
+
 public:
 	// Complete constructor:
 	CPFSolver(Instance instance, std::string encoding, std::string search, int max_makespan, int verbose)
 	: _instance(instance), _solution(instance), _solver() {
 		_max_makespan = max_makespan;
 		_verbose = verbose;
+		_solver.setIncrementalMode();
 		create_encoder(encoding);
 		create_search(search);
 	}
@@ -35,6 +39,7 @@ public:
 	: _instance(instance), _solution(instance), _solver() {
 		_verbose = verbose;
 		_max_makespan = _instance.n_vertices() * _instance.n_agents();
+		_solver.setIncrementalMode();
 		create_encoder(encoding);
 		create_search(search);
 	}
@@ -43,6 +48,7 @@ public:
 	CPFSolver(Instance instance, int verbose = 0)
 	: _instance(instance), _solution(instance), _solver() {
 		_max_makespan = _instance.n_vertices() * _instance.n_agents();
+		_solver.setIncrementalMode();
 		create_encoder("simplified");
 		create_encoder("UNSAT-SAT");
 	}
@@ -52,12 +58,8 @@ public:
 	// Main contructor functionality. Provides a solution for its instance.
 	Solution solve();
 
-	// Access SAT solver stats. Ideally, it would write them to a file. However,
-	//  Glucose function uses standard output.
-	// NOTE: Redirect standard output? Use dup().
-	void write_stats() {
-	    _solver.printIncrementalStats();
-	}
+	// Write SAT solver statistics to a file.
+	void write_stats(std::ostream &os);
 
 private:
 
