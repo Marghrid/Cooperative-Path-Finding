@@ -11,7 +11,7 @@ _, _, handmade  = next(walk("../handmade_instances"), (None, None, []))
 instances += handmade;
 
 for filename in instances:
-	if filename.startswith("grid_04x04") or filename.startswith("grid08x08"):
+	if filename.startswith("grid_04x04") or filename.startswith("grid_08x08"):
 		instance = filename[:-4]
 		aux  = " -i ../instances/"  + filename
 		aux += " -o ../M_solutions/"   + instance + "_binary.out"
