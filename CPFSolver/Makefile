@@ -3,7 +3,7 @@ INC   = -I src/ -I include/glucose/ -I src/searches/ -I src/encoders/
 LIB   = -L include/glucose/simp
 
 all: directories build/Graph.o build/Instance.o build/Solution.o build/Parser.o build/SimplifiedEncoder.o build/CPFSolver.o
-	g++ $(FLAGS) $(INC) $(LIB) -o bin/a.out build/Graph.o build/Instance.o build/Solution.o build/Parser.o build/CPFSolver.o build/SimplifiedEncoder.o  src/main.cpp -l_standard
+	g++ $(FLAGS) $(INC) $(LIB) -o bin/CPFSolver build/Graph.o build/Instance.o build/Solution.o build/Parser.o build/CPFSolver.o build/SimplifiedEncoder.o  src/main.cpp -l_standard
 
 directories:
 	mkdir -p build 
