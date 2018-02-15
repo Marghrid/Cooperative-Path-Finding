@@ -10,15 +10,24 @@ _, _, handmade  = next(walk("../handmade_instances"), (None, None, []))
 
 instances += handmade;
 
-for instance in instances:
-	aux  = " -i ../instances/"  + instance
-	instance = instance.split('.')[0]
-	aux += " -o ../M_solutions/" + instance + ".out"
-	aux += " -s ../M_stats_files/" + instance + ".txt"
+for filename in instances:
+	instance = filename[:-4]
+	aux  = " -i ../instances/"  + filename
+	aux += " -o ../M_solutions/"   + instance + "_binary.out"
+	aux += " -s ../M_stats_files/" + instance + "_binary.txt"
 	aux += " -e simplified"
 	aux += " -search binary"
-	aux += " -v 1"
+	aux += " -v 0"
 
-	output = ""
+	print ("../CPFSolver/bin/CPFSolver" + aux)
+	system("../CPFSolver/bin/CPFSolver" + aux)
+
+	aux  = " -i ../instances/"  + filename
+	aux += " -o ../M_solutions/"   + instance + "_unsat-sat.out"
+	aux += " -s ../M_stats_files/" + instance + "_unsat-sat.txt"
+	aux += " -e simplified"
+	aux += " -search unsat-sat"
+	aux += " -v 0"
+
 	print ("../CPFSolver/bin/CPFSolver" + aux)
 	system("../CPFSolver/bin/CPFSolver" + aux)

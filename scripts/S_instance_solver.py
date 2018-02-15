@@ -16,7 +16,7 @@ def get_makespan_limit(instance):
 		agents = agents.split("_")[0]
 		agents = int(agents)
 
-		dim = instance.split("grid")[1]
+		dim = instance.split("grid_")[1]
 		dim = dim.split("_a")[0]
 
 		dim1 = dim.split("x")[0]
@@ -44,11 +44,11 @@ def get_makespan_limit(instance):
 for instance in instances:
 	aux  = " --input-file=../instances/"  + instance
 	instance = instance.split(',')[0]
-	aux += " --output-file=../S_solutions/" + instance + ".out"
+	aux += " --output-file=../S_solutions/" + instance + "unsat-sat.out"
 	makespan_limit = get_makespan_limit(instance)
 	aux += " --makespan-limit=" + str(makespan_limit)
-	aux += " --strategy=binary"
-	aux += " > ../S_solver_files/" + instance + ".txt 2>&1"
+	aux += " --strategy=linear-up"
+	aux += " > ../S_solver_files/" + instance + "unsat-sat.txt 2>&1"
 
 	print ("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux)
 	system("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux)
