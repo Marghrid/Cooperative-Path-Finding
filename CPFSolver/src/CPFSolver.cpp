@@ -19,7 +19,7 @@ Solution CPFSolver::solve() {
     // The initial values of currently_solved and current_makespan must be
     //  attributed by the Search, so they will be coherent with the break test.
     bool currently_solved = _search->get_initial_solved();
-    int current_makespan = _search->get_initial_makespan();
+    int  current_makespan = _search->get_initial_makespan();
     
     // This variable is useful to perform a test (make sure that the solution
     //  returned is the optimal one.)
