@@ -46,14 +46,29 @@ void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
         int i = ++_created_clauses_makespan;
         // At most one agent is placed in each vertex at each time step
 
-    	create_vars_for_makespan(_created_clauses_makespan);
+    	create_vars_for_makespan(i);
 
-        if(_created_clauses_makespan == 0) {
+        if(i == 0) {
         	// Initial arragement:
 			if(_verbose > 0)
 			    std::cout << "Initial arragement..." << std::endl;
-			for(int j = 0; j < _instance.n_vertices(); ++j) {
-			    for(int k = 0; k < _instance.n_agents(); ++k) {
+			for(int j = 0; j < n; ++j) {
+
+                // epsilon vars:
+                if(_instance.starts_empty(j)) {
+                    if(_verbose > 1)
+                        std::cout << "adding clause: e(" << j << ", "
+                            << 0 << ", " << make_evar_id(j, 0) << ")" << std::endl;
+                    _solver->addClause(Glucose::mkLit(make_evar_id(j, 0)));
+                } else {
+                    if(_verbose > 1)
+                        std::cout << "adding clause: -e(" << j << ", "
+                            << 0 << ", " << make_evar_id(j, 0) << ")" << std::endl;
+                    _solver->addClause(Glucose::mkLit(make_evar_id(j, 0), true));
+                }
+
+                // X vars (for each agent):
+			    for(int k = 0; k < mu; ++k) {
 			        if(j == _instance.agent(k).initial_position().id()) {
 			            if(_verbose > 1)
 			                std::cout << "adding clause: x(" << k << ", " << j << ", "
@@ -66,44 +81,8 @@ void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
 			            _solver->addClause(Glucose::mkLit(make_xvar_id(k, j, 0), true));
 			        }
 			    }
-
-			    if(_instance.starts_empty(j)) {
-			        if(_verbose > 1)
-			            std::cout << "adding clause: e(" << j << ", "
-			                << 0 << ", " << make_evar_id(j, 0) << ")" << std::endl;
-			        _solver->addClause(Glucose::mkLit(make_evar_id(j, 0)));
-			    } else {
-                    if(_verbose > 1)
-                        std::cout << "adding clause: -e(" << j << ", "
-                            << 0 << ", " << make_evar_id(j, 0) << ")" << std::endl;
-                    _solver->addClause(Glucose::mkLit(make_evar_id(j, 0), true));
-                }
 			}
-        }
-
-        if(_verbose > 0)
-            std::cout << "At most one agent is placed in each vertex at each time step..."
-                << std::endl;
-
-        for(int j = 0; j < n; ++j) {
-            for(int h = 0; h < mu; ++h) {
-                for(int k = 0; k < h; ++k) {
-                    Glucose::Lit l1 = Glucose::mkLit(make_xvar_id(k, j, i), true);
-                    Glucose::Lit l2 = Glucose::mkLit(make_xvar_id(h, j, i), true);
-
-                    if(_verbose > 1)
-                        std::cout << "adding clause: ~x(" << k << ", "
-                            << j << ", " << i << ", "
-                            << make_xvar_id(k, j, i) << ") V ~x("
-                            << h << ", " << j << ", " << i << ", "
-                            << make_xvar_id(h, j, i) << ")" << std::endl;
-
-                    _solver->addClause(l1, l2);
-                }
-            }
-        }
-
-        if(i > 0) /* Clause that relate current timestep i with timestep i-1 */{
+        } else /* Clauses that relate current timestep i with timestep i-1 */ {
             // An agent moves along an edge, or not at all:
             if(_verbose > 0)
                 std::cout << "An agent moves along an edge, or not at all..."
@@ -160,18 +139,41 @@ void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
             }
         }
 
-        // relation between variables
+        // Clauses for all timesteps
+        if(_verbose > 0)
+            std::cout << "At most one agent is placed in each vertex at each time step..."
+                << std::endl;
         if(_verbose > 0)
             std::cout << "Establishing relation between epsilon and X variables..." << std::endl;
+
         for(int j = 0; j < n; ++j) {
-            Glucose::Lit l1 = Glucose::mkLit(make_evar_id(j, i), true);
-            for(int k = 0; k < _instance.n_agents(); ++k) {
-                _solver->addClause(l1, Glucose::mkLit(make_xvar_id(k, j, i), true));
-                if(_verbose > 1)
+            Glucose::Lit l3 = Glucose::mkLit(make_evar_id(j, i), true); // relation
+
+            for(int k = 0; k < mu; ++k) {
+                // relation between variables
+                Glucose::Lit l2 = Glucose::mkLit(make_xvar_id(k, j, i), true); // at most and relation
+                _solver->addClause(l3, l2); //relation
+
+                if(_verbose > 1) //relation
                     std::cout << "adding clause: ~e(" << j << ", " << i << ", "
                         << make_evar_id(j, i) << ") V ~x("
                         << k << ", " << j << ", " << i << ", "
                         << make_xvar_id(k, j, i) << ")" << std::endl;
+
+
+                // At most one agent is placed in each vertex at each time step
+                for(int h = 0; h < k; ++h) {
+                    Glucose::Lit l1 = Glucose::mkLit(make_xvar_id(h, j, i), true); // at most
+
+                    if(_verbose > 1) //at most
+                        std::cout << "adding clause: ~x(" << h << ", "
+                            << j << ", " << i << ", "
+                            << make_xvar_id(h, j, i) << ") V ~x("
+                            << k << ", " << j << ", " << i << ", "
+                            << make_xvar_id(k, j, i) << ")" << std::endl;
+
+                    _solver->addClause(l1, l2); //at most
+                }
             }
         }
     }
@@ -219,7 +221,8 @@ Solution SimplifiedEncoder::get_solution(int makespan) {
             for(int j = 0; j < _instance.n_vertices(); ++j) {
                 if(_solver->modelValue(make_xvar_id(k, j, i)) == l_True) {
                     if(_verbose > 1)
-                        std::cout << "var " << i << " " << j << " " << k << " " << make_xvar_id(k, j, i) << " is true" << std::endl;
+                        std::cout << "var x(" << i << ", " << j << ", " << k << ", " 
+                            << make_xvar_id(k, j, i) << ") is true" << std::endl;
                     sol.add(k, j);
                 }
             }
