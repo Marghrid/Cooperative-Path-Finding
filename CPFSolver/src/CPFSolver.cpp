@@ -73,12 +73,14 @@ bool CPFSolver::solve_for_makespan(int makespan) {
     bool satisfiable = _solver.solve(assumptions, false, true);
     
     if(!satisfiable) {
+        ++ _n_unsat_calls;
     	if(_verbose > 0)
         	std::cout << "No solution for makespan " << makespan << std::endl;
         return false;
     }
 
-    return satisfiable;
+    ++_n_sat_calls;
+    return true;
 }
 
 // Used on constructors.
@@ -106,4 +108,23 @@ void CPFSolver::create_search(std::string search) {
 
     else
         std::cerr << "Unknown search: " << search << std::endl;
+}
+
+void CPFSolver::write_stats(std::ostream &os) {
+    os << "SAT solver:" << std::endl;
+    os << "  #restarts          : " << _solver.starts << std::endl;
+    os << "  #nb ReduceDB       : " << _solver.stats[Glucose::nbReduceDB] << std::endl;
+    os << "  #nb removed Clauses: " << _solver.stats[Glucose::nbRemovedClauses] << std::endl;
+    os << "  #nb learnts DL2    : " << _solver.stats[Glucose::nbDL2] << std::endl;
+    os << "  #nb learnts size 2 : " << _solver.stats[Glucose::nbBin] << std::endl;
+    os << "  #nb learnts size 1 : " << _solver.stats[Glucose::nbUn] << std::endl;
+    os << "" << std::endl;
+
+    os << "  #conflicts   : " << _solver.conflicts << std::endl;
+    os << "  #decisions   : " << _solver.decisions << std::endl;
+    os << "  #propagations: " << _solver.propagations << std::endl;
+    os << "" << std::endl;
+
+    os << "  #SAT calls: "   << _n_sat_calls   << std::endl;
+    os << "  #UNSAT calls: " << _n_unsat_calls << std::endl;
 }
