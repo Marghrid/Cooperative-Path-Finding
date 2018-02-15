@@ -12,14 +12,14 @@ void print_usage_instructions() {
     std::cout << "" << std::endl;
     std::cout << "Different ways to use:" << std::endl;
     std::cout << "bin/CPFSolver <input-file>" << std::endl;
-    std::cout << "\t <input-file> is a path to a CPF file." << std::endl;
-    std::cout << "\t Will solve <input-file> with maximum makespan equal to the number of" << std::endl;
-    std::cout << "\t vertices. The solution and statistics will be presented on standard output." << std::endl;
+    std::cout << "  <input-file> is a path to a CPF file." << std::endl;
+    std::cout << "  Will solve <input-file> with maximum makespan equal to the number of" << std::endl;
+    std::cout << "  vertices. The solution and statistics will be presented on standard output." << std::endl;
     std::cout << "" << std::endl;
     std::cout << "bin/CPFSolver <input-file> <max-makespan>" << std::endl;
-    std::cout << "\t <input-file> is a path to a CPF file." << std::endl;
-    std::cout << "\t <max-makespan> is an integer." << std::endl;
-    std::cout << "\t Will solve <input-file> with maximum makespan <max-makespan>." << std::endl;
+    std::cout << "  <input-file> is a path to a CPF file." << std::endl;
+    std::cout << "  <max-makespan> is an integer." << std::endl;
+    std::cout << "  Will solve <input-file> with maximum makespan <max-makespan>." << std::endl;
     std::cout << "" << std::endl;
     std::cout << "bin/CPFSolver -i|-input-file   <input-file>"   << std::endl;
     std::cout << "              -o|-output-file  <output-file>"  << std::endl;
@@ -29,24 +29,49 @@ void print_usage_instructions() {
     std::cout << "                 -search       <search>"       << std::endl;
     std::cout << "              -v|-verbose      <verbosity>"    << std::endl;
 
-    std::cout << "\t <input-file>:   the path to an existing CPF file." << std::endl;
-    std::cout << "\t <output-file>:  the path to where the solution file will be created." << std::endl;
-    std::cout << "\t <stats-file>:   the path to where the statistics file will be created." << std::endl;
-    std::cout << "\t <max-makespan>: an integer" << std::endl;
-    std::cout << "\t <encoding>:     simplified|other_encoding_that_i_will_implement_soon" << std::endl;
-    std::cout << "\t <search>:       UNSAT-SAT|SAT-UNSAT|binary" << std::endl;
-    std::cout << "\t <verbosity>:    0|1|2" << std::endl;
-    std::cout << "\t Will solve <input-file> with maximum makespan <max-makespan>" << std::endl;
-    std::cout << "\t with <verbosity> verbosity level. The solution will be saved" << std::endl;
-    std::cout << "\t at <output-file> and the SAT solver statistics at <stats-file>." << std::endl;
+    std::cout << "  <input-file>:   the path to an existing CPF file." << std::endl;
+    std::cout << "  <output-file>:  the path to where the solution file will be created." << std::endl;
+    std::cout << "  <stats-file>:   the path to where the statistics file will be created." << std::endl;
+    std::cout << "  <max-makespan>: an integer" << std::endl;
+    std::cout << "  <encoding>:     simplified|other_encoding_that_i_will_implement_soon" << std::endl;
+    std::cout << "  <search>:       UNSAT-SAT|SAT-UNSAT|binary" << std::endl;
+    std::cout << "  <verbosity>:    0|1|2" << std::endl;
+    std::cout << "  Will solve <input-file> with maximum makespan <max-makespan>" << std::endl;
+    std::cout << "  with <verbosity> verbosity level. The solution will be saved" << std::endl;
+    std::cout << "  at <output-file> and the SAT solver statistics at <stats-file>." << std::endl;
     std::cout << "" << std::endl;
     std::cout << "Default values:" << std::endl;
-    std::cout << "\t <input-file>: ../instances/grid_4x4_a6_o0.1_s616.cpf" << std::endl;
-    std::cout << "\t <max-makespan>: the number of vertices of the instance." << std::endl;
-    std::cout << "\t <encoding>: simplified." << std::endl;
-    std::cout << "\t <search>: UNSAT-SAT." << std::endl;
-    std::cout << "\t <verbose>: 0" << std::endl;
+    std::cout << "  <input-file>: ../instances/grid_4x4_a6_o0.1_s616.cpf" << std::endl;
+    std::cout << "  <max-makespan>: the number of vertices of the instance." << std::endl;
+    std::cout << "  <encoding>: simplified." << std::endl;
+    std::cout << "  <search>: UNSAT-SAT." << std::endl;
+    std::cout << "  <verbose>: 0" << std::endl;
     std::cout << "" << std::endl;
+}
+
+void print_stats(std::ostream &os, Instance &instance, CPFSolver &solver,
+	std::string encoding, std::string search,
+	double parsing_cpu, double solving_cpu) {
+	//ofs << "Wall clock time:" << std::endl;
+    //ofs << "  Parsing: " << parsing_wall << std::endl;
+    //ofs << "  Solving: " << solving_wall << std::endl;
+	os << "Instance size:" << std::endl;
+	os << "  agents: "   << instance.n_agents() << std::endl;
+	os << "  vertices: " << instance.n_vertices() << std::endl;
+	os << "  edges: "    << instance.n_edges() << std::endl;
+	os << "" << std::endl;
+
+	os << "Solver settings:" << std::endl;
+	os << "  encoding: " << encoding << std::endl;
+	os << "  search: "   << search << std::endl;
+	os << "" << std::endl;
+
+    os << "CPU time:"   << std::endl;
+    os << "  Parsing: " << parsing_cpu << " s" << std::endl;
+	os << "  Solving: " << solving_cpu << " s" << std::endl;
+	os << "" << std::endl;
+
+    solver.write_stats(os);
 }
 
 int main(int argc, const char **argv) {
@@ -58,7 +83,6 @@ int main(int argc, const char **argv) {
 
     int max_makespan = -1;
     int verbose = 0;
-
 
     //double wall0;
     double cpu0;
@@ -114,16 +138,16 @@ int main(int argc, const char **argv) {
 
     Parser parser(input_file);
 
-    Instance inst = parser.parse();
+    Instance instance = parser.parse();
 
     //parsing_wall = std::get_wall_time() - wall0;
-    parsing_cpu  = 1000.0 * (std::clock() - cpu0) / CLOCKS_PER_SEC; 
+    parsing_cpu  = (std::clock() - cpu0) / CLOCKS_PER_SEC; 
 
     if(verbose > 0)
-        std::cout << inst << std::endl;
+        std::cout << instance << std::endl;
 
     if(max_makespan < 0)
-        max_makespan = inst.n_vertices() * inst.n_agents();
+        max_makespan = instance.n_vertices() * instance.n_agents();
 
     std::cout << "Solving instance with encoding " << encoding
     	<< " and search " << search << "." << std::endl;
@@ -131,14 +155,14 @@ int main(int argc, const char **argv) {
     //wall0 = std::get_wall_time();
 	cpu0  = std::clock();
 
-    CPFSolver s1(inst, encoding, search, max_makespan, verbose);
+    CPFSolver solver(instance, encoding, search, max_makespan, verbose);
 
-    Solution s = s1.solve();
+    Solution solution = solver.solve();
 
 	//solving_wall = std::get_wall_time() - wall0;
-	solving_cpu  = 1000.0 * (std::clock() - cpu0) / CLOCKS_PER_SEC;
+	solving_cpu  = (std::clock() - cpu0) / CLOCKS_PER_SEC;
 
-    if(s.is_empty()) {
+    if(solution.is_empty()) {
         std::cout << "No solution found." << std::endl;
         return 0;
     }
@@ -146,46 +170,26 @@ int main(int argc, const char **argv) {
     if(output_file != "") {
         std::ofstream ofs;
         ofs.open(output_file);
-        ofs << s << std::endl;
+        ofs << solution << std::endl;
     }
 
     if(verbose > 0 || output_file == "") {
-        std::cout << s << std::endl;
+        std::cout << solution << std::endl;
     }
 
 	// Unfortunately, the solver statistics cannot be written to a file, since
 	// the glucose function writes them directly to standard output.
 	// NOTE: Redirect standard output? Use dup().
-	s1.write_stats();
 
     if(stats_file != "") {
     	std::ofstream ofs;
     	ofs.open(stats_file);
-    	//ofs << "Wall clock time:" << std::endl;
-    	//ofs << "  Parsing: " << parsing_wall << std::endl;
-    	//ofs << "  Solving: " << solving_wall << std::endl;
-    	ofs << "CPU time:"   << std::endl;
-    	ofs << "  Parsing: " << parsing_cpu  << std::endl;
-		ofs << "  Solving: " << solving_cpu  << std::endl;
+    	print_stats(ofs, instance, solver, encoding, search, parsing_cpu, solving_cpu);
+    	ofs.close();
     }
 
     if(verbose > 0 || stats_file == "") {
-		//std::cout << "Wall clock time:" << std::endl;
-		//std::cout << "  Parsing: " << parsing_wall << std::endl;
-		//std::cout << "  Solving: " << solving_wall << std::endl;
-		std::cout << "Instance size:" << std::endl;
-		std::cout << "  agents: "  << inst.n_agents << std::endl;
-		std::cout << "  vertices:" << inst.n_vertices << std::endl;
-		std::cout << "  edges:"    << inst.n_edges << std::endl;
-		std::cout << "" << std::endl;
-		std::cout << "Solver settings:" << std::endl;
-		std::cout << "  encoding:" << encoding << std::endl;
-		std::cout << "  search: "  << search << std::endl;
-		std::cout << "" << std::endl;
-		std::cout << "CPU time:"   << std::endl;
-		std::cout << "  Parsing: " << parsing_cpu << "ms" << std::endl;
-		std::cout << "  Solving: " << solving_cpu << "ms" << std::endl;
+    	print_stats(std::cout, instance, solver, encoding, search, parsing_cpu, solving_cpu);
     }
-
     return 0;
 }
