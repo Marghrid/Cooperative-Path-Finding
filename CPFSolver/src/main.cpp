@@ -75,7 +75,7 @@ void print_stats(std::ostream &os, Instance &instance, CPFSolver &solver,
 }
 
 int main(int argc, const char **argv) {
-    std::string input_file = "../instances/grid_4x4_a6_o0.1_s616.cpf";
+    std::string input_file = "../instances/grid_04x04_a0006_o0.1_s616.cpf";
     std::string output_file = "";
     std::string stats_file = "";
     std::string encoding = "simplified";
@@ -171,6 +171,7 @@ int main(int argc, const char **argv) {
         std::ofstream ofs;
         ofs.open(output_file);
         ofs << solution << std::endl;
+		ofs.close();
     }
 
     if(verbose > 0 || output_file == "") {
