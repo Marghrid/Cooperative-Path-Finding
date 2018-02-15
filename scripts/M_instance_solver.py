@@ -12,9 +12,9 @@ instances += handmade;
 
 for instance in instances:
 	aux  = " -i ../instances/"  + instance
-	instance = instance.split(',')[0]
-	aux += " -o ../M_solutions/" + instance
-	aux += " -s ../M_stats_files/" + instance
+	instance = instance.split('.')[0]
+	aux += " -o ../M_solutions/" + instance + ".out"
+	aux += " -s ../M_stats_files/" + instance + ".txt"
 	aux += " -e simplified"
 	aux += " -search binary"
 	aux += " -v 1"
