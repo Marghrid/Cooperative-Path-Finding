@@ -41,14 +41,24 @@ def get_makespan_limit(instance):
 	return 64
 
 
-for instance in instances:
-	aux  = " --input-file=../instances/"  + instance
-	instance = instance.split(',')[0]
-	aux += " --output-file=../S_solutions/" + instance + "unsat-sat.out"
+for filename in instances:
+	instance = filename[:-4]
+	aux  = " --input-file=../instances/"  + filename
+	aux += " --output-file=../S_solutions/" + instance + "_unsat-sat.out"
 	makespan_limit = get_makespan_limit(instance)
 	aux += " --makespan-limit=" + str(makespan_limit)
 	aux += " --strategy=linear-up"
-	aux += " > ../S_solver_files/" + instance + "unsat-sat.txt 2>&1"
+	aux += " > ../S_solver_files/" + instance + "_unsat-sat.txt 2>&1"
+
+	print ("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux)
+	system("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux)
+
+	aux  = " --input-file=../instances/"  + filename
+	aux += " --output-file=../S_solutions/" + instance + "_binary.out"
+	makespan_limit = get_makespan_limit(instance)
+	aux += " --makespan-limit=" + str(makespan_limit)
+	aux += " --strategy=binary"
+	aux += " > ../S_solver_files/" + instance + "_binary.txt 2>&1"
 
 	print ("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux)
 	system("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux)
