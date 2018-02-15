@@ -1,42 +1,24 @@
 from os import system
+from os import walk
 
-for size in (4, 8, 16, 32):
-	makespan_limit = size * size *2
-	for robots_prob in (0.2, 0.3, 0.4):
-		for obst_prob in (0.1, 0.2, 0.3, 0.4):
-			n_robots = int(size * size * robots_prob);
-			for seed in (5, 31, 327, 616, 895):
+# filenames will contain the names of all files in the directory intances
+# walk() will go through all files and subdirectories of instances.
+# next will select the first result of walk.
+#  If none is returned, the second argument is used.
+_, _, instances = next(walk("../instances"), (None, None, []))
+_, _, handmade  = next(walk("../handmade_instances"), (None, None, []))
 
-				filename  = "grid_" + str(size) + "x" + str(size)
-				filename += "_a" + str(n_robots)
-				filename += "_o" + str(obst_prob)
-				filename += "_s" + str(seed)
+instances += handmade;
 
-				aux  = " -i ../M_instances/"  + filename + ".cpf"
-				aux += " -o ../M_instances/" + filename + ".out"
-				aux += " -s ../M_stats_files/" + filename + ".txt"
-				aux += " -e simplified"
-				aux += " -search binary"
-				aux += " -v 0"
+for instance in instances:
+	aux  = " -i ../instances/"  + instance
+	instance = instance.split(',')[0]
+	aux += " -o ../M_solutions/" + instance
+	aux += " -s ../M_stats_files/" + instance
+	aux += " -e simplified"
+	aux += " -search binary"
+	aux += " -v 1"
 
-				output = ""
-				print ("../CPFSolver/bin/a.out" + aux)
-				system("../CPFSolver/bin/a.out" + aux)
-
-for dim in (3, 9):
-	makespan_limit = 2**dim * 2
-	for robots_prob in (0.1, 0.2, 0.4):
-		aux = 2**dim * robots_prob
-		n_robots = int(aux);
-		for seed in (5, 31, 327, 616, 895):
-			filename = "hyper_dim" + str(dim) + "_a" + str(n_robots) + "_" + str(seed)
-			
-			aux  = " -i ../M_instances/"  + filename + ".cpf"
-			aux += " -o ../M_instances/" + filename + ".out"
-			aux += " -s ../M_stats_files/" + filename + ".txt"
-			aux += " -e simplified"
-			aux += " -search binary"
-			aux += " -v 0"
-
-			print ("../CPFSolver/bin/a.out" + aux)
-			system("../CPFSolver/bin/a.out" + aux)
+	output = ""
+	print ("../CPFSolver/bin/CPFSolver" + aux)
+	system("../CPFSolver/bin/CPFSolver" + aux)
