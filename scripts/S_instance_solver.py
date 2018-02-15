@@ -1,47 +1,55 @@
 from os import system
+from os import walk
 
-for filename in ["subway"]:
-	aux  = " --input-file=../handmade_instances/"  + filename + ".cpf"
-	aux += " --output-file=../handmade_instances/" + filename + ".out"
-	aux += " --makespan-limit=64"
+# filenames will contain the names of all files in the directory intances
+# walk() will go through all files and subdirectories of instances.
+# next will select the first result of walk.
+#  If none is returned, the second argument is used.
+_, _, instances = next(walk("../instances"), (None, None, []))
+_, _, handmade  = next(walk("../handmade_instances"), (None, None, []))
 
-output = " > ../solver_files/" + filename + ".txt 2>&1"
-print ("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
-system("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
+instances += handmade;
 
-for size in (4, 8, 16, 32):
-	for robots_prob in (0.2, 0.3, 0.4, 0.6):
-		for obst_prob in (0.1, 0.2, 0.3):
-			n_robots = int(size * size * robots_prob);
-			makespan_limit = size * size * n_robots
-			for seed in (5, 31, 327, 616, 895):
+def get_makespan_limit(instance):
+	if(instance.startswith("grid")):
+		agents = instance.split("_a")[1]
+		agents = agents.split("_")[0]
+		agents = int(agents)
 
-				filename  = "grid_" + str(size).zfill(2) + "x" + str(size).zfill(2)
-				filename += "_a" + str(n_robots).zfill(4)
-				filename += "_o" + str(obst_prob)
-				filename += "_s" + str(seed).zfill(3)
+		dim = instance.split("grid")[1]
+		dim = dim.split("_a")[0]
 
-				aux  = " --input-file=../instances/"  + filename + ".cpf"
-				aux += " --output-file=../instances/" + filename + ".out"
-				aux += " --makespan-limit=" + str(makespan_limit)
-				aux += " --strategy=binary"
+		dim1 = dim.split("x")[0]
+		dim2 = dim.split("x")[1]
 
-				output = " > ../solver_files/" + filename + ".txt 2>&1"
-				print ("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
-				system("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
+		dim1 = int(dim1)
+		dim2 = int(dim2)
 
-for dim in (3, 9):
-	for robots_prob in (0.1, 0.2, 0.4):
-		aux = 2**dim * robots_prob
-		n_robots = int(aux);
-		makespan_limit = 2**dim * n_robots
+		return dim1 * dim2 * agents
 
-		for seed in (5, 31, 327, 616, 895):
-			aux = " --input-file=../instances/hyper_dim" + str(dim) + "_a" + str(n_robots).zfill(3) + "_" + str(seed).zfill(3) + ".cpf"
-			aux += " --output-file=../solutions/hyper_dim" + str(dim) + "_a" + str(n_robots).zfill(3) + "_" + str(seed).zfill(3) + ".out"
-			aux += " --makespan-limit=" + str(makespan_limit)
-			aux += " --strategy=binary"
+	elif(instance.startswith("hyper")):
+		agents = instance.split("_a")[1]
+		agents = agents.split("_")[0]
+		agents = int(agents)
 
-			output = " > ../solver_files/hyper_dim" + str(dim) + "_a" + str(n_robots) + "_" + str(seed) + ".txt 2>&1"
-			print ("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
-			system("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux + output)
+		dim = instance.split("dim")[1]
+		dim = dim.split("_a")[0]
+		dim = int(dim)
+
+		return 2**dim*agents
+
+	return 64
+
+
+for instance in instances:
+	aux  = " --input-file=../instances/"  + instance
+	instance = instance.split(',')[0]
+	aux += " --output-file=../S_solutions/" + instance + ".out"
+	makespan_limit = get_makespan_limit(instance)
+	aux += " --makespan-limit=" + str(makespan_limit)
+	aux += " --strategy=binary"
+	aux += " > ../S_solver_files/" + instance + ".txt 2>&1"
+
+	print ("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux)
+	system("../reLOC-0.13-odaiba_037/src/solver_reLOC" + aux)
+
