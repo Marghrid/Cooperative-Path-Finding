@@ -13,9 +13,9 @@ instances += handmade;
 system("ulimit -s 1000000")
 
 for filename in instances:
-	if filename.startswith("grid_08x08_a032"):
+	if filename.startswith("hyper"):
 		instance = filename[:-4]
-		aux  = " -i ../instances/"  + filename
+		aux  = " -i ../intances/"  + filename
 		aux += " -o ../M_solutions/"   + instance + "_binary.out"
 		aux += " -s ../M_stats_files/" + instance + "_binary.txt"
 		aux += " -e simplified"
