@@ -13,9 +13,9 @@ instances += handmade;
 system("ulimit -s 1000000")
 
 for filename in instances:
-	if filename.startswith("grid_08x08_a032"):
+	if not (filename.startswith("grid") or filename.startswith("hyper")):
 		instance = filename[:-4]
-		aux  = " -i ../instances/"  + filename
+		aux  = " -i ../handmade_instances/"  + filename
 		aux += " -o ../M_solutions/"   + instance + "_binary.out"
 		aux += " -s ../M_stats_files/" + instance + "_binary.txt"
 		aux += " -e simplified"
@@ -25,7 +25,7 @@ for filename in instances:
 		print ("../CPFSolver/bin/CPFSolver" + aux)
 		system("../CPFSolver/bin/CPFSolver" + aux)
 	
-		aux  = " -i ../instances/"  + filename
+		aux  = " -i ../handmade_instances/"  + filename
 		aux += " -o ../M_solutions/"   + instance + "_unsat-sat.out"
 		aux += " -s ../M_stats_files/" + instance + "_unsat-sat.txt"
 		aux += " -e simplified"
