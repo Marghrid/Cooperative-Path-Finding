@@ -10,8 +10,10 @@ _, _, handmade  = next(walk("../handmade_instances"), (None, None, []))
 
 instances += handmade;
 
+system("ulimit -s 1000000")
+
 for filename in instances:
-	if filename.startswith("grid_04x04") or filename.startswith("grid_08x08"):
+	if filename.startswith("grid_08x08_a032"):
 		instance = filename[:-4]
 		aux  = " -i ../instances/"  + filename
 		aux += " -o ../M_solutions/"   + instance + "_binary.out"

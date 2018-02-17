@@ -1,15 +1,6 @@
 from os import system
 from os import walk
 
-# filenames will contain the names of all files in the directory intances
-# walk() will go through all files and subdirectories of instances.
-# next will select the first result of walk.
-#  If none is returned, the second argument is used.
-_, _, instances = next(walk("../instances"), (None, None, []))
-_, _, handmade  = next(walk("../handmade_instances"), (None, None, []))
-
-instances += handmade;
-
 def get_makespan_limit(instance):
 	if(instance.startswith("grid")):
 		agents = instance.split("_a")[1]
@@ -40,6 +31,16 @@ def get_makespan_limit(instance):
 
 	return 64
 
+# filenames will contain the names of all files in the directory intances
+# walk() will go through all files and subdirectories of instances.
+# next will select the first result of walk.
+#  If none is returned, the second argument is used.
+_, _, instances = next(walk("../instances"), (None, None, []))
+_, _, handmade  = next(walk("../handmade_instances"), (None, None, []))
+
+instances += handmade;
+
+system("ulimit -s 1000000")
 
 for filename in instances:
 	instance = filename[:-4]

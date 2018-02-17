@@ -1,0 +1,27 @@
+Instance size:
+  agents: 25
+  vertices: 74
+  edges: 115
+
+Solver settings:
+  encoding: simplified
+  search: unsat-sat
+
+CPU time:
+  Parsing: 0.00077 s
+  Solving: 12.4988 s
+
+SAT solver:
+  #restarts          : 428
+  #nb ReduceDB       : 6
+  #nb removed Clauses: 38420
+  #nb learnts DL2    : 366
+  #nb learnts size 2 : 46
+  #nb learnts size 1 : 7
+
+  #conflicts   : 56504
+  #decisions   : 273234
+  #propagations: 19576205
+
+  #SAT calls: 1
+  #UNSAT calls: 17

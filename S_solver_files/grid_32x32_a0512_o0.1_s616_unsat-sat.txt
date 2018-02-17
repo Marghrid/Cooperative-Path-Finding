@@ -1,0 +1,92 @@
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 5/1/5 (2)
+Open/close/exp size (steps): 16/4/16 (5)
+Open/close/exp size (steps): 27/8/27 (9)
+Open/close/exp size (steps): 34/13/34 (14)
+Open/close/exp size (steps): 47/19/47 (20)
+Open/close/exp size (steps): 68/27/68 (28)
+Open/close/exp size (steps): 89/37/89 (38)
+Open/close/exp size (steps): 111/49/111 (50)
+Open/close/exp size (steps): 134/64/134 (65)
+Open/close/exp size (steps): 162/82/162 (83)
+Open/close/exp size (steps): 198/104/198 (105)
+Open/close/exp size (steps): 242/131/242 (132)
+Open/close/exp size (steps): 70/30/70 (165)
+Open/close/exp size (steps): 149/70/149 (205)
+Open/close/exp size (steps): 95/46/95 (253)
+Open/close/exp size (steps): 205/104/205 (311)
+Open/close/exp size (steps): 34/10/34 (381)
+Open/close/exp size (steps): 183/94/183 (465)
+Open/close/exp size (steps): 90/43/90 (566)
+Open/close/exp size (steps): 310/165/310 (688)
+Open/close/exp size (steps): 132/64/132 (835)
+Open/close/exp size (steps): 312/164/312 (1012)
+Open/close/exp size (steps): 681/377/681 (1225)
+Open/close/exp size (steps): 140/64/140 (1481)
+Open/close/exp size (steps): 17/4/17 (1789)
+Open/close/exp size (steps): 107/33/107 (2159)
+Open/close/exp size (steps): 500/284/500 (2603)
+Open/close/exp size (steps): 148/74/148 (3136)
+Open/close/exp size (steps): 195/101/195 (3776)
+Open/close/exp size (steps): 1487/869/1487 (4544)
+Open/close/exp size (steps): 58/26/58 (5466)
+Open/close/exp size (steps): 165/75/165 (6573)
+Open/close/exp size (steps): 304/153/304 (7902)
+Open/close/exp size (steps): 545/303/545 (9497)
+Open/close/exp size (steps): 28/10/28 (11411)
+Open/close/exp size (steps): 748/432/748 (13708)
+Open/close/exp size (steps): 133/1497/133 (16465)
+Unable to find solution.
+Total cost: 0
+Multirobot solution analysis: (
+    total makespan           = 0
+    total distance           = 0
+    total trajectory         = 0
+    total cost               = 0
+    average parallelism      = -nan
+    average distance         = 0.000
+    average trajectory       = 0.000
+    parallelism distribution  = [ ]
+    distance distribution     = [ 511 ]
+    trajectory distribution   = [ ]
+)
+Phase statistics (current phase = 'root_phase') [
+        Phase (name = 'root_phase') [
+            Total SAT solver calls         = 0
+            Satisfiable SAT solver calls   = 0
+            Unsatisfiable SAT solver calls = 0
+            Indeterminate SAT solver calls = 0
+            Move executions                = 0
+            Produced CNF variables         = 0
+            Produced CNF clauses           = 0
+            Search steps                   = 0
+            Wall clock TIME (seconds)      = 0.365
+            CPU/machine TIME (seconds)     = 0.360
+        ]
+        Sub-phases {
+            Phase (name = 'independent_solving') [
+                Total SAT solver calls         = 0
+                Satisfiable SAT solver calls   = 0
+                Unsatisfiable SAT solver calls = 0
+                Indeterminate SAT solver calls = 0
+                Move executions                = 70037
+                Produced CNF variables         = 0
+                Produced CNF clauses           = 0
+                Search steps                   = 0
+                Wall clock TIME (seconds)      = 18.263
+                CPU/machine TIME (seconds)     = 18.260
+            ]
+        }
+]
+----------------------------------------------------------------
