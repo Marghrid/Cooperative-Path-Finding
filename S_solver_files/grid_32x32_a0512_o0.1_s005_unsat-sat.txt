@@ -1,0 +1,53 @@
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 3/1/3 (2)
+Open/close/exp size (steps): 14/4/14 (5)
+Open/close/exp size (steps): 22/8/22 (9)
+Open/close/exp size (steps): 36/13/36 (14)
+Open/close/exp size (steps): 46/19/46 (20)
+Open/close/exp size (steps): 62/27/62 (28)
+Open/close/exp size (steps): 74/37/74 (38)
+Open/close/exp size (steps): 98/49/98 (50)
+Open/close/exp size (steps): 122/64/122 (65)
+Open/close/exp size (steps): 153/82/153 (83)
+Open/close/exp size (steps): 196/104/196 (105)
+Open/close/exp size (steps): 245/131/245 (132)
+Open/close/exp size (steps): 301/164/301 (165)
+Open/close/exp size (steps): 367/204/367 (205)
+Open/close/exp size (steps): 111/43/111 (253)
+Open/close/exp size (steps): 80/35/80 (311)
+Open/close/exp size (steps): 217/105/217 (381)
+Open/close/exp size (steps): 359/189/359 (465)
+Open/close/exp size (steps): 69/31/69 (566)
+Open/close/exp size (steps): 288/153/288 (688)
+Open/close/exp size (steps): 535/300/535 (835)
+Open/close/exp size (steps): 844/477/844 (1012)
+Open/close/exp size (steps): 1173/690/1173 (1225)
+Open/close/exp size (steps): 84/33/84 (1481)
+Open/close/exp size (steps): 141/69/141 (1789)
+Open/close/exp size (steps): 595/343/595 (2159)
+Open/close/exp size (steps): 311/170/311 (2603)
+Open/close/exp size (steps): 570/319/570 (3136)
+Open/close/exp size (steps): 180/88/180 (3776)
+Open/close/exp size (steps): 238/123/238 (4544)
+Open/close/exp size (steps): 56/23/56 (5466)
+Open/close/exp size (steps): 624/346/624 (6573)
+Open/close/exp size (steps): 382/204/382 (7902)
+Open/close/exp size (steps): 167/84/167 (9497)
+Open/close/exp size (steps): 1062/615/1062 (11411)
+Open/close/exp size (steps): 59/24/59 (13708)
+Open/close/exp size (steps): 1592/953/1592 (16465)
+Open/close/exp size (steps): 442/247/442 (19774)
+Aborted (core dumped)

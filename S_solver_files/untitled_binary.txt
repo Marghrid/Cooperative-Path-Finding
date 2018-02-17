@@ -1,0 +1,6 @@
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Error: Reading graph from file ../instances/untitled.cpf failed (code = -1001).
