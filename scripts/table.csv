@@ -1,0 +1,18 @@
+type of instance, \#agents, simplified-binary avg time, simplified-binary \#solved, simplified-unsat-sat avg time, simplified-unsat-sat \#solved
+grid04x04, 2, 0.0066, 8, 0.0041, 16
+grid04x04, 4, 0.0293, 8, 0.0164, 16
+grid04x04, 6, 0.0981, 7, 0.0523, 14
+grid04x04, 8, 0.7369, 7, 0.3740, 14
+grid08x08, 8, 15.1293, 7, 7.5898, 14
+grid08x08, 16, - , 0, 0.1540, 7
+grid08x08, 24, - , 0, 0.3217, 8
+grid08x08, 32, - , 0, 236.7653, 8
+grid16x16, 32, - , 0, 2.3171, 8
+hyperdim3, 1, - , 0, 0.0006, 5
+hyperdim3, 2, - , 0, 0.0009, 5
+hyperdim3, 3, - , 0, 0.0012, 5
+hyperdim3, 4, - , 0, 0.0018, 5
+hyperdim6, 8, - , 0, 0.0422, 5
+hyperdim6, 16, - , 0, 0.1007, 5
+hyperdim6, 24, - , 0, 0.1599, 5
+hyperdim6, 32, - , 0, 0.2267, 5
