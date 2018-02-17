@@ -1,0 +1,63 @@
+================================================================
+reLOC 0.13-odaiba : Multirobot Solver
+(C) Copyright 2016 Pavel Surynek
+----------------------------------------------------------------
+Reading graph...
+Reading graph... FINISHED
+Reading initial arrangement...
+Reading initial arrangement... FINISHED.
+Reading goal arrangement...
+Reading goal arrangement... FINISHED.
+Building instance...
+Building instance... FINISHED.
+Open/close/exp size (steps): 1/0/1 (2)
+0 0 0 0 0 0 1 0 
+0 0 0 0 0 0 0 1 
+
+Computed optimal makespan:1
+Makespan optimal solution:
+Mulirobot solution: (|moves| = 2, paralellism = 2.000) [
+    Step 0: 1#6->7 2#3->2 
+]
+Total cost: 2
+Multirobot solution analysis: (
+    total makespan           = 1
+    total distance           = 1
+    total trajectory         = 2
+    total cost               = 2
+    average parallelism      = 2.000
+    average distance         = 0.500
+    average trajectory       = 1.000
+    parallelism distribution  = [ 0 1 ]
+    distance distribution     = [ 1 ]
+    trajectory distribution   = [ 2 ]
+)
+Phase statistics (current phase = 'root_phase') [
+        Phase (name = 'root_phase') [
+            Total SAT solver calls         = 0
+            Satisfiable SAT solver calls   = 0
+            Unsatisfiable SAT solver calls = 0
+            Indeterminate SAT solver calls = 0
+            Move executions                = 2
+            Produced CNF variables         = 0
+            Produced CNF clauses           = 0
+            Search steps                   = 0
+            Wall clock TIME (seconds)      = 0.025
+            CPU/machine TIME (seconds)     = 0.000
+        ]
+        Sub-phases {
+            Phase (name = 'independent_solving') [
+                Total SAT solver calls         = 0
+                Satisfiable SAT solver calls   = 0
+                Unsatisfiable SAT solver calls = 0
+                Indeterminate SAT solver calls = 0
+                Move executions                = 7
+                Produced CNF variables         = 0
+                Produced CNF clauses           = 0
+                Search steps                   = 0
+                Wall clock TIME (seconds)      = 0.000
+                CPU/machine TIME (seconds)     = 0.000
+            ]
+        }
+]
+----------------------------------------------------------------
