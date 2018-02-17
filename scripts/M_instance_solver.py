@@ -10,6 +10,8 @@ _, _, handmade  = next(walk("../handmade_instances"), (None, None, []))
 
 instances += handmade;
 
+system("ulimit -s 1000000")
+
 for filename in instances:
 	instance = filename[:-4]
 	aux  = " -i ../instances/"  + filename
