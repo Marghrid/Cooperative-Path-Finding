@@ -42,109 +42,88 @@ void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
 	int mu  = _instance.n_agents();
     int n   = _instance.n_vertices();
 
+    if(_created_clauses_makespan == 0) {
+
+        create_vars_for_makespan(0);
+
+        // Initial arragement:
+        if(_verbose > 0)
+            std::cout << "Initial arragement..." << std::endl;
+        for(int j = 0; j < n; ++j) {
+
+            // epsilon vars:
+            if(_instance.starts_empty(j)) {
+                if(_verbose > 1)
+                    std::cout << "adding clause: e(" << j << ", "
+                        << 0 << ", " << make_evar_id(j, 0) << ")" << std::endl;
+                _solver->addClause(Glucose::mkLit(make_evar_id(j, 0)));
+            } else {
+                if(_verbose > 1)
+                    std::cout << "adding clause: -e(" << j << ", "
+                        << 0 << ", " << make_evar_id(j, 0) << ")" << std::endl;
+                _solver->addClause(Glucose::mkLit(make_evar_id(j, 0), true));
+            }
+
+            // X vars (for each agent):
+            for(int k = 0; k < mu; ++k) {
+                if(j == _instance.agent(k).initial_position().id()) {
+                    if(_verbose > 1)
+                        std::cout << "adding clause: x(" << k << ", " << j << ", "
+                            << 0 << ", " << make_xvar_id(k, j, 0) << ")" << std::endl;
+                    _solver->addClause(Glucose::mkLit(make_xvar_id(k, j, 0)));
+                } else {
+                    if(_verbose > 1)
+                        std::cout << "adding clause: ~x(" << k << ", " << j << ", "
+                            << 0 << ", " << make_xvar_id(k, j, 0) << ")" << std::endl;
+                    _solver->addClause(Glucose::mkLit(make_xvar_id(k, j, 0), true));
+                }
+            }
+        }
+    }
+
 	while(_created_clauses_makespan < makespan) {
         int i = ++_created_clauses_makespan;
         // At most one agent is placed in each vertex at each time step
 
     	create_vars_for_makespan(i);
 
-        if(i == 0) {
-        	// Initial arragement:
-			if(_verbose > 0)
-			    std::cout << "Initial arragement..." << std::endl;
-			for(int j = 0; j < n; ++j) {
 
-                // epsilon vars:
-                if(_instance.starts_empty(j)) {
-                    if(_verbose > 1)
-                        std::cout << "adding clause: e(" << j << ", "
-                            << 0 << ", " << make_evar_id(j, 0) << ")" << std::endl;
-                    _solver->addClause(Glucose::mkLit(make_evar_id(j, 0)));
-                } else {
-                    if(_verbose > 1)
-                        std::cout << "adding clause: -e(" << j << ", "
-                            << 0 << ", " << make_evar_id(j, 0) << ")" << std::endl;
-                    _solver->addClause(Glucose::mkLit(make_evar_id(j, 0), true));
-                }
-
-                // X vars (for each agent):
-			    for(int k = 0; k < mu; ++k) {
-			        if(j == _instance.agent(k).initial_position().id()) {
-			            if(_verbose > 1)
-			                std::cout << "adding clause: x(" << k << ", " << j << ", "
-			                    << 0 << ", " << make_xvar_id(k, j, 0) << ")" << std::endl;
-			            _solver->addClause(Glucose::mkLit(make_xvar_id(k, j, 0)));
-			        } else {
-			            if(_verbose > 1)
-			                std::cout << "adding clause: ~x(" << k << ", " << j << ", "
-			                    << 0 << ", " << make_xvar_id(k, j, 0) << ")" << std::endl;
-			            _solver->addClause(Glucose::mkLit(make_xvar_id(k, j, 0), true));
-			        }
-			    }
-			}
-        } else /* Clauses that relate current timestep i with timestep i-1 */ {
-            // An agent moves along an edge, or not at all:
-            if(_verbose > 0)
-                std::cout << "An agent moves along an edge, or not at all..."
+        // The target vertex is vacant before the move,
+        // and the source vertex will be vacant after it
+        if(_verbose > 0)
+            std::cout << "The target vertex is vacant before the move, \n"
+                << "and the source vertex will be vacant after it..."
                 << std::endl;
-            for(int j = 0; j < n; ++j){
-                for(int k = 0; k < mu; ++k) {
-                    Glucose::vec<Glucose::Lit> lit_vec;
-                    lit_vec.push( Glucose::mkLit(make_xvar_id(k, j, i-1), true) );
-                    lit_vec.push( Glucose::mkLit(make_xvar_id(k, j, i  ), false) );
-                    if(_verbose > 1)
-                        std::cout << "adding clause: ~x(" << k << ", "
-                            << j << ", " << i-1 << ", "
-                            << make_xvar_id(k, j, i-1) << ") V x("
-                            << k << ", " << j << ", " << i << ", "
-                            << make_xvar_id(k, j, i) << ")";
-
-                    for(auto &v: _instance.get_neighbours(j)) {
-                        lit_vec.push( Glucose::mkLit(make_xvar_id(k, v.id(), i)) );
-                        if(_verbose > 1)
-                            std::cout << " V x(" << k << ", "
-                                << v.id() << ", " << i << ", "
-                                << make_xvar_id(k, v.id(), i) << ")";
-                    }
-                    if(_verbose > 1) std::cout << std::endl;
-                    _solver->addClause(lit_vec);
-                }
-            }
-        
-            // The target vertex is vacant before the move,
-            // and the source vertex will be vacant after it
-            if(_verbose > 0)
-                std::cout << "The target vertex is vacant before the move, \n"
-                    << "and the source vertex will be vacant after it..."
-                    << std::endl;
-            for(int k = 0; k < mu; ++k) {
-                for(auto &e: _instance.bidirectional_edges()) {
-                    Glucose::vec<Glucose::Lit> lit_vec;
-                    lit_vec.push( Glucose::mkLit(make_xvar_id(k, e.start().id(), i-1), true)  );
-                    lit_vec.push( Glucose::mkLit(make_xvar_id(k, e.end().id(),   i  ), true)  );
-                    lit_vec.push( Glucose::mkLit(make_evar_id(e.end().id(),      i-1), false) );
-                    lit_vec.push( Glucose::mkLit(make_evar_id(e.start().id(),    i  ), false) );
-                    if(_verbose > 1)
-                        std::cout << "adding clause: ~x(" << k << ", "
-                            << e.start().id() << ", " << i-1 << ", "
-                            << make_xvar_id(k, e.start().id(), i-1) << ") V ~x("
-                            << k << ", " << e.end().id() << ", " << i << ", "
-                            << make_xvar_id(k, e.end().id(), i  ) << ") V e("
-                            << e.end().id() << ", " << i-1 << ", "
-                            << make_evar_id(e.end().id(), i-1) << ") V e("
-                            << e.start().id() << ", " << i << ", "
-                            << make_evar_id(e.start().id(), i) <<")" << std::endl;
-                    _solver->addClause(lit_vec);
-                }
+        for(int k = 0; k < mu; ++k) {
+            for(auto &e: _instance.bidirectional_edges()) {
+                Glucose::vec<Glucose::Lit> lit_vec;
+                lit_vec.push( Glucose::mkLit(make_xvar_id(k, e.start().id(), i-1), true)  );
+                lit_vec.push( Glucose::mkLit(make_xvar_id(k, e.end().id(),   i  ), true)  );
+                lit_vec.push( Glucose::mkLit(make_evar_id(e.end().id(),      i-1), false) );
+                lit_vec.push( Glucose::mkLit(make_evar_id(e.start().id(),    i  ), false) );
+                if(_verbose > 1)
+                    std::cout << "adding clause: ~x(" << k << ", "
+                        << e.start().id() << ", " << i-1 << ", "
+                        << make_xvar_id(k, e.start().id(), i-1) << ") V ~x("
+                        << k << ", " << e.end().id() << ", " << i << ", "
+                        << make_xvar_id(k, e.end().id(), i  ) << ") V e("
+                        << e.end().id() << ", " << i-1 << ", "
+                        << make_evar_id(e.end().id(), i-1) << ") V e("
+                        << e.start().id() << ", " << i << ", "
+                        << make_evar_id(e.start().id(), i) <<")" << std::endl;
+                _solver->addClause(lit_vec);
             }
         }
 
-        // Clauses for all timesteps
+        if(_verbose > 0)
+            std::cout << "An agent moves along an edge, or not at all..."
+                << std::endl;
         if(_verbose > 0)
             std::cout << "At most one agent is placed in each vertex at each time step..."
                 << std::endl;
         if(_verbose > 0)
-            std::cout << "Establishing relation between epsilon and X variables..." << std::endl;
+            std::cout << "Establishing relation between epsilon and X variables..."
+                << std::endl;
 
         for(int j = 0; j < n; ++j) {
             Glucose::Lit l3 = Glucose::mkLit(make_evar_id(j, i), true); // relation
@@ -174,6 +153,26 @@ void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
 
                     _solver->addClause(l1, l2); //at most
                 }
+
+                Glucose::vec<Glucose::Lit> lit_vec; // along an edge
+                lit_vec.push( Glucose::mkLit(make_xvar_id(k, j, i-1), true) ); // along an edge
+                lit_vec.push( Glucose::mkLit(make_xvar_id(k, j, i  ), false)); // along an edge
+                if(_verbose > 1)
+                    std::cout << "adding clause: ~x(" << k << ", "
+                        << j << ", " << i-1 << ", "
+                        << make_xvar_id(k, j, i-1) << ") V x("
+                        << k << ", " << j << ", " << i << ", "
+                        << make_xvar_id(k, j, i) << ")";
+
+                for(auto &v: _instance.get_neighbours(j)) {
+                    lit_vec.push( Glucose::mkLit(make_xvar_id(k, v.id(), i)) );
+                    if(_verbose > 1)
+                        std::cout << " V x(" << k << ", "
+                            << v.id() << ", " << i << ", "
+                            << make_xvar_id(k, v.id(), i) << ")";
+                }
+                if(_verbose > 1) std::cout << std::endl;
+                _solver->addClause(lit_vec);
             }
         }
     }
