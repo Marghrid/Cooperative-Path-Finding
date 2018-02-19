@@ -46,3 +46,4 @@ CPFSolver/bin/a.out
 CPFSolver/core
 
 scripts/core
+**/core
