@@ -8,8 +8,11 @@
 
 class SimplifiedEncoder: public Encoder {
 private:
+    // Value is incremented before actually creating.
     int _created_vars_makespan = -1;
-    int _created_clauses_makespan = -1;
+    // No need to crade clauses for timestep 0, since all positions
+    //  are completely defined by the instance.
+    int _created_clauses_makespan = 0;
 public:
 
 	SimplifiedEncoder(Instance instance, Glucose::SimpSolver *solver, int verbose = 0)
