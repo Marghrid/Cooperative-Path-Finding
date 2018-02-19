@@ -6,7 +6,7 @@ def get_cell_values(l):
 
 class Instance:
 	def __init__(self, instance_type):
-		print( "new inst of type " + instance_type)
+		#print( "new inst of type " + instance_type)
 		self._instance_type = instance_type
 		self._n_vertices = 0
 		self._n_agents = 0
@@ -35,9 +35,11 @@ class Table:
 			self.diff_n_agents += [instance._n_agents]
 
 		if instance._encoding not in self.diff_encodings:
+			print("new encoding: " + instance._encoding)
 			self.diff_encodings += [instance._encoding]
 
 		if instance._search not in self.diff_searches:
+			print("new search: " + instance._search)
 			self.diff_searches += [instance._search]
 
 	def to_file(self, file):
@@ -69,20 +71,25 @@ class Table:
 						category_instances += [instance]
 
 				line += instance_type + ", " + str(n_agents) + ", "
-				cell = []
+				print(line)
+				print(len(category_instances))
+				print(self.diff_encodings)
+				print(self.diff_searches)
 				for encoding in self.diff_encodings:
 					for search in self.diff_searches:
+						times = []
 						for instance in category_instances:
 							if	instance._encoding == encoding and \
 								instance._search == search:
 
-								cell += [instance._time]
+								times += [instance._time]
 
-						if(len(cell) > 0):
-							line += "%.4f" % (sum(cell)/len(cell)) + ", " + str(len(cell)) + ", "
+						if(len(times) > 0):
+							line += "%.4f" % (sum(times)/len(times)) + " s, " + str(len(times)) + ", "
 						else:
-							line = ""
-				if(line != ""):
+							line += "- , 0, "
+						print(line + str(times))
+				if(not line.endswith("- , 0, - , 0, ")):
 					file.write(line[:-2] + "\n")
 
 
@@ -114,35 +121,39 @@ for filename in files:
 		instance = Instance(instance_type)
 
 	elif filename == __file__ or filename == "table.csv":
-		pass
+		continue
 
 	else:
 		print(filename + " of unknown file type.")
-		break
+		continue
 
 	content = open(directory + "/" + filename)
 	for line in content:
-		print("line: " + line)
 		if line.startswith("  vertices: "):
 			instance._n_vertices = int(line.split(" ")[-1])
 
 		elif line.startswith("  agents: "):
-			print(line.split(" ")[-1])
+			#print(line.split(" ")[-1])
 			instance._n_agents = int(line.split(" ")[-1])
 
 		elif line.startswith("  encoding: "):
-			print(line.split(" ")[-1])
+			#print(line.split(" ")[-1])
 			instance._encoding = line.split(" ")[-1][:-1]
 
 		elif line.startswith("  search: "):
-			print(line.split(" ")[-1])
+			#print(line.split(" ")[-1])
 			instance._search = line.split(" ")[-1][:-1]
 
 		if line.startswith("  Solving: "):
-			print(line.split(" ")[-2])
+			#print(line.split(" ")[-2])
 			instance._time = float(line.split(" ")[-2])
 
-	table.add_instance(instance)
+	if instance._n_vertices != 0 and \
+		instance._n_agents != 0 and \
+		instance._encoding != "" and \
+		instance._search != "" and \
+		instance._time != 0:
+		table.add_instance(instance)
 
 outfile = open("table.csv", "w+")
 table.to_file(outfile)
