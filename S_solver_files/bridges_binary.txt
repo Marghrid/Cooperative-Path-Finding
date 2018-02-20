@@ -1,6 +1,0 @@
-================================================================
-reLOC 0.13-odaiba : Multirobot Solver
-(C) Copyright 2016 Pavel Surynek
-----------------------------------------------------------------
-Reading graph...
-Error: Reading graph from file ../instances/bridges.out failed (code = -1001).
