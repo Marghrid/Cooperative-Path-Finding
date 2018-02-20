@@ -45,5 +45,11 @@ CPFSolver/bin
 CPFSolver/bin/a.out
 CPFSolver/core
 
+#Solver and solution files:
+M_solutions/*
+M_stats_files/*
+S_solutions/*
+S_solver_files/*
+
 scripts/core
 **/core
