@@ -36,9 +36,9 @@ def get_makespan_limit(instance):
 # next will select the first result of walk.
 #  If none is returned, the second argument is used.
 _, _, instances = next(walk("../instances"), (None, None, []))
-_, _, handmade  = next(walk("../handmade_instances"), (None, None, []))
+#_, _, handmade  = next(walk("../handmade_instances"), (None, None, []))
 
-instances += handmade;
+#instances += handmade;
 
 system("ulimit -s 1000000")
 

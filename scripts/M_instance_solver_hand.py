@@ -22,8 +22,8 @@ for filename in instances:
 		aux += " -search binary"
 		aux += " -v 0"
 	
-		print ("../CPFSolver/bin/CPFSolver" + aux)
-		system("../CPFSolver/bin/CPFSolver" + aux)
+#		print ("../CPFSolver/bin/CPFSolver" + aux)
+#		system("../CPFSolver/bin/CPFSolver" + aux)
 	
 		aux  = " -i ../handmade_instances/"  + filename
 		aux += " -o ../M_solutions/"   + instance + "_unsat-sat.out"

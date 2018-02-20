@@ -2,7 +2,7 @@ import random
 from os import system
 
 random.seed(377)
-for size in (4, 8, 16):
+for size in (4, 8, 16, 32):
 	for robots_prob in [0.125, 0.1875, 0.25, 0.3125, 0.375, 0.4375, 0.5]:
 		for obst_prob in [0.1]:
 			n_robots = int(size * size * robots_prob);
