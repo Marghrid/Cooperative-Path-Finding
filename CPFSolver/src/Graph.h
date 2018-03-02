@@ -5,20 +5,22 @@
 #include <vector>
 #include <list>
 
-class Vertex {
-public:
-    int _id;
+//class Vertex {
+//public:
+//    int _id;
+//
+//    Vertex(int id) { _id = id; }
+//
+//    int id() const { return _id; }
+//
+//    bool operator<(const Vertex& o) const {
+//        return this->_id < o._id;
+//    }
+//
+//    friend std::ostream& operator<<(std::ostream& os, const Vertex& v);
+//};
 
-    Vertex(int id) { _id = id; }
-
-    int id() const { return _id;    }
-
-    bool operator<(const Vertex& o) const {
-        return this->_id < o._id;
-    }
-
-    friend std::ostream& operator<<(std::ostream& os, const Vertex& v);
-};
+typedef int Vertex;
 
 class Edge {
 private:
@@ -28,9 +30,6 @@ private:
 public:
     Edge(Vertex start, Vertex end)
     : _start(start), _end(end) { }
-
-    Edge(int start_id, int end_id)
-    : _start(start_id), _end(end_id) {}
 
     Vertex start() const { return _start; }
     Vertex end()   const { return _end; }
@@ -58,8 +57,6 @@ public:
     std::vector<Vertex> get_neighbours(int v_id) const;
 
     void add_edge(Vertex start, Vertex end, bool directed = false);
-
-    void add_edge(int start_id, int end_id, bool directed = false);
 
     void add_vertex(int id);
 };

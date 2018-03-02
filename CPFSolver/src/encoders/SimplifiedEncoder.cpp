@@ -66,7 +66,7 @@ void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
 
             // X vars (for each agent):
             for(int k = 0; k < mu; ++k) {
-                if(j == _instance.agent(k).initial_position().id()) {
+                if(j == _instance.agent(k).initial_position()) {
                     if(_verbose > 1)
                         std::cout << "adding clause: x(" << k << ", " << j << ", "
                             << 0 << ", " << make_xvar_id(k, j, 0) << ")" << std::endl;
@@ -97,20 +97,20 @@ void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
         for(int k = 0; k < mu; ++k) {
             for(auto &e: _instance.bidirectional_edges()) {
                 Glucose::vec<Glucose::Lit> lit_vec;
-                lit_vec.push( Glucose::mkLit(make_xvar_id(k, e.start().id(), i-1), true)  );
-                lit_vec.push( Glucose::mkLit(make_xvar_id(k, e.end().id(),   i  ), true)  );
-                lit_vec.push( Glucose::mkLit(make_evar_id(e.end().id(),      i-1), false) );
-                lit_vec.push( Glucose::mkLit(make_evar_id(e.start().id(),    i  ), false) );
+                lit_vec.push( Glucose::mkLit(make_xvar_id(k, e.start(), i-1), true)  );
+                lit_vec.push( Glucose::mkLit(make_xvar_id(k, e.end(),   i  ), true)  );
+                lit_vec.push( Glucose::mkLit(make_evar_id(e.end(),      i-1), false) );
+                lit_vec.push( Glucose::mkLit(make_evar_id(e.start(),    i  ), false) );
                 if(_verbose > 1)
                     std::cout << "adding clause: ~x(" << k << ", "
-                        << e.start().id() << ", " << i-1 << ", "
-                        << make_xvar_id(k, e.start().id(), i-1) << ") V ~x("
-                        << k << ", " << e.end().id() << ", " << i << ", "
-                        << make_xvar_id(k, e.end().id(), i  ) << ") V e("
-                        << e.end().id() << ", " << i-1 << ", "
-                        << make_evar_id(e.end().id(), i-1) << ") V e("
-                        << e.start().id() << ", " << i << ", "
-                        << make_evar_id(e.start().id(), i) <<")" << std::endl;
+                        << e.start() << ", " << i-1 << ", "
+                        << make_xvar_id(k, e.start(), i-1) << ") V ~x("
+                        << k << ", " << e.end() << ", " << i << ", "
+                        << make_xvar_id(k, e.end(), i  ) << ") V e("
+                        << e.end() << ", " << i-1 << ", "
+                        << make_evar_id(e.end(), i-1) << ") V e("
+                        << e.start() << ", " << i << ", "
+                        << make_evar_id(e.start(), i) <<")" << std::endl;
                 _solver->addClause(lit_vec);
             }
         }
@@ -165,11 +165,11 @@ void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
                         << make_xvar_id(k, j, i) << ")";
 
                 for(auto &v: _instance.get_neighbours(j)) {
-                    lit_vec.push( Glucose::mkLit(make_xvar_id(k, v.id(), i)) );
+                    lit_vec.push( Glucose::mkLit(make_xvar_id(k, v, i)) );
                     if(_verbose > 1)
                         std::cout << " V x(" << k << ", "
-                            << v.id() << ", " << i << ", "
-                            << make_xvar_id(k, v.id(), i) << ")";
+                            << v << ", " << i << ", "
+                            << make_xvar_id(k, v, i) << ")";
                 }
                 if(_verbose > 1) std::cout << std::endl;
                 _solver->addClause(lit_vec);
@@ -184,7 +184,7 @@ void SimplifiedEncoder::create_goal_assumptions(Glucose::vec<Glucose:: Lit> &ass
     
     for(int j = 0; j < _instance.n_vertices(); ++j) {
         for(int k = 0; k < _instance.n_agents(); ++k) {
-            if(j == _instance.agent(k).goal_position().id()) {
+            if(j == _instance.agent(k).goal_position()) {
                 assumptions.push(Glucose::mkLit(make_xvar_id(k, j, makespan), false) );
                 
                 if(_verbose > 1)

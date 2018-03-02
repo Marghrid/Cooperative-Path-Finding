@@ -1,12 +1,7 @@
 #include "Graph.h"
 
-std::ostream& operator<<(std::ostream& os, const Vertex& v) {
-    os << v.id();
-    return os;
-}
-
 std::ostream& operator<<(std::ostream& os, const Edge& e) {
-    os << "(" << e._start.id() << ", " << e._end.id() << ")";
+    os << "(" << e._start << ", " << e._end << ")";
     return os;
 }
 
@@ -40,28 +35,23 @@ std::vector<Vertex> Graph::get_neighbours(int v_id) const {
 }
 
 void Graph::add_edge(Vertex start, Vertex end, bool directed) {
-    if(start.id() > _n_vertices-1) {
-        add_vertex(start.id());
+    if(start > _n_vertices-1) {
+        add_vertex(start);
 
     }
-    if(end.id() > _n_vertices-1) {
-        add_vertex(end.id());
+    if(end > _n_vertices-1) {
+        add_vertex(end);
     }
 
-    //std::cout << "Adding (" << start.id() << ", " << end.id() << ")" << std::endl;
+    //std::cout << "Adding (" << start << ", " << end << ")" << std::endl;
     Edge e1(start, end);
-    _adjacencies.at(start.id()).push_back(e1);
+    _adjacencies.at(start).push_back(e1);
 
     if(!directed) {
         Edge e2(end, start);
-        _adjacencies.at(end.id()).push_back(e2);
+        _adjacencies.at(end).push_back(e2);
     }
-
     ++_n_edges;
-}
-
-void Graph::add_edge(int start_id, int end_id, bool directed) {
-    add_edge(Vertex(start_id), Vertex(end_id), directed);
 }
 
 void Graph::add_vertex(int id) {

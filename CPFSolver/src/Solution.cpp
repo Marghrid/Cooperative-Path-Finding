@@ -26,7 +26,7 @@ void Solution::add(int agent, int position)  {
 	}
 
 	for(auto &v: _instance.get_neighbours(previous)) {
-		if(v.id() == position) {
+		if(v == position) {
 			_positions.at(_current_timestep).at(agent) = position;
 			return;
 		}

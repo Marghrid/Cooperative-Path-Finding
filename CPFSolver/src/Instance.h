@@ -57,16 +57,8 @@ public:
 
     // void add_agent(Agent a) { }
 
-    void set_agent_initial_position(int aid, int initial_pos_id) {
-        _agents.at(aid).set_initial_position(initial_pos_id);
-    }
-
     void set_agent_initial_position(int aid, Vertex initial_pos) {
         _agents.at(aid).set_initial_position(initial_pos);
-    }
-
-    void set_agent_goal_position(int aid, int goal_pos_id) {
-        _agents.at(aid).set_goal_position(goal_pos_id);
     }
 
     void set_agent_goal_position(int aid, Vertex goal_pos) {
