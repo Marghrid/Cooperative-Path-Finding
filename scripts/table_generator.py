@@ -1,8 +1,20 @@
-from os import walk
+import os
+import statistics
 import sys
 
 def get_cell_values(l):
 	return (sum(l)/len(l) , len(l))
+
+def count_total_instances(instance_type, n_agents):
+	_, _, files = next(os.walk("../instances"), (None, None, []))
+	count = 0
+
+	for file in files:
+		if(file.startswith(instance_type + "_a" + str(n_agents).zfill(3))):
+			count+=1
+
+	return count
+
 
 class Instance:
 	def __init__(self, instance_type):
@@ -27,27 +39,27 @@ class Table:
 		self.instances += [instance]
 
 		if instance._instance_type not in self.diff_types:
-			print("new type: " + instance._instance_type)
+			#print("new type: " + instance._instance_type)
 			self.diff_types += [instance._instance_type]
 
 		if instance._n_agents not in self.diff_n_agents:
-			print("new n_agents: " + str(instance._n_agents))
+			#print("new n_agents: " + str(instance._n_agents))
 			self.diff_n_agents += [instance._n_agents]
 
 		if instance._encoding not in self.diff_encodings:
-			print("new encoding: " + instance._encoding)
+			#print("new encoding: " + instance._encoding)
 			self.diff_encodings += [instance._encoding]
 
 		if instance._search not in self.diff_searches:
-			print("new search: " + instance._search)
+			#print("new search: " + instance._search)
 			self.diff_searches += [instance._search]
 
 	def to_file(self, file):
 		self.diff_types = sorted(self.diff_types)
 		self.diff_n_agents = sorted(self.diff_n_agents)
 
-		print(self.diff_types)
-		print(self.diff_n_agents)
+		#print(self.diff_types)
+		#print(self.diff_n_agents)
 
 		header_line = "type of instance, \\#agents, "
 
@@ -64,6 +76,8 @@ class Table:
 			for n_agents in self.diff_n_agents:
 				line = ""
 				category_instances = []
+				total_instances = count_total_instances(instance_type, n_agents)
+
 				for instance in self.instances:
 					if instance._instance_type == instance_type and \
 						instance._n_agents == n_agents:
@@ -71,10 +85,10 @@ class Table:
 						category_instances += [instance]
 
 				line += instance_type + ", " + str(n_agents) + ", "
-				print(line)
-				print(len(category_instances))
-				print(self.diff_encodings)
-				print(self.diff_searches)
+				#print(line)
+				#print(len(category_instances))
+				#print(self.diff_encodings)
+				#print(self.diff_searches)
 				for encoding in self.diff_encodings:
 					for search in self.diff_searches:
 						times = []
@@ -84,8 +98,8 @@ class Table:
 
 								times += [instance._time]
 
-						if(len(times) > 0):
-							line += "%.4f" % (sum(times)/len(times)) + " s, " + str(len(times)) + ", "
+						if len(times) > 0:
+							line += "%.4f" % statistics.median(times) + " s, " + str(len(times)) + " of " + str(total_instances) + ", "
 						else:
 							line += "- , 0, "
 						print(line + str(times))
@@ -98,21 +112,18 @@ class Table:
 
 # -------------------------   SCRIPT    ------------------------- #
 
-directory = "."
-
+directory = "../M_stats_files"
+table_file = "table.csv"
 if(len(sys.argv) > 0):
-	directory = sys.argv[1]
+	table_file = sys.argv[1]
 
-print(directory)
-
-_, _, files = next(walk(directory), (None, None, []))
+_, _, files = next(os.walk(directory), (None, None, []))
 
 table = Table()
 
 for filename in files:
 	if filename.startswith("grid"):
-		instance_type = filename.split("_")[1]
-		instance_type = "grid" + instance_type
+		instance_type = filename.split("_")[0] + "_" + filename.split("_")[1]
 		instance = Instance(instance_type)
 
 	elif filename.startswith("hyper") :
@@ -124,7 +135,7 @@ for filename in files:
 		continue
 
 	else:
-		print(filename + " of unknown file type.")
+		#print(filename + " of unknown file type.")
 		continue
 
 	content = open(directory + "/" + filename)
@@ -155,5 +166,5 @@ for filename in files:
 		instance._time != 0:
 		table.add_instance(instance)
 
-outfile = open("table.csv", "w+")
+outfile = open(table_file, "w+")
 table.to_file(outfile)

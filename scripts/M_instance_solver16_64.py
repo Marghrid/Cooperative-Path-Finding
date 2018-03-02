@@ -1,16 +1,5 @@
 from os import system
 from os import walk
-import signal
-import sys
-
-stop = False
-
-def signal_handler(signal, frame):
-    print('You pressed Ctrl+C!')
-    stop = True
-    sys.exit(0)
-
-signal.signal(signal.SIGINT, signal_handler)
 
 # filenames will contain the names of all files in the directory intances
 # walk() will go through all files and subdirectories of instances.
@@ -24,10 +13,7 @@ _, _, instances = next(walk("../instances"), (None, None, []))
 system("ulimit -s 1000000")
 
 for filename in instances:
-	if(stop):
-		break
-
-	if filename.startswith("grid_04x04"): 
+	if filename.startswith("grid_16x16_a064"):
 		instance = filename[:-4]
 		aux  = " -i ../instances/"  + filename
 		aux += " -o ../M_solutions/"   + instance + "_binary.out"
@@ -36,10 +22,8 @@ for filename in instances:
 		aux += " -search binary"
 		aux += " -v 0"
 	
-		print ("../CPFSolver/bin/CPFSolver" + aux)
-		#system("../../runsolver/runsolver -w ../runsolver_files/" + instance + ".wat "\
-		#	+ "-v ../runsolver_files/" + instance + ".var --vsize-limit 8388608 " + "../CPFSolver/bin/CPFSolver" + aux)
-		system("../CPFSolver/bin/CPFSolver" + aux)
+#		print ("../CPFSolver/bin/CPFSolver" + aux)
+#		system("../CPFSolver/bin/CPFSolver" + aux)
 	
 		aux  = " -i ../instances/"  + filename
 		aux += " -o ../M_solutions/"   + instance + "_unsat-sat.out"
