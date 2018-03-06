@@ -17,6 +17,9 @@ CPFSolver/include/glucose/simp/lib_standard.a
 *.mk
 CPFSolver/include/glucose/mtl/template.mk
 
+#IDE stuff
+**/.idea
+
 #Specifics:
 # Surynek's code:
 reLOC-0.13-odaiba_037/src/*.o
