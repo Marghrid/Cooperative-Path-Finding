@@ -39,7 +39,7 @@ for filename in filenames:
 	commands.append(command)
 
 while counter < 20:
-	command = command.pop()
+	command = commands.pop()
 	thread = threading.Thread(target=run_in_thread, args=[command])
 	thread.start()
 	time.sleep(20)
