@@ -10,6 +10,7 @@
 CPFSolver/include/glucose/simp/lib_standard.a
 **/*.pyw
 **/__PYCACHE__
+**/__pycache__
 
 # Executables
 *.exe
