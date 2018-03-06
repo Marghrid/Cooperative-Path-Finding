@@ -7,6 +7,6 @@ def generate_command(instance_name, encoding="simplified", search="UNSAT-SAT", v
 	command += " -s " + constants.stat_files_dir + instance_name + "_" + search + ".txt"
 	command += " -e " + encoding
 	command += " -search " + search
-	command += " -v " + verbosity
+	command += " -v " + str(verbosity)
 
 	return command

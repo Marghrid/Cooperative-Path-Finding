@@ -1,9 +1,11 @@
-import threading
 import subprocess
+import threading
 import time
+import glob
 import sys
-import os
+import re
 
+import constants
 import generate_command
 
 timeout = 14400  # 2 hours
@@ -26,12 +28,13 @@ def run_in_thread(command):
 	return
 
 
-_, _, filenames = next(os.walk("../instances/" + begin + "*.cpf"), (None, None, []))
-
+filenames  = glob.glob(constants.instances_dir + begin + '*.cpf')
 commands = []
 
 for filename in filenames:
-	instance = filename[:-4]
+	instance = re.sub(constants.instances_dir, '', filename)
+	instance = re.sub('.cpf', '', instance)
+
 	command = generate_command.generate_command(instance)
 	commands.append(command)
 
