@@ -34,7 +34,6 @@ commands = []
 
 for filename in filenames:
 	instance = re.sub(constants.instances_dir, '', filename)
-	#print(filename)
 	instance = re.sub('.cpf', '', instance)
 
 	command = generate_command.generate_command(instance)
