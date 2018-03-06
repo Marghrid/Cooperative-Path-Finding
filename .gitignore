@@ -8,6 +8,7 @@
 *.o_dbg
 *.a
 CPFSolver/include/glucose/simp/lib_standard.a
+**/*.pyw
 
 # Executables
 *.exe
