@@ -6,8 +6,10 @@ import os
 
 import generate_command
 
-timeout = 14400 # 2 hours
+timeout = 14400  # 2 hours
 begin = ''
+command = ''
+counter = 0
 
 if len(sys.argv) >= 2:
 	timeout = int(sys.argv[1])
@@ -17,7 +19,10 @@ if len(sys.argv) >= 3:
 
 
 def run_in_thread(command):
+	global counter
+	counter += 1
 	subprocess.run(args=command, timeout=timeout)
+	counter -= 1
 	return
 
 
@@ -30,14 +35,7 @@ for filename in filenames:
 	command = generate_command.generate_command(instance)
 	commands.append(command)
 
-
-counter = 0
-
 while counter < 20:
-	thread = threading.Thread(target=run_in_thread, args=command)
+	thread = threading.Thread(target=run_in_thread, args=commands.pop())
 	thread.start()
 	time.sleep(20)
-
-
-
-
