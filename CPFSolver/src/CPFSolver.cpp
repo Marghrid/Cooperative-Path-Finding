@@ -21,10 +21,6 @@ Solution CPFSolver::solve() {
     bool currently_solved = _search->get_initial_solved();
     int  current_makespan = _search->get_initial_makespan();
     
-    // This variable is useful to perform a test (make sure that the solution
-    //  returned is the optimal one.)
-    int saved_makespan = 0;
-
     // break test delegated to Search
     while(!_search->break_test(currently_solved)) {
 
@@ -39,7 +35,6 @@ Solution CPFSolver::solve() {
         if(currently_solved) {
             // _solution dependent on the Encoder's interpretation of the variables.
             _solution = _encoder->get_solution(current_makespan);
-            saved_makespan = current_makespan;
         }
 
         current_makespan = _search->get_next_makespan(currently_solved);
@@ -47,7 +42,6 @@ Solution CPFSolver::solve() {
     
     if(_search->success()) {
         std::cout << "Solved for makespan = " << _search->get_successful_makespan() << std::endl;
-        std::cout << "This should be one: " << (_search->get_successful_makespan() == saved_makespan) << std::endl;
     }
 
     return _solution;
@@ -62,6 +56,7 @@ bool CPFSolver::solve_for_makespan(int makespan) {
     Glucose::vec<Glucose::Lit> assumptions;
     _encoder->create_goal_assumptions(assumptions, makespan);
 
+    bool satisfiable = false;
     // The (false, true) arguments on solve() prenvent the solver from
     //  performing optimizations which could result in variable elimination.
     //  (view lines 172-187 on include/glucose/simp/SimpSolver.cc)
@@ -70,7 +65,11 @@ bool CPFSolver::solve_for_makespan(int makespan) {
     //  of clauses containing them.
     // NOTE: I should find out how much impact these optimizations I'm
     //  preventing actually have.
-    bool satisfiable = _solver.solve(assumptions, false, true);
+    try {
+        satisfiable = _solver.solve(assumptions, false, true);
+    } catch(Glucose::OutOfMemoryException e) {
+        throw std::runtime_error("Out of memory.");
+    }
     
     if(!satisfiable) {
         ++ _n_unsat_calls;
