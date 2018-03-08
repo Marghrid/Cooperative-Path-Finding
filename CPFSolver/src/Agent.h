@@ -17,6 +17,7 @@ public:
 
     Agent(int aid, Vertex initial_pos) : Agent(aid, initial_pos, -1) { }
 
+    int    id() { return _id; }
     Vertex initial_position() { return _initial_position; }
     Vertex goal_position() { return _goal_position; }
 

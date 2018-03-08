@@ -1,3 +1,10 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                   CPF Solver    2018                        *
+ *                   Margarida Ferreira                        *
+ *                                                             *
+ * File: Graph.cpp:                                            *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 #include "Graph.h"
 
 std::ostream& operator<<(std::ostream& os, const Edge& e) {
@@ -26,9 +33,9 @@ std::vector<Edge> Graph::bidirectional_edges() const {
     return ret;
 }
 
-std::vector<Vertex> Graph::get_neighbours(int v_id) const {
+std::vector<Vertex> Graph::get_neighbours(Vertex v) const {
     std::vector<Vertex> neighbours;
-    for(auto& a: _adjacencies[v_id]) {
+    for(auto& a: _adjacencies[v]) {
         neighbours.push_back(a.end());
     }
     return neighbours;

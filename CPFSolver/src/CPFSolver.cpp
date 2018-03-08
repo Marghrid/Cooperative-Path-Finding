@@ -98,13 +98,13 @@ void CPFSolver::create_search(std::string search) {
     for(auto &a: search) a = tolower(a);
 
     if(search == "unsat-sat")
-        _search = new UNSAT_SATSearch(_max_makespan);
+        _search = new UNSAT_SATSearch(_instance.min_makespan(), _instance.max_makespan());
 
     else if(search == "sat-unsat")
-        _search = new SAT_UNSATSearch(_max_makespan);
+        _search = new SAT_UNSATSearch(_instance.min_makespan(), _instance.max_makespan());
 
     else if(search == "binary")
-      _search = new BinarySearch(_max_makespan);
+      _search = new BinarySearch(_instance.min_makespan(), _instance.max_makespan());
 
     else
         std::cerr << "Unknown search: " << search << std::endl;

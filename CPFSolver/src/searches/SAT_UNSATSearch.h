@@ -8,7 +8,7 @@ private:
 	int _count = _max_makespan;
 
 public:
-	SAT_UNSATSearch(int max_makespan) : Search(max_makespan) {}
+	SAT_UNSATSearch(int min_makespan, int max_makespan) : Search(min_makespan, max_makespan) {}
 
 	bool get_initial_solved()    override { return true; }
 	int  get_initial_makespan()  override { return _max_makespan; }

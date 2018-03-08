@@ -12,8 +12,8 @@ private:
 	int _average = std::floor((_lower_bound + _upper_bound)/8);
 
 public:
-	BinarySearch(int max_makespan) : Search(max_makespan) {}
-
+	BinarySearch(int min_makespan, int max_makespan) : Search(min_makespan, max_makespan) {}
+	
 	bool get_initial_solved()    override { return false; }
 	int  get_initial_makespan()  override { return _average; }
 

@@ -18,7 +18,6 @@ private:
 	Search  *_search;
 
 	int _verbose;
-	int _max_makespan;
 
 	int _n_sat_calls   = 0;
 	int _n_unsat_calls = 0;
@@ -26,7 +25,7 @@ private:
 public:
 	// Complete constructor:
 	CPFSolver(Instance instance, std::string encoding, std::string search, int max_makespan, int verbose)
-	: _instance(instance), _solution(instance), _solver(), _verbose(verbose), _max_makespan(max_makespan) {
+	: _instance(instance), _solution(instance), _solver(), _verbose(verbose) {
 		_solver.setIncrementalMode();
 		create_encoder(encoding);
 		create_search(search);
@@ -34,8 +33,7 @@ public:
 
 	// Constructor with default maximum makespan.
 	CPFSolver(Instance instance, std::string encoding, std::string search, int verbose = 0)
-	: _instance(instance), _solution(instance), _solver(), _verbose(verbose),
-		_max_makespan(_instance.n_vertices() * _instance.n_agents()) {
+	: _instance(instance), _solution(instance), _solver(), _verbose(verbose) {
 
 		_solver.setIncrementalMode();
 		create_encoder(encoding);
@@ -44,8 +42,7 @@ public:
 
 	// Minimal constructor. Default encoding, search, and maximum makespan.
 	CPFSolver(Instance instance, int verbose = 0)
-	: _instance(instance), _solution(instance), _solver(), _verbose(verbose),
-		_max_makespan(_instance.n_vertices() * _instance.n_agents()) {
+	: _instance(instance), _solution(instance), _solver(), _verbose(verbose) {
 
 		_solver.setIncrementalMode();
 		create_encoder("simplified");

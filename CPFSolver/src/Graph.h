@@ -1,24 +1,16 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                   CPF Solver    2018                        *
+ *                   Margarida Ferreira                        *
+ *                                                             *
+ * File: Graph.h:                                              *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 #ifndef __GRAPH__
 #define __GRAPH__
 
 #include <iostream>
 #include <vector>
 #include <list>
-
-//class Vertex {
-//public:
-//    int _id;
-//
-//    Vertex(int id) { _id = id; }
-//
-//    int id() const { return _id; }
-//
-//    bool operator<(const Vertex& o) const {
-//        return this->_id < o._id;
-//    }
-//
-//    friend std::ostream& operator<<(std::ostream& os, const Vertex& v);
-//};
 
 typedef int Vertex;
 
@@ -54,11 +46,13 @@ public:
 
     std::vector<Edge> bidirectional_edges() const;
 
-    std::vector<Vertex> get_neighbours(int v_id) const;
+    std::vector<Vertex> get_neighbours(Vertex v) const;
 
     void add_edge(Vertex start, Vertex end, bool directed = false);
 
     void add_vertex(int id);
+
+    int distance(Vertex v1, Vertex v2);
 };
 
 #endif

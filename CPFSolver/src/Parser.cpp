@@ -1,3 +1,10 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                   CPF Solver    2018                        *
+ *                   Margarida Ferreira                        *
+ *                                                             *
+ * File: Parser.cpp:                                           *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 #include "Parser.h"
 #include "Instance.h"
 

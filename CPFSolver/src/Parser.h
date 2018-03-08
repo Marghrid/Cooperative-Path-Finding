@@ -1,3 +1,10 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                   CPF Solver    2018                        *
+ *                   Margarida Ferreira                        *
+ *                                                             *
+ * File: Parser.h:                                             *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 #ifndef _PARSER_
 #define _PARSER_
 
