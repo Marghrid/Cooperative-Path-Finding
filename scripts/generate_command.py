@@ -1,6 +1,5 @@
 import constants
 
-
 def generate_command(instance_name, encoding="simplified", search="UNSAT-SAT", verbosity=0):
 	command  = ["../CPFSolver/bin/CPFSolver"]
 	command += ["-i"]      + [constants.instances_dir + instance_name + ".cpf"]

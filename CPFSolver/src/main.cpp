@@ -85,6 +85,7 @@ int main(int argc, const char **argv) {
     int verbose = 0;
 
     bool out_of_memory = false;
+    bool unknown_error = false;
 
     //double wall0;
     double cpu0;
@@ -167,8 +168,10 @@ int main(int argc, const char **argv) {
         std::string error_message(e.what());
         if (error_message.compare("Out of memory.") == 0)    
             out_of_memory = true;
-        else
+        else {
+            unknown_error = true;
             return -1;
+        }
     }
 
 	//solving_wall = std::get_wall_time() - wall0;
@@ -179,6 +182,14 @@ int main(int argc, const char **argv) {
         ofs.open(stats_file);
         ofs << "Out of memory." << std::endl;
         ofs.close();
+        out_of_memory = false;
+    }
+    else if (stats_file != "" && unknown_error) {
+        std::ofstream ofs;
+        ofs.open(stats_file);
+        ofs << "Unknown error." << std::endl;
+        ofs.close();
+        unknown_error = false;
     }
     else if ( stats_file != "" && !solution.is_empty() ) {
         std::ofstream ofs;
@@ -186,7 +197,8 @@ int main(int argc, const char **argv) {
         ofs << "Solution found." << std::endl;
         print_stats(ofs, instance, solver, encoding, search, parsing_cpu, solving_cpu);
         ofs.close();
-    } else if ( stats_file != "" ) {
+    }
+    else if ( stats_file != "" ) {
         std::ofstream ofs;
         ofs.open(stats_file);
         ofs << "No solution found." << std::endl;

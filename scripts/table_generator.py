@@ -10,8 +10,8 @@ def count_total_instances(instance_type, n_agents):
 	count = 0
 
 	for file in files:
-		if(file.startswith(instance_type + "_a" + str(n_agents).zfill(3))):
-			count+=1
+		if file.startswith(instance_type + "_a" + str(n_agents).zfill(3)):
+			count += 1
 
 	return count
 
@@ -93,8 +93,8 @@ class Table:
 					for search in self.diff_searches:
 						times = []
 						for instance in category_instances:
-							if	instance._encoding == encoding and \
-								instance._search == search:
+							if instance._encoding == encoding and \
+							        instance._search == search:
 
 								times += [instance._time]
 
@@ -103,7 +103,7 @@ class Table:
 						else:
 							line += "- , 0, "
 						print(line + str(times))
-				if(not line.endswith("- , 0, - , 0, ")):
+				if not line.endswith("- , 0, - , 0, "):
 					file.write(line[:-2] + "\n")
 
 
@@ -112,9 +112,9 @@ class Table:
 
 # -------------------------   SCRIPT    ------------------------- #
 
-directory = "../M_stats_files"
+directory = "../stat_files"
 table_file = "table.csv"
-if(len(sys.argv) > 0):
+if(len(sys.argv) > 1):
 	table_file = sys.argv[1]
 
 _, _, files = next(os.walk(directory), (None, None, []))
