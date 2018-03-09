@@ -1,3 +1,9 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                   CPF Solver    2018                        *
+ *                   Margarida Ferreira                        *
+ *                                                             *
+ * File: SAT_UNSATSearch.h:                                    *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #ifndef __SAT_UNSAT_SEARCH__
 #define __SAT_UNSAT_SEARCH__
 

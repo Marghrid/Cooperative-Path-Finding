@@ -1,3 +1,9 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                   CPF Solver    2018                        *
+ *                   Margarida Ferreira                        *
+ *                                                             *
+ * File: BinarySearch.h:                                       *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #ifndef __BINARY_SEARCH__
 #define __BINARY_SEARCH__
 

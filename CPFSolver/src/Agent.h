@@ -1,3 +1,9 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                   CPF Solver    2018                        *
+ *                   Margarida Ferreira                        *
+ *                                                             *
+ * File: Agent.h:                                              *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #ifndef __AGENT__
 #define __AGENT__
 

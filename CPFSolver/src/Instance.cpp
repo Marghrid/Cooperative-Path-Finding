@@ -62,7 +62,7 @@ int Instance::min_makespan() const {
 	int max_distance = 0;
 	int current_distance = 0;
 
-	std::cout << "Agents' distances to their goals:" << std::endl;
+	//std::cout << "Agents' distances to their goals:" << std::endl;
 
 	for(Agent a : _agents) {
 		current_distance = _environment.distance(a.initial_position(), a. goal_position() );

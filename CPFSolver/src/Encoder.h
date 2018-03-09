@@ -1,4 +1,9 @@
-/* encoder.h */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                   CPF Solver    2018                        *
+ *                   Margarida Ferreira                        *
+ *                                                             *
+ * File: Encoder.h:                                            *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #ifndef __ENCODER__
 #define __ENCODER__
 

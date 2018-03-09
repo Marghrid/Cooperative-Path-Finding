@@ -1,3 +1,9 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                   CPF Solver    2018                        *
+ *                   Margarida Ferreira                        *
+ *                                                             *
+ * File: SimplifiedEncoder.cpp:                                *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #include "SimplifiedEncoder.h"
 
 #include "Instance.h"
