@@ -6,7 +6,7 @@
 
 class BinarySearch: public Search {
 private:
-	int _lower_bound = 0;
+	int _lower_bound = _min_makespan;
 	int _upper_bound = _max_makespan + 1;
 	// I wonder if starting lower will be better:
 	int _average = std::floor((_lower_bound + _upper_bound)/8);

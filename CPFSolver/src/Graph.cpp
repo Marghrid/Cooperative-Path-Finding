@@ -7,6 +7,9 @@
 
 #include "Graph.h"
 
+#include <vector>
+#include <queue>
+
 std::ostream& operator<<(std::ostream& os, const Edge& e) {
     os << "(" << e._start << ", " << e._end << ")";
     return os;
@@ -50,7 +53,7 @@ void Graph::add_edge(Vertex start, Vertex end, bool directed) {
         add_vertex(end);
     }
 
-    //std::cout << "Adding (" << start << ", " << end << ")" << std::endl;
+    /*std::cout << "Adding (" << start << ", " << end << ")" << std::endl;*/
     Edge e1(start, end);
     _adjacencies.at(start).push_back(e1);
 
@@ -66,4 +69,31 @@ void Graph::add_vertex(int id) {
         _adjacencies.resize(id+1);
         _n_vertices = id+1;
     }
+}
+
+int Graph::distance(Vertex v1, Vertex v2) const {
+    std::vector<bool> visited(_n_vertices, false);
+    std::queue< std::pair<Vertex, int> > open;
+
+    if(v1 == v2) return 0;
+
+    visited[v1] = true;
+    open.push(std::pair<Vertex, int>(v1, 0));
+
+    while (! open.empty()) {
+        Vertex v = open.front().first;
+        int depth = open.front().second;
+         open.pop();
+
+        for(Vertex n : get_neighbours(v)) {
+            if(n == v2) return depth + 1;
+
+            if( !visited[n] ) {
+                visited[n] = true;
+                open.push(std::pair<Vertex, int>(n, depth + 1));
+            }
+        }
+    }
+
+    return -1;
 }

@@ -18,7 +18,7 @@ public:
 
 	bool break_test(bool solved) override {
 		//Returns true if search should stop:
-		return !solved || _count == -1 ;
+		return !solved || _count == _min_makespan - 1;
 	}
 
 	bool success() override { return _count != -1; }

@@ -11,7 +11,7 @@ public:
 	UNSAT_SATSearch(int min_makespan, int max_makespan) : Search(min_makespan, max_makespan) {}
 
 	bool get_initial_solved()    override { return false; }
-	int  get_initial_makespan()  override { return 0; }
+	int  get_initial_makespan()  override { return _min_makespan; }
 
 	int  get_next_makespan(bool solved)     override { return ++_count; }
 	int  get_successful_makespan() override { return _count-1; }

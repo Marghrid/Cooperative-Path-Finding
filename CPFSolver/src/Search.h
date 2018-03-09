@@ -10,9 +10,12 @@
 
 class Search {
 protected:
+	int _min_makespan;
 	int _max_makespan;
+
 public:
-	Search(int min_makespan, int max_makespan) { _max_makespan = max_makespan; }
+	Search(int min_makespan, int max_makespan) 
+	: _min_makespan(min_makespan), _max_makespan(max_makespan) {}
 	virtual ~Search() {}
 
 	virtual bool get_initial_solved() = 0;

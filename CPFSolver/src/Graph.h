@@ -52,7 +52,7 @@ public:
 
     void add_vertex(int id);
 
-    int distance(Vertex v1, Vertex v2);
+    int distance(Vertex v1, Vertex v2) const;
 };
 
 #endif

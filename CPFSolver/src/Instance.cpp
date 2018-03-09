@@ -11,6 +11,7 @@
 #include <queue>
 #include <set>
 #include <iostream>
+#include <limits>
 
 void Instance::add_agent(int a_id) {
 	if ((size_t)a_id >= _agents.size()) {
@@ -58,72 +59,19 @@ bool Instance::check() const {
 }
 
 int Instance::min_makespan() const {
-	std::vector<int> distances(n_agents(), 0);
-	std::vector<int> found(n_agents(), 0);
+	int max_distance = 0;
+	int current_distance = 0;
 
-	std::cout << "dist  " << distances.size() << std::endl;
-	std::cout << "agent " << n_agents()  << std::endl;
+	std::cout << "Agents' distances to their goals:" << std::endl;
 
-	std::cout << "found " << found.size() << std::endl;
+	for(Agent a : _agents) {
+		current_distance = _environment.distance(a.initial_position(), a. goal_position() );
+		//std::cout << "Agent " << a.id() << " distance: " << current_distance << std::endl;
+		//std::cout << "Agent " << a.id() << " initial pos: " << a.initial_position() << std::endl;
 
-	std::set<Vertex> this_level;
-	std::set<Vertex> next_level;
-
-	this_level.insert(0);
-
-	int current_depth = 0;
-	bool end = false;
-
-	while (!end) {
-
-		end = true;
-		for (Agent a : _agents) {
-			for (Vertex v : this_level) {
-				if (a.initial_position() == v && found[a.id()] == 0) {
-					distances[a.id()] = current_depth;
-					found[a.id()] = 1;
-					break;
-				}
-
-				if (a.goal_position() == v && found[a.id()] == 1) {
-					distances[a.id()] = current_depth - distances[a.id()];
-					found[a.id()] = 2;
-					break;
-				}
-
-				std::cout << "  v " << v << " id " << a.id() << "  found " << found[a.id()] << "? " << (found[a.id()] < 2) << std::endl;
-
-				if (found[a.id()] < 2) {
-					end = false;
-				}
-				
-			}
-			
-		}
-
-		for (Vertex v : this_level) {
-			for (Vertex n : _environment.get_neighbours(v) ) {
-				next_level.insert(n);
-			}
-		}
-		this_level = next_level;
-		next_level.clear();
-		++current_depth;
-		std::cout << "depth " << current_depth << std::endl;
-		//std::cout << "after clear" << std::endl;
+		if( current_distance > max_distance )
+			max_distance = current_distance;
 	}
 
-	//std::cout << "Agents' distances to their goals:" << std::endl;
-
-	
-	for (int i =0; i < n_agents(); ++i) {
-		std::cout << distances[i] << " ";
-	}
-
-	//std::cout << "after for" << std::endl;
-
-	
-	// Start in vertex 0, BFS
-
-	return 0;
+	return max_distance;
 }
