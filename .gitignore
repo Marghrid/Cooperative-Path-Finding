@@ -7,8 +7,7 @@
 *.o_opt
 *.o_dbg
 *.a
-CPFSolver/include/glucose/simp/lib_standard.a
-**/*.pyc
+*.pyc
 **/__PYCACHE__
 **/__pycache__
 
@@ -22,12 +21,10 @@ CPFSolver/include/glucose/mtl/template.mk
 
 #IDE stuff
 **/.idea
+**/cmake-build-debug
 
 #Specifics:
 # Surynek's code:
-reLOC-0.13-odaiba_037/src/*.o
-reLOC-0.13-odaiba_037/src/*.o_opt
-reLOC-0.13-odaiba_037/src/*.o_dbg
 reLOC-0.13-odaiba_037/src/autooptim_reLOC
 reLOC-0.13-odaiba_037/src/gridgen_reLOC
 reLOC-0.13-odaiba_037/src/hypergen_reLOC
@@ -48,8 +45,6 @@ reLOC-0.13-odaiba_037/src/test_multirobot_reLOC
 #CPFSolver:
 CPFSolver/build
 CPFSolver/bin
-CPFSolver/bin/a.out
-CPFSolver/core
 
 #Solver and solution files:
 M_solutions/*
@@ -57,5 +52,4 @@ M_stats_files/*
 S_solutions/*
 S_solver_files/*
 
-scripts/core
 **/core
