@@ -14,11 +14,8 @@ timeout = 600  # 10 minutes
 begin = ''
 current_command = []
 n_threads = 0
+n_max_threads = 20
 all_commands = []
-timed_out = []
-
-file = open("timed_out_commands.txt", "w+")
-file.close()
 
 if len(sys.argv) >= 2:
 	timeout = int(sys.argv[1])
@@ -29,19 +26,12 @@ if len(sys.argv) >= 3:
 
 def run_in_thread(thread_command):
 	global n_threads
-	global timed_out
 	global file
 	n_threads += 1
 	print(thread_command)
 	print(str(datetime.datetime.now()))
 
 	subprocess.run(args=thread_command)
-	# except subprocess.TimeoutExpired:
-	#	timed_out += [thread_command]
-	#	print("timeout expired on " + str(thread_command))
-	#	file = open("timedout_commands.txt", "a")
-	#	file.write("timeout expired on " + str(thread_command))
-	#	file.close()
 
 	n_threads -= 1
 	return
@@ -63,7 +53,7 @@ n_commands_total = len(all_commands)
 random.shuffle(all_commands)
 
 while len(all_commands) > 0:
-	if n_threads < 20:
+	if n_threads < n_max_threads:
 		current_command = all_commands.pop()
 		print(
 			"solving instance " + str(n_commands_total - len(all_commands)) + " out of " + str(n_commands_total) + ".")
@@ -73,7 +63,3 @@ while len(all_commands) > 0:
 		thread.start()
 	if n_threads > 16:
 		time.sleep(10)
-
-print(str(len(timed_out)) + " commands timed out:")
-for current_command in timed_out:
-	print(current_command)

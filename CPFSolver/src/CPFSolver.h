@@ -58,6 +58,8 @@ public:
     // Write SAT solver statistics to a file.
     void write_stats(std::ostream &os);
 
+    double get_solving_time() { return _solve_time; }
+
 private:
 
     // Auxiliary function. Used on solve(). Tries to find a solution for

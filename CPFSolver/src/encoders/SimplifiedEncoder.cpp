@@ -14,7 +14,7 @@ void SimplifiedEncoder::create_vars_for_makespan(int makespan) {
         ++_created_vars_makespan;
 
         for (int j = 0; j < _instance.n_vertices(); ++j) {
-            for (int k = 0; k < _instance.n_agents(); ++k) {
+            for (unsigned k = 0; k < _instance.n_agents(); ++k) {
 
                 if (_verbose > 1)
                     std::cout << "var x for agent " << k
@@ -183,7 +183,7 @@ void SimplifiedEncoder::create_goal_assumptions(Glucose::vec<Glucose::Lit> &assu
         std::cout << "Goal arragements..." << std::endl;
 
     for (int j = 0; j < _instance.n_vertices(); ++j) {
-        for (int k = 0; k < _instance.n_agents(); ++k) {
+        for (unsigned k = 0; k < _instance.n_agents(); ++k) {
             if (j == _instance.agent(k).goal_position()) {
                 assumptions.push(Glucose::mkLit(make_xvar_id(k, j, makespan), false));
 
@@ -216,7 +216,7 @@ Solution SimplifiedEncoder::get_solution(int makespan) {
     Solution sol(_instance);
     for (int i = 0; i < makespan + 1; ++i) {
         sol.increment_timestep();
-        for (int k = 0; k < _instance.n_agents(); ++k) {
+        for (unsigned k = 0; k < _instance.n_agents(); ++k) {
             for (int j = 0; j < _instance.n_vertices(); ++j) {
                 if (_solver->modelValue(make_xvar_id(k, j, i)) == l_True) {
                     if (_verbose > 1)

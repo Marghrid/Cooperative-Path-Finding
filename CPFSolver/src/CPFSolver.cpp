@@ -8,8 +8,12 @@
 #include "SAT_UNSATSearch.h"
 #include "BinarySearch.h"
 
+#include <ctime>
+
 Solution CPFSolver::solve() {
     double cpu0;
+
+    _solver.verbosity = _verbose;
 
     if (!_instance.check()) {
         //exception
@@ -43,8 +47,8 @@ Solution CPFSolver::solve() {
 
         current_makespan = _search->get_next_makespan(currently_solved);
 
-        _solve_time  = (std::clock() - cpu0) / CLOCKS_PER_SEC;
-        if(_solve_time > _timeout)
+        _solve_time += (std::clock() - cpu0) / CLOCKS_PER_SEC;
+        if(_solve_time > _timeout) 
             throw TimeoutException("Solver timed out.");
     }
 

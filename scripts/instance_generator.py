@@ -26,7 +26,7 @@ for dim in (3, 6, 9):
 		seeds = random.sample(range(1, 1000), 100)
 		for seed in seeds:
 
-			filename = get_filename.get_grid_filename(dim, n_robots, seed)
+			filename = get_filename.get_hyper_filename(dim, n_robots, seed)
 			command = get_command.get_generate_hyper_command(dim, n_robots, seed, filename)
 
 			print(command)

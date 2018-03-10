@@ -1,8 +1,10 @@
-#include <exceptions/OutOfMemoryException.h>
+#include "OutOfMemoryException.h"
 #include "TimeoutException.h"
 #include "Instance.h"
 #include "Parser.h"
 #include "CPFSolver.h"
+
+#include <ctime>
 
 void print_usage_instructions() {
     std::cout << "-------->>>  CPFSolver  <<<--------" << "\n";
@@ -49,7 +51,7 @@ void print_usage_instructions() {
 }
 
 void print_stats(std::ostream &os, Instance &instance, CPFSolver &solver,
-                 const std::string &encoding, const std::string &search, double solving_cpu) {
+                 const std::string &encoding, const std::string &search) {
 	os << "Instance size:" << "\n";
 	os << "  agents: "   << instance.n_agents() << "\n";
 	os << "  vertices: " << instance.n_vertices() << "\n";
@@ -62,7 +64,7 @@ void print_stats(std::ostream &os, Instance &instance, CPFSolver &solver,
 	os << "" << "\n";
 
     os << "CPU time:"   << "\n";
-	os << "  Solving: " << solving_cpu << " s" << "\n";
+	os << "  Solving: " << solver.get_solving_time() << " s" << "\n";
 	os << "" << std::endl;
 
     solver.write_stats(os);
@@ -82,9 +84,6 @@ int main(int argc, const char **argv) {
     bool timed_out = false;
     bool out_of_memory = false;
     bool unknown_error = false;
-
-    double cpu0;
-    double solving_cpu;
 
     // to use in strtol
     char* aux;
@@ -131,8 +130,6 @@ int main(int argc, const char **argv) {
         }
     }
 
-	cpu0  = std::clock();
-
     Parser parser(input_file);
 
     Instance instance = parser.parse();
@@ -150,8 +147,6 @@ int main(int argc, const char **argv) {
 
     Solution solution(instance);
 
-    cpu0  = std::clock();
-
     try {
         solution = solver.solve();
     } catch (const TimeoutException& e) {
@@ -161,9 +156,6 @@ int main(int argc, const char **argv) {
     } catch (const std::runtime_error& e) {
         unknown_error = true;
     }
-
-	//solving_wall = std::get_wall_time() - wall0;
-	solving_cpu  = (std::clock() - cpu0) / CLOCKS_PER_SEC;
 
     if (!stats_file.empty() && out_of_memory) {
         std::ofstream ofs;
@@ -190,14 +182,14 @@ int main(int argc, const char **argv) {
         std::ofstream ofs;
         ofs.open(stats_file);
         ofs << "Solution found." << std::endl;
-        print_stats(ofs, instance, solver, encoding, search, solving_cpu);
+        print_stats(ofs, instance, solver, encoding, search);
         ofs.close();
     }
     else if (!stats_file.empty()) {
         std::ofstream ofs;
         ofs.open(stats_file);
         ofs << "No solution found." << std::endl;
-        print_stats(ofs, instance, solver, encoding, search, solving_cpu);
+        print_stats(ofs, instance, solver, encoding, search);
         ofs.close();
     }
 
@@ -213,7 +205,7 @@ int main(int argc, const char **argv) {
     }
 
     if(verbose > 0 || stats_file.empty()) {
-    	print_stats(std::cout, instance, solver, encoding, search, solving_cpu);
+    	print_stats(std::cout, instance, solver, encoding, search);
     }
     return 0;
 }
