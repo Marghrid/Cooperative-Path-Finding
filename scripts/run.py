@@ -10,7 +10,7 @@ import re
 import constants
 import get_command
 
-timeout = 3600  # 1 hour
+timeout = 600  # 10 minutes
 begin = ''
 current_command = []
 n_threads = 0
@@ -35,14 +35,13 @@ def run_in_thread(thread_command):
 	print(thread_command)
 	print(str(datetime.datetime.now()))
 
-	try:
-		subprocess.run(args=thread_command, timeout=timeout)
-	except subprocess.TimeoutExpired:
-		timed_out += [thread_command]
-		print("timeout expired on " + str(thread_command))
-		file = open("timedout_commands.txt", "a")
-		file.write("timeout expired on " + str(thread_command))
-		file.close()
+	subprocess.run(args=thread_command)
+	# except subprocess.TimeoutExpired:
+	#	timed_out += [thread_command]
+	#	print("timeout expired on " + str(thread_command))
+	#	file = open("timedout_commands.txt", "a")
+	#	file.write("timeout expired on " + str(thread_command))
+	#	file.close()
 
 	n_threads -= 1
 	return
@@ -54,7 +53,7 @@ for filename in filenames:
 	instance = re.sub(constants.instances_dir, '', filename)
 	instance = re.sub(".cpf", '', instance)
 
-	current_command = get_command.get_solve_command(instance, search="UNSAT-SAT")
+	current_command = get_command.get_solve_command(instance, search="UNSAT-SAT", timeout=timeout)
 	all_commands.append(current_command)
 
 	current_command = get_command.get_solve_command(instance, search="binary")

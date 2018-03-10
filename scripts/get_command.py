@@ -1,7 +1,7 @@
 import constants
 
 
-def get_solve_command(instance_name, encoding="simplified", search="UNSAT-SAT", verbosity=0):
+def get_solve_command(instance_name, encoding="simplified", search="UNSAT-SAT", verbosity=0, timeout = -1):
 	command = ["../CPFSolver/bin/CPFSolver"]
 	command += ["-i"] + [constants.instances_dir + instance_name + ".cpf"]
 	command += ["-o"] + [constants.solutions_dir + instance_name + "_" + search + ".out"]
@@ -9,6 +9,7 @@ def get_solve_command(instance_name, encoding="simplified", search="UNSAT-SAT", 
 	command += ["-e"] + [encoding]
 	command += ["-search"] + [search]
 	command += ["-v "] + [str(verbosity)]
+	command += ["-t "] + [str(timeout)]
 
 	return command
 
