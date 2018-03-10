@@ -9,65 +9,66 @@
 
 class CPFSolver {
 private:
-	Instance _instance;
-	Solution _solution;
-	Glucose::SimpSolver _solver;
+    Instance _instance;
+    Solution _solution;
+    Glucose::SimpSolver _solver;
 
-	/* Strategies: */
-	Encoder *_encoder;
-	Search  *_search;
+    /* Strategies: */
+    Encoder *_encoder{};
+    Search *_search{};
 
-	int _verbose;
+    int _verbose;
+    long _max_makespan;
+    long _timeout;
 
-	int _n_sat_calls   = 0;
-	int _n_unsat_calls = 0;
+    int _n_sat_calls = 0;
+    int _n_unsat_calls = 0;
+    double _solve_time = 0;
 
 public:
-	// Complete constructor:
-	CPFSolver(Instance instance, std::string encoding, std::string search, int max_makespan, int verbose)
-	: _instance(instance), _solution(instance), _solver(), _verbose(verbose) {
-		_solver.setIncrementalMode();
-		create_encoder(encoding);
-		create_search(search);
-	}
+    // Complete constructor:
+    CPFSolver(Instance &instance, std::string &encoding, std::string &search,
+              int verbose, long timeout, int max_makespan);
 
-	// Constructor with default maximum makespan.
-	CPFSolver(Instance instance, std::string encoding, std::string search, int verbose = 0)
-	: _instance(instance), _solution(instance), _solver(), _verbose(verbose) {
+    // Constructor with default maximum makespan.
+    CPFSolver(Instance &instance, std::string &encoding, std::string &search, int verbose, long timeout)
+            : CPFSolver(instance, encoding, search, verbose, timeout, instance.max_makespan()) {}
 
-		_solver.setIncrementalMode();
-		create_encoder(encoding);
-		create_search(search);
-	}
+    // Constructor with default maximum makespan and timeout.
+    CPFSolver(Instance &instance, std::string &encoding, std::string &search, int verbose)
+            : CPFSolver(instance, encoding, search, verbose, 172800 /* 48 hours */, instance.max_makespan()) {}
 
-	// Minimal constructor. Default encoding, search, and maximum makespan.
-	CPFSolver(Instance instance, int verbose = 0)
-	: _instance(instance), _solution(instance), _solver(), _verbose(verbose) {
+    // Constructor with default maximum makespan, timeout and verbosity.
+    CPFSolver(Instance &instance, std::string &encoding, std::string &search)
+            : CPFSolver(instance, encoding, search, 0, 172800 /* 48 hours */, instance.max_makespan()) {}
 
-		_solver.setIncrementalMode();
-		create_encoder("simplified");
-		create_encoder("UNSAT-SAT");
-	}
+    // Minimal constructor. Default maximum makespan, timeout, verbosity, encoding and search.
+    CPFSolver(Instance instance, int verbose = 0)
+            : CPFSolver(instance, (std::string &) "simplified", (std::string &) "UNSAT-SAT",
+                        0, 172800 /* 48 hours */, instance.max_makespan()) {}
 
-	~CPFSolver() { delete _encoder; delete _search; }
+    ~CPFSolver() {
+        delete _encoder;
+        delete _search;
+    }
 
-	// Main contructor functionality. Provides a solution for its instance.
-	Solution solve();
+    // Main constructor functionality. Provides a solution for its instance.
+    Solution solve();
 
-	// Write SAT solver statistics to a file.
-	void write_stats(std::ostream &os);
+    // Write SAT solver statistics to a file.
+    void write_stats(std::ostream &os);
 
 private:
 
-	// Auxiliary function. Used on solve(). Tries to find a solution for
-	//   the instance with a given makespan
-	bool solve_for_makespan(int makespan);
+    // Auxiliary function. Used on solve(). Tries to find a solution for
+    //   the instance with a given makespan
+    bool solve_for_makespan(int makespan);
 
-	// Auxiliary function. Used on constructors.
-	void create_encoder(std::string encoding);
+    // Auxiliary function. Used on constructors.
+    void create_encoder(std::string &encoding);
 
-	// Auxiliary function. Used on constructors.
-	void create_search(std::string search);
+    // Auxiliary function. Used on constructors.
+    void create_search(std::string &search);
 
 };
 

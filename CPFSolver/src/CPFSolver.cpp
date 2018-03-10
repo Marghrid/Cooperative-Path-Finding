@@ -1,46 +1,54 @@
+#include "OutOfMemoryException.h"
+#include "TimeoutException.h"
 #include "CPFSolver.h"
 
-#include "Instance.h"
-#include "Solution.h"
-#include "Encoder.h"
 #include "SimplifiedEncoder.h"
 
-#include "Search.h"
 #include "UNSAT_SATSearch.h"
 #include "SAT_UNSATSearch.h"
 #include "BinarySearch.h"
 
 Solution CPFSolver::solve() {
-    if(!_instance.check()) {
+    double cpu0;
+
+    if (!_instance.check()) {
         //exception
-        std::cerr << "The instance wasn't ready to convert" << std::endl;
+        std::cerr << "The instance wasn't ready to solve" << std::endl;
     }
 
     // The initial values of currently_solved and current_makespan must be
     //  attributed by the Search, so they will be coherent with the break test.
     bool currently_solved = _search->get_initial_solved();
-    int  current_makespan = _search->get_initial_makespan();
-    
+    int current_makespan = _search->get_initial_makespan();
+
+    // Start counting time:
+    cpu0  = std::clock();
+
     // break test delegated to Search
-    while(!_search->break_test(currently_solved)) {
+    while (!_search->break_test(currently_solved)) {
 
-        // Just a precaution. Sould not happen.
-        if(current_makespan < 0) break;
+        // Just a precaution. Should not happen.
+        if (current_makespan < 0)
+            throw std::runtime_error("Unexpected makespan value");
 
-        if(_verbose > 0)
-        	std::cout << "Trying makespan = " << current_makespan << std::endl;
+        if (_verbose > 0)
+            std::cout << "Trying makespan = " << current_makespan << std::endl;
 
         currently_solved = solve_for_makespan(current_makespan);
 
-        if(currently_solved) {
+        if (currently_solved) {
             // _solution dependent on the Encoder's interpretation of the variables.
             _solution = _encoder->get_solution(current_makespan);
         }
 
         current_makespan = _search->get_next_makespan(currently_solved);
+
+        _solve_time  = (std::clock() - cpu0) / CLOCKS_PER_SEC;
+        if(_solve_time > _timeout)
+            throw TimeoutException("Solver timed out.");
     }
-    
-    if(_search->success()) {
+
+    if (_search->success()) {
         std::cout << "Solved for makespan = " << _search->get_successful_makespan() << std::endl;
     }
 
@@ -48,7 +56,7 @@ Solution CPFSolver::solve() {
 }
 
 bool CPFSolver::solve_for_makespan(int makespan) {
-    if(_verbose > 0)
+    if (_verbose > 0)
         std::cout << "Solving for makespan " << makespan << ":" << std::endl;
 
     _encoder->create_clauses_for_makespan(makespan);
@@ -67,14 +75,14 @@ bool CPFSolver::solve_for_makespan(int makespan) {
     //  preventing actually have.
     try {
         satisfiable = _solver.solve(assumptions, false, true);
-    } catch(Glucose::OutOfMemoryException e) {
-        throw std::runtime_error("Out of memory.");
+    } catch (Glucose::OutOfMemoryException e) {
+        throw OutOfMemoryException("Out of memory declared by Glucose.");
     }
-    
-    if(!satisfiable) {
-        ++ _n_unsat_calls;
-    	if(_verbose > 0)
-        	std::cout << "No solution for makespan " << makespan << std::endl;
+
+    if (!satisfiable) {
+        ++_n_unsat_calls;
+        if (_verbose > 0)
+            std::cout << "No solution for makespan " << makespan << std::endl;
         return false;
     }
 
@@ -83,27 +91,27 @@ bool CPFSolver::solve_for_makespan(int makespan) {
 }
 
 // Used on constructors.
-void CPFSolver::create_encoder(std::string encoding) {
-    for(auto &a: encoding) a = tolower(a);
+void CPFSolver::create_encoder(std::string &encoding) {
+    for (auto &a: encoding) a = tolower(a);
 
-    if(encoding == "simplified")
+    if (encoding == "simplified")
         _encoder = new SimplifiedEncoder(_instance, &_solver, _verbose);
     else
         std::cerr << "Unknown encoding: " << encoding << std::endl;
 }
 
 // Used on constructors.
-void CPFSolver::create_search(std::string search) {
-    for(auto &a: search) a = tolower(a);
+void CPFSolver::create_search(std::string &search) {
+    for (auto &a: search) a = static_cast<char>(tolower(a));
 
-    if(search == "unsat-sat")
-        _search = new UNSAT_SATSearch(_instance.min_makespan(), _instance.max_makespan());
+    if (search == "unsat-sat")
+        _search = new UNSAT_SATSearch(_instance.min_makespan(), _max_makespan);
 
-    else if(search == "sat-unsat")
-        _search = new SAT_UNSATSearch(_instance.min_makespan(), _instance.max_makespan());
+    else if (search == "sat-unsat")
+        _search = new SAT_UNSATSearch(_instance.min_makespan(), _max_makespan);
 
-    else if(search == "binary")
-      _search = new BinarySearch(_instance.min_makespan(), _instance.max_makespan());
+    else if (search == "binary")
+        _search = new BinarySearch(_instance.min_makespan(), _max_makespan);
 
     else
         std::cerr << "Unknown search: " << search << std::endl;
@@ -124,6 +132,17 @@ void CPFSolver::write_stats(std::ostream &os) {
     os << "  #propagations: " << _solver.propagations << std::endl;
     os << "" << std::endl;
 
-    os << "  #SAT calls: "   << _n_sat_calls   << std::endl;
+    os << "  #SAT calls: " << _n_sat_calls << std::endl;
     os << "  #UNSAT calls: " << _n_unsat_calls << std::endl;
+}
+
+CPFSolver::CPFSolver(Instance &instance, std::string &encoding, std::string &search,
+                     int verbose, long timeout, int max_makespan)
+        : _instance(instance), _solution(instance), _solver(),
+          _verbose(verbose), _max_makespan(max_makespan), _timeout(timeout) {
+    if(_timeout < 0)      _timeout = 172800;
+    if(_max_makespan < 0) _max_makespan = instance.max_makespan();
+    _solver.setIncrementalMode();
+    create_encoder(encoding);
+    create_search(search);
 }
