@@ -10,6 +10,17 @@
 
 #include <ctime>
 
+CPFSolver::CPFSolver(Instance &instance, std::string &encoding, std::string &search,
+                     int verbose, long timeout, int max_makespan)
+        : _instance(instance), _solution(instance), _solver(),
+          _verbose(verbose), _max_makespan(max_makespan), _timeout(timeout) {
+    if(_timeout < 0)      _timeout = 172800;
+    if(_max_makespan < 0) _max_makespan = instance.max_makespan();
+    _solver.setIncrementalMode();
+    create_encoder(encoding);
+    create_search(search);
+}
+
 Solution CPFSolver::solve() {
     double cpu0;
 
@@ -48,12 +59,19 @@ Solution CPFSolver::solve() {
         current_makespan = _search->get_next_makespan(currently_solved);
 
         _solve_time += (std::clock() - cpu0) / CLOCKS_PER_SEC;
-        if(_solve_time > _timeout) 
+        if(_solve_time > _timeout) {
+            _status = -2;
             throw TimeoutException("Solver timed out.");
+        }
     }
 
     if (_search->success()) {
+        _status = 1;
         std::cout << "Solved for makespan = " << _search->get_successful_makespan() << std::endl;
+    }
+
+    if (_solution.is_empty()) {
+        _status = 2;
     }
 
     return _solution;
@@ -80,6 +98,7 @@ bool CPFSolver::solve_for_makespan(int makespan) {
     try {
         satisfiable = _solver.solve(assumptions, false, true);
     } catch (Glucose::OutOfMemoryException e) {
+        _status = -1;
         throw OutOfMemoryException("Out of memory declared by Glucose.");
     }
 
@@ -96,7 +115,7 @@ bool CPFSolver::solve_for_makespan(int makespan) {
 
 // Used on constructors.
 void CPFSolver::create_encoder(std::string &encoding) {
-    for (auto &a: encoding) a = tolower(a);
+    for (auto &a: encoding) a = static_cast<char>(tolower(a));
 
     if (encoding == "simplified")
         _encoder = new SimplifiedEncoder(_instance, &_solver, _verbose);
@@ -121,7 +140,25 @@ void CPFSolver::create_search(std::string &search) {
         std::cerr << "Unknown search: " << search << std::endl;
 }
 
-void CPFSolver::write_stats(std::ostream &os) {
+void CPFSolver::print_status(std::ostream &os) const {
+   switch(_status) {
+       case 1:
+           os << "Solution found (SAT)." << std::endl;
+           break;
+       case 2:
+           os << "No solution (UNSAT)." << std::endl;
+           break;
+       case -1:
+           os << "Out of memory." << std::endl;
+           break;
+       case -2:
+           os << "Solver timed out." << std::endl;
+       default:
+           break;
+   }
+}
+
+void CPFSolver::print_SAT_solver_stats(std::ostream &os) const {
     os << "SAT solver:" << std::endl;
     os << "  #restarts          : " << _solver.starts << std::endl;
     os << "  #nb ReduceDB       : " << _solver.stats[Glucose::nbReduceDB] << std::endl;
@@ -140,13 +177,26 @@ void CPFSolver::write_stats(std::ostream &os) {
     os << "  #UNSAT calls: " << _n_unsat_calls << std::endl;
 }
 
-CPFSolver::CPFSolver(Instance &instance, std::string &encoding, std::string &search,
-                     int verbose, long timeout, int max_makespan)
-        : _instance(instance), _solution(instance), _solver(),
-          _verbose(verbose), _max_makespan(max_makespan), _timeout(timeout) {
-    if(_timeout < 0)      _timeout = 172800;
-    if(_max_makespan < 0) _max_makespan = instance.max_makespan();
-    _solver.setIncrementalMode();
-    create_encoder(encoding);
-    create_search(search);
+
+
+void CPFSolver::print_stats(std::ostream &os) const {
+    print_status(os);
+
+    os << "Instance size:" << "\n";
+    os << "  agents: "   << _instance.n_agents() << "\n";
+    os << "  vertices: " << _instance.n_vertices() << "\n";
+    os << "  edges: "    << _instance.n_edges() << "\n";
+    os << "" << "\n";
+
+    os << "Solver settings:" << "\n";
+    os << "  encoding: " << _encoder->name() << "\n";
+    os << "  search: "   << _search->name() << "\n";
+    os << "" << "\n";
+
+    os << "CPU time:"   << "\n";
+    os << "  Solving: " << _solve_time << " s" << "\n";
+    os << "" << std::endl;
+
+    print_SAT_solver_stats(os);
 }
+

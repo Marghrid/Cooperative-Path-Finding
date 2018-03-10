@@ -30,6 +30,9 @@ public:
     }
 
     bool success() override { return _count != -1; }
+
+    const std::string name() const override { return "SAT-UNSAT"; }
+
 };
 
 #endif

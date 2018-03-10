@@ -42,6 +42,9 @@ public:
     }
 
     bool success() override { return (_lower_bound != _max_makespan + 1); }
+
+    const std::string name() const override { return "Binary"; }
+
 };
 
 #endif

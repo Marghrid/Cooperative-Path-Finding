@@ -50,25 +50,6 @@ void print_usage_instructions() {
     std::cout << "" << std::endl;
 }
 
-void print_stats(std::ostream &os, Instance &instance, CPFSolver &solver,
-                 const std::string &encoding, const std::string &search) {
-	os << "Instance size:" << "\n";
-	os << "  agents: "   << instance.n_agents() << "\n";
-	os << "  vertices: " << instance.n_vertices() << "\n";
-	os << "  edges: "    << instance.n_edges() << "\n";
-	os << "" << "\n";
-
-	os << "Solver settings:" << "\n";
-	os << "  encoding: " << encoding << "\n";
-	os << "  search: "   << search << "\n";
-	os << "" << "\n";
-
-    os << "CPU time:"   << "\n";
-	os << "  Solving: " << solver.get_solving_time() << " s" << "\n";
-	os << "" << std::endl;
-
-    solver.write_stats(os);
-}
 
 int main(int argc, const char **argv) {
     std::string input_file = "src/example.cpf";
@@ -182,14 +163,14 @@ int main(int argc, const char **argv) {
         std::ofstream ofs;
         ofs.open(stats_file);
         ofs << "Solution found." << std::endl;
-        print_stats(ofs, instance, solver, encoding, search);
+        solver.print_stats(ofs);
         ofs.close();
     }
     else if (!stats_file.empty()) {
         std::ofstream ofs;
         ofs.open(stats_file);
         ofs << "No solution found." << std::endl;
-        print_stats(ofs, instance, solver, encoding, search);
+        solver.print_stats(ofs);
         ofs.close();
     }
 
@@ -205,7 +186,7 @@ int main(int argc, const char **argv) {
     }
 
     if(verbose > 0 || stats_file.empty()) {
-    	print_stats(std::cout, instance, solver, encoding, search);
+    	solver.print_stats(std::cout);
     }
     return 0;
 }

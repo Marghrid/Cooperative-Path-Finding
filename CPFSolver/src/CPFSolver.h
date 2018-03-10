@@ -18,12 +18,19 @@ private:
     Search *_search{};
 
     int _verbose;
-    long _max_makespan;
+    int _max_makespan;
     long _timeout;
 
     int _n_sat_calls = 0;
     int _n_unsat_calls = 0;
     double _solve_time = 0;
+
+    // 0 - Unsolved
+    // 1 - Solution found (SAT)
+    // 2 - Solution does not exist (UNSAT)
+    // -1 - Out of memory
+    // -2 - Timed out
+    short _status = 0;
 
 public:
     // Complete constructor:
@@ -55,10 +62,15 @@ public:
     // Main constructor functionality. Provides a solution for its instance.
     Solution solve();
 
-    // Write SAT solver statistics to a file.
-    void write_stats(std::ostream &os);
 
     double get_solving_time() { return _solve_time; }
+
+    // Write SAT solver statistics to a file.
+    void print_SAT_solver_stats(std::ostream &os) const;
+
+    void print_status(std::ostream &os) const;
+
+    void print_stats(std::ostream &os) const;
 
 private:
 
@@ -71,7 +83,6 @@ private:
 
     // Auxiliary function. Used on constructors.
     void create_search(std::string &search);
-
 };
 
 #endif

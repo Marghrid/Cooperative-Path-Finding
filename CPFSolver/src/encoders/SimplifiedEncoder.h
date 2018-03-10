@@ -43,6 +43,8 @@ public:
     int get_vertex_id_x(int var_id);
 
     int get_timestep_x(int var_id);
+
+	const std::string name() const override { return "Simplified"; }
 };
 
 #endif
