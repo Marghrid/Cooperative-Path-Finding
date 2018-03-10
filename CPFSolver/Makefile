@@ -1,7 +1,7 @@
 GLUCOSE_DIR ?= ../glucose
 
-FLAGS = -Wall -std=c++11
-INC   = -I src/ -I $(GLUCOSE_DIR) -I src/searches/ -I src/encoders/
+FLAGS = -Wall -std=c++14
+INC   = -I src/ -I $(GLUCOSE_DIR) -I src/searches/ -I src/encoders/ -I src/exceptions
 LIB   = -L $(GLUCOSE_DIR)/simp
 
 all: directories build/Graph.o build/Instance.o build/Solution.o build/Parser.o build/SimplifiedEncoder.o build/CPFSolver.o

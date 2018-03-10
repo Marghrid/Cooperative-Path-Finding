@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.9)
 project(CPFSolver)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
-include_directories (CPFSolver/src glucose CPFSolver/src/encoders CPFSolver/src/searches)
+include_directories (CPFSolver/src glucose CPFSolver/src/encoders CPFSolver/src/searches CPFSolver/src/exceptions)
 link_directories(glucose/simp)
 
 add_executable(CPFSolver
@@ -25,7 +25,9 @@ add_executable(CPFSolver
         CPFSolver/src/Parser.h
         CPFSolver/src/Search.h
         CPFSolver/src/Solution.cpp
-        CPFSolver/src/Solution.h)
+        CPFSolver/src/Solution.h
+        CPFSolver/src/exceptions/OutOfMemoryException.h
+        CPFSolver/src/exceptions/TimeoutException.h)
 
 target_link_libraries(CPFSolver
         _standard)
