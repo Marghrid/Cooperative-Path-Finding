@@ -9,25 +9,27 @@
 
 #include "Search.h"
 
-class UNSAT_SATSearch: public Search {
+class UNSAT_SATSearch : public Search {
 private:
-	int _count = 0;
+    int _count;
 
 public:
-	UNSAT_SATSearch(int min_makespan, int max_makespan) : Search(min_makespan, max_makespan) {}
+    UNSAT_SATSearch(int min_makespan, int max_makespan) : Search(min_makespan, max_makespan), _count(min_makespan) {}
 
-	bool get_initial_solved()    override { return false; }
-	int  get_initial_makespan()  override { return _min_makespan; }
+    bool get_initial_solved() override { return false; }
 
-	int  get_next_makespan(bool solved)     override { return ++_count; }
-	int  get_successful_makespan() override { return _count-1; }
+    int get_initial_makespan() override { return _min_makespan; }
 
-	bool break_test(bool solved) override {
-		//Returns true if search should stop:
-		return solved || _count == _max_makespan + 1 ;
-	}
+    int get_next_makespan(bool solved) override { return ++_count; }
 
-	bool success() override { return _count != _max_makespan + 1; }
+    int get_successful_makespan() override { return _count - 1; }
+
+    bool break_test(bool solved) override {
+        //Returns true if search should stop:
+        return solved || _count == _max_makespan + 1;
+    }
+
+    bool success() override { return _count != _max_makespan + 1; }
 };
 
 #endif

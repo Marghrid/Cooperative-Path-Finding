@@ -1,14 +1,14 @@
-//
-// Created by Rui Cruz Ferreira on 10/03/2018.
-//
+#ifndef __TIMEOUT_EXCEPTION__
+#define __TIMEOUT_EXCEPTION__
 
-#ifndef CPFSOLVER_TIMEOUTEXCEPTION_H
-#define CPFSOLVER_TIMEOUTEXCEPTION_H
+#include <stdexcept>
 
-
-class TimeoutException {
+class TimeoutException : public std::runtime_error {
+public:
+    TimeoutException(const char *msg)
+            : std::runtime_error(msg) { }
 
 };
 
 
-#endif //CPFSOLVER_TIMEOUTEXCEPTION_H
+#endif //__TIMEOUT_EXCEPTION__

@@ -1,14 +1,13 @@
-//
-// Created by Rui Cruz Ferreira on 10/03/2018.
-//
+#ifndef __OUT_OF_MEMORY_EXCEPTION__
+#define __OUT_OF_MEMORY_EXCEPTION__
 
-#ifndef CPFSOLVER_OUTOFMEMORYEXCEPTION_H
-#define CPFSOLVER_OUTOFMEMORYEXCEPTION_H
+#include <stdexcept>
 
-
-class OutOfMemoryException {
+class OutOfMemoryException : public std::runtime_error {
+public:
+    OutOfMemoryException(const char *msg)
+            : std::runtime_error(msg) { }
 
 };
 
-
-#endif //CPFSOLVER_OUTOFMEMORYEXCEPTION_H
+#endif //__OUT_OF_MEMORY_EXCEPTION__

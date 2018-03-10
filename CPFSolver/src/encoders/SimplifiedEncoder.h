@@ -34,9 +34,9 @@ public:
 
 public:
 
-    Glucose::Var make_xvar_id(int agent_id, int vertex_id, int timestep);
+    Glucose::Var make_xvar_id(int agent_id, int vertex_id, int timestep) const;
 
-    Glucose::Var make_evar_id(int vertex_id, int timestep);
+    Glucose::Var make_evar_id(int vertex_id, int timestep) const;
 
     int get_agent_id_x(int var_id);
 

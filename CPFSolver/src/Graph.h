@@ -21,22 +21,23 @@ private:
 
 public:
     Edge(Vertex start, Vertex end)
-    : _start(start), _end(end) { }
+            : _start(start), _end(end) {}
 
     Vertex start() const { return _start; }
-    Vertex end()   const { return _end; }
 
-    friend std::ostream& operator<<(std::ostream& os, const Edge& e);
+    Vertex end() const { return _end; }
+
+    friend std::ostream &operator<<(std::ostream &os, const Edge &e);
 };
 
 class Graph {
 private:
-    std::vector< std::list<Edge> > _adjacencies;
+    std::vector<std::list<Edge> > _adjacencies;
     int _n_vertices = 0;
     int _n_edges = 0;
 
 public:
-    Graph() {}
+    Graph() = default;
 
     int n_vertices() const { return _n_vertices; }
 

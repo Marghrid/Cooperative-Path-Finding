@@ -10,21 +10,26 @@
 
 class Search {
 protected:
-	int _min_makespan;
-	int _max_makespan;
+    int _min_makespan;
+    int _max_makespan;
 
 public:
-	Search(int min_makespan, int max_makespan) 
-	: _min_makespan(min_makespan), _max_makespan(max_makespan) {}
-	virtual ~Search() {}
+    Search(int min_makespan, int max_makespan)
+            : _min_makespan(min_makespan), _max_makespan(max_makespan) {}
 
-	virtual bool get_initial_solved() = 0;
-	virtual int  get_initial_makespan() = 0;
-	virtual int  get_next_makespan(bool solved) = 0;
-	virtual int  get_successful_makespan() = 0;
-	virtual bool break_test(bool solved) = 0;
+    virtual ~Search() = default;
 
-	virtual bool success() = 0;
+    virtual bool get_initial_solved() = 0;
+
+    virtual int get_initial_makespan() = 0;
+
+    virtual int get_next_makespan(bool solved) = 0;
+
+    virtual int get_successful_makespan() = 0;
+
+    virtual bool break_test(bool solved) = 0;
+
+    virtual bool success() = 0;
 };
 
 #endif
