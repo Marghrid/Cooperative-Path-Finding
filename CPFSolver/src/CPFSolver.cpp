@@ -194,8 +194,7 @@ void CPFSolver::print_stats(std::ostream &os) const {
     os << "  search: "   << _search->name() << "\n";
     os << "" << "\n";
 
-    os << "CPU time:"   << "\n";
-    os << "  Solving: " << _solve_time << " s" << "\n";
+    os << "Solving CPU time:" << _solve_time << " s" << "\n";
     os << "" << std::endl;
 
     print_SAT_solver_stats(os);
