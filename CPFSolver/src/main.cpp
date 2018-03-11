@@ -62,10 +62,6 @@ int main(int argc, const char **argv) {
     short verbose = 0;
     long timeout = -1;
 
-    bool timed_out = false;
-    bool out_of_memory = false;
-    bool unknown_error = false;
-
     // to use in strtol
     char* aux;
 
@@ -130,46 +126,13 @@ int main(int argc, const char **argv) {
 
     try {
         solution = solver.solve();
-    } catch (const TimeoutException& e) {
-        timed_out = true;
-    } catch (const OutOfMemoryException& e) {
-        out_of_memory = true;
     } catch (const std::runtime_error& e) {
-        unknown_error = true;
+        std::cout << e.what() << std::endl;
     }
 
-    if (!stats_file.empty() && out_of_memory) {
+    if (!stats_file.empty()) {
         std::ofstream ofs;
         ofs.open(stats_file);
-        ofs << "Out of memory." << std::endl;
-        ofs.close();
-        out_of_memory = false;
-    }
-    else if (!stats_file.empty() && timed_out) {
-        std::ofstream ofs;
-        ofs.open(stats_file);
-        ofs << "Solver timed out." << std::endl;
-        ofs.close();
-        timed_out = false;
-    }
-    else if (!stats_file.empty() && unknown_error) {
-        std::ofstream ofs;
-        ofs.open(stats_file);
-        ofs << "Unknown error." << std::endl;
-        ofs.close();
-        unknown_error = false;
-    }
-    else if (!stats_file.empty() && !solution.is_empty() ) {
-        std::ofstream ofs;
-        ofs.open(stats_file);
-        ofs << "Solution found." << std::endl;
-        solver.print_stats(ofs);
-        ofs.close();
-    }
-    else if (!stats_file.empty()) {
-        std::ofstream ofs;
-        ofs.open(stats_file);
-        ofs << "No solution found." << std::endl;
         solver.print_stats(ofs);
         ofs.close();
     }

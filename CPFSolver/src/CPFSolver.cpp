@@ -14,6 +14,7 @@ CPFSolver::CPFSolver(Instance &instance, std::string &encoding, std::string &sea
                      int verbose, long timeout, int max_makespan)
         : _instance(instance), _solution(instance), _solver(),
           _verbose(verbose), _max_makespan(max_makespan), _timeout(timeout) {
+            
     if(_timeout < 0)      _timeout = 172800;
     if(_max_makespan < 0) _max_makespan = instance.max_makespan();
     _solver.setIncrementalMode();
