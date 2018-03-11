@@ -21,7 +21,7 @@ private:
     //  position (vertex#) on each timestep.
 
     Instance _instance;
-    unsigned long _current_timestep = -1;
+    int _current_timestep = -1;
 
 public:
 
@@ -35,7 +35,7 @@ public:
         return _positions.at(timestep).at(agent);
     }
 
-    unsigned long n_timesteps() { return _positions.size(); }
+    unsigned long n_timesteps() const { return _positions.size() - 1; }
 
     bool check() const;
 

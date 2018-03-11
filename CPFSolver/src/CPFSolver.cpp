@@ -144,7 +144,7 @@ void CPFSolver::create_search(std::string &search) {
 void CPFSolver::print_status(std::ostream &os) const {
    switch(_status) {
        case 1:
-           os << "Solution found (SAT)." << std::endl;
+           os << "Solution found (SAT) for makespan " << _solution.n_timesteps() << std::endl;
            break;
        case 2:
            os << "No solution (UNSAT)." << std::endl;
