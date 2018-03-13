@@ -59,7 +59,8 @@ Solution CPFSolver::solve() {
 
         current_makespan = _search->get_next_makespan(currently_solved);
 
-        _solve_time += (std::clock() - cpu0) / CLOCKS_PER_SEC;
+        _solve_time = (std::clock() - cpu0) / CLOCKS_PER_SEC;
+
         if (_verbose > 0)
             std::cout << "Time elapsed: " << _solve_time << std::endl;
 
