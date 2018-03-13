@@ -1,12 +1,13 @@
 import os
 import statistics
+import constants
 import sys
 
 def get_cell_values(l):
 	return (sum(l)/len(l) , len(l))
 
 def count_total_instances(instance_type, n_agents):
-	_, _, files = next(os.walk("../instances"), (None, None, []))
+	_, _, files = next(os.walk(constants.instances_dir), (None, None, []))
 	count = 0
 
 	for file in files:
@@ -94,7 +95,7 @@ class Table:
 						times = []
 						for instance in category_instances:
 							if instance._encoding == encoding and \
-							        instance._search == search:
+									instance._search == search:
 
 								times += [instance._time]
 
@@ -112,7 +113,7 @@ class Table:
 
 # -------------------------   SCRIPT    ------------------------- #
 
-directory = "../stat_files"
+directory = constants.stat_files_dir
 table_file = "table.csv"
 if(len(sys.argv) > 1):
 	table_file = sys.argv[1]
@@ -140,22 +141,22 @@ for filename in files:
 
 	content = open(directory + "/" + filename)
 	for line in content:
-		if line.startswith("  vertices: "):
+		if "vertices:" in line:
 			instance._n_vertices = int(line.split(" ")[-1])
 
-		elif line.startswith("  agents: "):
+		elif "agents:" in line:
 			#print(line.split(" ")[-1])
 			instance._n_agents = int(line.split(" ")[-1])
 
-		elif line.startswith("  encoding: "):
+		elif "encoding:" in line:
 			#print(line.split(" ")[-1])
 			instance._encoding = line.split(" ")[-1][:-1]
 
-		elif line.startswith("  search: "):
+		elif "search:" in line:
 			#print(line.split(" ")[-1])
 			instance._search = line.split(" ")[-1][:-1]
 
-		if line.startswith("  Solving: "):
+		if "Solving CPU time:" in line:
 			#print(line.split(" ")[-2])
 			instance._time = float(line.split(" ")[-2])
 

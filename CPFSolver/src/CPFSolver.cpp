@@ -10,7 +10,7 @@
 
 #include <ctime>
 
-CPFSolver::CPFSolver(Instance &instance, std::string &encoding, std::string &search,
+CPFSolver::CPFSolver(Instance &instance, std::string encoding, std::string search,
                      int verbose, long timeout, int max_makespan)
         : _instance(instance), _solution(instance), _solver(),
           _verbose(verbose), _max_makespan(max_makespan), _timeout(timeout) {
@@ -60,6 +60,9 @@ Solution CPFSolver::solve() {
         current_makespan = _search->get_next_makespan(currently_solved);
 
         _solve_time += (std::clock() - cpu0) / CLOCKS_PER_SEC;
+        if (_verbose > 0)
+            std::cout << "Time elapsed: " << _solve_time << std::endl;
+
         if(_solve_time > _timeout) {
             _status = -2;
             throw TimeoutException("Solver timed out.");
@@ -115,7 +118,7 @@ bool CPFSolver::solve_for_makespan(int makespan) {
 }
 
 // Used on constructors.
-void CPFSolver::create_encoder(std::string &encoding) {
+void CPFSolver::create_encoder(std::string encoding) {
     for (auto &a: encoding) a = static_cast<char>(tolower(a));
 
     if (encoding == "simplified")
@@ -125,7 +128,7 @@ void CPFSolver::create_encoder(std::string &encoding) {
 }
 
 // Used on constructors.
-void CPFSolver::create_search(std::string &search) {
+void CPFSolver::create_search(std::string search) {
     for (auto &a: search) a = static_cast<char>(tolower(a));
 
     if (search == "unsat-sat")
@@ -194,7 +197,7 @@ void CPFSolver::print_stats(std::ostream &os) const {
     os << "  search: "   << _search->name() << "\n";
     os << "" << "\n";
 
-    os << "Solving CPU time:" << _solve_time << " s" << "\n";
+    os << "Solving CPU time: " << _solve_time << " s" << "\n";
     os << "" << std::endl;
 
     print_SAT_solver_stats(os);

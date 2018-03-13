@@ -14,8 +14,11 @@ timeout = 600  # 10 minutes
 begin = ''
 current_command = []
 n_threads = 0
-n_max_threads = 20
+n_max_threads = 24
 all_commands = []
+
+timed_out_commands = open("timed_out.txt", "w+");
+timed_out_commands.close()
 
 if len(sys.argv) >= 2:
 	timeout = int(sys.argv[1])
@@ -27,11 +30,17 @@ if len(sys.argv) >= 3:
 def run_in_thread(thread_command):
 	global n_threads
 	global file
+	global timed_out_commands
 	n_threads += 1
 	print(thread_command)
 	print(str(datetime.datetime.now()))
 
-	subprocess.run(args=thread_command)
+	try:
+		subprocess.run(args=thread_command, timeout=timeout)
+	except subprocess.TimeoutExpired:
+		timed_out_commands = open("timed_out.txt", "a")
+		timed_out_commands.write(str(datetime.datetime.now()) + " : " + str(thread_command) + "\n")
+		timed_out_commands.close()
 
 	n_threads -= 1
 	return
@@ -43,10 +52,10 @@ for filename in filenames:
 	instance = re.sub(constants.instances_dir, '', filename)
 	instance = re.sub(".cpf", '', instance)
 
-	current_command = get_command.get_solve_command(instance, search="UNSAT-SAT", timeout=timeout)
+	current_command = get_command.get_solve_command(instance, search="UNSAT-SAT", verbosity=0, timeout=timeout)
 	all_commands.append(current_command)
 
-	current_command = get_command.get_solve_command(instance, search="binary")
+	current_command = get_command.get_solve_command(instance, search="binary", verbosity=0,timeout=timeout)
 	all_commands.append(current_command)
 
 n_commands_total = len(all_commands)

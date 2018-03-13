@@ -34,19 +34,19 @@ private:
 
 public:
     // Complete constructor:
-    CPFSolver(Instance &instance, std::string &encoding, std::string &search,
+    CPFSolver(Instance &instance, std::string encoding, std::string search,
               int verbose, long timeout, int max_makespan);
 
     // Constructor with default maximum makespan.
-    CPFSolver(Instance &instance, std::string &encoding, std::string &search, int verbose, long timeout)
+    CPFSolver(Instance &instance, std::string encoding, std::string search, int verbose, long timeout)
             : CPFSolver(instance, encoding, search, verbose, timeout, instance.max_makespan()) {}
 
     // Constructor with default maximum makespan and timeout.
-    CPFSolver(Instance &instance, std::string &encoding, std::string &search, int verbose)
+    CPFSolver(Instance &instance, std::string encoding, std::string search, int verbose)
             : CPFSolver(instance, encoding, search, verbose, 172800 /* 48 hours */, instance.max_makespan()) {}
 
     // Constructor with default maximum makespan, timeout and verbosity.
-    CPFSolver(Instance &instance, std::string &encoding, std::string &search)
+    CPFSolver(Instance &instance, std::string encoding, std::string search)
             : CPFSolver(instance, encoding, search, 0, 172800 /* 48 hours */, instance.max_makespan()) {}
 
     // Minimal constructor. Default maximum makespan, timeout, verbosity, encoding and search.
@@ -79,10 +79,10 @@ private:
     bool solve_for_makespan(int makespan);
 
     // Auxiliary function. Used on constructors.
-    void create_encoder(std::string &encoding);
+    void create_encoder(std::string encoding);
 
     // Auxiliary function. Used on constructors.
-    void create_search(std::string &search);
+    void create_search(std::string search);
 };
 
 #endif
