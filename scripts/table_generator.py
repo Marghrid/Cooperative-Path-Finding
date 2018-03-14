@@ -26,6 +26,11 @@ class Instance:
 		self._encoding = ""
 		self._search = ""
 		self._time = 0
+		self._status = -1
+		# 1: solved SAT
+		# 2: solved UNSAT
+		# 3: out of memory
+		# 4: timed out
 
 class Table:
 	def __init__(self):
@@ -81,7 +86,8 @@ class Table:
 
 				for instance in self.instances:
 					if instance._instance_type == instance_type and \
-						instance._n_agents == n_agents:
+						instance._n_agents == n_agents and\
+						(instance._status == 1 or instance._status == 2):
 
 						category_instances += [instance]
 
@@ -100,7 +106,8 @@ class Table:
 								times += [instance._time]
 
 						if len(times) > 0:
-							line += "%.4f" % statistics.median(times) + " s, " + str(len(times)) + " of " + str(total_instances) + ", "
+							#line += "%.4f" % statistics.median(times) + " s, "
+							line += str(len(times)) + " of " + str(total_instances) + ", "
 						else:
 							line += "- , 0, "
 						print(line + str(times))
@@ -113,7 +120,7 @@ class Table:
 
 # -------------------------   SCRIPT    ------------------------- #
 
-directory = constants.stat_files_dir
+directory = constants.stat_files_dir 
 table_file = "table.csv"
 if(len(sys.argv) > 1):
 	table_file = sys.argv[1]
@@ -156,15 +163,24 @@ for filename in files:
 			#print(line.split(" ")[-1])
 			instance._search = line.split(" ")[-1][:-1]
 
-		if "Solving CPU time:" in line:
+		elif "CPU time:" in line:
 			#print(line.split(" ")[-2])
 			instance._time = float(line.split(" ")[-2])
+		elif "(SAT)" in line:
+			instance._status = 1
+
+		elif "(UNSAT)" in line:
+			instance._status = 2
+
+		elif "Out of memory" in line:
+			instance._status = 3
 
 	if instance._n_vertices != 0 and \
 		instance._n_agents != 0 and \
 		instance._encoding != "" and \
 		instance._search != "" and \
-		instance._time != 0:
+		instance._time != 0 and \
+		instance._status != -1:
 		table.add_instance(instance)
 
 outfile = open(table_file, "w+")

@@ -50,7 +50,7 @@ CPFSolver/bin
 instances/*
 solutions/*
 stats_files/*
-scripts/table.csv
+**/table.csv
 
 
 
