@@ -1,0 +1,26 @@
+Solution makespan:5
+Timestep 0:
+	0 # 3
+	1 # 13
+	2 # 0
+Timestep 1:
+	0 # 6
+	1 # 14
+	2 # 0
+Timestep 2:
+	0 # 10
+	1 # 14
+	2 # 0
+Timestep 3:
+	0 # 9
+	1 # 14
+	2 # 0
+Timestep 4:
+	0 # 8
+	1 # 10
+	2 # 4
+Timestep 5:
+	0 # 12
+	1 # 9
+	2 # 7
+

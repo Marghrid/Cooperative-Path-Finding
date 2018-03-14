@@ -1,0 +1,26 @@
+No solution (UNSAT).
+Instance size:
+  agents: 28
+  vertices: 53
+  edges: 77
+
+Solver settings:
+  encoding: Simplified
+  search: UNSAT-SAT
+
+Solving CPU time: 5.67648 s
+
+SAT solver:
+  #restarts          : 201
+  #nb ReduceDB       : 0
+  #nb removed Clauses: 0
+  #nb learnts DL2    : 0
+  #nb learnts size 2 : 0
+  #nb learnts size 1 : 0
+
+  #conflicts   : 201
+  #decisions   : 0
+  #propagations: 3437581
+
+  #SAT calls: 0
+  #UNSAT calls: 201

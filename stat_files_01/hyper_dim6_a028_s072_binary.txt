@@ -1,0 +1,26 @@
+Solver timed out.
+Instance size:
+  agents: 28
+  vertices: 64
+  edges: 192
+
+Solver settings:
+  encoding: Simplified
+  search: Binary
+
+Solving CPU time: 177662 s
+
+SAT solver:
+  #restarts          : 57185
+  #nb ReduceDB       : 174
+  #nb removed Clauses: 39028136
+  #nb learnts DL2    : 503
+  #nb learnts size 2 : 0
+  #nb learnts size 1 : 0
+
+  #conflicts   : 39656974
+  #decisions   : 7383910725
+  #propagations: 46757176911
+
+  #SAT calls: 7
+  #UNSAT calls: 0

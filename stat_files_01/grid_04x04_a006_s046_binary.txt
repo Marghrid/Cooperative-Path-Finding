@@ -1,0 +1,26 @@
+Solution found (SAT) for makespan 5
+Instance size:
+  agents: 6
+  vertices: 13
+  edges: 14
+
+Solver settings:
+  encoding: Simplified
+  search: Binary
+
+Solving CPU time: 0.084504 s
+
+SAT solver:
+  #restarts          : 18
+  #nb ReduceDB       : 1
+  #nb removed Clauses: 993
+  #nb learnts DL2    : 50
+  #nb learnts size 2 : 1
+  #nb learnts size 1 : 0
+
+  #conflicts   : 2154
+  #decisions   : 27975
+  #propagations: 178099
+
+  #SAT calls: 6
+  #UNSAT calls: 0

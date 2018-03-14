@@ -1,0 +1,26 @@
+Solution found (SAT) for makespan 10
+Instance size:
+  agents: 28
+  vertices: 56
+  edges: 84
+
+Solver settings:
+  encoding: Simplified
+  search: UNSAT-SAT
+
+Solving CPU time: 0.311375 s
+
+SAT solver:
+  #restarts          : 6
+  #nb ReduceDB       : 0
+  #nb removed Clauses: 0
+  #nb learnts DL2    : 14
+  #nb learnts size 2 : 4
+  #nb learnts size 1 : 0
+
+  #conflicts   : 1312
+  #decisions   : 8042
+  #propagations: 325510
+
+  #SAT calls: 1
+  #UNSAT calls: 0
