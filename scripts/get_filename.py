@@ -7,7 +7,7 @@ def get_grid_filename(x_size, y_size, n_agents, obst_prob, seed):
 
 
 def get_hyper_filename(dim, n_agents, seed):
-	filename = "hyper_dim" + str(dim)
+	filename = "hyper" + str(dim)
 	filename += "_a" + str(n_agents).zfill(3)
 	filename += "_s" + str(seed).zfill(3)
 	return filename
