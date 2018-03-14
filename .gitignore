@@ -47,9 +47,11 @@ CPFSolver/build
 CPFSolver/bin
 
 #Solver and solution files:
-M_solutions/*
-M_stats_files/*
-S_solutions/*
-S_solver_files/*
+instances/*
+solutions/*
+stats_files/*
+scripts/table.csv
+
+
 
 **/core
