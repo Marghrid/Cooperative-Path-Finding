@@ -12,15 +12,19 @@
 
 CPFSolver::CPFSolver(Instance &instance, std::string encoding, std::string search,
                      int verbose, long timeout, int max_makespan)
-        : _instance(instance), _solution(instance), _solver(),
-          _verbose(verbose), _max_makespan(max_makespan), _timeout(timeout) {
+        : _instance(instance), _solution(instance),
+          _verbose(verbose), _timeout(timeout) {
             
     if(_timeout < 0)      _timeout = 172800;
-    if(_max_makespan < 0) _max_makespan = instance.max_makespan();
+    if(max_makespan < 0)
+        _max_makespan = instance.max_makespan();
+    else
+        _max_makespan = max_makespan;
     _solver.setIncrementalMode();
     create_encoder(encoding);
     create_search(search);
 }
+
 
 Solution CPFSolver::solve() {
     double cpu0;
@@ -67,6 +71,8 @@ Solution CPFSolver::solve() {
         if(_solve_time > _timeout) {
             _status = -2;
             throw TimeoutException("Solver timed out.");
+            if(_verbose > 0)
+                std::cout << "Solver timed out." << std::endl; 
         }
     }
 
@@ -198,7 +204,7 @@ void CPFSolver::print_stats(std::ostream &os) const {
     os << "  search: "   << _search->name() << "\n";
     os << "" << "\n";
 
-    os << "Solving CPU time: " << _solve_time << " s" << "\n";
+    os << "CPU time: " << _solve_time << " s" << "\n";
     os << "" << std::endl;
 
     print_SAT_solver_stats(os);

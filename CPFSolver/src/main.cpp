@@ -118,7 +118,7 @@ int main(int argc, const char **argv) {
     std::cout << "Solving instance with encoding " << encoding
     	<< " and search " << search << "." << std::endl;
 
-    CPFSolver solver(instance, encoding, search, verbosity, timeout);
+    CPFSolver solver(instance, encoding, search, verbosity, timeout, max_makespan);
 
     Solution solution(instance);
 
