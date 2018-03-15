@@ -1,5 +1,6 @@
 import subprocess
 import threading
+import constants
 import datetime
 import random
 import time
@@ -14,13 +15,13 @@ timeout = 900  # 15 minutes
 begin = ''
 current_command = []
 n_threads = 0
-n_max_threads = 24
+n_max_threads = 28
 all_commands = []
 
-timed_out_commands_file = open("timed_out.txt", "w+");
+timed_out_commands_file = open(constants.timed_out_commands_file, "w+");
 timed_out_commands_file.close()
 
-commands_file = open("executed_commands.txt", "w+")
+commands_file = open(constants.executed_commands_file, "w+")
 commands_file.close()
 
 if len(sys.argv) >= 2:
@@ -63,8 +64,8 @@ for filename in filenames:
 	current_command = get_command.get_solve_command(instance, search="UNSAT-SAT", verbosity=0, timeout=timeout)
 	all_commands.append(current_command)
 
-	current_command = get_command.get_solve_command(instance, search="binary", verbosity=0,timeout=timeout)
-	all_commands.append(current_command)
+	#current_command = get_command.get_solve_command(instance, search="binary", verbosity=0,timeout=timeout)
+	#all_commands.append(current_command)
 
 n_commands_total = len(all_commands)
 random.shuffle(all_commands)
@@ -80,5 +81,6 @@ while len(all_commands) > 0:
 		print(str(n_threads) + " threads active.")
 		thread = threading.Thread(target=run_in_thread, args=[current_command])
 		thread.start()
-	if n_threads > 20:
+	else:
+    #if n_threads > 20:
 		time.sleep(10)
