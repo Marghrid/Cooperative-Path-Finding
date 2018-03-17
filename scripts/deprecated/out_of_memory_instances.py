@@ -6,8 +6,8 @@ for filename in filenames:
 	content = open(filename)
 	instance = re.sub(constants.stat_files_dir, '', filename)
 	for line in content:
-		if "Out of memory." in line:
+		if "Out of memory" in line:
 			print(instance)
-		elif "Unknown error." in line:
+		elif "Unknown error" in line:
 			print("unknown: " + instance)
 
