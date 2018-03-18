@@ -12,22 +12,33 @@ void Solution::add(int agent, int position) {
         _positions.at(_current_timestep).resize(agent + 1, -1);
     }
 
+    // If building the first timestep, everything is ok.
+    // Maybe check if coherent with initial arrangement on instance?
     if (_current_timestep == 0) {
         _positions.at(_current_timestep).at(agent) = position;
         return;
     }
 
+    // Else, check if the agent made a valid move.
     int previous = _positions.at(_current_timestep - 1).at(agent);
+    // Either the agent stayed at the same vertex
     if (previous == position) {
         _positions.at(_current_timestep).at(agent) = position;
         return;
     }
 
+    // Or it moved to a neighbour of that vertex.
     for (auto &v: _instance.get_neighbours(previous)) {
         if (v == position) {
             _positions.at(_current_timestep).at(agent) = position;
             return;
         }
+    }
+
+    // If this agent was left unassigned, something went wrong.
+    if( _positions.at(_current_timestep).at(agent) == -1) {
+        throw std::runtime_error("An agent was left unassigned while building" +
+            "solution. Something went wrong while solving.")
     }
 }
 
@@ -37,6 +48,7 @@ void Solution::increment_timestep() {
 }
 
 bool Solution::check() const {
+    // Is there any unassigned agent for each timestep?
     for (auto &timestep: _positions) {
         if (timestep.size() != (unsigned) _instance.n_agents())
             return false;
