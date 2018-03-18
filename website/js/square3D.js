@@ -4,7 +4,7 @@ class Square3D extends THREE.Object3D {
 	constructor(length, pos_x, pos_y, odd) {
 		super();
 		this.length = length;
-		this.height = length/4;
+		this.height = length/3;
 		this.geometry = new THREE.BoxGeometry(this.length, this.length, this.height);
 
 		this.material = board_material_e;
