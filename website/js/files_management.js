@@ -44,17 +44,17 @@ function start_reading_sol(sol_file) {
 }
 
 function refresh_button() {
-    if(cpf_file_change) {
+    //if(cpf_file_change) {
         cpf_file_change = false;
         let cpf_file = document.getElementById('cpf_file').files[0];
         start_reading_cpf(cpf_file);
-    }
+    
 
-    if(sol_file_change) {
+    //if(sol_file_change) {
         sol_file_change = false;
         let solution_file = document.getElementById('sol_file').files[0];
         start_reading_sol(solution_file);
-    }
+    
 
 }
 
@@ -68,7 +68,7 @@ function example1_button() {
 }
 
 function example2_button() {
-    get_example_file("grid_4x4_a6_o0.1_s616");
+    get_example_file("grid_04x04_a008_s928");
 }
 
 function example3_button() {
@@ -84,8 +84,13 @@ function example5_button() {
 }
 
 function example6_button() {
-    get_example_file("grid_16x16_a25_o0.1_s5");
+    get_example_file("bridges");
 }
+
+function example7_button() {
+    get_example_file("grid_08x08_a024_s849");
+}
+
 
 function get_example_file(ex_name) {
     let cpf_blob = null;
