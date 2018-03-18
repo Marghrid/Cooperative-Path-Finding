@@ -1,9 +1,11 @@
-instances_dir  = "../instances/"
-solutions_dir  = "../solutions_03/"
-stat_files_dir = "../stat_files_03/"
-exec_command = "../NonIncCPFSolver/bin/CPFSolver"
+import datetime
 
-executed_commands_file = "executed_commands_03.txt"
-timed_out_commands_file = "timed_out_03.txt"
+instances_dir  = '../instances/'
+solutions_dir  = '../solutions_04'
+stat_files_dir = '../stat_files_04'
+exec_command = '../CPFSolver/bin/CPFSolver'
 
-table_filename = "table.csv"
+executed_commands_file = 'executed_04_' + str(datetime.datetime.now()) + '.txt'
+timed_out_commands_file = 'timed_out_04_' + str(datetime.datetime.now()) + '.txt'
+
+table_filename = 'table.csv'
