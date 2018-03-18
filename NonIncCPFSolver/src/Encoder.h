@@ -33,7 +33,7 @@ public:
 
     virtual const std::string name() const = 0;
 
-    void set_solver(Glucose::SimpSolver *solver) { _solver = solver; }
+    void set_solver(Glucose::SimpSolver *solver) { free(_solver); _solver = solver; }
 };
 
 #endif

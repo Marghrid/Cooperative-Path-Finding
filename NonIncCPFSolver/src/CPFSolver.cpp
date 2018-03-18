@@ -62,11 +62,10 @@ Solution CPFSolver::solve() {
         current_makespan = _search->get_next_makespan(currently_solved);
 
         _solve_time = (std::clock() - cpu0) / CLOCKS_PER_SEC;
-
         if (_verbose > 0)
             std::cout << "Time elapsed: " << _solve_time << std::endl;
 
-        if(_solve_time > _timeout) {
+        if (_solve_time > _timeout) {
             _status = -2;
             throw TimeoutException("Solver timed out.");
             if(_verbose > 0)
@@ -91,9 +90,9 @@ bool CPFSolver::solve_for_makespan(int makespan) {
         std::cout << "Solving for makespan " << makespan << ":" << std::endl;
 
 
-    Glucose::SimpSolver solver;		// Non incremental solver
-    solver.verbosity = _verbose;
-    _encoder->set_solver(&solver);	// Non incremental solver
+    Glucose::SimpSolver* solver = new  Glucose::SimpSolver();		// Non incremental solver
+    solver->verbosity = _verbose;
+    _encoder->set_solver(solver);	// Non incremental solver
 
     _encoder->create_clauses_for_makespan(makespan);
 
@@ -110,7 +109,7 @@ bool CPFSolver::solve_for_makespan(int makespan) {
     // NOTE: I should find out how much impact these optimizations I'm
     //  preventing actually have.
     try {
-        satisfiable = solver.solve(assumptions);
+        satisfiable = solver->solve(assumptions);
     } catch (Glucose::OutOfMemoryException e) {
         _status = -1;
         throw OutOfMemoryException("Out of memory declared by Glucose.");
@@ -118,14 +117,14 @@ bool CPFSolver::solve_for_makespan(int makespan) {
                 std::cout << "Out of memory declared by Glucose." << std::endl; 
     }
 
+    ++_n_unsat_calls;
+
     if (!satisfiable) {
-        ++_n_unsat_calls;
         if (_verbose > 0)
             std::cout << "No solution for makespan " << makespan << std::endl;
         return false;
     }
 
-    ++_n_sat_calls;
     return true;
 }
 

@@ -113,14 +113,15 @@ bool CPFSolver::solve_for_makespan(int makespan) {
         throw OutOfMemoryException("Out of memory declared by Glucose.");
     }
 
+    ++_n_sat_calls;
+    
     if (!satisfiable) {
-        ++_n_unsat_calls;
         if (_verbose > 0)
             std::cout << "No solution for makespan " << makespan << std::endl;
         return false;
     }
 
-    ++_n_sat_calls;
+    
     return true;
 }
 

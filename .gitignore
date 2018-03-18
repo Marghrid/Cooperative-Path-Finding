@@ -43,8 +43,8 @@ CPFSolver/include/glucose/mtl/template.mk
 #reLOC-0.13-odaiba_037/src/test_multirobot_reLOC
 
 #CPFSolver:
-CPFSolver/build
-CPFSolver/bin
+**/build
+**/bin
 
 #Solver and solution files:
 instances/*
