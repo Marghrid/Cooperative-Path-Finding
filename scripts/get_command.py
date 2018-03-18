@@ -21,7 +21,6 @@ def get_generate_grid_command(x_size, y_size, n_robots, obst_prob, seed, filenam
 	command += ['--N-robots=' + str(n_robots)]
 	command += ['--obstacle-probability=' + str(obst_prob)]
 	command += ['--seed=' + str(seed)]
-	command += ['--distance=' + str(x_size)]
 	command += ['--multirobot-file=' + constants.instances_dir + '/' + filename + '.cpf']
 
 	return command
