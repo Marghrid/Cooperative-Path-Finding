@@ -26,7 +26,7 @@ void print_usage_instructions() {
     std::cout << "            -max|-max-makespan <max-makespan>" << "\n";
     std::cout << "              -e|-encoding     <encoding>"     << "\n";
     std::cout << "                 -search       <search>"       << "\n";
-    std::cout << "              -v|-verbose      <verbosity>"    << "\n";
+    std::cout << "              -v|-verbosity    <verbosity>"    << "\n";
     std::cout << "              -t|-timeout      <timeout>"      << "\n";
 
     std::cout << "  <input-file>:   the path to an existing CPF file."                      << "\n";
@@ -46,7 +46,7 @@ void print_usage_instructions() {
     std::cout << "  <max-makespan>: the number of vertices of the instance."                << "\n";
     std::cout << "  <encoding>: simplified."                                                << "\n";
     std::cout << "  <search>: UNSAT-SAT."                                                   << "\n";
-    std::cout << "  <verbose>: 0"                                                           << "\n";
+    std::cout << "  <verbosity>: 0"                                                           << "\n";
     std::cout << "" << std::endl;
 }
 
@@ -59,7 +59,7 @@ int main(int argc, const char **argv) {
     std::string search = "unsat-sat";
 
     long max_makespan = -1;
-    short verbose = 0;
+    short verbosity = 0;
     long timeout = -1;
 
     // to use in strtol
@@ -98,8 +98,8 @@ int main(int argc, const char **argv) {
             else if(arg == "-search") {
                 search = argv[i+1];
             }
-            else if(arg == "-v" || arg == "-verbose") {
-                verbose = static_cast<short>(strtol(argv[i + 1], &aux, 10));
+            else if(arg == "-v" || arg == "-verbosity") {
+                verbosity = static_cast<short>(strtol(argv[i + 1], &aux, 10));
             }
             else if(arg == "-t" || arg == "-timeout") {
                 timeout = strtol(argv[i+1], &aux, 10);
@@ -111,16 +111,14 @@ int main(int argc, const char **argv) {
 
     Instance instance = parser.parse();
 
-    if(verbose > 0)
+    if(verbosity > 0)
         std::cout << instance << std::endl;
 
-    if(max_makespan < 0)
-        max_makespan = instance.n_vertices() * instance.n_agents();
 
     std::cout << "Solving instance with encoding " << encoding
     	<< " and search " << search << "." << std::endl;
 
-    CPFSolver solver(instance, encoding, search, verbose, timeout);
+    CPFSolver solver(instance, encoding, search, verbosity, timeout, max_makespan);
 
     Solution solution(instance);
 
@@ -144,11 +142,11 @@ int main(int argc, const char **argv) {
 		ofs.close();
     }
 
-    if(verbose > 0 || output_file.empty()) {
+    if(verbosity > 0 || output_file.empty()) {
         std::cout << solution << std::endl;
     }
 
-    if(verbose > 0 || stats_file.empty()) {
+    if(verbosity > 0 || stats_file.empty()) {
     	solver.print_stats(std::cout);
     }
     return 0;

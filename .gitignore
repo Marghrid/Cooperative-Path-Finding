@@ -25,31 +25,33 @@ CPFSolver/include/glucose/mtl/template.mk
 
 #Specifics:
 # Surynek's code:
-reLOC-0.13-odaiba_037/src/autooptim_reLOC
-reLOC-0.13-odaiba_037/src/gridgen_reLOC
-reLOC-0.13-odaiba_037/src/hypergen_reLOC
-reLOC-0.13-odaiba_037/src/netgen_reLOC
-reLOC-0.13-odaiba_037/src/optimizer_reLOC
-reLOC-0.13-odaiba_037/src/reloc.cpp
-reLOC-0.13-odaiba_037/src/resolver_reLOC
-reLOC-0.13-odaiba_037/src/simplify_reLOC
-reLOC-0.13-odaiba_037/src/solver_reLOC
-reLOC-0.13-odaiba_037/src/test_alldiff_reLOC
-reLOC-0.13-odaiba_037/src/test_basic_reLOC
-reLOC-0.13-odaiba_037/src/test_cnf_reLOC
-reLOC-0.13-odaiba_037/src/test_complete_reLOC
-reLOC-0.13-odaiba_037/src/test_compress_reLOC
-reLOC-0.13-odaiba_037/src/test_hierarch_reLOC
-reLOC-0.13-odaiba_037/src/test_multirobot_reLOC
+#reLOC-0.13-odaiba_037/src/autooptim_reLOC
+#reLOC-0.13-odaiba_037/src/gridgen_reLOC
+#reLOC-0.13-odaiba_037/src/hypergen_reLOC
+#reLOC-0.13-odaiba_037/src/netgen_reLOC
+#reLOC-0.13-odaiba_037/src/optimizer_reLOC
+#reLOC-0.13-odaiba_037/src/reloc.cpp
+#reLOC-0.13-odaiba_037/src/resolver_reLOC
+#reLOC-0.13-odaiba_037/src/simplify_reLOC
+#reLOC-0.13-odaiba_037/src/solver_reLOC
+#reLOC-0.13-odaiba_037/src/test_alldiff_reLOC
+#reLOC-0.13-odaiba_037/src/test_basic_reLOC
+#reLOC-0.13-odaiba_037/src/test_cnf_reLOC
+#reLOC-0.13-odaiba_037/src/test_complete_reLOC
+#reLOC-0.13-odaiba_037/src/test_compress_reLOC
+#reLOC-0.13-odaiba_037/src/test_hierarch_reLOC
+#reLOC-0.13-odaiba_037/src/test_multirobot_reLOC
 
 #CPFSolver:
-CPFSolver/build
-CPFSolver/bin
+**/build
+**/bin
 
 #Solver and solution files:
-M_solutions/*
-M_stats_files/*
-S_solutions/*
-S_solver_files/*
+instances/*
+solutions/*
+stats_files/*
+**/table.csv
+
+
 
 **/core

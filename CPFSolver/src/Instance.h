@@ -68,7 +68,7 @@ public:
         _agents.at(aid).set_goal_position(goal_pos);
     }
 
-    int max_makespan() const { return n_vertices() * n_agents(); }
+    int max_makespan() const { return n_vertices() * 4; }
 
     int min_makespan() const;
 
