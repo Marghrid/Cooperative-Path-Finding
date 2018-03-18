@@ -64,11 +64,11 @@ for filename in filenames:
 	instance = re.sub(constants.instances_dir, '', filename)
 	instance = re.sub('.cpf', '', instance)
 
-	current_command = get_command.get_solve_command(instance, search='UNSAT-SAT', verbosity=0, timeout=timeout)
-	all_commands.append(current_command)
-
-	# current_command = get_command.get_solve_command(instance, search='binary', verbosity=0,timeout=timeout)
+	# current_command = get_command.get_solve_command(instance, search='UNSAT-SAT', verbosity=0, timeout=timeout)
 	# all_commands.append(current_command)
+
+	current_command = get_command.get_solve_command(instance, search='binary', verbosity=0,timeout=timeout)
+	all_commands.append(current_command)
 
 n_commands_total = len(all_commands)
 random.shuffle(all_commands)
