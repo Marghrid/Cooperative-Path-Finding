@@ -1,6 +1,6 @@
 import datetime
 
-instances_dir  = '../instances/'
+instances_dir  = '../instances'
 solutions_dir  = '../solutions_04'
 stat_files_dir = '../stat_files_04'
 exec_command = '../CPFSolver/bin/CPFSolver'

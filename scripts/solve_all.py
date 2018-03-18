@@ -58,7 +58,7 @@ def run_in_thread(thread_command):
 	return
 
 
-filenames = glob.glob(constants.instances_dir + begin + '*.cpf')
+filenames = glob.glob(constants.instances_dir + '/' + begin + '*.cpf')
 
 for filename in filenames:
 	instance = re.sub(constants.instances_dir, '', filename)
