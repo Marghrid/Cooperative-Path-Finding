@@ -11,7 +11,7 @@ import re
 import constants
 import get_command
 
-timeout = 900  # 15 minutes
+timeout = 600  # 10 minutes
 begin = ''
 current_command = []
 n_threads = 0
@@ -61,18 +61,23 @@ def run_in_thread(thread_command):
 filenames = glob.glob(constants.instances_dir + '/' + begin + '*.cpf')
 
 for filename in filenames:
-	instance = re.sub(constants.instances_dir, '', filename)
+	instance = re.sub(constants.instances_dir + '/', '', filename)
 	instance = re.sub('.cpf', '', instance)
+
+	stats = glob.glob(constants.stat_files_dir + '/' + instance + '*.txt')
+	if(len(stats) > 0):
+		# this instance is already solved in this folder
+		continue
 
 	# current_command = get_command.get_solve_command(instance, search='UNSAT-SAT', verbosity=0, timeout=timeout)
 	# all_commands.append(current_command)
 
-	current_command = get_command.get_solve_command(instance, search='binary', verbosity=0,timeout=timeout)
+	current_command = get_command.get_solve_command(instance, search='UNSAT-SAT', verbosity=0,timeout=timeout)
 	all_commands.append(current_command)
 
+print('All commands ready')
 n_commands_total = len(all_commands)
 random.shuffle(all_commands)
-
 
 
 while len(all_commands) > 0:

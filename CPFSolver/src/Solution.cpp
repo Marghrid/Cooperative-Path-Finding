@@ -34,12 +34,6 @@ void Solution::add(int agent, int position) {
             return;
         }
     }
-
-    // If this agent was left unassigned, something went wrong.
-    if( _positions.at(_current_timestep).at(agent) == -1) {
-        throw std::runtime_error("An agent was left unassigned while building" +
-            "solution. Something went wrong while solving.")
-    }
 }
 
 void Solution::increment_timestep() {

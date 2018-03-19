@@ -21,7 +21,7 @@ for size in (4, 8, 16, 32):
 				print(command)
 				subprocess.run(args=command, timeout=timeout)
 
-for dim in (3, 6, 9):
+for dim in (4, 6, 8, 10):
 	for robots_prob in [0.05, 0.25, 0.375, 0.5, 0.625, 0.75]:
 		n_robots = int(2 ** dim * robots_prob)
 		if(n_robots < 3):
