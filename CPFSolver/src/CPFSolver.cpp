@@ -111,6 +111,7 @@ bool CPFSolver::solve_for_makespan(int makespan) {
     } catch (Glucose::OutOfMemoryException e) {
         _status = -1;
         throw OutOfMemoryException("Out of memory declared by Glucose.");
+        std::cout << "Out of memory exception" << std::endl;
     }
 
     ++_n_sat_calls;
@@ -153,21 +154,21 @@ void CPFSolver::create_search(std::string search) {
 }
 
 void CPFSolver::print_status(std::ostream &os) const {
-   switch(_status) {
-       case 1:
-           os << "Solution found (SAT) for makespan " << _solution.n_timesteps() << std::endl;
-           break;
-       case 2:
-           os << "No solution (UNSAT)." << std::endl;
-           break;
-       case -1:
-           os << "Out of memory." << std::endl;
-           break;
-       case -2:
-           os << "Solver timed out." << std::endl;
-       default:
-           break;
-   }
+    switch(_status) {
+        case 1:
+            os << "Solution found (SAT) for makespan " << _solution.n_timesteps() << std::endl;
+            break;
+        case 2:
+            os << "No solution (UNSAT)." << std::endl;
+            break;
+        case -1:
+            os << "Out of memory." << std::endl;
+            break;
+        case -2:
+            os << "Solver timed out." << std::endl;
+        default:
+            break;
+    }
 }
 
 void CPFSolver::print_SAT_solver_stats(std::ostream &os) const {

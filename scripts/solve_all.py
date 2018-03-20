@@ -69,10 +69,7 @@ for filename in filenames:
 		# this instance is already solved in this folder
 		continue
 
-	# current_command = get_command.get_solve_command(instance, search='UNSAT-SAT', verbosity=0, timeout=timeout)
-	# all_commands.append(current_command)
-
-	current_command = get_command.get_solve_command(instance, search='UNSAT-SAT', verbosity=0,timeout=timeout)
+	current_command = get_command.get_solve_command(instance, search='binary', verbosity=0,timeout=timeout)
 	all_commands.append(current_command)
 
 print('All commands ready')

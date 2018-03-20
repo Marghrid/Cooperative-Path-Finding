@@ -21,7 +21,7 @@ public:
     BinarySearch(int min_makespan, int max_makespan)
             : Search(min_makespan, max_makespan) {
         
-        _average = static_cast<int>(std::floor((_lower_bound + _upper_bound) / 2));
+        _average = static_cast<int>(std::floor((_lower_bound + _upper_bound) / 8));
 
         /*_average = static_cast<int>( std::floor( std::sqrt(_upper_bound) ) );
 
