@@ -48,13 +48,15 @@ for filename in files:
 
 _, _, files = next(os.walk(constants.stat_files_dir), (None, None, []) )
 
-solution_instance = None
-solution_encoding = ""
-solution_search   = ""
-solution_CPUtime  = -1
-solution_status   = -1
 
 for filename in files:
+	solution_instance = None
+	solution_encoding = ""
+	solution_search   = ""
+	solution_CPUtime  = -1
+	solution_status   = -1
+	solution_makespan = -1
+
 	for inst in table.instances:
 		if filename.startswith(inst.filename):
 			solution_instance = inst
@@ -76,6 +78,7 @@ for filename in files:
 
 		elif "(SAT)" in line:
 			solution_status = 1
+			solution_makespan = int(line.split(" ")[-1])
 
 		elif "(UNSAT)" in line:
 			solution_status = 2
@@ -90,7 +93,7 @@ for filename in files:
 
 		continue # This is not a valid solution file
 
-	solution = Table.Solution(solution_instance, solution_encoding, solution_search, solution_CPUtime, solution_status)
+	solution = Table.Solution(solution_instance, solution_encoding, solution_search, solution_CPUtime, solution_status, solution_makespan)
 	table.add_solution(solution)
 
 table.print_to_file(table_filename)

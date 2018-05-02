@@ -56,12 +56,9 @@ system("ulimit -s 1000000")
 
 for filename in instances:
 	if stop:
-                break
-
-        if not filename.startswith("grid_04x04_a004"):
-                continue
+        break
     
-        instance = filename[:-4]
+    instance = filename[:-4]
 	aux  = " --input-file=../instances/"  + filename
 	aux += " --output-file=../S_solutions/" + instance + "_unsat-sat.out"
 	makespan_limit = get_makespan_limit(instance)

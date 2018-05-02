@@ -17,6 +17,7 @@ class Table:
 		for line in self.lines:
 			if line == new_line:
 				return
+
 		self.lines += [new_line]
 
 	def add_solution(self, solution):

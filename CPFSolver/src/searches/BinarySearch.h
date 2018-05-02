@@ -23,11 +23,11 @@ public:
         
         _average = static_cast<int>(std::floor((_lower_bound + _upper_bound) / 8));
 
-        /*_average = static_cast<int>( std::floor( std::sqrt(_upper_bound) ) );
+        //_average = static_cast<int>( std::floor( std::sqrt(_upper_bound) ) );
 
         if (_average > _min_makespan)
             _average = static_cast<int>(std::floor((_lower_bound + _upper_bound) / 2));
-*/
+
     }
 
     bool get_initial_solved() override { return false; }

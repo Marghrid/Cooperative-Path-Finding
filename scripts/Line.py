@@ -9,7 +9,7 @@ class Line:
 		self.cells = []
 		for encoding in table.diff_encodings:
 			for search in table.diff_searches:
-				cell = Cell(encoding, search)
+				cell = Cell(encoding, search, self)
 				self.cells += [cell]
 
 		#print("new Line: " + self.type + ", " + str(self.n_agents))
@@ -20,12 +20,12 @@ class Line:
 
 	def add_encoding(self, encoding):
 		for search in self.table.diff_searches:
-			cell = Cell(encoding, search)
+			cell = Cell(encoding, search, self)
 			self.cells += [cell]
 
 	def add_search(self, search):
 		for encoding in self.table.diff_encodings:
-			cell = Cell(encoding, search)
+			cell = Cell(encoding, search, self)
 			self.cells += [cell]
 
 	def add_solution(self, solution):
@@ -35,7 +35,7 @@ class Line:
 
 		# if solution belongs in one of the previously created cells, then add it to that cell
 		for cell in self.cells:
-			if cell.belongs(solution):
+			if cell.belongs(solution) and solution not in cell.solutions:
 				cell.add_solution(solution)
 				return
 
@@ -53,10 +53,19 @@ class Line:
 		line = self.type + "," + (sep-len(self.type))*" " + str(self.n_agents)
 		last_written = self.n_agents
 		for cell in self.cells:
-			line += "," + (sep-len(str(last_written)))*" " + str(cell.get_n_solved_instances()) + \
-				" of " + str(self.table.get_n_instances_of_type(self.type, self.n_agents))
-			last_written = str(cell.get_n_solved_instances()) + \
-				" of " + str(self.table.get_n_instances_of_type(self.type, self.n_agents))
+			#line += "," + (sep-len(str(last_written)))*" " + str(cell.get_n_solved_instances()) + \
+			#	" of " + str(self.table.get_n_instances_of_type(self.type, self.n_agents))
+			#last_written = str(cell.get_n_solved_instances()) + \
+			#	" of " + str(self.table.get_n_instances_of_type(self.type, self.n_agents))
+			#line += "," + (sep-len(str(last_written)))*" " + str(cell.get_median_CPUtime())
+			#last_written = str(cell.get_median_CPUtime())
+			if cell.get_average_optimal_makespan() == None:
+				continue
+
+			line += ", " + str(cell.get_n_solved_instances()) + \
+				", " + str(self.table.get_n_instances_of_type(self.type, self.n_agents)) + \
+				", " + str(float(cell.get_average_optimal_makespan()))
+
 		return line	
 
 	def __eq__(self, other):

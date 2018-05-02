@@ -56,7 +56,7 @@ bool Instance::check() const {
 }
 
 int Instance::min_makespan() const {
-    /*int max_distance = 0;
+    int max_distance = 0;
     int current_distance = 0;
 
     //std::cout << "Agents' distances to their goals:" << std::endl;
@@ -70,6 +70,5 @@ int Instance::min_makespan() const {
             max_distance = current_distance;
     }
 
-    return max_distance;*/
-    return 0;
+    return max_distance;
 }

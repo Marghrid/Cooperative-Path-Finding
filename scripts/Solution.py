@@ -1,19 +1,21 @@
 class Solution:
-	def __init__(self, instance, encoding, search, CPUtime, status):
+	def __init__(self, instance, encoding, search, CPUtime, status, makespan):
 		self.instance = instance
 		self.encoding = encoding
 		self.search   = search
 		self.CPUtime  = CPUtime
 		self.status   = status
+		self.makespan = makespan
 
 		#print("new Solution: " + self.encoding + ", " + self.search + ", " + str(self.CPUtime))
 
 	def __eq__(self, other):
 		if isinstance(self, other.__class__):
-			return self.instance == instance and \
-				self.encoding == encoding and \
-				self.search   == search and \
-				self.CPUtime  == CPUtime
+			return self.instance == other.instance and \
+				self.encoding == other.encoding and \
+				self.search   == other.search and \
+				self.CPUtime  == other.CPUtime
+
 		return False
 
 	def __ne__(self, other):
