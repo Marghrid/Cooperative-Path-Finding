@@ -52,6 +52,7 @@ solutions/*
 stats_files/*
 **/table.csv
 
-
-
 **/core
+
+# MacOS
+**/._*
