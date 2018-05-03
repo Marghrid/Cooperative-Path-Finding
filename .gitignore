@@ -56,3 +56,4 @@ stats_files/*
 
 # MacOS
 **/._*
+**/.DS_Store
