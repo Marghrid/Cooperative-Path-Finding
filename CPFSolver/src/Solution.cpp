@@ -54,12 +54,12 @@ bool Solution::check() const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Solution &sol) {
-    if(sol.is_empty()) {
+    if (sol.is_empty()) {
         os << "Empty solution!" << std::endl;
         return os;
     }
-    
-    os << "Solution makespan:" << sol._positions.size() - 1 << std::endl;
+
+    os << "Solution makespan: " << sol._positions.size() - 1 << std::endl;
     for (unsigned timestep = 0; timestep < sol._positions.size(); ++timestep) {
         os << "Timestep " << timestep << ":" << std::endl;
         for (unsigned agent = 0; agent < sol._positions.at(timestep).size(); ++agent) {

@@ -1,6 +1,6 @@
 GLUCOSE_DIR ?= ../glucose
 
-FLAGS = -Wall -std=c++14 -O3
+FLAGS = -Wall -std=c++14 -g
 INC   = -I src/ -I $(GLUCOSE_DIR) -I src/searches/ -I src/encoders/ -I src/exceptions
 LIB   = -L $(GLUCOSE_DIR)/simp
 

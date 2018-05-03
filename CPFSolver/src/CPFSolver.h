@@ -1,3 +1,10 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                   CPF Solver    2018                        *
+ *                   Margarida Ferreira                        *
+ *                                                             *
+ * File: CPFSolver.h                                           *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 #ifndef __CPFSOLVER__
 #define __CPFSOLVER__
 
@@ -14,8 +21,8 @@ private:
     Glucose::SimpSolver _solver;
 
     /* Strategies: */
-    Encoder *_encoder{};
-    Search *_search{};
+    Encoder *_encoder;
+    Search *_search;
 
     int _verbose;
     int _max_makespan;
@@ -59,7 +66,7 @@ public:
         delete _search;
     }
 
-    // Main constructor functionality. Provides a solution for its instance.
+    // Main solver functionality. Provides a solution for its instance.
     Solution solve();
 
     double get_solving_time() { return _solve_time; }

@@ -2,7 +2,7 @@
  *                   CPF Solver    2018                        *
  *                   Margarida Ferreira                        *
  *                                                             *
- * File: Instance.cpp                                          *
+ * File: Instance.h                                            *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #ifndef _INSTANCE_

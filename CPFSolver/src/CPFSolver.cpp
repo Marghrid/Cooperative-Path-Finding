@@ -1,3 +1,10 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                   CPF Solver    2018                        *
+ *                   Margarida Ferreira                        *
+ *                                                             *
+ * File: CPFSolver.cpp                                         *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 #include "OutOfMemoryException.h"
 #include "TimeoutException.h"
 #include "CPFSolver.h"
@@ -8,14 +15,12 @@
 #include "SAT_UNSATSearch.h"
 #include "BinarySearch.h"
 
-#include <ctime>
-
 CPFSolver::CPFSolver(Instance &instance, std::string encoding, std::string search,
                      int verbose, long timeout, int max_makespan)
         : _instance(instance), _solution(instance), _solver(),
           _verbose(verbose), _max_makespan(max_makespan), _timeout(timeout) {
 
-    if (_timeout < 0) _timeout = 172800;
+    if (_timeout < 0) _timeout = 3600;
     if (_max_makespan < 0) _max_makespan = instance.max_makespan();
     _solver.setIncrementalMode();
     create_encoder(encoding);
@@ -165,26 +170,6 @@ void CPFSolver::print_status(std::ostream &os) const {
     }
 }
 
-void CPFSolver::print_SAT_solver_stats(std::ostream &os) const {
-    os << "SAT solver:" << std::endl;
-    os << "  #restarts          : " << _solver.starts << std::endl;
-    os << "  #nb ReduceDB       : " << _solver.stats[Glucose::nbReduceDB] << std::endl;
-    os << "  #nb removed Clauses: " << _solver.stats[Glucose::nbRemovedClauses] << std::endl;
-    os << "  #nb learnts DL2    : " << _solver.stats[Glucose::nbDL2] << std::endl;
-    os << "  #nb learnts size 2 : " << _solver.stats[Glucose::nbBin] << std::endl;
-    os << "  #nb learnts size 1 : " << _solver.stats[Glucose::nbUn] << std::endl;
-    os << "" << std::endl;
-
-    os << "  #conflicts   : " << _solver.conflicts << std::endl;
-    os << "  #decisions   : " << _solver.decisions << std::endl;
-    os << "  #propagations: " << _solver.propagations << std::endl;
-    os << "" << std::endl;
-
-    os << "  #SAT calls: " << _n_sat_calls << std::endl;
-    os << "  #UNSAT calls: " << _n_unsat_calls << std::endl;
-}
-
-
 void CPFSolver::print_stats(std::ostream &os) const {
     print_status(os);
 
@@ -201,7 +186,4 @@ void CPFSolver::print_stats(std::ostream &os) const {
 
     os << "Solving CPU time: " << _solve_time << " s" << "\n";
     os << "" << std::endl;
-
-    print_SAT_solver_stats(os);
 }
-

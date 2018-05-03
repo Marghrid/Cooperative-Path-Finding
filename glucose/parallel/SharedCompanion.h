@@ -56,6 +56,7 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 
 #ifndef SharedCompanion_h
 #define SharedCompanion_h
+
 #include "core/SolverTypes.h"
 #include "parallel/ParallelSolver.h"
 #include "parallel/SolverCompanion.h"
@@ -63,60 +64,66 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 
 namespace Glucose {
 
-    
-class SharedCompanion : public SolverCompanion {
-    friend class MultiSolvers;
-    friend class ParallelSolver;
-public:
-	SharedCompanion(int nbThreads=0);
-	void setNbThreads(int _nbThreads); // Sets the number of threads (cannot by changed once the solver is running)
-	void newVar(bool sign);            // Adds a var (used to keep track of unary variables)
-	void printStats();                 // Printing statistics of all solvers
 
-	bool jobFinished();                // True if the job is over
-	bool IFinished(ParallelSolver *s); // returns true if you are the first solver to finish
-	bool addSolver(ParallelSolver*);   // attach a solver to accompany 
-	void addLearnt(ParallelSolver *s,Lit unary);   // Add a unary clause to share
-	bool addLearnt(ParallelSolver *s, Clause & c); // Add a clause to the shared companion, as a database manager
+    class SharedCompanion : public SolverCompanion {
+        friend class MultiSolvers;
 
-	bool getNewClause(ParallelSolver *s, int &th, vec<Lit> & nc); // gets a new interesting clause for solver s 
-	Lit getUnary(ParallelSolver *s);                              // Gets a new unary literal
-	inline ParallelSolver* winner(){return jobFinishedBy;}        // Gets the first solver that called IFinished()
+        friend class ParallelSolver;
 
- protected:
+    public:
+        SharedCompanion(int nbThreads = 0);
 
-	ClausesBuffer clausesBuffer; // A big blackboard for all threads sharing non unary clauses
-	int nbThreads;               // Number of threads
-	
-	// A set of mutex variables
-	pthread_mutex_t mutexSharedCompanion; // mutex for any high level sync between all threads (like reportf)
-	pthread_mutex_t mutexSharedClauseCompanion; // mutex for reading/writing clauses on the blackboard
-	pthread_mutex_t mutexSharedUnitCompanion; // mutex for reading/writing unit clauses on the blackboard 
+        void setNbThreads(int _nbThreads); // Sets the number of threads (cannot by changed once the solver is running)
+        void newVar(bool sign);            // Adds a var (used to keep track of unary variables)
+        void printStats();                 // Printing statistics of all solvers
+
+        bool jobFinished();                // True if the job is over
+        bool IFinished(ParallelSolver *s); // returns true if you are the first solver to finish
+        bool addSolver(ParallelSolver *);   // attach a solver to accompany
+        void addLearnt(ParallelSolver *s, Lit unary);   // Add a unary clause to share
+        bool addLearnt(ParallelSolver *s, Clause &c); // Add a clause to the shared companion, as a database manager
+
+        bool getNewClause(ParallelSolver *s, int &th, vec<Lit> &nc); // gets a new interesting clause for solver s
+        Lit getUnary(ParallelSolver *s);                              // Gets a new unary literal
+        inline ParallelSolver *
+        winner() { return jobFinishedBy; }        // Gets the first solver that called IFinished()
+
+    protected:
+
+        ClausesBuffer clausesBuffer; // A big blackboard for all threads sharing non unary clauses
+        int nbThreads;               // Number of threads
+
+        // A set of mutex variables
+        pthread_mutex_t mutexSharedCompanion; // mutex for any high level sync between all threads (like reportf)
+        pthread_mutex_t mutexSharedClauseCompanion; // mutex for reading/writing clauses on the blackboard
+        pthread_mutex_t mutexSharedUnitCompanion; // mutex for reading/writing unit clauses on the blackboard
         pthread_mutex_t mutexJobFinished;
 
-	bool bjobFinished;
-	ParallelSolver *jobFinishedBy;
-	bool panicMode;                        // panicMode means no more increasing space needed
-	lbool jobStatus;                       // globale status of the job
+        bool bjobFinished;
+        ParallelSolver *jobFinishedBy;
+        bool panicMode;                        // panicMode means no more increasing space needed
+        lbool jobStatus;                       // globale status of the job
 
         // Shared clauses are a queue of lits...
-	//	friend class wholearnt;
-	vec<int> nextUnit; // indice of next unit clause to retrieve for solver number i 
-	vec<Lit> unitLit;  // Set of unit literals found so far
+        //	friend class wholearnt;
+        vec<int> nextUnit; // indice of next unit clause to retrieve for solver number i
+        vec<Lit> unitLit;  // Set of unit literals found so far
         vec<lbool> isUnary; // sign of the unary var (if proved, or l_Undef if not)	
-	double    random_seed;
+        double random_seed;
 
-	// Returns a random float 0 <= x < 1. Seed must never be 0.
-	static inline double drand(double& seed) {
-	    seed *= 1389796;
-	    int q = (int)(seed / 2147483647);
-	    seed -= (double)q * 2147483647;
-	    return seed / 2147483647; }
+        // Returns a random float 0 <= x < 1. Seed must never be 0.
+        static inline double drand(double &seed) {
+            seed *= 1389796;
+            int q = (int) (seed / 2147483647);
+            seed -= (double) q * 2147483647;
+            return seed / 2147483647;
+        }
 
-	// Returns a random integer 0 <= x < size. Seed must never be 0.
-	static inline int irand(double& seed, int size) {
-	    return (int)(drand(seed) * size); }
+        // Returns a random integer 0 <= x < size. Seed must never be 0.
+        static inline int irand(double &seed, int size) {
+            return (int) (drand(seed) * size);
+        }
 
-};
+    };
 }
 #endif
