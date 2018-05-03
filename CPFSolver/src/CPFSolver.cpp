@@ -12,19 +12,15 @@
 
 CPFSolver::CPFSolver(Instance &instance, std::string encoding, std::string search,
                      int verbose, long timeout, int max_makespan)
-        : _instance(instance), _solution(instance),
-          _verbose(verbose), _timeout(timeout) {
-            
-    if(_timeout < 0)      _timeout = 172800;
-    if(max_makespan < 0)
-        _max_makespan = instance.max_makespan();
-    else
-        _max_makespan = max_makespan;
+        : _instance(instance), _solution(instance), _solver(),
+          _verbose(verbose), _max_makespan(max_makespan), _timeout(timeout) {
+
+    if (_timeout < 0) _timeout = 172800;
+    if (_max_makespan < 0) _max_makespan = instance.max_makespan();
     _solver.setIncrementalMode();
     create_encoder(encoding);
     create_search(search);
 }
-
 
 Solution CPFSolver::solve() {
     double cpu0;
@@ -42,7 +38,7 @@ Solution CPFSolver::solve() {
     int current_makespan = _search->get_initial_makespan();
 
     // Start counting time:
-    cpu0  = std::clock();
+    cpu0 = std::clock();
 
     // break test delegated to Search
     while (!_search->break_test(currently_solved)) {
@@ -63,16 +59,13 @@ Solution CPFSolver::solve() {
 
         current_makespan = _search->get_next_makespan(currently_solved);
 
-        _solve_time = (std::clock() - cpu0) / CLOCKS_PER_SEC;
-
         if (_verbose > 0)
             std::cout << "Time elapsed: " << _solve_time << std::endl;
 
-        if(_solve_time > _timeout) {
+
+        if (_solve_time > _timeout) {
             _status = -2;
             throw TimeoutException("Solver timed out.");
-            if(_verbose > 0)
-                std::cout << "Solver timed out." << std::endl; 
         }
     }
 
@@ -84,6 +77,8 @@ Solution CPFSolver::solve() {
     if (_solution.is_empty()) {
         _status = 2;
     }
+
+    _solve_time = (std::clock() - cpu0) / CLOCKS_PER_SEC;
 
     return _solution;
 }
@@ -98,6 +93,7 @@ bool CPFSolver::solve_for_makespan(int makespan) {
     _encoder->create_goal_assumptions(assumptions, makespan);
 
     bool satisfiable = false;
+
     // The (false, true) arguments on solve() prenvent the solver from
     //  performing optimizations which could result in variable elimination.
     //  (view lines 172-187 on include/glucose/simp/SimpSolver.cc)
@@ -111,18 +107,16 @@ bool CPFSolver::solve_for_makespan(int makespan) {
     } catch (Glucose::OutOfMemoryException e) {
         _status = -1;
         throw OutOfMemoryException("Out of memory declared by Glucose.");
-        std::cout << "Out of memory exception" << std::endl;
     }
 
-    ++_n_sat_calls;
-    
     if (!satisfiable) {
+        ++_n_unsat_calls;
         if (_verbose > 0)
             std::cout << "No solution for makespan " << makespan << std::endl;
         return false;
     }
 
-    
+    ++_n_sat_calls;
     return true;
 }
 
@@ -154,7 +148,7 @@ void CPFSolver::create_search(std::string search) {
 }
 
 void CPFSolver::print_status(std::ostream &os) const {
-    switch(_status) {
+    switch (_status) {
         case 1:
             os << "Solution found (SAT) for makespan " << _solution.n_timesteps() << std::endl;
             break;
@@ -191,22 +185,21 @@ void CPFSolver::print_SAT_solver_stats(std::ostream &os) const {
 }
 
 
-
 void CPFSolver::print_stats(std::ostream &os) const {
     print_status(os);
 
     os << "Instance size:" << "\n";
-    os << "  agents: "   << _instance.n_agents() << "\n";
+    os << "  agents: " << _instance.n_agents() << "\n";
     os << "  vertices: " << _instance.n_vertices() << "\n";
-    os << "  edges: "    << _instance.n_edges() << "\n";
+    os << "  edges: " << _instance.n_edges() << "\n";
     os << "" << "\n";
 
     os << "Solver settings:" << "\n";
     os << "  encoding: " << _encoder->name() << "\n";
-    os << "  search: "   << _search->name() << "\n";
+    os << "  search: " << _search->name() << "\n";
     os << "" << "\n";
 
-    os << "CPU time: " << _solve_time << " s" << "\n";
+    os << "Solving CPU time: " << _solve_time << " s" << "\n";
     os << "" << std::endl;
 
     print_SAT_solver_stats(os);

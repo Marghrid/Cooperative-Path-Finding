@@ -72,10 +72,6 @@ int main(int argc, const char **argv) {
     else if(argc == 2) {
         input_file = argv[1];
     }
-    else if(argc == 3) {
-        input_file = argv[1];
-        max_makespan = strtol(argv[2], &aux, 10);
-    }
     else {
         for(int i = 1; i < argc-1; ++i) {
             std::string arg(argv[i]);
