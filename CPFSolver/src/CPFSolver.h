@@ -62,7 +62,6 @@ public:
     // Main constructor functionality. Provides a solution for its instance.
     Solution solve();
 
-
     double get_solving_time() { return _solve_time; }
 
     // Write SAT solver statistics to a file.
