@@ -18,7 +18,7 @@ def get_sury_solve_command(instance_name, encoding='simplicial', search='linear-
     command = [constants.sury_exec_command]
     command += ['--input-file=' + constants.sury_instances_dir + '/' + instance_name + '.cpf']
     command += ['--output-file=' + constants.sury_solutions_dir + '/' + instance_name + '_' + search + '.out']
-    command += ['--encoding=' + encoding]
+    #command += ['--encoding=' + encoding]
     command += ['--strategy=' + search]
     command += ['--makespan-limit=' + str(makespan)]
 

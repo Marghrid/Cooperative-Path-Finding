@@ -15,7 +15,7 @@ timeout = 600  # 10 minutes
 begin = ''
 current_command = []
 n_threads = 0
-n_max_threads = 16
+n_max_threads = 28
 surynek = False
 all_commands = []
 
@@ -87,15 +87,31 @@ def run_in_thread_s(thread_command):
     print(thread_command)
 
     commands_file = open(executed_filename, 'a')
-    commands_file.write(str(datetime.datetime.now()) + ' : ' + str(thread_command) + '\n')
+    commands_file.write(str(datetime.datetime.now()) + ' : ' + thread_command[1] + ' ' + thread_command[3] + '\n')
     commands_file.close()
 
     try:
-        subprocess.run(args=thread_command, timeout=timeout * 1.2)
+        process = subprocess.run(args=thread_command, timeout=timeout * 1.2)
+
+        if process.returncode == -6:
+            segfault_file = open(segfault_filename, 'a')
+            segfault_file.write(str(datetime.datetime.now()) + ' : ' + thread_command[1] + ' ' + thread_command[3] + '\n')
+            segfault_file.close()
+            n_thread -= 1
+            return
+
     except subprocess.TimeoutExpired:
         timed_out_commands_file = open(timed_out_filename, 'a')
-        timed_out_commands_file.write(str(datetime.datetime.now()) + ' : ' + str(thread_command) + '\n')
+        timed_out_commands_file.write(str(datetime.datetime.now()) + ' : ' + thread_command[1] + ' '  + thread_command[3] + '\n')
         timed_out_commands_file.close()
+        n_thread -= 1
+        return        
+ 
+    output_filename = re.sub('--output-file=', '', thread_command[2])
+    output_file = open(output_filename, 'w')
+    output_file.write('No solution\n')
+    output_file.close
+
 
     n_threads -= 1
     return
@@ -127,7 +143,7 @@ for filename in filenames:
 all_commands.sort(reverse=True)
 n_commands_total = len(all_commands)
 print('All ' + str(n_commands_total) + ' commands ready')
-# random.shuffle(all_commands)
+#random.shuffle(all_commands)
 
 
 while len(all_commands) > 0:
