@@ -52,23 +52,22 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #define SolverConfiguration_h
 
 
+
 namespace Glucose {
 
-    class MultiSolvers;
+class MultiSolvers;
 
-    class SolverConfiguration {
+class SolverConfiguration {
 
-    public :
-        static void configure(MultiSolvers *ms, int nbsolvers);
+public : 
+    static void configure(MultiSolvers *ms, int nbsolvers);
 
-        // Special configurations
-        static void configureSAT14(MultiSolvers *ms, int nbsolvers);
-
-        void configureSAT15Adapt(MultiSolvers *ms, int nbsolvers);
-
-        void configureSAT15Default(MultiSolvers *ms, int nbsolvers);
-
-    };
+    // Special configurations
+    static void configureSAT14(MultiSolvers *ms, int nbsolvers);
+    void configureSAT15Adapt(MultiSolvers *ms, int nbsolvers);
+    void configureSAT15Default(MultiSolvers *ms, int nbsolvers);
+    
+};
 
 }
 #endif

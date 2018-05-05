@@ -5,8 +5,8 @@
 namespace Glucose {
 
     class Clone {
-    public:
-        virtual Clone *clone() const = 0;
+        public:
+          virtual Clone* clone() const = 0;
     };
 };
 

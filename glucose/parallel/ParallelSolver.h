@@ -48,121 +48,105 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
  **************************************************************************************************/
 
 #ifndef PARALLELSOLVER_H
-#define    PARALLELSOLVER_H
+#define	PARALLELSOLVER_H
 
 #include "core/SolverTypes.h"
 #include "core/Solver.h"
 #include "simp/SimpSolver.h"
 #include "parallel/SharedCompanion.h"
-
 namespace Glucose {
-
-    enum ParallelStats {
-        nbexported = coreStatsSize,
-        nbimported,
-        nbexportedunit,
-        nbimportedunit,
-        nbimportedInPurgatory,
-        nbImportedGoodClauses
-    };
+    
+   enum ParallelStats{
+       nbexported=coreStatsSize,
+       nbimported,
+       nbexportedunit,
+       nbimportedunit,
+       nbimportedInPurgatory,
+       nbImportedGoodClauses
+   } ;
 #define parallelStatsSize (coreStatsSize + 6)
-
+ 
 //=================================================================================================
     //class MultiSolvers;
     //class SolverCompanion;
-    //   class MultiSolvers;
-
-    class ParallelSolver : public SimpSolver {
-        friend class MultiSolvers;
-
-        friend class SolverCompanion;
-
-        friend class SharedCompanion;
+ //   class MultiSolvers;
+    
+class ParallelSolver : public SimpSolver {
+    friend class MultiSolvers;
+    friend class SolverCompanion;
+    friend class SharedCompanion;
 //    friend class ReasoningCompanion;
 //    friend class SolverConfiguration;
 
-    protected :
-        // Multithread :
-        int thn; // internal thread number
-        //MultiSolvers* belongsto; // Not working (due to incomplete types)
-        SharedCompanion *sharedcomp;
-        bool coreFUIP; // true if one core is specialized for branching on all FUIP
-        bool ImTheSolverFUIP;
-        pthread_mutex_t *pmfinished; // mutex on which main process may wait for... As soon as one process finishes it release the mutex
-        pthread_cond_t *pcfinished; // condition variable that says that a thread as finished
+protected : 
+          // Multithread :
+    int		thn; // internal thread number
+    //MultiSolvers* belongsto; // Not working (due to incomplete types)
+    SharedCompanion *sharedcomp;
+    bool coreFUIP; // true if one core is specialized for branching on all FUIP
+    bool ImTheSolverFUIP;
+    pthread_mutex_t *pmfinished; // mutex on which main process may wait for... As soon as one process finishes it release the mutex
+    pthread_cond_t *pcfinished; // condition variable that says that a thread as finished
 
-    public:
-        // Constructor/Destructor:
-        //
-        ParallelSolver(int threadId);
+public:
+    // Constructor/Destructor:
+    //
+    ParallelSolver(int threadId);
+    ParallelSolver(const ParallelSolver &s);
+    ~ParallelSolver();
+    
+    /**
+     * Clone function
+     */
+    virtual Clone* clone() const {
+        return  new ParallelSolver(*this);
+    }   
 
-        ParallelSolver(const ParallelSolver &s);
+    int  threadNumber  ()      const;
+    void setThreadNumber (int i);
+    void reportProgress();
+    void reportProgressArrayImports(vec<unsigned int> &totalColumns);
+    virtual void reduceDB();
+    virtual lbool         solve_                   (bool do_simp = true, bool turn_off_simp = false);
 
-        ~ParallelSolver();
-
-        /**
-         * Clone function
-         */
-        virtual Clone *clone() const {
-            return new ParallelSolver(*this);
-        }
-
-        int threadNumber() const;
-
-        void setThreadNumber(int i);
-
-        void reportProgress();
-
-        void reportProgressArrayImports(vec<unsigned int> &totalColumns);
-
-        virtual void reduceDB();
-
-        virtual lbool solve_(bool do_simp = true, bool turn_off_simp = false);
-
-        vec<Lit> importedClause; // Temporary clause used to copy each imported clause
-        unsigned int goodlimitlbd; // LBD score of the "good" clauses, locally
-        int goodlimitsize;
-        bool purgatory; // mode of operation
-        bool shareAfterProbation; // Share any none glue clause only after probation (seen 2 times in conflict analysis)
-        bool plingeling; // plingeling strategy for sharing clauses (experimental)
-        int nbTimesSeenBeforeExport;
-        // Stats front end
+    vec<Lit>    importedClause; // Temporary clause used to copy each imported clause
+    unsigned int    goodlimitlbd; // LBD score of the "good" clauses, locally
+    int    goodlimitsize;
+    bool purgatory; // mode of operation
+    bool shareAfterProbation; // Share any none glue clause only after probation (seen 2 times in conflict analysis)
+    bool plingeling; // plingeling strategy for sharing clauses (experimental)
+    int nbTimesSeenBeforeExport;
+    // Stats front end
 //    uint64_t   getNbExported() { return nbexported;}
-        //   uint64_t   getNbImported() { return nbimported;}
-        //   uint64_t   getNbExportedUnit() {return nbexportedunit;}
+ //   uint64_t   getNbImported() { return nbimported;}
+ //   uint64_t   getNbExportedUnit() {return nbexportedunit;}
+    
+    uint32_t  firstSharing, limitSharingByGoodLBD, limitSharingByFixedLimitLBD, limitSharingByFixedLimitSize;
+    uint32_t  probationByFollowingRoads, probationByFriend;
+    uint32_t  survivorLayers; // Number of layers for a common clause to survive
+    bool dontExportDirectReusedClauses ; // When true, directly reused clauses are not exported
+    uint64_t nbNotExportedBecauseDirectlyReused;
+    
+    
+    vec<uint32_t> goodImportsFromThreads; // Stats of good importations from other threads
 
-        uint32_t firstSharing, limitSharingByGoodLBD, limitSharingByFixedLimitLBD, limitSharingByFixedLimitSize;
-        uint32_t probationByFollowingRoads, probationByFriend;
-        uint32_t survivorLayers; // Number of layers for a common clause to survive
-        bool dontExportDirectReusedClauses; // When true, directly reused clauses are not exported
-        uint64_t nbNotExportedBecauseDirectlyReused;
+    virtual void parallelImportClauseDuringConflictAnalysis(Clause &c,CRef confl);
+    virtual bool parallelImportClauses(); // true if the empty clause was received
+    virtual void parallelImportUnaryClauses();
+    virtual void parallelExportUnaryClause(Lit p);
+    virtual void parallelExportClauseDuringSearch(Clause &c);
+    virtual bool parallelJobIsFinished();
+    virtual bool panicModeIsEnabled();
+ 
+    bool shareClause(Clause & c); // true if the clause was succesfully sent
 
+    
 
-        vec<uint32_t> goodImportsFromThreads; // Stats of good importations from other threads
-
-        virtual void parallelImportClauseDuringConflictAnalysis(Clause &c, CRef confl);
-
-        virtual bool parallelImportClauses(); // true if the empty clause was received
-        virtual void parallelImportUnaryClauses();
-
-        virtual void parallelExportUnaryClause(Lit p);
-
-        virtual void parallelExportClauseDuringSearch(Clause &c);
-
-        virtual bool parallelJobIsFinished();
-
-        virtual bool panicModeIsEnabled();
-
-        bool shareClause(Clause &c); // true if the clause was succesfully sent
-
+};
 
 
-    };
-
-
-    inline int ParallelSolver::threadNumber() const { return thn; }
-
-    inline void ParallelSolver::setThreadNumber(int i) { thn = i; }
+    inline int      ParallelSolver::threadNumber  ()      const   {return thn;}
+    inline void     ParallelSolver::setThreadNumber (int i)       {thn = i;}
 }
-#endif    /* PARALLELSOLVER_H */
+#endif	/* PARALLELSOLVER_H */
 

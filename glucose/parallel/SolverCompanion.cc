@@ -59,27 +59,29 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 
 using namespace Glucose;
 
-SolverCompanion::SolverCompanion() {}
+SolverCompanion::SolverCompanion()
+{}
 
-SolverCompanion::~SolverCompanion() {}
+SolverCompanion::~SolverCompanion()
+{}
 
 
-bool SolverCompanion::addSolver(ParallelSolver *s) {
-    watchedSolvers.push(s);
-    return true;
+bool SolverCompanion::addSolver(ParallelSolver* s) {
+	watchedSolvers.push(s);
+	return true;
 }
 
 int SolverCompanion::runOnceCompanion() {
-    int errcode = 0;
-    for (int indexSolver = 0; indexSolver < watchedSolvers.size(); indexSolver++) {
-        errcode = runOnceCompanion(watchedSolvers[indexSolver]);
-        if (errcode < 0) return errcode;
-    }
-    return errcode;
+	int errcode = 0;
+	for(int indexSolver = 0; indexSolver<watchedSolvers.size();indexSolver++) {
+	  errcode=runOnceCompanion(watchedSolvers[indexSolver]);
+		if (errcode<0) return errcode;
+	}
+	return errcode;
 }
 
-int SolverCompanion::runOnceCompanion(ParallelSolver *s) {
-    return 0;
+int SolverCompanion::runOnceCompanion(ParallelSolver*s) {
+	return 0;
 }
 
 
