@@ -63,7 +63,7 @@ void Graph::add_edge(Vertex start, Vertex end, bool directed) {
     ++_n_edges;
 }
 
-void Graph::add_vertex(int id) {
+void Graph::add_vertex(Vertex id) {
     if (id >= _n_vertices) {
         _adjacencies.resize(id + 1);
         _n_vertices = id + 1;

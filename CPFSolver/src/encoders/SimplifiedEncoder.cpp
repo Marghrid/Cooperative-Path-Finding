@@ -46,9 +46,9 @@ void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
 
         create_vars_for_makespan(0);
 
-        // Initial arragement:
+        // Initial arrangement:
         if (_verbose > 1)
-            std::cout << "Initial arragement..." << std::endl;
+            std::cout << "Initial arrangement..." << std::endl;
         for (int j = 0; j < n; ++j) {
 
             // epsilon vars:
@@ -180,7 +180,7 @@ void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
 
 void SimplifiedEncoder::create_goal_assumptions(Glucose::vec<Glucose::Lit> &assumptions, int makespan) {
     if (_verbose > 1)
-        std::cout << "Goal arragements..." << std::endl;
+        std::cout << "Goal arrangements..." << std::endl;
 
     for (int j = 0; j < _instance.n_vertices(); ++j) {
         for (unsigned k = 0; k < _instance.n_agents(); ++k) {
@@ -234,19 +234,19 @@ Solution SimplifiedEncoder::get_solution(int makespan) {
 }
 
 inline Glucose::Var SimplifiedEncoder::make_xvar_id(int agent_id, int vertex_id, int timestep) const {
-    return timestep * _instance.n_vertices() * (_instance.n_agents() + 1)
-           + vertex_id * (_instance.n_agents() + 1)
-           + agent_id;
+    return static_cast<Glucose::Var>(timestep * _instance.n_vertices() * (_instance.n_agents() + 1)
+                                     + vertex_id * (_instance.n_agents() + 1)
+                                     + agent_id);
 }
 
 inline Glucose::Var SimplifiedEncoder::make_evar_id(int vertex_id, int timestep) const {
-    return timestep * _instance.n_vertices() * (_instance.n_agents() + 1)
-           + vertex_id * (_instance.n_agents() + 1)
-           + _instance.n_agents();
+    return static_cast<Glucose::Var>(timestep * _instance.n_vertices() * (_instance.n_agents() + 1)
+                                     + vertex_id * (_instance.n_agents() + 1)
+                                     + _instance.n_agents());
 }
 
 inline int SimplifiedEncoder::get_agent_id_x(int var_id) {
-    return var_id % (_instance.n_vertices() * (_instance.n_agents() + 1));
+    return static_cast<int>(var_id % (_instance.n_vertices() * (_instance.n_agents() + 1)));
 }
 
 inline int SimplifiedEncoder::get_vertex_id_x(int var_id) {

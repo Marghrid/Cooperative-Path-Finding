@@ -25,7 +25,7 @@ private:
 
 public:
 
-    Solution(Instance &instance) : _instance(instance) {};
+    explicit Solution(Instance &instance) : _instance(instance) {};
 
     void add(int agent, int position);
 

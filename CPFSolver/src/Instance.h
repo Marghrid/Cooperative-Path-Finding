@@ -24,7 +24,7 @@ public:
     Instance(Graph &environment, std::vector<Agent> &agents)
             : _environment(environment), _agents(agents) {}
 
-    Instance(Graph &environment) : _environment(environment) {}
+    explicit Instance(Graph &environment) : _environment(environment) {}
 
     Instance() = default;
 
@@ -36,9 +36,9 @@ public:
 
     unsigned long n_agents() const { return _agents.size(); }
 
-    Agent agent(int id) const { return _agents.at(id); }
+    Agent agent(unsigned id) const { return _agents.at(id); }
 
-    std::vector<Vertex> get_neighbours(int v_id) const {
+    std::vector<Vertex> get_neighbours(Vertex v_id) const {
         return _environment.get_neighbours(v_id);
     }
 
@@ -46,9 +46,9 @@ public:
 
     std::vector<Edge> bidirectional_edges() const { return _environment.bidirectional_edges(); }
 
-    void add_vertex(int v_id) { _environment.add_vertex(v_id); }
+    void add_vertex(Vertex v_id) { _environment.add_vertex(v_id); }
 
-    void add_edge(int start_id, int end_id) { _environment.add_edge(start_id, end_id); }
+    void add_edge(Vertex start_id, Vertex end_id) { _environment.add_edge(start_id, end_id); }
 
     void add_agent(int a_id);
 
@@ -60,11 +60,11 @@ public:
 
     bool ends_empty(int v_id) const { return _vertex_ends_empty[v_id]; }
 
-    void set_agent_initial_position(int aid, Vertex initial_pos) {
+    void set_agent_initial_position(unsigned aid, Vertex initial_pos) {
         _agents.at(aid).set_initial_position(initial_pos);
     }
 
-    void set_agent_goal_position(int aid, Vertex goal_pos) {
+    void set_agent_goal_position(unsigned aid, Vertex goal_pos) {
         _agents.at(aid).set_goal_position(goal_pos);
     }
 

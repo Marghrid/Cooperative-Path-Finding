@@ -19,7 +19,7 @@ private:
     std::string _instance_file;
 
 public:
-    Parser(const std::string &instance_file)
+    explicit Parser(const std::string &instance_file)
             : _instance_file(instance_file) {
 
         _instance_file_stream.open(instance_file);

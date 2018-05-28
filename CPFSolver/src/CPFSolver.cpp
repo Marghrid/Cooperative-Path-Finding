@@ -15,8 +15,6 @@
 #include "SAT_UNSATSearch.h"
 #include "BinarySearch.h"
 
-#include <ctime>
-
 CPFSolver::CPFSolver(Instance &instance, std::string encoding, std::string search,
                      int verbose, long timeout, int max_makespan)
         : _instance(instance), _solution(instance), _solver(),

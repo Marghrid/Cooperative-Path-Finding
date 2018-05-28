@@ -12,7 +12,7 @@
 #include <vector>
 #include <list>
 
-typedef int Vertex;
+typedef unsigned Vertex;
 
 class Edge {
 private:
@@ -51,7 +51,7 @@ public:
 
     void add_edge(Vertex start, Vertex end, bool directed = false);
 
-    void add_vertex(int id);
+    void add_vertex(Vertex id);
 
     int distance(Vertex v1, Vertex v2) const;
 };

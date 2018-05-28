@@ -2,7 +2,7 @@
  *                   CPF Solver    2018                        *
  *                   Margarida Ferreira                        *
  *                                                             *
- * File: SimplifiedEncoder.h:                                  *
+ * File: InvertedEncoder.h:                                  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #ifndef __SIMPLIFIED_ENCODER__
 #define __SIMPLIFIED_ENCODER__
@@ -12,16 +12,12 @@
 #include "mtl/Vec.h"
 #include "core/SolverTypes.h"
 
-class SimplifiedEncoder: public Encoder {
+class InvertedEncoder: public Encoder {
 private:
-    // Value is incremented before actually creating.
-    int _created_vars_makespan = -1;
-    // No need to create clauses for timestep 0, since all positions
-    //  are completely defined by the instance.
-    int _created_clauses_makespan = 0;
+
 public:
 
-	SimplifiedEncoder(Instance instance, Glucose::SimpSolver *solver, int verbose = 0)
+	InvertedEncoder(Instance instance, Glucose::SimpSolver *solver, int verbose = 0)
 	: Encoder(instance, solver, verbose) {}
 
 	void create_vars_for_makespan(int makespan) override;
@@ -33,18 +29,7 @@ public:
 	Solution get_solution(int makespan) override;
 
 public:
-
-    Glucose::Var make_xvar_id(int agent_id, int vertex_id, int timestep) const;
-
-    Glucose::Var make_evar_id(int vertex_id, int timestep) const;
-
-    int get_agent_id_x(int var_id);
-
-    int get_vertex_id_x(int var_id);
-
-    int get_timestep_x(int var_id);
-
-	const std::string name() const override { return "Simplified"; }
+	const std::string name() const override { return "Inverted"; }
 };
 
 #endif

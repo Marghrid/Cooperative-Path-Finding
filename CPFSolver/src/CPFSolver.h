@@ -8,6 +8,7 @@
 #ifndef __CPFSOLVER__
 #define __CPFSOLVER__
 
+#include <utility>
 #include "Instance.h"
 #include "Parser.h"
 #include "Encoder.h"
@@ -46,18 +47,20 @@ public:
 
     // Constructor with default maximum makespan.
     CPFSolver(Instance &instance, std::string encoding, std::string search, int verbose, long timeout)
-            : CPFSolver(instance, encoding, search, verbose, timeout, instance.max_makespan()) {}
+            : CPFSolver(instance, std::move(encoding), std::move(search), verbose, timeout, instance.max_makespan()) {}
 
     // Constructor with default maximum makespan and timeout.
     CPFSolver(Instance &instance, std::string encoding, std::string search, int verbose)
-            : CPFSolver(instance, encoding, search, verbose, 172800 /* 48 hours */, instance.max_makespan()) {}
+            : CPFSolver(instance, std::move(encoding), std::move(search), verbose,
+                        172800 /* 48 hours */, instance.max_makespan()) {}
 
     // Constructor with default maximum makespan, timeout and verbosity.
     CPFSolver(Instance &instance, std::string encoding, std::string search)
-            : CPFSolver(instance, encoding, search, 0, 172800 /* 48 hours */, instance.max_makespan()) {}
+            : CPFSolver(instance, std::move(encoding),
+                        std::move(search), 0, 172800 /* 48 hours */, instance.max_makespan()) {}
 
     // Minimal constructor. Default maximum makespan, timeout, verbosity, encoding and search.
-    CPFSolver(Instance instance, int verbose = 0)
+    explicit CPFSolver(Instance instance, int verbose = 0)
             : CPFSolver(instance, (std::string &) "simplified", (std::string &) "UNSAT-SAT",
                         0, 172800 /* 48 hours */, instance.max_makespan()) {}
 
@@ -70,9 +73,6 @@ public:
     Solution solve();
 
     double get_solving_time() { return _solve_time; }
-
-    // Write SAT solver statistics to a file.
-    void print_SAT_solver_stats(std::ostream &os) const;
 
     void print_status(std::ostream &os) const;
 

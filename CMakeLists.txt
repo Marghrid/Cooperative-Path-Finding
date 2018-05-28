@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.9)
 project(CPFSolver)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 include_directories (CPFSolver/src glucose CPFSolver/src/encoders CPFSolver/src/searches CPFSolver/src/exceptions)
 link_directories(glucose/simp)
@@ -9,6 +9,8 @@ link_directories(glucose/simp)
 add_executable(CPFSolver
         CPFSolver/src/encoders/SimplifiedEncoder.cpp
         CPFSolver/src/encoders/SimplifiedEncoder.h
+        CPFSolver/src/encoders/InvertedEncoder.cpp
+        CPFSolver/src/encoders/InvertedEncoder.h
         CPFSolver/src/searches/BinarySearch.h
         CPFSolver/src/searches/SAT_UNSATSearch.h
         CPFSolver/src/searches/UNSAT_SATSearch.h

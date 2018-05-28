@@ -5,7 +5,7 @@
 
 class OutOfMemoryException : public std::runtime_error {
 public:
-    OutOfMemoryException(const char *msg)
+    explicit OutOfMemoryException(const char *msg)
             : std::runtime_error(msg) { }
 
 };

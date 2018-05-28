@@ -5,7 +5,7 @@
 
 class TimeoutException : public std::runtime_error {
 public:
-    TimeoutException(const char *msg)
+    explicit TimeoutException(const char *msg)
             : std::runtime_error(msg) { }
 
 };
