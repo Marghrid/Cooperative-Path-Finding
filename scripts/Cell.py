@@ -58,6 +58,15 @@ class Cell:
                 makespans += [solution.makespan]
                 
         if len(makespans) > 0:
+            return sum(makespans)/len(makespans)
+
+    def get_median_optimal_makespan(self):
+        makespans = []
+        for solution in self.solutions:
+            if solution.makespan > -1:
+                makespans += [solution.makespan]
+                
+        if len(makespans) > 0:
             return statistics.median(makespans)
 
     def __eq__(self, other):

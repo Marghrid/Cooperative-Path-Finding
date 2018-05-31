@@ -16,7 +16,7 @@ begin = ''
 current_command = []
 n_threads = 0
 n_max_threads = 16
-surynek = False
+surynek = True
 all_commands = []
 
 timed_out_filename = constants.timed_out_commands_file
@@ -120,31 +120,22 @@ def run_in_thread_s(thread_command):
 
 #######################  MAIN ##########################
 
-filenames = glob.glob(constants.instances_dir + '/' + begin + '*.cpf')
+filenames = glob.glob(constants.instances_dir + '/' + '*.cpf')
 
 for filename in filenames:
     instance = re.sub(constants.instances_dir + '/', '', filename)
     instance = re.sub('.cpf', '', instance)
 
-    stats = glob.glob(constants.stat_files_dir + '/' + instance + '*.txt')
-    if len(stats) > 0 and not surynek:
-        print('Instance ' + instance + ' has already been solved.')
-        continue
-
     # current_command = get_command.get_solve_command(instance, search='binary', verbosity=0,timeout=timeout)
     # all_commands.append(current_command)
 
-    if not surynek:
-        current_command = get_command.get_solve_command(instance, search='UNSAT-SAT', verbosity=0, timeout=timeout)
-    else:
-        current_command = get_command.get_sury_solve_command(instance, makespan=32)
-
+    current_command = get_command.get_sury_solve_command(instance, makespan=32)
     all_commands.append(current_command)
 
-#all_commands.sort(reverse=True)
 n_commands_total = len(all_commands)
 print('All ' + str(n_commands_total) + ' commands ready')
 random.shuffle(all_commands)
+#all_commands.sort(reverse=True)
 
 
 while len(all_commands) > 0:
