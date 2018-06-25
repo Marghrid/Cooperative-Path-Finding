@@ -10,65 +10,84 @@
 #include <queue>
 #include <set>
 
-void Instance::add_agent(int a_id) {
-    if ((size_t) a_id >= _agents.size()) {
-        for (int i = _agents.size(); i <= a_id; ++i) {
-            Agent a(i);
-            _agents.push_back(a);
-            _vertex_starts_empty.push_back(true);
-        }
-    }
+void Instance::add_agent(Agent a) {
+	_agents.push_back(a);
+	_vertex_starts_empty[a.initial_position()] = false;
+	_vertex_ends_empty[a.goal_position()] = false;
 }
-
-void Instance::set_start_empty(int a_id, bool b) {
-    while ((size_t) a_id >= _vertex_starts_empty.size()) {
-        _vertex_starts_empty.push_back(false);
-    }
-    _vertex_starts_empty[a_id] = b;
-}
-
-void Instance::set_end_empty(int a_id, bool b) {
-    while ((size_t) a_id >= _vertex_ends_empty.size()) {
-        _vertex_ends_empty.push_back(false);
-    }
-    _vertex_ends_empty[a_id] = b;
-}
-
 
 std::ostream &operator<<(std::ostream &os, const Instance &inst) {
-    os << "---- CPF INSTANCE ----" << std::endl;
-    os << "Environment: " << std::endl;
-    os << "N vertices: " << inst.n_vertices() << std::endl;
-    os << "N edges: " << inst.n_edges() << std::endl;
-    for (auto &e: inst._environment.bidirectional_edges()) {
-        os << e << std::endl;
-    }
-    os << std::endl;
-    os << "N agents: " << inst._agents.size() << std::endl;
-    for (auto &a: inst._agents) {
-        os << a << std::endl;
-    }
-    return os;
+	os << "---- CPF INSTANCE ----" << std::endl;
+	os << "Environment: " << std::endl;
+	os << "N vertices: " << inst.n_vertices() << std::endl;
+	os << "N edges: " << inst.n_edges() << std::endl;
+	for (auto &e: inst._environment.bidirectional_edges()) {
+		os << e << std::endl;
+	}
+	os << std::endl;
+	os << "N agents: " << inst._agents.size() << std::endl;
+	for (auto &a: inst._agents) {
+		os << a << std::endl;
+	}
+	return os;
 }
 
-bool Instance::check() const {
-    return true;
+bool Instance::check() {
+	// Are there as many non-empty vertices at the beginning and the end as agents?
+	int count = 0;
+	for (bool val : _vertex_starts_empty)
+		if (!val) ++count;
+	if (count != _agents.size()) return false;
+
+	count = 0;
+	for (bool val : _vertex_ends_empty)
+		if (!val) ++count;
+	if (count != _agents.size()) return false;
+
+	// Are the IDs unique and sequential?
+	bool ok = false;
+	for (int i = 0; i < _agents.size(); ++i) {
+		for (Agent a : _agents) {
+			if (a.id() == i) ok = true;
+		}
+	}
+	if (!ok) return false;
+
+	std::sort(_agents.begin(), _agents.end(), [this](const Agent &a1, const Agent &a2) {
+		return distance(a1.initial_position(), a1.goal_position())
+		       > distance(a2.initial_position(), a2.goal_position());
+	});
+
+	return true;
 }
 
 int Instance::min_makespan() const {
-    int max_distance = 0;
-    int current_distance = 0;
+	int max_distance = 0;
+	int current_distance = 0;
 
-    //std::cout << "Agents' distances to their goals:" << std::endl;
+	//std::cout << "Agents' distances to their goals:" << std::endl;
 
-    for (Agent a : _agents) {
-        current_distance = _environment.distance(a.initial_position(), a.goal_position());
-        //std::cout << "Agent " << a.id() << " distance: " << current_distance << std::endl;
-        //std::cout << "Agent " << a.id() << " initial pos: " << a.initial_position() << std::endl;
+	for (Agent a : _agents) {
+		current_distance = _environment.distance(a.initial_position(), a.goal_position());
+		//std::cout << "Agent " << a.id() << " distance: " << current_distance << std::endl;
+		//std::cout << "Agent " << a.id() << " initial pos: " << a.initial_position() << std::endl;
 
-        if (current_distance > max_distance)
-            max_distance = current_distance;
-    }
+		if (current_distance > max_distance)
+			max_distance = current_distance;
+	}
 
-    return max_distance;
+	return max_distance;
+}
+
+Agent Instance::agent(unsigned a_id) const {
+	for (Agent a : _agents) {
+		if (a.id() == a_id)
+			return a;
+	}
+	std::cout << n_agents() << std::endl;
+	throw std::runtime_error(std::string("Nonexistent agent #" + std::to_string(a_id)));
+}
+
+unsigned Instance::distance(Vertex v1, Vertex v2) const {
+	return _environment.distance(v1, v2);
 }

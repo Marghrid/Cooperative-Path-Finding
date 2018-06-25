@@ -15,66 +15,77 @@
 
 class Instance {
 private:
-    Graph _environment;
-    std::vector<Agent> _agents;
-    std::vector<bool> _vertex_starts_empty;
-    std::vector<bool> _vertex_ends_empty;
+	Graph _environment;
+
+	/* In the end, agents are sorted by distance to goal */
+	std::vector<Agent> _agents;
+
+	/* The indices are vertex IDs */
+	std::vector<bool> _vertex_starts_empty;
+	std::vector<bool> _vertex_ends_empty;
 
 public:
-    Instance(Graph &environment, std::vector<Agent> &agents)
-            : _environment(environment), _agents(agents) {}
+	// Constructors:
+	Instance(Graph &environment, std::vector<Agent> &agents)
+			: _environment(environment), _agents(agents) {}
 
-    explicit Instance(Graph &environment) : _environment(environment) {}
+	explicit Instance(Graph &environment) : _environment(environment),
+	                                        _vertex_starts_empty(environment.n_vertices(), true),
+	                                        _vertex_ends_empty(environment.n_vertices(), true) {}
 
-    Instance() = default;
+	// Instance() = default;
+	// Agents:
 
-    int n_vertices() const {
-        return _environment.n_vertices();
-    }
+	unsigned long n_agents() const { return _agents.size(); }
 
-    int n_edges() const { return _environment.n_edges(); }
+	Agent agent(unsigned a_id) const;
 
-    unsigned long n_agents() const { return _agents.size(); }
+	void add_agent(Agent a_id);
 
-    Agent agent(unsigned id) const { return _agents.at(id); }
+	void set_agent_initial_position(unsigned aid, Vertex initial_pos) {
+		_agents.at(aid).set_initial_position(initial_pos);
+	}
 
-    std::vector<Vertex> get_neighbours(Vertex v_id) const {
-        return _environment.get_neighbours(v_id);
-    }
+	void set_agent_goal_position(unsigned aid, Vertex goal_pos) {
+		_agents.at(aid).set_goal_position(goal_pos);
+	}
 
-    std::vector<Edge> edges() const { return _environment.edges(); }
+	// Environment:
+	int n_vertices() const { return _environment.n_vertices(); }
 
-    std::vector<Edge> bidirectional_edges() const { return _environment.bidirectional_edges(); }
+	int n_edges() const { return _environment.n_edges(); }
 
-    void add_vertex(Vertex v_id) { _environment.add_vertex(v_id); }
+	std::vector<Vertex> get_neighbours(Vertex v_id) const {
+		return _environment.get_neighbours(v_id);
+	}
 
-    void add_edge(Vertex start_id, Vertex end_id) { _environment.add_edge(start_id, end_id); }
+	std::vector<Edge> edges() const { return _environment.edges(); }
 
-    void add_agent(int a_id);
+	std::vector<Edge> bidirectional_edges() const { return _environment.bidirectional_edges(); }
 
-    void set_start_empty(int v_id, bool b);
+	void add_vertex(Vertex v_id) { _environment.add_vertex(v_id); }
 
-    bool starts_empty(int v_id) const { return _vertex_starts_empty[v_id]; }
+	void add_edge(Vertex start_id, Vertex end_id) { _environment.add_edge(start_id, end_id); }
 
-    void set_end_empty(int v_id, bool b);
+	bool starts_empty(int v_id) const { return _vertex_starts_empty[v_id]; }
 
-    bool ends_empty(int v_id) const { return _vertex_ends_empty[v_id]; }
+	bool ends_empty(int v_id) const { return _vertex_ends_empty[v_id]; }
+/*
+	void set_start_empty(int v_id, bool b);
 
-    void set_agent_initial_position(unsigned aid, Vertex initial_pos) {
-        _agents.at(aid).set_initial_position(initial_pos);
-    }
+	void set_end_empty(int v_id, bool b);*/
 
-    void set_agent_goal_position(unsigned aid, Vertex goal_pos) {
-        _agents.at(aid).set_goal_position(goal_pos);
-    }
 
-    int max_makespan() const { return n_vertices() * 4; }
+	//Instance:
+	int max_makespan() const { return n_vertices() * 4; }
 
-    int min_makespan() const;
+	int min_makespan() const;
 
-    bool check() const;
+	bool check();
 
-    friend std::ostream &operator<<(std::ostream &os, const Instance &inst);
+	friend std::ostream &operator<<(std::ostream &os, const Instance &inst);
+
+	unsigned int distance(Vertex v1, Vertex v2) const;
 };
 
 #endif

@@ -18,6 +18,8 @@ private:
     std::ifstream _instance_file_stream;
     std::string _instance_file;
 
+    std::vector<std::shared_ptr<Agent>> _agents;
+
 public:
     explicit Parser(const std::string &instance_file)
             : _instance_file(instance_file) {
@@ -34,6 +36,10 @@ public:
     }
 
     Instance parse();
+
+	void set_agent_start(unsigned int a_id, Vertex v_id);
+
+	void set_agent_goal(unsigned int agent_finishing_here, Vertex v_id);
 };
 
 #endif

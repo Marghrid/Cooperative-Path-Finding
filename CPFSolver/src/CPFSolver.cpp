@@ -25,6 +25,8 @@ CPFSolver::CPFSolver(Instance &instance, std::string encoding, std::string searc
     if (_timeout < 0) _timeout = 3600;
     if (_max_makespan < 0) _max_makespan = instance.max_makespan();
     _solver.setIncrementalMode();
+    _solver.verbEveryConflicts = 10;
+    _solver.verbosity = 0;
     create_encoder(encoding);
     create_search(search);
 }

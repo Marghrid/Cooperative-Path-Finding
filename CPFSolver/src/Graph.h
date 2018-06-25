@@ -33,15 +33,15 @@ public:
 class Graph {
 private:
     std::vector<std::list<Edge> > _adjacencies;
-    int _n_vertices = 0;
-    int _n_edges = 0;
+    unsigned _n_vertices = 0;
+    unsigned _n_edges = 0;
 
 public:
     Graph() = default;
 
-    int n_vertices() const { return _n_vertices; }
+	unsigned n_vertices() const { return _n_vertices; }
 
-    int n_edges() const { return _n_edges; }
+	unsigned n_edges() const { return _n_edges; }
 
     std::vector<Edge> edges() const;
 
@@ -53,7 +53,7 @@ public:
 
     void add_vertex(Vertex id);
 
-    int distance(Vertex v1, Vertex v2) const;
+    unsigned int distance(Vertex v1, Vertex v2) const;
 };
 
 #endif
