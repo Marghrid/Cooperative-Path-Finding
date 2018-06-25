@@ -82,16 +82,14 @@ double MiniSat::memUsedPeak(void) { return memUsed(); }
 
 
 #elif defined(__APPLE__)
-
 #include <malloc/malloc.h>
 
 double Glucose::memUsed(void) {
     malloc_statistics_t t;
     malloc_zone_statistics(NULL, &t);
-    return (double) t.max_size_in_use / (1024 * 1024);
-}
+    return (double)t.max_size_in_use / (1024*1024); }
 
 #else
-double Glucose::memUsed() {
+double Glucose::memUsed() { 
     return 0; }
 #endif
