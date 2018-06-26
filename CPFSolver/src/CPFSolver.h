@@ -15,6 +15,17 @@
 #include "Search.h"
 #include "simp/SimpSolver.h"
 
+struct Group {
+	Glucose::SimpSolver _solver;
+	std::vector<Agent*> agents;
+
+	Group() : _solver() {
+			_solver.setIncrementalMode();
+			_solver.verbEveryConflicts = 10;
+			_solver.verbosity = 0;
+	}
+};
+
 class CPFSolver {
 private:
     Instance _instance;
@@ -24,6 +35,9 @@ private:
     /* Strategies: */
     Encoder *_encoder;
     Search *_search;
+
+	std::vector<Group> _unplanned_groups;
+	std::vector<Group> _planned_groups;
 
     int _verbose;
     int _max_makespan;
@@ -39,6 +53,8 @@ private:
     // -1 - Out of memory
     // -2 - Timed out
     short _status = 0;
+
+
 
 public:
     // Complete constructor:
@@ -83,6 +99,15 @@ private:
     // Auxiliary function. Used on solve(). Tries to find a solution for
     //   the instance with a given makespan
     bool solve_for_makespan(int makespan);
+
+	void group() {
+		// For now, all agents go in one big group
+		Group all = Group();
+		for (Agent &a : _instance.agents()) {
+			all.agents.push_back(&a);
+		}
+		_unplanned_groups.push_back(all);
+	}
 
     // Auxiliary function. Used on constructors.
     void create_encoder(std::string encoding);

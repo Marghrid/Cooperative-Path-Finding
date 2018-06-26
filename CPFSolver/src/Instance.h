@@ -33,12 +33,13 @@ public:
 	                                        _vertex_starts_empty(environment.n_vertices(), true),
 	                                        _vertex_ends_empty(environment.n_vertices(), true) {}
 
-	// Instance() = default;
 	// Agents:
 
-	unsigned long n_agents() const { return _agents.size(); }
+	unsigned n_agents() const { return static_cast<unsigned int>(_agents.size()); }
 
 	Agent agent(unsigned a_id) const;
+
+	std::vector<Agent> &agents() { return _agents; }
 
 	void add_agent(Agent a_id);
 
@@ -51,9 +52,9 @@ public:
 	}
 
 	// Environment:
-	int n_vertices() const { return _environment.n_vertices(); }
+	unsigned n_vertices() const { return _environment.n_vertices(); }
 
-	int n_edges() const { return _environment.n_edges(); }
+	unsigned n_edges() const { return _environment.n_edges(); }
 
 	std::vector<Vertex> get_neighbours(Vertex v_id) const {
 		return _environment.get_neighbours(v_id);

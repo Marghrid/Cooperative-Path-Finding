@@ -33,9 +33,6 @@ CPFSolver::CPFSolver(Instance &instance, std::string encoding, std::string searc
 
 Solution CPFSolver::solve() {
     double cpu0;
-
-    _solver.verbosity = _verbose;
-
     if (!_instance.check()) {
         //exception
         std::cerr << "The instance wasn't ready to solve" << std::endl;
@@ -68,10 +65,9 @@ Solution CPFSolver::solve() {
 
         current_makespan = _search->get_next_makespan(currently_solved);
 
+        _solve_time = (std::clock() - cpu0) / CLOCKS_PER_SEC;
         if (_verbose > 0)
             std::cout << "Time elapsed: " << _solve_time << std::endl;
-
-
         if (_solve_time > _timeout) {
             _status = -2;
             throw TimeoutException("Solver timed out.");

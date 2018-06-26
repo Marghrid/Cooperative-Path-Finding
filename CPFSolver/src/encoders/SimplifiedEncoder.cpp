@@ -39,8 +39,8 @@ void SimplifiedEncoder::create_vars_for_makespan(int makespan) {
 }
 
 void SimplifiedEncoder::create_clauses_for_makespan(int makespan) {
-    int mu = _instance.n_agents();
-    int n = _instance.n_vertices();
+    unsigned mu = _instance.n_agents();
+	unsigned n = _instance.n_vertices();
 
     if (_created_clauses_makespan == 0) {
 
