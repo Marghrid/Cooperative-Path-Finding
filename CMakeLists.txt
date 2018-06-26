@@ -29,7 +29,7 @@ add_executable(CPFSolver
         CPFSolver/src/Solution.cpp
         CPFSolver/src/Solution.h
         CPFSolver/src/exceptions/OutOfMemoryException.h
-        CPFSolver/src/exceptions/TimeoutException.h)
+        CPFSolver/src/exceptions/TimeoutException.h CPFSolver/src/Group.h CPFSolver/src/Group.cpp)
 
 target_link_libraries(CPFSolver
         _standard)

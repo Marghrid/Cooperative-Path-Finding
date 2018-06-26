@@ -52,7 +52,7 @@ int main(int argc, const char **argv) {
     std::string encoding = "simplified";
     std::string search = "unsat-sat";
 
-    long max_makespan = -1;
+    int max_makespan = -1;
     short verbosity = 0;
     long timeout = -1;
 

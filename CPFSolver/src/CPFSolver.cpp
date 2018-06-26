@@ -31,6 +31,44 @@ CPFSolver::CPFSolver(Instance &instance, std::string encoding, std::string searc
     create_search(search);
 }
 
+bool CPFSolver::solve_group_for_makespan(Group &group, int makespan) {
+	if (_verbose > 0)
+		std::cout << "Solving group " << group << " for makespan " << makespan << ":" << std::endl;
+
+	_encoder->create_clauses_for_group_makespan(&group, makespan);
+
+
+	Glucose::vec<Glucose::Lit> assumptions;
+	_encoder->create_group_goal_assumptions(&group, assumptions, makespan);
+
+	bool satisfiable = false;
+
+	// The (false, true) arguments on solve() prenvent the solver from
+	//  performing optimizations which could result in variable elimination.
+	//  (view lines 172-187 on include/glucose/simp/SimpSolver.cc)
+	// This is a problem because I use variables from one iteration to another,
+	//  resulting in a call of solve() between their creation, and the creation
+	//  of clauses containing them.
+	// NOTE: I should find out how much impact these optimizations I'm
+	//  preventing actually have.
+	try {
+		satisfiable = group.solver->solve(assumptions, false, true);
+	} catch (Glucose::OutOfMemoryException e) {
+		_status = -1;
+		throw OutOfMemoryException("Out of memory declared by Glucose.");
+	}
+
+	if (!satisfiable) {
+		++_n_unsat_calls;
+		if (_verbose > 0)
+			std::cout << "No solution for makespan " << makespan << std::endl;
+		return false;
+	}
+
+	++_n_sat_calls;
+	return true;
+}
+/*
 Solution CPFSolver::solve() {
     double cpu0;
     if (!_instance.check()) {
@@ -86,6 +124,67 @@ Solution CPFSolver::solve() {
     _solve_time = (std::clock() - cpu0) / CLOCKS_PER_SEC;
 
     return _solution;
+}*/
+
+
+Solution CPFSolver::solve() {
+	double cpu0;
+	if (!_instance.check()) {
+		//exception
+		std::cerr << "The instance wasn't ready to solve" << std::endl;
+	}
+
+	group();
+
+	// The initial values of currently_solved and current_makespan must be
+	//  attributed by the Search, so they will be coherent with the break test.
+	bool currently_solved = _search->get_initial_solved();
+	int current_makespan = _search->get_initial_makespan();
+
+	// Start counting time:
+	cpu0 = std::clock();
+
+	// break test delegated to Search
+	while (!_search->break_test(currently_solved)) {
+
+		// Just a precaution. Should not happen.
+		if (current_makespan < 0)
+			throw std::runtime_error("Unexpected makespan value");
+
+		if (_verbose > 0)
+			std::cout << "Trying makespan = " << current_makespan << std::endl;
+
+		//currently_solved = solve_for_makespan(current_makespan);
+		currently_solved = solve_group_for_makespan (_unplanned_groups[0], current_makespan);
+
+		if (currently_solved) {
+			// _solution dependent on the Encoder's interpretation of the variables.
+			_solution = _encoder->get_group_solution(_unplanned_groups[0], current_makespan);
+		}
+
+		current_makespan = _search->get_next_makespan(currently_solved);
+
+		_solve_time = (std::clock() - cpu0) / CLOCKS_PER_SEC;
+		if (_verbose > 0)
+			std::cout << "Time elapsed: " << _solve_time << std::endl;
+		if (_solve_time > _timeout) {
+			_status = -2;
+			throw TimeoutException("Solver timed out.");
+		}
+	}
+
+	if (_search->success()) {
+		_status = 1;
+		std::cout << "Solved for makespan = " << _search->get_successful_makespan() << std::endl;
+	}
+
+	if (_solution.is_empty()) {
+		_status = 2;
+	}
+
+	_solve_time = (std::clock() - cpu0) / CLOCKS_PER_SEC;
+
+	return _solution;
 }
 
 bool CPFSolver::solve_for_makespan(int makespan) {

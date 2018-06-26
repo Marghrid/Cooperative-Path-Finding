@@ -22,6 +22,8 @@ public:
 
 	void create_vars_for_makespan(int makespan) override;
 
+	void create_clauses_for_group_makespan(Group *group, int makespan) override;
+
 	void create_clauses_for_makespan(int makespan) override;
 
 	void create_goal_assumptions(Glucose::vec<Glucose:: Lit> &assumptions, int makespan) override;

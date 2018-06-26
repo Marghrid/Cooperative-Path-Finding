@@ -1,4 +1,9 @@
-//
-// Created by Rui Cruz Ferreira on 26/06/2018.
-//
+#include "Group.h"
 
+std::ostream &operator<<(std::ostream &os, const Group &group) {
+	os << "agents { ";
+	for (Agent *a: group.agents)
+		os << *a << " ";
+	os <<"}";
+	return os;
+}
