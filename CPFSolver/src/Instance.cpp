@@ -10,8 +10,8 @@
 #include <queue>
 #include <set>
 
-void Instance::add_agent(Agent a) {
-	_agents.push_back(a);
+void Instance::add_agent(Agent &a) {
+	_agents.push_back(std::make_shared<Agent>(a));
 	_vertex_starts_empty[a.initial_position()] = false;
 	_vertex_ends_empty[a.goal_position()] = false;
 }
@@ -27,7 +27,7 @@ std::ostream &operator<<(std::ostream &os, const Instance &inst) {
 	os << std::endl;
 	os << "N agents: " << inst._agents.size() << std::endl;
 	for (auto &a: inst._agents) {
-		os << a << std::endl;
+		os << *a << std::endl;
 	}
 	return os;
 }
@@ -47,22 +47,22 @@ bool Instance::check() {
 	// Are the IDs unique and sequential?
 	bool ok = false;
 	for (int i = 0; i < _agents.size(); ++i) {
-		for (Agent a : _agents) {
-			if (a.id() == i) ok = true;
+		for (const std::shared_ptr<Agent> &a : _agents) {
+			if (a->id() == i) ok = true;
 		}
 	}
 	if (!ok) return false;
 
-	std::sort(_agents.begin(), _agents.end(), [this](const Agent &a1, const Agent &a2) {
-		return distance(a1.initial_position(), a1.goal_position())
-		       > distance(a2.initial_position(), a2.goal_position());
+	std::sort(_agents.begin(), _agents.end(), [this](const std::shared_ptr<Agent> &a1, const std::shared_ptr<Agent> &a2) {
+		return distance(a1->initial_position(), a1->goal_position())
+		       > distance(a2->initial_position(), a2->goal_position());
 	});
 
 	return true;
 }
 
 int Instance::min_makespan() const {
-	int max_distance = 0;
+	/*int max_distance = 0;
 	int current_distance = 0;
 
 	//std::cout << "Agents' distances to their goals:" << std::endl;
@@ -76,13 +76,13 @@ int Instance::min_makespan() const {
 			max_distance = current_distance;
 	}
 
-	return max_distance;
+	return max_distance;*/
+	return distance(_agents[0]->initial_position(), _agents[0]->goal_position());
 }
 
-Agent Instance::agent(unsigned a_id) const {
-	for (Agent a : _agents) {
-		if (a.id() == a_id)
-			return a;
+Agent &Instance::agent(unsigned a_id) const {
+	for (const std::shared_ptr<Agent> &a : _agents) {
+		if (a->id() == a_id) return *a;
 	}
 	std::cout << n_agents() << std::endl;
 	throw std::runtime_error(std::string("Nonexistent agent #" + std::to_string(a_id)));

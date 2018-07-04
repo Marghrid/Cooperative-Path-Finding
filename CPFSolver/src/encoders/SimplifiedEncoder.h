@@ -39,7 +39,11 @@ public:
 
 	Solution get_solution(int makespan) override;
 
-	Solution get_group_solution(Group &group, int makespan) override;
+	Solution get_group_solution(Group *group, int makespan) override;
+
+	void create_planned_groups_assumptions(std::vector<std::shared_ptr<Group>> planned_groups,
+	                                       Glucose::vec<Glucose::Lit> &assumptions,
+	                                       int makespan) override;
 
 public:
 

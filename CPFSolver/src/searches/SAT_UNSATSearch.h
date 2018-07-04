@@ -14,19 +14,19 @@ private:
     int _count = _max_makespan;
 
 public:
-    SAT_UNSATSearch(int min_makespan, int max_makespan) : Search(min_makespan, max_makespan) {}
+    SAT_UNSATSearch(unsigned min_makespan, unsigned max_makespan) : Search(min_makespan, max_makespan) {}
 
     bool get_initial_solved() override { return true; }
 
-    int get_initial_makespan() override { return _max_makespan; }
+    unsigned int get_initial_makespan() override { return _max_makespan; }
 
-    int get_next_makespan(bool solved) override { return --_count; }
+    unsigned get_next_makespan(bool solved) override { return --_count; }
 
     int get_successful_makespan() override { return _count + 2; }
 
     bool break_test(bool solved) override {
         //Returns true if search should stop:
-        return !solved || _count == _min_makespan - 1;
+        return !solved || _count == (int)_min_makespan - 1;
     }
 
     bool success() override { return _count != -1; }

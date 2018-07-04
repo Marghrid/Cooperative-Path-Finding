@@ -238,25 +238,24 @@ Solution SimplifiedEncoder::get_solution(int makespan) {
 	return sol;
 }
 
-Solution SimplifiedEncoder::get_group_solution(Group &group, int makespan) {
-	Solution sol(_instance);
+Solution SimplifiedEncoder::get_group_solution(Group *group, int makespan) {
 	for (unsigned i = 0; i < makespan + 1; ++i) {
-		sol.increment_timestep();
-		for (unsigned k = 0; k < group.agents.size(); ++k) {
+		group->solution.increment_timestep();
+		for (unsigned k = 0; k < group->agents.size(); ++k) {
 			for (int j = 0; j < _instance.n_vertices(); ++j) {
-				if (group.solver->modelValue(make_xvar_id(k, j, i)) == l_True) {
+				if (group->solver->modelValue(make_xvar_id(k, j, i)) == l_True) {
 					if (_verbose > 2)
 						std::cout << "var x(" << i << ", " << j << ", " << k << ", "
 						          << make_xvar_id(k, j, i) << ") is true" << std::endl;
-					sol.add(k, j);
+					group->solution.add(k, j);
 				}
 			}
 		}
 	}
-	if (!sol.check())
+	if (!group->solution.check())
 		std::cerr << "Something went wrong with solution." << std::endl;
 
-	return sol;
+	return group->solution;
 }
 
 inline Glucose::Var
@@ -344,10 +343,10 @@ void SimplifiedEncoder::create_clauses_for_group_makespan(Group *group, int make
 		for (int k = 0; k < mu; ++k) {
 			for (auto &e: _instance.bidirectional_edges()) {
 				Glucose::vec<Glucose::Lit> lit_vec;
-				lit_vec.push(Glucose::mkLit(make_xvar_id(k, e.start(), i - 1), true));
-				lit_vec.push(Glucose::mkLit(make_xvar_id(k, e.end(), i), true));
-				lit_vec.push(Glucose::mkLit(make_evar_id(e.end(), i - 1), false));
-				lit_vec.push(Glucose::mkLit(make_evar_id(e.start(), i), false));
+				lit_vec.push(Glucose::mkLit(make_xvar_id(k, e.start(), i - 1), true));  //FIXME
+				lit_vec.push(Glucose::mkLit(make_xvar_id(k, e.end(), i), true));  //FIXME
+				lit_vec.push(Glucose::mkLit(make_evar_id(e.end(), i - 1), false));  //FIXME
+				lit_vec.push(Glucose::mkLit(make_evar_id(e.start(), i), false));  //FIXME
 				if (_verbose > 2)
 					std::cout << "adding clause: ~x(" << k << ", "
 					          << e.start() << ", " << i - 1 << ", "
@@ -496,4 +495,10 @@ void SimplifiedEncoder::create_group_goal_assumptions(Group *group,
 			assumptions.push(Glucose::mkLit(make_evar_id(j, makespan), true));
 		}
 	}
+}
+
+void SimplifiedEncoder::create_planned_groups_assumptions(
+		std::vector<std::shared_ptr<Group>> planned_groups, Glucose::vec<Glucose::Lit> &assumptions,
+		int makespan) {
+
 }

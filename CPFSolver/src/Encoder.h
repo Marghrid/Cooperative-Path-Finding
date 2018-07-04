@@ -40,13 +40,16 @@ public:
 
 	virtual Solution get_solution(int makespan) = 0;
 
-	virtual Solution get_group_solution(Group &group, int makespan) = 0;
+	virtual Solution get_group_solution(Group *group, int makespan) = 0;
 
 	virtual const std::string name() const = 0;
 
 	void set_solver(Glucose::SimpSolver *solver) { _solver = solver; }
 
 
+	virtual void
+	create_planned_groups_assumptions(std::vector<std::shared_ptr<Group>> planned_groups,
+	                                  Glucose::vec<Glucose::Lit> &assumptions, int makespan) = 0;
 };
 
 #endif

@@ -17,8 +17,8 @@ class Instance {
 private:
 	Graph _environment;
 
-	/* In the end, agents are sorted by distance to goal */
-	std::vector<Agent> _agents;
+	/* In the end, agents are sorted by decreasing distance to goal: _agents[0] is farther away */
+	std::vector<std::shared_ptr<Agent>> _agents;
 
 	/* The indices are vertex IDs */
 	std::vector<bool> _vertex_starts_empty;
@@ -26,7 +26,7 @@ private:
 
 public:
 	// Constructors:
-	Instance(Graph &environment, std::vector<Agent> &agents)
+	Instance(Graph &environment, std::vector<std::shared_ptr<Agent>> &agents)
 			: _environment(environment), _agents(agents) {}
 
 	explicit Instance(Graph &environment) : _environment(environment),
@@ -37,18 +37,18 @@ public:
 
 	unsigned n_agents() const { return static_cast<unsigned int>(_agents.size()); }
 
-	Agent agent(unsigned a_id) const;
+	Agent &agent(unsigned a_id) const;
 
-	std::vector<Agent> &agents() { return _agents; }
+	std::vector<std::shared_ptr<Agent>> &agents() { return _agents; }
 
-	void add_agent(Agent a_id);
+	void add_agent(Agent &a_id);
 
 	void set_agent_initial_position(unsigned aid, Vertex initial_pos) {
-		_agents.at(aid).set_initial_position(initial_pos);
+		_agents.at(aid)->set_initial_position(initial_pos);
 	}
 
 	void set_agent_goal_position(unsigned aid, Vertex goal_pos) {
-		_agents.at(aid).set_goal_position(goal_pos);
+		_agents.at(aid)->set_goal_position(goal_pos);
 	}
 
 	// Environment:
@@ -71,11 +71,6 @@ public:
 	bool starts_empty(int v_id) const { return _vertex_starts_empty[v_id]; }
 
 	bool ends_empty(int v_id) const { return _vertex_ends_empty[v_id]; }
-/*
-	void set_start_empty(int v_id, bool b);
-
-	void set_end_empty(int v_id, bool b);*/
-
 
 	//Instance:
 	int max_makespan() const { return n_vertices() * 4; }

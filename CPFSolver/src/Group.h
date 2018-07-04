@@ -1,3 +1,10 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                   CPF Solver    2018                        *
+ *                   Margarida Ferreira                        *
+ *                                                             *
+ * File: Group.h                                               *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 #ifndef __GROUP__
 #define __GROUP__
 
@@ -9,7 +16,7 @@
 struct Group {
 	std::shared_ptr<Glucose::SimpSolver> solver;
 	Solution solution;
-	std::vector<Agent *> agents;
+	std::vector<std::shared_ptr<Agent>> agents;
 
 	int created_vars_makespan = -1;
 	int created_clauses_makespan = 0;
@@ -18,7 +25,7 @@ struct Group {
 	std::vector<bool> vertex_starts_empty;
 	std::vector<bool> vertex_ends_empty;
 
-	Group(Instance &instance) :
+	explicit Group(Instance &instance) :
 			solution(instance),
 			vertex_starts_empty(instance.n_vertices(), true),
 			vertex_ends_empty(instance.n_vertices(), true){
@@ -28,7 +35,13 @@ struct Group {
 		solver->verbosity = 0;
 	}
 
-	void add_agent(Agent *a) {
+	/*void add_agent(std::shared_ptr<Agent> a) {
+		agents.push_back(a);
+		vertex_starts_empty[a->initial_position()] = false;
+		vertex_ends_empty[a->goal_position()] = false;
+	}*/
+
+	void add_agent(std::shared_ptr<Agent> &a) {
 		agents.push_back(a);
 		vertex_starts_empty[a->initial_position()] = false;
 		vertex_ends_empty[a->goal_position()] = false;
