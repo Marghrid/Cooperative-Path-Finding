@@ -84,7 +84,6 @@ Agent &Instance::agent(unsigned a_id) const {
 	for (const std::shared_ptr<Agent> &a : _agents) {
 		if (a->id() == a_id) return *a;
 	}
-	std::cout << n_agents() << std::endl;
 	throw std::runtime_error(std::string("Nonexistent agent #" + std::to_string(a_id)));
 }
 

@@ -226,7 +226,7 @@ Solution SimplifiedEncoder::get_solution(int makespan) {
 					if (_verbose > 2)
 						std::cout << "var x(" << t << ", " << j << ", " << k << ", "
 						          << make_xvar_id(k, j, t) << ") is true" << std::endl;
-					sol.add(k, j, t);
+					sol.add(_instance.agent(k).id(), j, t);
 				}
 			}
 		}
@@ -245,7 +245,8 @@ Solution SimplifiedEncoder::get_group_solution(Group *group, int makespan) {
 					if (_verbose > 2)
 						std::cout << "var x(" << t << ", " << j << ", " << k << ", "
 						          << make_xvar_id(k, j, t) << ") is true" << std::endl;
-					group->solution.add(k, j, t);
+					auto id = group->agents[k]->id();
+					group->solution.add(id, j, t);
 				}
 			}
 		}

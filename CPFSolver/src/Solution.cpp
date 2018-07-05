@@ -63,6 +63,7 @@ bool Solution::check() const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Solution &sol) {
+	//FIXME The agents aren't printed ordered by ID
 	if (sol.is_empty()) {
 		os << "Empty solution!" << std::endl;
 		return os;
@@ -70,12 +71,14 @@ std::ostream &operator<<(std::ostream &os, const Solution &sol) {
 
 	os << "Solution makespan: " << sol._positions.begin()->second.size() - 1 << std::endl;
 
-	auto blaaaaaa = sol.n_timesteps();
-	for (unsigned timestep = 0; timestep < blaaaaaa; ++timestep) {
+	for (unsigned timestep = 0; timestep < sol.n_timesteps(); ++timestep) {
 		os << "Timestep " << timestep << ":" << std::endl;
-		for (auto &agent_pair : sol._positions) {
-			os << "\t" << agent_pair.first->id() << " # " << agent_pair.second.at(timestep)
+		for (auto it = sol._positions.begin(); it != sol._positions.end(); ++it) {
+			os << "\t" << it->first->id() << " # " << it->second.at(timestep)
 			   << std::endl;
+		}
+		for (auto &agent_pair : sol._positions) {
+
 		}
 	}
 	return os;
@@ -157,7 +160,7 @@ void Solution::add(std::shared_ptr<Agent> agent, int position, unsigned timestep
 	} else {
 		// This agent did not yet exist in this solution
 		std::vector<int> empty_vector;
-		_positions.insert(std::pair<std::shared_ptr<Agent>, std::vector<int>>(agent, empty_vector));
+		_positions[agent] = empty_vector;
 
 		auto agent_pair = _positions.find(agent);
 		if (timestep >= agent_pair->second.size())

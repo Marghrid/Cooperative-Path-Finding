@@ -35,11 +35,13 @@ struct Group {
 		solver->verbosity = 0;
 	}
 
-	/*void add_agent(std::shared_ptr<Agent> a) {
-		agents.push_back(a);
-		vertex_starts_empty[a->initial_position()] = false;
-		vertex_ends_empty[a->goal_position()] = false;
-	}*/
+	Agent &agent(unsigned a_id) const {
+		for (const std::shared_ptr<Agent> &a : agents) {
+			if (a->id() == a_id) return *a;
+		}
+
+		throw std::runtime_error(std::string("Nonexistent agent #" + std::to_string(a_id)));
+	}
 
 	void add_agent(std::shared_ptr<Agent> &a) {
 		agents.push_back(a);
