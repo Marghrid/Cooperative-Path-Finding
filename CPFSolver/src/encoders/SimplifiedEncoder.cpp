@@ -219,15 +219,14 @@ SimplifiedEncoder::create_goal_assumptions(Glucose::vec<Glucose::Lit> &assumptio
 
 Solution SimplifiedEncoder::get_solution(int makespan) {
 	Solution sol(_instance);
-	for (int i = 0; i < makespan + 1; ++i) {
-		sol.increment_timestep();
+	for (unsigned t = 0; t < makespan + 1; ++t) {
 		for (unsigned k = 0; k < _instance.n_agents(); ++k) {
-			for (int j = 0; j < _instance.n_vertices(); ++j) {
-				if (_solver->modelValue(make_xvar_id(k, j, i)) == l_True) {
+			for (unsigned j = 0; j < _instance.n_vertices(); ++j) {
+				if (_solver->modelValue(make_xvar_id(k, j, t)) == l_True) {
 					if (_verbose > 2)
-						std::cout << "var x(" << i << ", " << j << ", " << k << ", "
-						          << make_xvar_id(k, j, i) << ") is true" << std::endl;
-					sol.add(k, j);
+						std::cout << "var x(" << t << ", " << j << ", " << k << ", "
+						          << make_xvar_id(k, j, t) << ") is true" << std::endl;
+					sol.add(k, j, t);
 				}
 			}
 		}
@@ -239,15 +238,14 @@ Solution SimplifiedEncoder::get_solution(int makespan) {
 }
 
 Solution SimplifiedEncoder::get_group_solution(Group *group, int makespan) {
-	for (unsigned i = 0; i < makespan + 1; ++i) {
-		group->solution.increment_timestep();
+	for (unsigned t = 0; t < makespan + 1; ++t) {
 		for (unsigned k = 0; k < group->agents.size(); ++k) {
-			for (int j = 0; j < _instance.n_vertices(); ++j) {
-				if (group->solver->modelValue(make_xvar_id(k, j, i)) == l_True) {
+			for (unsigned j = 0; j < _instance.n_vertices(); ++j) {
+				if (group->solver->modelValue(make_xvar_id(k, j, t)) == l_True) {
 					if (_verbose > 2)
-						std::cout << "var x(" << i << ", " << j << ", " << k << ", "
-						          << make_xvar_id(k, j, i) << ") is true" << std::endl;
-					group->solution.add(k, j);
+						std::cout << "var x(" << t << ", " << j << ", " << k << ", "
+						          << make_xvar_id(k, j, t) << ") is true" << std::endl;
+					group->solution.add(k, j, t);
 				}
 			}
 		}

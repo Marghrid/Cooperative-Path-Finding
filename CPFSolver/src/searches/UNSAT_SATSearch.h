@@ -11,7 +11,7 @@
 
 class UNSAT_SATSearch : public Search {
 private:
-	int _count;
+	unsigned _count;
 
 public:
 	UNSAT_SATSearch(unsigned min_makespan, unsigned max_makespan) :
@@ -23,7 +23,7 @@ public:
 
 	unsigned get_next_makespan(bool solved) override { return ++_count; }
 
-	int get_successful_makespan() override { return _count - 1; }
+	int get_successful_makespan() override { return _count; }
 
 	bool break_test(bool solved) override {
 		//Returns true if search should stop:

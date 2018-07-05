@@ -7,6 +7,7 @@
 
 #include "Solution.h"
 
+/*
 void Solution::add(int agentID, int position) {
 	if ((unsigned) agentID + 1 > _positions.at(_current_timestep).size()) {
 		//_positions.at(_current_timestep).resize(agentID + 1, -1);
@@ -36,18 +37,15 @@ void Solution::add(int agentID, int position) {
 		}
 	}
 }
+*/
 
-void Solution::increment_timestep() {
-	_positions.resize(_positions.size() + 1);
-	_current_timestep = _positions.size() - 1;
-}
 
 bool Solution::check() const {
-	// Is there any unassigned agent for each timestep?
-	for (auto &timestep: _positions) {
+	//TODO Is there any unassigned agent for each timestep?
+	for (auto &agent: _positions) {
 		//if (timestep.size() != (unsigned) _instance.n_agents())
 		//	return false;
-		for (auto &agent_pos: timestep)
+		for (auto &agent_pos: agent.second)
 			if (agent_pos < 0 || agent_pos > _instance.n_vertices())
 				return false;
 	}
@@ -70,11 +68,14 @@ std::ostream &operator<<(std::ostream &os, const Solution &sol) {
 		return os;
 	}
 
-	os << "Solution makespan: " << sol._positions.size() - 1 << std::endl;
-	for (unsigned timestep = 0; timestep < sol._positions.size(); ++timestep) {
+	os << "Solution makespan: " << sol._positions.begin()->second.size() - 1 << std::endl;
+
+	auto blaaaaaa = sol.n_timesteps();
+	for (unsigned timestep = 0; timestep < blaaaaaa; ++timestep) {
 		os << "Timestep " << timestep << ":" << std::endl;
-		for (unsigned agent = 0; agent < sol._positions.at(timestep).size(); ++agent) {
-			os << "\t" << agent << " # " << sol._positions.at(timestep).at(agent) << std::endl;
+		for (auto &agent_pair : sol._positions) {
+			os << "\t" << agent_pair.first->id() << " # " << agent_pair.second.at(timestep)
+			   << std::endl;
 		}
 	}
 	return os;
@@ -90,18 +91,88 @@ void Solution::merge(Solution &other) {
 				std::to_string(this->n_timesteps()) + " and " +
 				std::to_string(other.n_timesteps()) + ".");
 
-	for (unsigned i = 0; i <= this->n_timesteps(); ++i) {
+	for (auto &agent_pair : other._positions) {
+		// Make sure there are no collisions
+		for (unsigned i = 0; i < agent_pair.second.size(); ++i) {
+			for (auto &local_agent_pair : this->_positions) {
+				if (local_agent_pair.second[i] == agent_pair.second[i]) {
+					throw std::runtime_error("Collision in merge");
+				}
+			}
+		}
+		this->_positions.insert(agent_pair);
+	}
+
+	//FIXME in the end, the agents must be ordered by id
+
+	/*for (unsigned i = 0; i <= this->n_timesteps(); ++i) {
 		for (unsigned k = 0; k < other.n_agents(); ++k) {
 			for (const int &vertexID : this->_positions[i]) {
-				if (vertexID == other.get_position(i, k))
+				if (vertexID == other.get_position(k, i))
 					throw std::runtime_error(
 							"Couldn't merge the solutions, there is a conflict at timestep " +
 							std::to_string(i) + " and agent at index " + std::to_string(k));
 			}
 
-			this->_positions[i].push_back(other.get_position(i, k));
+			this->_positions[i].push_back(other.get_position(k, i));
 
-			//FIXME in the end, the agents must be ordered by id
+
+		}
+	}*/
+}
+
+void Solution::add(std::shared_ptr<Agent> agent, int position, unsigned timestep) {
+	/* If the agent exists in this solution, either change or reassign the value in the positions vector;
+	 * Otherwise, add agent to the map, and then the value in the positions vector
+	 */
+	auto search = _positions.find(agent);
+	if (search != _positions.end()) {
+		// The agent already exists in this solution
+		if (timestep == 0) {
+			// If building the first timestep, everything is ok.
+			if (timestep >= search->second.size())
+				search->second.resize(timestep + 1);
+			search->second[timestep] = position;
+			return;
+		}
+		// Else, check if the agent made a valid move.
+		int previous = search->second[timestep - 1];
+		// Either the agent stayed at the same vertex
+		if (previous == position) {
+			if (timestep >= search->second.size())
+				search->second.resize(timestep + 1);
+			search->second[timestep] = position;
+			return;
+		}
+		// Or it moved to a neighbouring vertex.
+		for (auto &v: _instance.get_neighbours(previous)) {
+			if (v == position) {
+				if (timestep >= search->second.size())
+					search->second.resize(timestep + 1);
+				search->second[timestep] = position;
+				return;
+			}
+		}
+		throw std::runtime_error("Could not add agent to solution");
+	} else {
+		// This agent did not yet exist in this solution
+		std::vector<int> empty_vector;
+		_positions.insert(std::pair<std::shared_ptr<Agent>, std::vector<int>>(agent, empty_vector));
+
+		auto agent_pair = _positions.find(agent);
+		if (timestep >= agent_pair->second.size())
+			agent_pair->second.resize(timestep + 1);
+		agent_pair->second[timestep] = position;
+	}
+}
+
+void Solution::add(unsigned agentID, int position, unsigned timestep) {
+	for (auto pair : _positions) {
+		if (pair.first->id() == agentID) {
+			this->add(pair.first, position, timestep);
+			return;
 		}
 	}
+	std::shared_ptr<Agent> new_agent = std::make_shared<Agent>(agentID);
+	add(new_agent, position, timestep);
 }

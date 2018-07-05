@@ -25,7 +25,7 @@ public:
 
 	Agent(unsigned int aid, Vertex initial_pos) : Agent(aid, initial_pos, static_cast<Vertex>(-1)) {}
 */
-	unsigned int id() { return _id; }
+	unsigned int id() const { return _id; }
 
 	Vertex initial_position() const { return _initial_position; }
 
@@ -47,6 +47,22 @@ public:
 	bool operator<=(const Agent &rhs) const { return !(rhs < *this); }
 
 	bool operator>=(const Agent &rhs) const { return !(*this < rhs); }
+
+	bool operator==(const Agent &rhs) const {
+		if (id() == rhs.id()) {
+			if (initial_position() != rhs.initial_position() ||
+			    goal_position() != rhs.goal_position()) {
+				throw std::runtime_error(
+						"Agents compared have the same ID but different starting and/or goal positions");
+			}
+			return true;
+		}
+		return false;
+	}
+
+	bool operator!=(const Agent &rhs) const {
+		return !(rhs == *this);
+	}
 };
 
 #endif
