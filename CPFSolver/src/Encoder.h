@@ -48,8 +48,10 @@ public:
 
 
 	virtual void
-	create_planned_groups_assumptions(std::vector<std::shared_ptr<Group>> planned_groups,
-	                                  Glucose::vec<Glucose::Lit> &assumptions, int makespan) = 0;
+	create_planned_groups_assumptions(std::shared_ptr<Group> group,
+		                                  std::list<std::shared_ptr<Group>> planned_groups,
+		                                  Glucose::vec<Glucose::Lit> &assumptions,
+		                                  int makespan) = 0;
 };
 
 #endif

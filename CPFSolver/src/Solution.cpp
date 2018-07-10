@@ -77,9 +77,6 @@ std::ostream &operator<<(std::ostream &os, const Solution &sol) {
 			os << "\t" << it->first->id() << " # " << it->second.at(timestep)
 			   << std::endl;
 		}
-		for (auto &agent_pair : sol._positions) {
-
-		}
 	}
 	return os;
 }
@@ -95,33 +92,18 @@ void Solution::merge(Solution &other) {
 				std::to_string(other.n_timesteps()) + ".");
 
 	for (auto &agent_pair : other._positions) {
-		// Make sure there are no collisions
 		for (unsigned i = 0; i < agent_pair.second.size(); ++i) {
 			for (auto &local_agent_pair : this->_positions) {
 				if (local_agent_pair.second[i] == agent_pair.second[i]) {
-					throw std::runtime_error("Collision in merge");
+					throw std::runtime_error(
+							"Couldn't merge the solutions, there is a conflict at timestep " +
+							std::to_string(i) + " and agent " +
+							std::to_string(agent_pair.first->id()));
 				}
 			}
 		}
 		this->_positions.insert(agent_pair);
 	}
-
-	//FIXME in the end, the agents must be ordered by id
-
-	/*for (unsigned i = 0; i <= this->n_timesteps(); ++i) {
-		for (unsigned k = 0; k < other.n_agents(); ++k) {
-			for (const int &vertexID : this->_positions[i]) {
-				if (vertexID == other.get_position(k, i))
-					throw std::runtime_error(
-							"Couldn't merge the solutions, there is a conflict at timestep " +
-							std::to_string(i) + " and agent at index " + std::to_string(k));
-			}
-
-			this->_positions[i].push_back(other.get_position(k, i));
-
-
-		}
-	}*/
 }
 
 void Solution::add(std::shared_ptr<Agent> agent, int position, unsigned timestep) {

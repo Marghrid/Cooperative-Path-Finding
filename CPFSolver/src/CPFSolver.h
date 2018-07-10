@@ -80,10 +80,10 @@ private:
 	Search *_search;
 
 	// Increasing order of complexity
-	std::vector<std::shared_ptr<Group>> _unplanned_groups;
+	std::list<std::shared_ptr<Group>> _unplanned_groups;
 
 	// Increasing order of complexity
-	std::vector<std::shared_ptr<Group>> _planned_groups;
+	std::list<std::shared_ptr<Group>> _planned_groups;
 
 	int _verbose;
 	int _max_makespan;

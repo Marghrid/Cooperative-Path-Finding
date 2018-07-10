@@ -33,8 +33,11 @@ public:
 	void add(unsigned agentID, int position, unsigned timestep);
 
 	int get_position(std::shared_ptr<Agent> agent, unsigned timestep) {
-		//return _positions.at(agent).second.at(timestep);
-		return _positions.find(agent)->second.at(timestep);
+		for (auto agent_pair : _positions) {
+			if (agent_pair.first->id() == agent->id())
+				return agent_pair.second[timestep];
+		}
+		return -1;
 	}
 
 	unsigned long n_timesteps() const { return _positions.begin()->second.size(); }
@@ -46,6 +49,10 @@ public:
 	bool is_empty() const { return _positions.empty(); }
 
 	void merge(Solution &solution);
+
+	Instance &instance() {
+		return _instance;
+	}
 
 	friend std::ostream &operator<<(std::ostream &os, const Solution &sol);
 };

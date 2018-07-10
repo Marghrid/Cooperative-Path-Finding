@@ -41,9 +41,10 @@ public:
 
 	Solution get_group_solution(Group *group, int makespan) override;
 
-	void create_planned_groups_assumptions(std::vector<std::shared_ptr<Group>> planned_groups,
-	                                       Glucose::vec<Glucose::Lit> &assumptions,
-	                                       int makespan) override;
+	void create_planned_groups_assumptions(std::shared_ptr<Group> group,
+		                                       std::list<std::shared_ptr<Group>> planned_groups,
+		                                       Glucose::vec<Glucose::Lit> &assumptions,
+		                                       int makespan) override;
 
 public:
 
@@ -58,6 +59,10 @@ public:
 	int get_timestep_x(int var_id);
 
 	const std::string name() const override { return "Simplified"; }
+
+	Glucose::Var make_group_xvar_id(int agent_id, int vertex_id, int timestep, Group &group) const;
+
+	Glucose::Var make_group_evar_id(int vertex_id, int timestep, Group &group) const;
 };
 
 #endif

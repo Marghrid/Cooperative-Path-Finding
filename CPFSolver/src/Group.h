@@ -35,6 +35,9 @@ struct Group {
 		solver->verbosity = 0;
 	}
 
+	unsigned long n_agents() {
+		return agents.size();
+	}
 	Agent &agent(unsigned a_id) const {
 		for (const std::shared_ptr<Agent> &a : agents) {
 			if (a->id() == a_id) return *a;

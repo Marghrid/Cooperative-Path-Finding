@@ -15,6 +15,9 @@
 #include "SAT_UNSATSearch.h"
 #include "BinarySearch.h"
 
+#include "mtl/Vec.h"
+#include "core/SolverTypes.h"
+
 #include <ctime>
 
 CPFSolver::CPFSolver(Instance &instance, std::string encoding, std::string search,
@@ -32,24 +35,26 @@ CPFSolver::CPFSolver(Instance &instance, std::string encoding, std::string searc
 }
 
 bool CPFSolver::solve_group_for_makespan(std::shared_ptr<Group> group, int makespan) {
+	bool satisfiable;
+
 	if (_verbose > 0)
 		std::cout << "Solving group " << *group << " for makespan " << makespan << ":" << std::endl;
 
 	_encoder->create_clauses_for_group_makespan(group.get(), makespan);
 	Glucose::vec<Glucose::Lit> assumptions;
 	_encoder->create_group_goal_assumptions(group.get(), assumptions, makespan);
-	_encoder->create_planned_groups_assumptions(_planned_groups, assumptions, makespan);
+	_encoder->create_planned_groups_assumptions(group, _planned_groups,
+	                                            assumptions, makespan);
 
-	bool satisfiable = false;
-
-	// The (false, true) arguments on solve() prenvent the solver from
-	//  performing optimizations which could result in variable elimination.
-	//  (view lines 172-187 on include/glucose/simp/SimpSolver.cc)
-	// This is a problem because I use variables from one iteration to another,
-	//  resulting in a call of solve() between their creation, and the creation
-	//  of clauses containing them.
-	// NOTE: I should find out how much impact these optimizations I'm
-	//  preventing actually have.
+	/* The (false, true) arguments on solve() prenvent the solver from
+	 *  performing optimizations which could result in variable elimination.
+	 *  (view lines 172-187 on include/glucose/simp/SimpSolver.cc)
+	 * This is a problem because I use variables from one iteration to another,
+	 *  resulting in a call of solve() between their creation, and the creation
+	 *  of clauses containing them.
+	 * NOTE: I should find out how much impact these optimizations I'm
+	 *  preventing actually have.
+	 */
 	try {
 		satisfiable = group->solver->solve(assumptions, false, true);
 	} catch (Glucose::OutOfMemoryException e) {
@@ -61,6 +66,12 @@ bool CPFSolver::solve_group_for_makespan(std::shared_ptr<Group> group, int makes
 		++_n_unsat_calls;
 		if (_verbose > 0)
 			std::cout << "No solution for makespan " << makespan << std::endl;
+
+		std::cout << "conflict: " << _solver.conflict.size() << std::endl;
+		while (_solver.conflict.size() > 0) {
+			std::cout << " " << _solver.conflict.last().x << std::endl;
+			_solver.conflict.pop();
+		}
 		return false;
 	}
 
@@ -212,14 +223,15 @@ bool CPFSolver::solve_for_makespan(int makespan) {
 
 	bool satisfiable = false;
 
-	// The (false, true) arguments on solve() prenvent the solver from
-	//  performing optimizations which could result in variable elimination.
-	//  (view lines 172-187 on include/glucose/simp/SimpSolver.cc)
-	// This is a problem because I use variables from one iteration to another,
-	//  resulting in a call of solve() between their creation, and the creation
-	//  of clauses containing them.
-	// NOTE: I should find out how much impact these optimizations I'm
-	//  preventing actually have.
+	/* The (false, true) arguments on solve() prenvent the solver from
+	 *  performing optimizations which could result in variable elimination.
+	 *  (view lines 172-187 on include/glucose/simp/SimpSolver.cc)
+	 * This is a problem because I use variables from one iteration to another,
+	 *  resulting in a call of solve() between their creation, and the creation
+	 *  of clauses containing them.
+	 * NOTE: I should find out how much impact these optimizations I'm
+	 *  preventing actually have.
+	 */
 	try {
 		satisfiable = _solver.solve(assumptions, false, true);
 	} catch (Glucose::OutOfMemoryException e) {
@@ -307,10 +319,10 @@ std::shared_ptr<Group> CPFSolver::get_conflicting_group(std::shared_ptr<Group> g
 
 void CPFSolver::merge(std::shared_ptr<Group> group1, std::shared_ptr<Group> group2) {
 	// Remove these 2 groups from their vectors
-	_unplanned_groups.erase(std::find(_unplanned_groups.begin(), _unplanned_groups.end(), group1));
-	_unplanned_groups.erase(std::find(_unplanned_groups.begin(), _unplanned_groups.end(), group2));
-	_planned_groups.erase(std::find(_planned_groups.begin(), _planned_groups.end(), group1));
-	_planned_groups.erase(std::find(_planned_groups.begin(), _planned_groups.end(), group2));
+	_unplanned_groups.remove(*std::find(_unplanned_groups.begin(), _unplanned_groups.end(), group1));
+	_unplanned_groups.remove(*std::find(_unplanned_groups.begin(), _unplanned_groups.end(), group2));
+	_planned_groups.remove(*std::find(_planned_groups.begin(), _planned_groups.end(), group1));
+	_planned_groups.remove(*std::find(_planned_groups.begin(), _planned_groups.end(), group2));
 
 	// Create new group with the agents from both
 	std::shared_ptr<Group> new_group = std::make_shared<Group>(_instance);
@@ -359,8 +371,7 @@ void CPFSolver::group() {
 }
 
 Solution CPFSolver::merge_solutions() {
-	std::vector<std::shared_ptr<Group>>::iterator pg_it = _planned_groups.begin();
-
+	auto pg_it = _planned_groups.begin();
 	Solution solution = (*pg_it)->solution;
 	++pg_it;
 
