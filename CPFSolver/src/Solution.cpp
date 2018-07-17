@@ -74,7 +74,7 @@ std::ostream &operator<<(std::ostream &os, const Solution &sol) {
 	for (unsigned timestep = 0; timestep < sol.n_timesteps(); ++timestep) {
 		os << "Timestep " << timestep << ":" << std::endl;
 		for (auto it = sol._positions.begin(); it != sol._positions.end(); ++it) {
-			os << "\t" << it->first->id() << " # " << it->second.at(timestep)
+			os << "\t" << it->first->id() << " @ " << it->second.at(timestep)
 			   << std::endl;
 		}
 	}
@@ -110,41 +110,41 @@ void Solution::add(std::shared_ptr<Agent> agent, int position, unsigned timestep
 	/* If the agent exists in this solution, either change or reassign the value in the positions vector;
 	 * Otherwise, add agent to the map, and then the value in the positions vector
 	 */
-	auto search = _positions.find(agent);
-	if (search != _positions.end()) {
+	auto agent_pair = _positions.find(agent);
+	if (agent_pair != _positions.end()) {
 		// The agent already exists in this solution
 		if (timestep == 0) {
 			// If building the first timestep, everything is ok.
-			if (timestep >= search->second.size())
-				search->second.resize(timestep + 1);
-			search->second[timestep] = position;
+			if (timestep >= agent_pair->second.size())
+				agent_pair->second.resize(timestep + 1);
+			agent_pair->second[timestep] = position;
 			return;
 		}
 		// Else, check if the agent made a valid move.
-		int previous = search->second[timestep - 1];
+		int previous = agent_pair->second[timestep - 1];
 		// Either the agent stayed at the same vertex
 		if (previous == position) {
-			if (timestep >= search->second.size())
-				search->second.resize(timestep + 1);
-			search->second[timestep] = position;
+			if (timestep >= agent_pair->second.size())
+				agent_pair->second.resize(timestep + 1);
+			agent_pair->second[timestep] = position;
 			return;
 		}
 		// Or it moved to a neighbouring vertex.
 		for (auto &v: _instance.get_neighbours(previous)) {
 			if (v == position) {
-				if (timestep >= search->second.size())
-					search->second.resize(timestep + 1);
-				search->second[timestep] = position;
+				if (timestep >= agent_pair->second.size())
+					agent_pair->second.resize(timestep + 1);
+				agent_pair->second[timestep] = position;
 				return;
 			}
 		}
-		throw std::runtime_error("Could not add agent to solution");
+		// If it reaches here, the agent appeared in the instance.
 	} else {
 		// This agent did not yet exist in this solution
 		std::vector<int> empty_vector;
 		_positions[agent] = empty_vector;
 
-		auto agent_pair = _positions.find(agent);
+		agent_pair = _positions.find(agent);
 		if (timestep >= agent_pair->second.size())
 			agent_pair->second.resize(timestep + 1);
 		agent_pair->second[timestep] = position;

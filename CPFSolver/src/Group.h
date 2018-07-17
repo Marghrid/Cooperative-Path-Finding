@@ -35,7 +35,7 @@ struct Group {
 		solver->verbosity = 0;
 	}
 
-	unsigned long n_agents() {
+	unsigned long n_agents() const {
 		return agents.size();
 	}
 	Agent &agent(unsigned a_id) const {

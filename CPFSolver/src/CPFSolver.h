@@ -15,6 +15,7 @@
 #include "Search.h"
 #include "simp/SimpSolver.h"
 #include "Group.h"
+#include "EncoderID.h"
 
 
 /* Independence detection:
@@ -76,7 +77,7 @@ private:
 	Glucose::SimpSolver _solver;
 
 	/* Strategies: */
-	Encoder *_encoder;
+	EncoderID *_encoder;
 	Search *_search;
 
 	// Increasing order of complexity
@@ -162,6 +163,8 @@ private:
 	void merge(std::shared_ptr<Group> group1, std::shared_ptr<Group> group2);
 
 	Solution merge_solutions();
+
+	void merge_all();
 };
 
 #endif
