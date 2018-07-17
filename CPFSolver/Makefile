@@ -4,8 +4,8 @@ FLAGS = -Wall -std=c++17 -O3
 INC   = -I src/ -I $(GLUCOSE_DIR) -I src/searches/ -I src/encoders/ -I src/exceptions
 LIB   = -L $(GLUCOSE_DIR)/simp
 
-all: directories build/Graph.o build/Instance.o build/Solution.o build/Parser.o build/Group.o build/SimplifiedEncoder.o build/InvertedEncoder.o build/CPFSolver.o
-	g++ $(FLAGS) $(INC) $(LIB) -o bin/CPFSolver build/Graph.o build/Instance.o build/Solution.o build/Parser.o build/CPFSolver.o build/Group.o build/SimplifiedEncoder.o  src/main.cpp -l_standard
+all: directories build/Graph.o build/Instance.o build/Solution.o build/Parser.o build/Group.o build/SimplifiedID.o build/Simplified.o build/CPFSolver.o
+	g++ $(FLAGS) $(INC) $(LIB) -o bin/CPFSolver build/Graph.o build/Instance.o build/Solution.o build/Parser.o build/CPFSolver.o build/Group.o build/Simplified.o build/SimplifiedID.o src/main.cpp -l_standard
 
 directories:
 	mkdir -p build 
@@ -26,13 +26,13 @@ build/Parser.o: src/Parser.cpp src/Parser.h src/Instance.h
 build/Group.o: src/Group.cpp src/Group.h src/Agent.h src/Instance.h src/Solution.h
 	g++ $(FLAGS) -c $(INC) -o build/Group.o src/Group.cpp
 
-build/SimplifiedEncoder.o: src/encoders/SimplifiedEncoder.cpp src/encoders/SimplifiedEncoder.h src/Encoder.h src/Instance.h src/Solution.h
-	g++ $(FLAGS) -c $(INC) -o build/SimplifiedEncoder.o src/encoders/SimplifiedEncoder.cpp
+build/SimplifiedID.o: src/encoders/SimplifiedID.cpp src/encoders/SimplifiedID.h src/EncoderID.h src/Instance.h src/Solution.h
+	g++ $(FLAGS) -c $(INC) -o build/SimplifiedID.o src/encoders/SimplifiedID.cpp
 
-build/InvertedEncoder.o: src/encoders/InvertedEncoder.cpp src/encoders/InvertedEncoder.h src/Encoder.h src/Instance.h src/Solution.h
-	g++ $(FLAGS) -c $(INC) -o build/InvertedEncoder.o src/encoders/InvertedEncoder.cpp
+build/Simplified.o: src/encoders/Simplified.cpp src/encoders/Simplified.h src/Encoder.h src/Instance.h src/Solution.h
+	g++ $(FLAGS) -c $(INC) -o build/Simplified.o src/encoders/Simplified.cpp
 
-build/CPFSolver.o: src/CPFSolver.cpp src/CPFSolver.h src/Instance.h src/Solution.h src/Parser.h src/Encoder.h src/Search.h src/encoders/SimplifiedEncoder.h src/searches/SAT_UNSATSearch.h src/searches/UNSAT_SATSearch.h src/searches/BinarySearch.h
+build/CPFSolver.o: src/CPFSolver.cpp src/CPFSolver.h src/Instance.h src/Solution.h src/Parser.h src/Encoder.h src/EncoderID.h src/Search.h src/encoders/Simplified.h src/encoders/SimplifiedID.h src/searches/SAT_UNSATSearch.h src/searches/UNSAT_SATSearch.h src/searches/BinarySearch.h
 	g++ $(FLAGS) -c $(INC) -o build/CPFSolver.o src/CPFSolver.cpp
 
 clean:

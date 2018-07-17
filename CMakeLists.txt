@@ -7,10 +7,8 @@ include_directories (CPFSolver/src glucose CPFSolver/src/encoders CPFSolver/src/
 link_directories(glucose/simp)
 
 add_executable(CPFSolver
-        CPFSolver/src/encoders/SimplifiedEncoder.cpp
-        CPFSolver/src/encoders/SimplifiedEncoder.h
-        CPFSolver/src/encoders/InvertedEncoder.cpp
-        CPFSolver/src/encoders/InvertedEncoder.h
+        CPFSolver/src/encoders/Simplified.cpp
+        CPFSolver/src/encoders/Simplified.h
         CPFSolver/src/searches/BinarySearch.h
         CPFSolver/src/searches/SAT_UNSATSearch.h
         CPFSolver/src/searches/UNSAT_SATSearch.h
@@ -29,7 +27,7 @@ add_executable(CPFSolver
         CPFSolver/src/Solution.cpp
         CPFSolver/src/Solution.h
         CPFSolver/src/exceptions/OutOfMemoryException.h
-        CPFSolver/src/exceptions/TimeoutException.h CPFSolver/src/Group.h CPFSolver/src/Group.cpp)
+        CPFSolver/src/exceptions/TimeoutException.h CPFSolver/src/Group.h CPFSolver/src/Group.cpp CPFSolver/src/encoders/SimplifiedID.cpp CPFSolver/src/encoders/SimplifiedID.h CPFSolver/src/EncoderID.h)
 
 target_link_libraries(CPFSolver
         _standard)
