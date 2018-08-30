@@ -8,7 +8,7 @@
 #ifndef __CPFSOLVER__
 #define __CPFSOLVER__
 
-#include <utility>
+#include <vector>
 #include "Instance.h"
 #include "Parser.h"
 #include "Encoder.h"
@@ -21,8 +21,6 @@
 /* Independence detection:
  * Create a Solution for each group, in the end, merge all solutions.
  *
- * -----------------------------------------------------------------------------
- * Surynek:
  *
  *  assign each agent to a group;
  *  plan a path for each group G1, ..., Gk using SAT solver;
@@ -46,28 +44,6 @@
  *  end
  *  return combined paths for all groups
  *
- * -----------------------------------------------------------------------------
- * Margarida:
- *
- *  for each group G1:
- *      plan path considering all already planned groups;
- *      if a conflict is found:
- *          G2 = other group in conflict;
- *          replan G1 using SAT solver with current makespan
- *
- *          if failed to replan G1:
- *              replan G2 using SAT solver with current makespan
- *          endif
- *
- *          if failed to replan G2:
- *              Gx = merge G1, G2;
- *              plan Gx using SAT solver with current makespan
- *          endif
- *
- *          if failed to replan Gx:
- *              try from the begining with new makespan
- *          endif
- *      endif
  */
 
 class CPFSolver {
@@ -81,10 +57,7 @@ private:
 	Search *_search;
 
 	// Increasing order of complexity
-	std::list<std::shared_ptr<Group>> _unplanned_groups;
-
-	// Increasing order of complexity
-	std::list<std::shared_ptr<Group>> _planned_groups;
+	std::vector<std::shared_ptr<Group>> _groups;
 
 	int _verbose;
 	int _max_makespan;
@@ -160,11 +133,13 @@ private:
 
 	std::shared_ptr<Group> get_conflicting_group(std::shared_ptr<Group> group);
 
-	void merge(std::shared_ptr<Group> group1, std::shared_ptr<Group> group2);
+	void merge(unsigned int g1_idx, unsigned int g2_idx);
 
 	Solution merge_solutions();
 
 	void merge_all();
+
+	bool check_conflict(std::shared_ptr<Group> &g1, std::shared_ptr<Group> &g2);
 };
 
 #endif

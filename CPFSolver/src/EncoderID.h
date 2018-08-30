@@ -37,8 +37,8 @@ public:
 
 	virtual void
 	create_planned_groups_assumptions(std::shared_ptr<Group> group,
-		                                  std::list<std::shared_ptr<Group>> planned_groups,
-		                                  Glucose::vec<Glucose::Lit> &assumptions) = 0;
+	                                  std::vector<std::shared_ptr<Group>> planned_groups,
+	                                  Glucose::vec<Glucose::Lit> &assumptions) = 0;
 };
 
 #endif //__ENCODER_ID__

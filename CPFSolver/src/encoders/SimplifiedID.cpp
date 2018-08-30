@@ -20,8 +20,8 @@ inline Glucose::Var SimplifiedID::make_evar_id(int vertex_id, int timestep, cons
 }
 
 void SimplifiedID::create_vars_for_makespan(Group *group, int makespan) {
-	if (_verbose > 1)
-		std::cout << "creating vars for group " << *group << " for makespan " << makespan
+	if (_verbose > 2)
+		std::cout << "Creating vars for group " << *group << " for makespan " << makespan
 		          << std::endl;
 
 	while (group->created_vars_makespan < makespan) {
@@ -30,28 +30,26 @@ void SimplifiedID::create_vars_for_makespan(Group *group, int makespan) {
 		for (int j = 0; j < _instance.n_vertices(); ++j) {
 			for (unsigned k = 0; k < group->agents.size(); ++k) {
 
-				if (_verbose > 2)
+				if (_verbose > 3)
 					std::cout << "var x for agent " << k
 					          << ", vertex " << j
 					          << ", and timestep " << group->created_vars_makespan
 					          << " has id "
 					          << make_xvar_id(k, j, group->created_vars_makespan, *group);
 
-				while (make_xvar_id(k, j, group->created_vars_makespan, *group) >=
-				       group->solver->nVars())
+				while (make_xvar_id(k, j, group->created_vars_makespan, *group) >= group->solver->nVars())
 					group->solver->newVar();
 
-				if (_verbose > 2) std::cout << std::endl;
+				if (_verbose > 3) std::cout << std::endl;
 			}
-			if (_verbose > 2)
+			if (_verbose > 3)
 				std::cout << "var epsilon for vertex " << j
 				          << ", and timestep " << group->created_vars_makespan
 				          << " has id "
 				          << make_evar_id(j, group->created_vars_makespan, *group)
 				          << std::endl;
 
-			while (make_evar_id(j, group->created_vars_makespan, *group) >=
-			       group->solver->nVars())
+			while (make_evar_id(j, group->created_vars_makespan, *group) >= group->solver->nVars())
 				group->solver->newVar();
 		}
 	}
@@ -73,7 +71,7 @@ void SimplifiedID::create_clauses_for_makespan(Group *group, int makespan) {
 		// At most one agent is placed in each vertex at each time step
 		// The target vertex is vacant before the move,
 		// and the source vertex will be vacant after it
-		if (_verbose > 1)
+		if (_verbose > 3)
 			std::cout << "The target vertex is vacant before the move, \n"
 			          << "and the source vertex will be vacant after it..."
 			          << std::endl;
@@ -93,7 +91,7 @@ void SimplifiedID::create_clauses_for_makespan(Group *group, int makespan) {
 				lit_vec2.push(x2);
 				lit_vec2.push(Glucose::mkLit(make_evar_id(e.start(), i, *group), false));
 
-				if (_verbose > 2) {
+				if (_verbose > 3) {
 					std::cout << "adding clause: ~x(" << k << ", " << e.start() << ", " << i - 1 << ", "
 					          << make_xvar_id(k, e.start(), i - 1, *group) << ") V ~x("
 					          << k << ", " << e.end() << ", " << i << ", "
@@ -114,13 +112,13 @@ void SimplifiedID::create_clauses_for_makespan(Group *group, int makespan) {
 			}
 		}
 
-		if (_verbose > 1)
+		if (_verbose > 3)
 			std::cout << "An agent moves along an edge, or not at all..."
 			          << std::endl;
-		if (_verbose > 1)
+		if (_verbose > 3)
 			std::cout << "At most one agent is placed in each vertex at each time step..."
 			          << std::endl;
-		if (_verbose > 1)
+		if (_verbose > 3)
 			std::cout << "Establishing relation between epsilon and X variables..."
 			          << std::endl;
 
@@ -132,7 +130,7 @@ void SimplifiedID::create_clauses_for_makespan(Group *group, int makespan) {
 				Glucose::Lit l2 = Glucose::mkLit(make_xvar_id(k, j, i, *group), true); // at most and relation
 				group->solver->addClause(l3, l2); //relation
 
-				if (_verbose > 2) //relation
+				if (_verbose > 3) //relation
 					std::cout << "adding clause: ~e(" << j << ", " << i << ", "
 					          << make_evar_id(j, i, *group) << ") V ~x("
 					          << k << ", " << j << ", " << i << ", "
@@ -143,7 +141,7 @@ void SimplifiedID::create_clauses_for_makespan(Group *group, int makespan) {
 				for (unsigned h = 0; h < k; ++h) {
 					Glucose::Lit l1 = Glucose::mkLit(make_xvar_id(h, j, i, *group), true); // at most
 
-					if (_verbose > 2) //at most
+					if (_verbose > 3) //at most
 						std::cout << "adding clause: ~x(" << h << ", "
 						          << j << ", " << i << ", "
 						          << make_xvar_id(h, j, i, *group) << ") V ~x("
@@ -156,7 +154,7 @@ void SimplifiedID::create_clauses_for_makespan(Group *group, int makespan) {
 				Glucose::vec<Glucose::Lit> lit_vec; // along an edge
 				lit_vec.push(Glucose::mkLit(make_xvar_id(k, j, i - 1, *group), true)); // along an edge
 				lit_vec.push(Glucose::mkLit(make_xvar_id(k, j, i, *group), false)); // along an edge
-				if (_verbose > 2)
+				if (_verbose > 3)
 					std::cout << "adding clause: ~x(" << k << ", "
 					          << j << ", " << i - 1 << ", "
 					          << make_xvar_id(k, j, i - 1, *group) << ") V x("
@@ -165,11 +163,11 @@ void SimplifiedID::create_clauses_for_makespan(Group *group, int makespan) {
 
 				for (auto &v: _instance.get_neighbours(j)) {
 					lit_vec.push(Glucose::mkLit(make_xvar_id(k, v, i, *group)));
-					if (_verbose > 2)
+					if (_verbose > 3)
 						std::cout << " V x(" << k << ", " << v << ", " << i << ", "
 						          << make_xvar_id(k, v, i, *group) << ")";
 				}
-				if (_verbose > 2) std::cout << std::endl;
+				if (_verbose > 3) std::cout << std::endl;
 				group->solver->addClause(lit_vec);
 			}
 		}
@@ -178,18 +176,18 @@ void SimplifiedID::create_clauses_for_makespan(Group *group, int makespan) {
 
 void SimplifiedID::create_initial_arrangement_clauses(const Group *group, unsigned long mu, unsigned int n) const {
 	// Initial arrangement:
-	if (_verbose > 1)
+	if (_verbose > 3)
 		std::__1::cout << "Initial arrangement..." << std::__1::endl;
 	for (unsigned j = 0; j < n; ++j) {
 
 		// epsilon vars:
 		if (group->vertex_starts_empty[j]) {
-			if (_verbose > 2)
+			if (_verbose > 3)
 				std::__1::cout << "adding clause: e(" << j << ", "
 				               << 0 << ", " << make_evar_id(j, 0, *group) << ")" << std::__1::endl;
 			group->solver->addClause(Glucose::mkLit(make_evar_id(j, 0, *group)));
 		} else {
-			if (_verbose > 2)
+			if (_verbose > 3)
 				std::__1::cout << "adding clause: ~e(" << j << ", "
 				               << 0 << ", " << make_evar_id(j, 0, *group) << ")" << std::__1::endl;
 			group->solver->addClause(Glucose::mkLit(make_evar_id(j, 0, *group), true));
@@ -198,12 +196,12 @@ void SimplifiedID::create_initial_arrangement_clauses(const Group *group, unsign
 		// X vars (for each agent):
 		for (unsigned k = 0; k < mu; ++k) {
 			if (j == group->agents[k]->initial_position()) {
-				if (_verbose > 2)
+				if (_verbose > 3)
 					std::__1::cout << "adding clause: x(" << k << ", " << j << ", " << 0 << ", "
 					               << make_xvar_id(k, j, 0, *group) << ")" << std::__1::endl;
 				group->solver->addClause(Glucose::mkLit(make_xvar_id(k, j, 0, *group)));
 			} else {
-				if (_verbose > 2)
+				if (_verbose > 3)
 					std::__1::cout << "adding clause: ~x(" << k << ", " << j << ", " << 0 << ", "
 					               << make_xvar_id(k, j, 0, *group) << ")" << std::__1::endl;
 				group->solver->addClause(Glucose::mkLit(make_xvar_id(k, j, 0, *group), true));
@@ -225,25 +223,25 @@ void SimplifiedID::create_goal_assumptions(Group *group,
 				// This should make sense: If it's no one's goal position, it should end empty.
 				// assumptions.push(Glucose::mkLit(make_evar_id(j, makespan, *group), true));
 
-				if (_verbose > 2)
+				if (_verbose > 3)
 					std::cout << "Creating assumption: x(" << k << ", " << j << ", " << makespan << ", "
 					          << make_xvar_id(k, j, makespan, *group) << ")" << std::endl;
 			} else {
 				assumptions.push(Glucose::mkLit(make_xvar_id(k, j, makespan, *group), true));
 
-				if (_verbose > 2)
+				if (_verbose > 3)
 					std::cout << "Creating assumption: ~x(" << k << ", " << j << ", " << makespan << ", "
 					          << make_xvar_id(k, j, makespan, *group) << ")" << std::endl;
 			}
 		}
 		// This is the original solution
 		if (group->vertex_ends_empty[j]) {
-			if (_verbose > 2)
+			if (_verbose > 3)
 				std::cout << "Creating assumption: e(" << j << ", "
 				          << makespan << ", " << make_evar_id(j, makespan, *group) << ")" << std::endl;
 			assumptions.push(Glucose::mkLit(make_evar_id(j, makespan, *group)));
 		} else {
-			if (_verbose > 2)
+			if (_verbose > 3)
 				std::cout << "Creating assumption: ~e(" << j << ", "
 				          << makespan << ", " << make_evar_id(j, makespan, *group) << ")" << std::endl;
 			assumptions.push(Glucose::mkLit(make_evar_id(j, makespan, *group), true));
@@ -252,10 +250,10 @@ void SimplifiedID::create_goal_assumptions(Group *group,
 }
 
 void SimplifiedID::create_planned_groups_assumptions(std::shared_ptr<Group> group,
-                                                     std::list<std::shared_ptr<Group>> planned_groups,
+                                                     std::vector<std::shared_ptr<Group>> planned_groups,
                                                      Glucose::vec<Glucose::Lit> &assumptions) {
 
-	if (_verbose > 1)
+	if (_verbose > 2)
 		std::cout << "Planned groups' assumptions for group " << *group << std::endl;
 
 	std::vector<std::vector<bool>> empty(group->solution.n_timesteps() + 1);
@@ -272,7 +270,7 @@ void SimplifiedID::create_planned_groups_assumptions(std::shared_ptr<Group> grou
 		for (std::shared_ptr<Agent> &planned_agent : planned_group->agents) {
 			for (unsigned t = 0; t < planned_group->solution.n_timesteps(); ++t) {
 				for (unsigned k = 0; k < group->n_agents(); ++k) {
-					if (_verbose > 2)
+					if (_verbose > 3)
 						std::cout << "Creating assumption: ~x(" << k << ", "
 						          << planned_group->solution.get_position(planned_agent, t) << ", " << t << ", "
 						          << make_xvar_id(k, planned_group->solution.get_position(planned_agent, t), t,
@@ -282,7 +280,7 @@ void SimplifiedID::create_planned_groups_assumptions(std::shared_ptr<Group> grou
 							true));
 				}
 
-				if (_verbose > 2)
+				if (_verbose > 3)
 					std::cout << "Creating assumption: ~e("
 					          << planned_group->solution.get_position(planned_agent, t) << ", "
 					          << t << ", " << make_evar_id(
@@ -303,7 +301,7 @@ Solution SimplifiedID::get_solution(Group *group, int makespan) {
 		for (unsigned k = 0; k < group->agents.size(); ++k) {
 			for (unsigned j = 0; j < _instance.n_vertices(); ++j) {
 				if (group->solver->modelValue(make_xvar_id(k, j, t, *group)) == l_True) {
-					if (_verbose > 2)
+					if (_verbose > 3)
 						std::cout << "var x(" << k << ", " << j << ", " << t << ", "
 						          << make_xvar_id(k, j, t, *group) << ") is true" << std::endl;
 					group->solution.add(group->agents[k]->id(), j, t);

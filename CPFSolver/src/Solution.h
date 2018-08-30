@@ -15,12 +15,6 @@
 
 class Solution {
 private:
-	//std::vector<std::vector<int>> _positions;
-	// Outer vector element represents a timestep.
-	// Inner vector element represents an agent.
-	// int on the inner vector represents the agent's
-	//  position (vertex#) on each timestep.
-
 	// std::vector<int> represents the agent's position in each timestep
 	std::map<std::shared_ptr<Agent>, std::vector<int>> _positions;
 	Instance _instance;

@@ -37,13 +37,15 @@ CPFSolver::CPFSolver(Instance &instance, std::string encoding, std::string searc
 bool CPFSolver::solve_group_for_makespan(std::shared_ptr<Group> group, int makespan) {
 	bool satisfiable;
 
+	//TODO if this group has been solved for this makespan do nothing
+
 	if (_verbose > 0)
 		std::cout << "Solving group " << *group << " for makespan " << makespan << ":" << std::endl;
 
 	_encoder->create_clauses_for_makespan(group.get(), makespan);
 	Glucose::vec<Glucose::Lit> assumptions;
 	_encoder->create_goal_assumptions(group.get(), assumptions, makespan);
-	_encoder->create_planned_groups_assumptions(group, _planned_groups, assumptions);
+	//_encoder->create_planned_groups_assumptions(group, _planned_groups, assumptions);
 
 	/* The (false, true) arguments on solve() prevent the solver from
 	 *  performing optimizations which could result in variable elimination.
@@ -74,65 +76,6 @@ bool CPFSolver::solve_group_for_makespan(std::shared_ptr<Group> group, int makes
 	return true;
 }
 
-/*
-Solution CPFSolver::solve() {
-    double cpu0;
-    if (!_instance.check()) {
-        //exception
-        std::cerr << "The instance wasn't ready to solve" << std::endl;
-    }
-
-    // The initial values of currently_solved and current_makespan must be
-    //  attributed by the Search, so they will be coherent with the break test.
-    bool currently_solved = _search->get_initial_solved();
-    int current_makespan = _search->get_initial_makespan();
-
-    // Start counting time:
-    cpu0 = std::clock();
-
-    // break test delegated to Search
-    while (!_search->break_test(currently_solved)) {
-
-        // Just a precaution. Should not happen.
-        if (current_makespan < 0)
-            throw std::runtime_error("Unexpected makespan value");
-
-        if (_verbose > 0)
-            std::cout << "Trying makespan = " << current_makespan << std::endl;
-
-        currently_solved = solve_for_makespan(current_makespan);
-
-        if (currently_solved) {
-            // _solution dependent on the Encoder's interpretation of the variables.
-            _solution = _encoder->get_solution(current_makespan);
-        }
-
-        current_makespan = _search->get_next_makespan(currently_solved);
-
-        _solve_time = (std::clock() - cpu0) / CLOCKS_PER_SEC;
-        if (_verbose > 0)
-            std::cout << "Time elapsed: " << _solve_time << std::endl;
-        if (_solve_time > _timeout) {
-            _status = -2;
-            throw TimeoutException("Solver timed out.");
-        }
-    }
-
-    if (_search->success()) {
-        _status = 1;
-        std::cout << "Solved for makespan = " << _search->get_successful_makespan() << std::endl;
-    }
-
-    if (_solution.is_empty()) {
-        _status = 2;
-    }
-
-    _solve_time = (std::clock() - cpu0) / CLOCKS_PER_SEC;
-
-    return _solution;
-}*/
-
-
 Solution CPFSolver::solve() {
 	double cpu0;
 	if (!_instance.check()) {
@@ -140,12 +83,12 @@ Solution CPFSolver::solve() {
 		std::cerr << "The instance wasn't ready to solve" << std::endl;
 	}
 
-	group();
-
 	// The initial values of currently_solved and current_makespan must be
 	//  attributed by the Search, so they will be coherent with the break test.
 	bool currently_solved = _search->get_initial_solved();
 	unsigned current_makespan = _search->get_initial_makespan();
+
+	group();
 
 	// Start counting time:
 	cpu0 = std::clock();
@@ -156,35 +99,62 @@ Solution CPFSolver::solve() {
 		if (_verbose > 0)
 			std::cout << "Trying makespan = " << current_makespan << std::endl;
 
-		while (!_unplanned_groups.empty()) {
-			std::shared_ptr<Group> group = _unplanned_groups.back();
-			currently_solved = solve_group_for_makespan(group, current_makespan);
-
-			if (currently_solved) {
-				_unplanned_groups.pop_back();
-				_planned_groups.push_back(group);
+		// Solve each group independently
+		bool solved_all_groups = true;
+		for (std::shared_ptr<Group> group : _groups) {
+			if (!solve_group_for_makespan(group, current_makespan)) {
+				std::cout << "Couldn't plan group " << *group << std::endl;
+				solved_all_groups = false;
+				break;
 			} else {
-				if (_planned_groups.empty())
-					current_makespan = _search->get_next_makespan(currently_solved);
-				else {
-					merge_all();
-					//TODO try to replan conflicting_group
-					//std::shared_ptr<Group> conflicting_group = get_conflicting_group(group);
-					//merge(group, conflicting_group);
-				}
+				if (_verbose > 2)
+					std::cout << "Group " << *group << " solution: \n" << group->solution << std::endl;
 			}
 		}
 
+		if (!solved_all_groups) {
+			currently_solved = false;
+			current_makespan = _search->get_next_makespan(currently_solved);
+			group();
+			continue;
+		}
 
-		if (currently_solved) {
-			// _solution dependent on the Encoder's interpretation of the variables.
-			//_solution = _encoder->get_group_solution(_unplanned_groups[0], current_makespan);
-			for (std::shared_ptr<Group> group : _planned_groups) {
-				std::cout << group->solution << std::endl;
+		std::cout << "Planned all groups. Checking for conflicts:" << std::endl;
+		bool merged = false;
+		for (unsigned i = 0; i < _groups.size(); ++i) {
+			for (unsigned j = i + 1; j < _groups.size(); ++j) {
+				if (check_conflict(_groups[i], _groups[j])) {
+					//replan _groups[i]
+
+					//replan _groups[j]
+
+					std::cout << "Found a conflict between groups " << *_groups[i] << " and " << *_groups[j]
+					          << ". Merging." << std::endl;
+					merge(i, j);
+					merged = true;
+					break;
+				} else {
+					std::cout << "No conflict between " << *_groups[i] << " and " << *_groups[j] << "." << std::endl;
+				}
 			}
-			_solution = merge_solutions();
+			if (merged) {
+				break;
+			}
+		}
+		if (merged) {
+			currently_solved = false;
+			if (_verbose > 1) {
+				std::cout << "Current groups:" << std::endl;
+				for (const auto &g : _groups)
+					std::cout << *g << " ";
 
-			//std::cout << "\nSOLUTION:" << _solution << std::endl;
+				std::cout << std::endl;
+			}
+			continue;
+
+		} else {
+			currently_solved = true;
+			_solution = merge_solutions();
 		}
 
 		_solve_time = (std::clock() - cpu0) / CLOCKS_PER_SEC;
@@ -322,64 +292,42 @@ std::shared_ptr<Group> CPFSolver::get_conflicting_group(std::shared_ptr<Group> g
 	return std::make_shared<Group>(_instance);
 }
 
-void CPFSolver::merge(std::shared_ptr<Group> group1, std::shared_ptr<Group> group2) {
-	// Remove these 2 groups from their vectors
-	_unplanned_groups.remove(*std::find(_unplanned_groups.begin(), _unplanned_groups.end(), group1));
-	_unplanned_groups.remove(*std::find(_unplanned_groups.begin(), _unplanned_groups.end(), group2));
-	_planned_groups.remove(*std::find(_planned_groups.begin(), _planned_groups.end(), group1));
-	_planned_groups.remove(*std::find(_planned_groups.begin(), _planned_groups.end(), group2));
-
-	// Create new group with the agents from both
-	std::shared_ptr<Group> new_group = std::make_shared<Group>(_instance);
-	for (std::shared_ptr<Agent> a : group1->agents)
-		new_group->add_agent(a);
-	for (std::shared_ptr<Agent> a : group2->agents)
-		new_group->add_agent(a);
-
-	// Move all planned groups to unplanned in reverse order.
-	std::reverse(std::begin(_planned_groups), std::end(_planned_groups));
-	_unplanned_groups.insert(_unplanned_groups.end(), _planned_groups.begin(),
-	                         _planned_groups.end());
-	// Add new group to the back of unplanned.
-	_unplanned_groups.push_back(new_group);
-
-	_planned_groups.clear();
-}
-
 void CPFSolver::group() {
 	std::cout << "Grouping agents:" << std::endl;
-	if ((double) _instance.n_agents() / (double) _instance.n_vertices() > 0.4) {
+	_groups.clear();
+	if ((double) _instance.n_agents() / (double) _instance.n_vertices() > 0.5) {
 		// If there are many agents, all agents go in one big group
 		std::shared_ptr<Group> all = std::make_shared<Group>(_instance);
-		for (std::shared_ptr<Agent> &a : _instance.agents()) {
-			all->add_agent(a);
+		for (std::shared_ptr<Agent> &agent : _instance.agents()) {
+			all->add_agent(agent);
 		}
-		_unplanned_groups.push_back(all);
+		_groups.push_back(all);
 	} else {
 		std::vector<std::shared_ptr<Agent>> aux(_instance.agents());
 		while (!aux.empty()) {
-			// Each agent is added to its own group, and the groups are put in _unplanned_groups
+			// Each agent is added to its own group, and the groups are put in _groups
 			// The groups are added in order of increasing distance to goal.
-			std::shared_ptr<Group> g = std::make_shared<Group>(_instance);
-			g->add_agent(aux.back());
+			std::shared_ptr<Group> group = std::make_shared<Group>(_instance);
+			group->add_agent(aux.back());
 			aux.pop_back();
-			_unplanned_groups.push_back(g);
+			_groups.push_back(group);
 		}
 	}
 
-	std::cout << "Grouped:" << std::endl;
-	for (auto g : _unplanned_groups)
+	for (auto g : _groups)
 		std::cout << *g << " ";
 
 	std::cout << std::endl;
 }
 
 Solution CPFSolver::merge_solutions() {
-	auto pg_it = _planned_groups.begin();
+	auto pg_it = _groups.begin();
+	std::cout << "\n" << **pg_it << std::endl;
+
 	Solution solution = (*pg_it)->solution;
 	++pg_it;
 
-	for (; pg_it != _planned_groups.end(); ++pg_it) {
+	for (; pg_it != _groups.end(); ++pg_it) {
 		solution.merge((*pg_it)->solution);
 		std::cout << "Merged " << solution;
 	}
@@ -389,18 +337,72 @@ Solution CPFSolver::merge_solutions() {
 void CPFSolver::merge_all() {
 	// Create new group with the agents from both
 	std::shared_ptr<Group> new_group = std::make_shared<Group>(_instance);
-	for (std::shared_ptr<Group> &group : _unplanned_groups) {
-		for (std::shared_ptr<Agent> a : group->agents)
-			new_group->add_agent(a);
-	}
-	for (std::shared_ptr<Group> &group : _planned_groups) {
+	for (std::shared_ptr<Group> &group : _groups) {
 		for (std::shared_ptr<Agent> a : group->agents)
 			new_group->add_agent(a);
 	}
 
-	_unplanned_groups.clear();
+	_groups.clear();
 	// Add new group to unplanned.
-	_unplanned_groups.push_back(new_group);
+	_groups.push_back(new_group);
 
-	_planned_groups.clear();
+}
+
+bool CPFSolver::check_conflict(std::shared_ptr<Group> &g1, std::shared_ptr<Group> &g2) {
+	// Go through solutions and search for conflicts
+
+	unsigned n_timesteps = (unsigned int) std::min(g1->solution.n_timesteps(), g2->solution.n_timesteps());
+
+	for (const std::shared_ptr<Agent> &g1_agent : g1->agents) {
+		for (const std::shared_ptr<Agent> &g2_agent : g2->agents) {
+			for (unsigned i = 0; i < n_timesteps; ++i) {
+				if (g1->solution.get_position(g1_agent, i) == g2->solution.get_position(g2_agent, i)) {
+					// Two agents in the same position at the same time
+					if (_verbose > 1)
+						std::cout << "Agent " << *g1_agent << " from group " << *g1 << " and "
+						          << "agent " << *g2_agent << " from group " << *g2 << " are both at vertex "
+						          << g1->solution.get_position(g1_agent, i) << " on timestep " << i << "." << std::endl;
+					return true;
+				}
+
+
+				if (i < n_timesteps &&
+				    g1->solution.get_position(g1_agent, i) == g2->solution.get_position(g2_agent, i + 1) &&
+				    g2->solution.get_position(g2_agent, i) == g1->solution.get_position(g1_agent, i + 1)) {
+
+					// Agents swap places
+					if (_verbose > 1)
+						std::cout << "Agent " << *g1_agent << " from group " << *g1 << " and "
+						          << "agent " << *g2_agent << " from group " << *g2 << " swapped vertices from "
+						          << g1->solution.get_position(g1_agent, i) << " to "
+						          << g2->solution.get_position(g2_agent, i)
+						          << " between timesteps " << i << " and " << i + 1 << std::endl;
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+void CPFSolver::merge(unsigned int g1_idx, unsigned int g2_idx) {
+	// Create new group with the agents from both
+	std::shared_ptr<Group> new_group = std::make_shared<Group>(_instance);
+	for (std::shared_ptr<Agent> a : _groups[g1_idx]->agents)
+		new_group->add_agent(a);
+	for (std::shared_ptr<Agent> a : _groups[g2_idx]->agents)
+		new_group->add_agent(a);
+
+
+	// Add new group to the back of unplanned.
+	_groups.push_back(new_group);
+
+	if (g1_idx > g2_idx) {
+		_groups.erase(_groups.begin() + g1_idx);
+		_groups.erase(_groups.begin() + g2_idx);
+	} else {
+		_groups.erase(_groups.begin() + g2_idx);
+		_groups.erase(_groups.begin() + g1_idx);
+	}
+
 }
