@@ -34,7 +34,6 @@ public:
 	                                        _vertex_ends_empty(environment.n_vertices(), true) {}
 
 	// Agents:
-
 	unsigned n_agents() const { return static_cast<unsigned int>(_agents.size()); }
 
 	Agent &agent(unsigned a_id) const;

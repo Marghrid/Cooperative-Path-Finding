@@ -253,14 +253,8 @@ void SimplifiedID::create_planned_groups_assumptions(std::shared_ptr<Group> grou
                                                      std::vector<std::shared_ptr<Group>> planned_groups,
                                                      Glucose::vec<Glucose::Lit> &assumptions) {
 
-	if (_verbose > 2)
+	if (_verbose > 3)
 		std::cout << "Planned groups' assumptions for group " << *group << std::endl;
-
-	std::vector<std::vector<bool>> empty(group->solution.n_timesteps() + 1);
-	for (std::vector<bool> &empty_line : empty) {
-		std::vector<bool> aux(group->solution.instance().n_vertices(), true);
-		empty_line = aux;
-	}
 
 	for (std::shared_ptr<Group> &planned_group : planned_groups) {
 		// for each planned group add X and eps vars for each value in solution
@@ -270,6 +264,7 @@ void SimplifiedID::create_planned_groups_assumptions(std::shared_ptr<Group> grou
 		for (std::shared_ptr<Agent> &planned_agent : planned_group->agents) {
 			for (unsigned t = 0; t < planned_group->solution.n_timesteps(); ++t) {
 				for (unsigned k = 0; k < group->n_agents(); ++k) {
+					// All groups' agents are not where planned groups' agents are.
 					if (_verbose > 3)
 						std::cout << "Creating assumption: ~x(" << k << ", "
 						          << planned_group->solution.get_position(planned_agent, t) << ", " << t << ", "
@@ -280,16 +275,14 @@ void SimplifiedID::create_planned_groups_assumptions(std::shared_ptr<Group> grou
 							true));
 				}
 
-				if (_verbose > 3)
+				/*if (_verbose > 3)
 					std::cout << "Creating assumption: ~e("
-					          << planned_group->solution.get_position(planned_agent, t) << ", "
-					          << t << ", " << make_evar_id(
-							planned_group->solution.get_position(planned_agent, t), t, *group)
-					          << ")"
-					          << std::endl;
+					          << planned_group->solution.get_position(planned_agent, t) << ", " << t << ", "
+					          << make_evar_id(planned_group->solution.get_position(planned_agent, t), t, *group)
+					          << ")" << std::endl;
 
 				assumptions.push(Glucose::mkLit(
-						make_evar_id(planned_group->solution.get_position(planned_agent, t), t, *group), true));
+						make_evar_id(planned_group->solution.get_position(planned_agent, t), t, *group), true));*/
 			}
 		}
 	}

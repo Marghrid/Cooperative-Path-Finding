@@ -20,6 +20,7 @@ struct Group {
 
 	int created_vars_makespan = -1;
 	int created_clauses_makespan = 0;
+	int last_solved_makespan = -1;
 
 	/* The indices are vertex IDs */
 	std::vector<bool> vertex_starts_empty;
@@ -33,6 +34,9 @@ struct Group {
 		solver->setIncrementalMode();
 		solver->verbEveryConflicts = 10;
 		solver->verbosity = 0;
+	}
+
+	virtual ~Group() {
 	}
 
 	unsigned long n_agents() const {

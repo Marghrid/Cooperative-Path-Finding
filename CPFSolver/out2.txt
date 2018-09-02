@@ -1,0 +1,1287 @@
+agent 0 starts at 0
+agent 1 starts at 2
+agent 2 starts at 3
+agent 0 ends at 8
+agent 1 ends at 14
+agent 2 ends at 15
+---- CPF INSTANCE ----
+Environment: 
+N vertices: 16
+N edges: 25
+(0, 1)
+(0, 4)
+(1, 2)
+(1, 5)
+(2, 3)
+(2, 6)
+(3, 7)
+(4, 5)
+(4, 8)
+(5, 6)
+(5, 9)
+(6, 7)
+(6, 10)
+(7, 11)
+(8, 9)
+(8, 12)
+(9, 10)
+(9, 13)
+(10, 11)
+(10, 14)
+(11, 15)
+(12, 13)
+(13, 14)
+(14, 15)
+(14, 15)
+
+N agents: 3
+1[2, 14]
+2[3, 15]
+0[0, 8]
+
+Solving instance with encoding simplified and search unsat-sat.
+Grouping agents:
+Grouped:
+{ 0[0, 8] } { 2[3, 15] } { 1[2, 14] } 
+Trying makespan = 3
+Solving group { 1[2, 14] } for makespan 3:
+creating vars for group { 1[2, 14] } for makespan 0
+var x for agent 0, vertex 0, and timestep 0 has id 0
+var epsilon for vertex 0, and timestep 0 has id 1
+var x for agent 0, vertex 1, and timestep 0 has id 2
+var epsilon for vertex 1, and timestep 0 has id 3
+var x for agent 0, vertex 2, and timestep 0 has id 4
+var epsilon for vertex 2, and timestep 0 has id 5
+var x for agent 0, vertex 3, and timestep 0 has id 6
+var epsilon for vertex 3, and timestep 0 has id 7
+var x for agent 0, vertex 4, and timestep 0 has id 8
+var epsilon for vertex 4, and timestep 0 has id 9
+var x for agent 0, vertex 5, and timestep 0 has id 10
+var epsilon for vertex 5, and timestep 0 has id 11
+var x for agent 0, vertex 6, and timestep 0 has id 12
+var epsilon for vertex 6, and timestep 0 has id 13
+var x for agent 0, vertex 7, and timestep 0 has id 14
+var epsilon for vertex 7, and timestep 0 has id 15
+var x for agent 0, vertex 8, and timestep 0 has id 16
+var epsilon for vertex 8, and timestep 0 has id 17
+var x for agent 0, vertex 9, and timestep 0 has id 18
+var epsilon for vertex 9, and timestep 0 has id 19
+var x for agent 0, vertex 10, and timestep 0 has id 20
+var epsilon for vertex 10, and timestep 0 has id 21
+var x for agent 0, vertex 11, and timestep 0 has id 22
+var epsilon for vertex 11, and timestep 0 has id 23
+var x for agent 0, vertex 12, and timestep 0 has id 24
+var epsilon for vertex 12, and timestep 0 has id 25
+var x for agent 0, vertex 13, and timestep 0 has id 26
+var epsilon for vertex 13, and timestep 0 has id 27
+var x for agent 0, vertex 14, and timestep 0 has id 28
+var epsilon for vertex 14, and timestep 0 has id 29
+var x for agent 0, vertex 15, and timestep 0 has id 30
+var epsilon for vertex 15, and timestep 0 has id 31
+Initial arrangement...
+adding clause: e(0, 0, 1)
+adding clause: ~x(0, 0, 0, 0)
+adding clause: e(1, 0, 3)
+adding clause: ~x(0, 1, 0, 2)
+adding clause: ~e(2, 0, 5)
+adding clause: x(0, 2, 0, 4)
+adding clause: e(3, 0, 7)
+adding clause: ~x(0, 3, 0, 6)
+adding clause: e(4, 0, 9)
+adding clause: ~x(0, 4, 0, 8)
+adding clause: e(5, 0, 11)
+adding clause: ~x(0, 5, 0, 10)
+adding clause: e(6, 0, 13)
+adding clause: ~x(0, 6, 0, 12)
+adding clause: e(7, 0, 15)
+adding clause: ~x(0, 7, 0, 14)
+adding clause: e(8, 0, 17)
+adding clause: ~x(0, 8, 0, 16)
+adding clause: e(9, 0, 19)
+adding clause: ~x(0, 9, 0, 18)
+adding clause: e(10, 0, 21)
+adding clause: ~x(0, 10, 0, 20)
+adding clause: e(11, 0, 23)
+adding clause: ~x(0, 11, 0, 22)
+adding clause: e(12, 0, 25)
+adding clause: ~x(0, 12, 0, 24)
+adding clause: e(13, 0, 27)
+adding clause: ~x(0, 13, 0, 26)
+adding clause: e(14, 0, 29)
+adding clause: ~x(0, 14, 0, 28)
+adding clause: e(15, 0, 31)
+adding clause: ~x(0, 15, 0, 30)
+creating vars for group { 1[2, 14] } for makespan 1
+var x for agent 0, vertex 0, and timestep 1 has id 32
+var epsilon for vertex 0, and timestep 1 has id 33
+var x for agent 0, vertex 1, and timestep 1 has id 34
+var epsilon for vertex 1, and timestep 1 has id 35
+var x for agent 0, vertex 2, and timestep 1 has id 36
+var epsilon for vertex 2, and timestep 1 has id 37
+var x for agent 0, vertex 3, and timestep 1 has id 38
+var epsilon for vertex 3, and timestep 1 has id 39
+var x for agent 0, vertex 4, and timestep 1 has id 40
+var epsilon for vertex 4, and timestep 1 has id 41
+var x for agent 0, vertex 5, and timestep 1 has id 42
+var epsilon for vertex 5, and timestep 1 has id 43
+var x for agent 0, vertex 6, and timestep 1 has id 44
+var epsilon for vertex 6, and timestep 1 has id 45
+var x for agent 0, vertex 7, and timestep 1 has id 46
+var epsilon for vertex 7, and timestep 1 has id 47
+var x for agent 0, vertex 8, and timestep 1 has id 48
+var epsilon for vertex 8, and timestep 1 has id 49
+var x for agent 0, vertex 9, and timestep 1 has id 50
+var epsilon for vertex 9, and timestep 1 has id 51
+var x for agent 0, vertex 10, and timestep 1 has id 52
+var epsilon for vertex 10, and timestep 1 has id 53
+var x for agent 0, vertex 11, and timestep 1 has id 54
+var epsilon for vertex 11, and timestep 1 has id 55
+var x for agent 0, vertex 12, and timestep 1 has id 56
+var epsilon for vertex 12, and timestep 1 has id 57
+var x for agent 0, vertex 13, and timestep 1 has id 58
+var epsilon for vertex 13, and timestep 1 has id 59
+var x for agent 0, vertex 14, and timestep 1 has id 60
+var epsilon for vertex 14, and timestep 1 has id 61
+var x for agent 0, vertex 15, and timestep 1 has id 62
+var epsilon for vertex 15, and timestep 1 has id 63
+The target vertex is vacant before the move, 
+and the source vertex will be vacant after it...
+adding clause: ~x(0, 0, 0, 0) V ~x(0, 1, 1, 34) V e(1, 0, 3) V e(0, 1, 33)
+adding clause: ~x(0, 0, 0, 0) V ~x(0, 4, 1, 40) V e(4, 0, 9) V e(0, 1, 33)
+adding clause: ~x(0, 1, 0, 2) V ~x(0, 2, 1, 36) V e(2, 0, 5) V e(1, 1, 35)
+adding clause: ~x(0, 1, 0, 2) V ~x(0, 5, 1, 42) V e(5, 0, 11) V e(1, 1, 35)
+adding clause: ~x(0, 2, 0, 4) V ~x(0, 3, 1, 38) V e(3, 0, 7) V e(2, 1, 37)
+adding clause: ~x(0, 2, 0, 4) V ~x(0, 6, 1, 44) V e(6, 0, 13) V e(2, 1, 37)
+adding clause: ~x(0, 3, 0, 6) V ~x(0, 7, 1, 46) V e(7, 0, 15) V e(3, 1, 39)
+adding clause: ~x(0, 4, 0, 8) V ~x(0, 5, 1, 42) V e(5, 0, 11) V e(4, 1, 41)
+adding clause: ~x(0, 4, 0, 8) V ~x(0, 8, 1, 48) V e(8, 0, 17) V e(4, 1, 41)
+adding clause: ~x(0, 5, 0, 10) V ~x(0, 6, 1, 44) V e(6, 0, 13) V e(5, 1, 43)
+adding clause: ~x(0, 5, 0, 10) V ~x(0, 9, 1, 50) V e(9, 0, 19) V e(5, 1, 43)
+adding clause: ~x(0, 6, 0, 12) V ~x(0, 7, 1, 46) V e(7, 0, 15) V e(6, 1, 45)
+adding clause: ~x(0, 6, 0, 12) V ~x(0, 10, 1, 52) V e(10, 0, 21) V e(6, 1, 45)
+adding clause: ~x(0, 7, 0, 14) V ~x(0, 11, 1, 54) V e(11, 0, 23) V e(7, 1, 47)
+adding clause: ~x(0, 8, 0, 16) V ~x(0, 9, 1, 50) V e(9, 0, 19) V e(8, 1, 49)
+adding clause: ~x(0, 8, 0, 16) V ~x(0, 12, 1, 56) V e(12, 0, 25) V e(8, 1, 49)
+adding clause: ~x(0, 9, 0, 18) V ~x(0, 10, 1, 52) V e(10, 0, 21) V e(9, 1, 51)
+adding clause: ~x(0, 9, 0, 18) V ~x(0, 13, 1, 58) V e(13, 0, 27) V e(9, 1, 51)
+adding clause: ~x(0, 10, 0, 20) V ~x(0, 11, 1, 54) V e(11, 0, 23) V e(10, 1, 53)
+adding clause: ~x(0, 10, 0, 20) V ~x(0, 14, 1, 60) V e(14, 0, 29) V e(10, 1, 53)
+adding clause: ~x(0, 11, 0, 22) V ~x(0, 15, 1, 62) V e(15, 0, 31) V e(11, 1, 55)
+adding clause: ~x(0, 12, 0, 24) V ~x(0, 13, 1, 58) V e(13, 0, 27) V e(12, 1, 57)
+adding clause: ~x(0, 13, 0, 26) V ~x(0, 14, 1, 60) V e(14, 0, 29) V e(13, 1, 59)
+adding clause: ~x(0, 14, 0, 28) V ~x(0, 15, 1, 62) V e(15, 0, 31) V e(14, 1, 61)
+adding clause: ~x(0, 14, 0, 28) V ~x(0, 15, 1, 62) V e(15, 0, 31) V e(14, 1, 61)
+An agent moves along an edge, or not at all...
+At most one agent is placed in each vertex at each time step...
+Establishing relation between epsilon and X variables...
+adding clause: ~e(0, 1, 33) V ~x(0, 0, 1, 32)
+adding clause: ~x(0, 0, 0, 0) V x(0, 0, 1, 32) V x(0, 1, 1, 34) V x(0, 4, 1, 40)
+adding clause: ~e(1, 1, 35) V ~x(0, 1, 1, 34)
+adding clause: ~x(0, 1, 0, 2) V x(0, 1, 1, 34) V x(0, 0, 1, 32) V x(0, 2, 1, 36) V x(0, 5, 1, 42)
+adding clause: ~e(2, 1, 37) V ~x(0, 2, 1, 36)
+adding clause: ~x(0, 2, 0, 4) V x(0, 2, 1, 36) V x(0, 1, 1, 34) V x(0, 3, 1, 38) V x(0, 6, 1, 44)
+adding clause: ~e(3, 1, 39) V ~x(0, 3, 1, 38)
+adding clause: ~x(0, 3, 0, 6) V x(0, 3, 1, 38) V x(0, 2, 1, 36) V x(0, 7, 1, 46)
+adding clause: ~e(4, 1, 41) V ~x(0, 4, 1, 40)
+adding clause: ~x(0, 4, 0, 8) V x(0, 4, 1, 40) V x(0, 0, 1, 32) V x(0, 5, 1, 42) V x(0, 8, 1, 48)
+adding clause: ~e(5, 1, 43) V ~x(0, 5, 1, 42)
+adding clause: ~x(0, 5, 0, 10) V x(0, 5, 1, 42) V x(0, 1, 1, 34) V x(0, 4, 1, 40) V x(0, 6, 1, 44) V x(0, 9, 1, 50)
+adding clause: ~e(6, 1, 45) V ~x(0, 6, 1, 44)
+adding clause: ~x(0, 6, 0, 12) V x(0, 6, 1, 44) V x(0, 2, 1, 36) V x(0, 5, 1, 42) V x(0, 7, 1, 46) V x(0, 10, 1, 52)
+adding clause: ~e(7, 1, 47) V ~x(0, 7, 1, 46)
+adding clause: ~x(0, 7, 0, 14) V x(0, 7, 1, 46) V x(0, 3, 1, 38) V x(0, 6, 1, 44) V x(0, 11, 1, 54)
+adding clause: ~e(8, 1, 49) V ~x(0, 8, 1, 48)
+adding clause: ~x(0, 8, 0, 16) V x(0, 8, 1, 48) V x(0, 4, 1, 40) V x(0, 9, 1, 50) V x(0, 12, 1, 56)
+adding clause: ~e(9, 1, 51) V ~x(0, 9, 1, 50)
+adding clause: ~x(0, 9, 0, 18) V x(0, 9, 1, 50) V x(0, 5, 1, 42) V x(0, 8, 1, 48) V x(0, 10, 1, 52) V x(0, 13, 1, 58)
+adding clause: ~e(10, 1, 53) V ~x(0, 10, 1, 52)
+adding clause: ~x(0, 10, 0, 20) V x(0, 10, 1, 52) V x(0, 6, 1, 44) V x(0, 9, 1, 50) V x(0, 11, 1, 54) V x(0, 14, 1, 60)
+adding clause: ~e(11, 1, 55) V ~x(0, 11, 1, 54)
+adding clause: ~x(0, 11, 0, 22) V x(0, 11, 1, 54) V x(0, 7, 1, 46) V x(0, 10, 1, 52) V x(0, 15, 1, 62)
+adding clause: ~e(12, 1, 57) V ~x(0, 12, 1, 56)
+adding clause: ~x(0, 12, 0, 24) V x(0, 12, 1, 56) V x(0, 8, 1, 48) V x(0, 13, 1, 58)
+adding clause: ~e(13, 1, 59) V ~x(0, 13, 1, 58)
+adding clause: ~x(0, 13, 0, 26) V x(0, 13, 1, 58) V x(0, 9, 1, 50) V x(0, 12, 1, 56) V x(0, 14, 1, 60)
+adding clause: ~e(14, 1, 61) V ~x(0, 14, 1, 60)
+adding clause: ~x(0, 14, 0, 28) V x(0, 14, 1, 60) V x(0, 10, 1, 52) V x(0, 13, 1, 58) V x(0, 15, 1, 62) V x(0, 15, 1, 62)
+adding clause: ~e(15, 1, 63) V ~x(0, 15, 1, 62)
+adding clause: ~x(0, 15, 0, 30) V x(0, 15, 1, 62) V x(0, 11, 1, 54) V x(0, 14, 1, 60) V x(0, 14, 1, 60)
+creating vars for group { 1[2, 14] } for makespan 2
+var x for agent 0, vertex 0, and timestep 2 has id 64
+var epsilon for vertex 0, and timestep 2 has id 65
+var x for agent 0, vertex 1, and timestep 2 has id 66
+var epsilon for vertex 1, and timestep 2 has id 67
+var x for agent 0, vertex 2, and timestep 2 has id 68
+var epsilon for vertex 2, and timestep 2 has id 69
+var x for agent 0, vertex 3, and timestep 2 has id 70
+var epsilon for vertex 3, and timestep 2 has id 71
+var x for agent 0, vertex 4, and timestep 2 has id 72
+var epsilon for vertex 4, and timestep 2 has id 73
+var x for agent 0, vertex 5, and timestep 2 has id 74
+var epsilon for vertex 5, and timestep 2 has id 75
+var x for agent 0, vertex 6, and timestep 2 has id 76
+var epsilon for vertex 6, and timestep 2 has id 77
+var x for agent 0, vertex 7, and timestep 2 has id 78
+var epsilon for vertex 7, and timestep 2 has id 79
+var x for agent 0, vertex 8, and timestep 2 has id 80
+var epsilon for vertex 8, and timestep 2 has id 81
+var x for agent 0, vertex 9, and timestep 2 has id 82
+var epsilon for vertex 9, and timestep 2 has id 83
+var x for agent 0, vertex 10, and timestep 2 has id 84
+var epsilon for vertex 10, and timestep 2 has id 85
+var x for agent 0, vertex 11, and timestep 2 has id 86
+var epsilon for vertex 11, and timestep 2 has id 87
+var x for agent 0, vertex 12, and timestep 2 has id 88
+var epsilon for vertex 12, and timestep 2 has id 89
+var x for agent 0, vertex 13, and timestep 2 has id 90
+var epsilon for vertex 13, and timestep 2 has id 91
+var x for agent 0, vertex 14, and timestep 2 has id 92
+var epsilon for vertex 14, and timestep 2 has id 93
+var x for agent 0, vertex 15, and timestep 2 has id 94
+var epsilon for vertex 15, and timestep 2 has id 95
+The target vertex is vacant before the move, 
+and the source vertex will be vacant after it...
+adding clause: ~x(0, 0, 1, 32) V ~x(0, 1, 2, 66) V e(1, 1, 35) V e(0, 2, 65)
+adding clause: ~x(0, 0, 1, 32) V ~x(0, 4, 2, 72) V e(4, 1, 41) V e(0, 2, 65)
+adding clause: ~x(0, 1, 1, 34) V ~x(0, 2, 2, 68) V e(2, 1, 37) V e(1, 2, 67)
+adding clause: ~x(0, 1, 1, 34) V ~x(0, 5, 2, 74) V e(5, 1, 43) V e(1, 2, 67)
+adding clause: ~x(0, 2, 1, 36) V ~x(0, 3, 2, 70) V e(3, 1, 39) V e(2, 2, 69)
+adding clause: ~x(0, 2, 1, 36) V ~x(0, 6, 2, 76) V e(6, 1, 45) V e(2, 2, 69)
+adding clause: ~x(0, 3, 1, 38) V ~x(0, 7, 2, 78) V e(7, 1, 47) V e(3, 2, 71)
+adding clause: ~x(0, 4, 1, 40) V ~x(0, 5, 2, 74) V e(5, 1, 43) V e(4, 2, 73)
+adding clause: ~x(0, 4, 1, 40) V ~x(0, 8, 2, 80) V e(8, 1, 49) V e(4, 2, 73)
+adding clause: ~x(0, 5, 1, 42) V ~x(0, 6, 2, 76) V e(6, 1, 45) V e(5, 2, 75)
+adding clause: ~x(0, 5, 1, 42) V ~x(0, 9, 2, 82) V e(9, 1, 51) V e(5, 2, 75)
+adding clause: ~x(0, 6, 1, 44) V ~x(0, 7, 2, 78) V e(7, 1, 47) V e(6, 2, 77)
+adding clause: ~x(0, 6, 1, 44) V ~x(0, 10, 2, 84) V e(10, 1, 53) V e(6, 2, 77)
+adding clause: ~x(0, 7, 1, 46) V ~x(0, 11, 2, 86) V e(11, 1, 55) V e(7, 2, 79)
+adding clause: ~x(0, 8, 1, 48) V ~x(0, 9, 2, 82) V e(9, 1, 51) V e(8, 2, 81)
+adding clause: ~x(0, 8, 1, 48) V ~x(0, 12, 2, 88) V e(12, 1, 57) V e(8, 2, 81)
+adding clause: ~x(0, 9, 1, 50) V ~x(0, 10, 2, 84) V e(10, 1, 53) V e(9, 2, 83)
+adding clause: ~x(0, 9, 1, 50) V ~x(0, 13, 2, 90) V e(13, 1, 59) V e(9, 2, 83)
+adding clause: ~x(0, 10, 1, 52) V ~x(0, 11, 2, 86) V e(11, 1, 55) V e(10, 2, 85)
+adding clause: ~x(0, 10, 1, 52) V ~x(0, 14, 2, 92) V e(14, 1, 61) V e(10, 2, 85)
+adding clause: ~x(0, 11, 1, 54) V ~x(0, 15, 2, 94) V e(15, 1, 63) V e(11, 2, 87)
+adding clause: ~x(0, 12, 1, 56) V ~x(0, 13, 2, 90) V e(13, 1, 59) V e(12, 2, 89)
+adding clause: ~x(0, 13, 1, 58) V ~x(0, 14, 2, 92) V e(14, 1, 61) V e(13, 2, 91)
+adding clause: ~x(0, 14, 1, 60) V ~x(0, 15, 2, 94) V e(15, 1, 63) V e(14, 2, 93)
+adding clause: ~x(0, 14, 1, 60) V ~x(0, 15, 2, 94) V e(15, 1, 63) V e(14, 2, 93)
+An agent moves along an edge, or not at all...
+At most one agent is placed in each vertex at each time step...
+Establishing relation between epsilon and X variables...
+adding clause: ~e(0, 2, 65) V ~x(0, 0, 2, 64)
+adding clause: ~x(0, 0, 1, 32) V x(0, 0, 2, 64) V x(0, 1, 2, 66) V x(0, 4, 2, 72)
+adding clause: ~e(1, 2, 67) V ~x(0, 1, 2, 66)
+adding clause: ~x(0, 1, 1, 34) V x(0, 1, 2, 66) V x(0, 0, 2, 64) V x(0, 2, 2, 68) V x(0, 5, 2, 74)
+adding clause: ~e(2, 2, 69) V ~x(0, 2, 2, 68)
+adding clause: ~x(0, 2, 1, 36) V x(0, 2, 2, 68) V x(0, 1, 2, 66) V x(0, 3, 2, 70) V x(0, 6, 2, 76)
+adding clause: ~e(3, 2, 71) V ~x(0, 3, 2, 70)
+adding clause: ~x(0, 3, 1, 38) V x(0, 3, 2, 70) V x(0, 2, 2, 68) V x(0, 7, 2, 78)
+adding clause: ~e(4, 2, 73) V ~x(0, 4, 2, 72)
+adding clause: ~x(0, 4, 1, 40) V x(0, 4, 2, 72) V x(0, 0, 2, 64) V x(0, 5, 2, 74) V x(0, 8, 2, 80)
+adding clause: ~e(5, 2, 75) V ~x(0, 5, 2, 74)
+adding clause: ~x(0, 5, 1, 42) V x(0, 5, 2, 74) V x(0, 1, 2, 66) V x(0, 4, 2, 72) V x(0, 6, 2, 76) V x(0, 9, 2, 82)
+adding clause: ~e(6, 2, 77) V ~x(0, 6, 2, 76)
+adding clause: ~x(0, 6, 1, 44) V x(0, 6, 2, 76) V x(0, 2, 2, 68) V x(0, 5, 2, 74) V x(0, 7, 2, 78) V x(0, 10, 2, 84)
+adding clause: ~e(7, 2, 79) V ~x(0, 7, 2, 78)
+adding clause: ~x(0, 7, 1, 46) V x(0, 7, 2, 78) V x(0, 3, 2, 70) V x(0, 6, 2, 76) V x(0, 11, 2, 86)
+adding clause: ~e(8, 2, 81) V ~x(0, 8, 2, 80)
+adding clause: ~x(0, 8, 1, 48) V x(0, 8, 2, 80) V x(0, 4, 2, 72) V x(0, 9, 2, 82) V x(0, 12, 2, 88)
+adding clause: ~e(9, 2, 83) V ~x(0, 9, 2, 82)
+adding clause: ~x(0, 9, 1, 50) V x(0, 9, 2, 82) V x(0, 5, 2, 74) V x(0, 8, 2, 80) V x(0, 10, 2, 84) V x(0, 13, 2, 90)
+adding clause: ~e(10, 2, 85) V ~x(0, 10, 2, 84)
+adding clause: ~x(0, 10, 1, 52) V x(0, 10, 2, 84) V x(0, 6, 2, 76) V x(0, 9, 2, 82) V x(0, 11, 2, 86) V x(0, 14, 2, 92)
+adding clause: ~e(11, 2, 87) V ~x(0, 11, 2, 86)
+adding clause: ~x(0, 11, 1, 54) V x(0, 11, 2, 86) V x(0, 7, 2, 78) V x(0, 10, 2, 84) V x(0, 15, 2, 94)
+adding clause: ~e(12, 2, 89) V ~x(0, 12, 2, 88)
+adding clause: ~x(0, 12, 1, 56) V x(0, 12, 2, 88) V x(0, 8, 2, 80) V x(0, 13, 2, 90)
+adding clause: ~e(13, 2, 91) V ~x(0, 13, 2, 90)
+adding clause: ~x(0, 13, 1, 58) V x(0, 13, 2, 90) V x(0, 9, 2, 82) V x(0, 12, 2, 88) V x(0, 14, 2, 92)
+adding clause: ~e(14, 2, 93) V ~x(0, 14, 2, 92)
+adding clause: ~x(0, 14, 1, 60) V x(0, 14, 2, 92) V x(0, 10, 2, 84) V x(0, 13, 2, 90) V x(0, 15, 2, 94) V x(0, 15, 2, 94)
+adding clause: ~e(15, 2, 95) V ~x(0, 15, 2, 94)
+adding clause: ~x(0, 15, 1, 62) V x(0, 15, 2, 94) V x(0, 11, 2, 86) V x(0, 14, 2, 92) V x(0, 14, 2, 92)
+creating vars for group { 1[2, 14] } for makespan 3
+var x for agent 0, vertex 0, and timestep 3 has id 96
+var epsilon for vertex 0, and timestep 3 has id 97
+var x for agent 0, vertex 1, and timestep 3 has id 98
+var epsilon for vertex 1, and timestep 3 has id 99
+var x for agent 0, vertex 2, and timestep 3 has id 100
+var epsilon for vertex 2, and timestep 3 has id 101
+var x for agent 0, vertex 3, and timestep 3 has id 102
+var epsilon for vertex 3, and timestep 3 has id 103
+var x for agent 0, vertex 4, and timestep 3 has id 104
+var epsilon for vertex 4, and timestep 3 has id 105
+var x for agent 0, vertex 5, and timestep 3 has id 106
+var epsilon for vertex 5, and timestep 3 has id 107
+var x for agent 0, vertex 6, and timestep 3 has id 108
+var epsilon for vertex 6, and timestep 3 has id 109
+var x for agent 0, vertex 7, and timestep 3 has id 110
+var epsilon for vertex 7, and timestep 3 has id 111
+var x for agent 0, vertex 8, and timestep 3 has id 112
+var epsilon for vertex 8, and timestep 3 has id 113
+var x for agent 0, vertex 9, and timestep 3 has id 114
+var epsilon for vertex 9, and timestep 3 has id 115
+var x for agent 0, vertex 10, and timestep 3 has id 116
+var epsilon for vertex 10, and timestep 3 has id 117
+var x for agent 0, vertex 11, and timestep 3 has id 118
+var epsilon for vertex 11, and timestep 3 has id 119
+var x for agent 0, vertex 12, and timestep 3 has id 120
+var epsilon for vertex 12, and timestep 3 has id 121
+var x for agent 0, vertex 13, and timestep 3 has id 122
+var epsilon for vertex 13, and timestep 3 has id 123
+var x for agent 0, vertex 14, and timestep 3 has id 124
+var epsilon for vertex 14, and timestep 3 has id 125
+var x for agent 0, vertex 15, and timestep 3 has id 126
+var epsilon for vertex 15, and timestep 3 has id 127
+The target vertex is vacant before the move, 
+and the source vertex will be vacant after it...
+adding clause: ~x(0, 0, 2, 64) V ~x(0, 1, 3, 98) V e(1, 2, 67) V e(0, 3, 97)
+adding clause: ~x(0, 0, 2, 64) V ~x(0, 4, 3, 104) V e(4, 2, 73) V e(0, 3, 97)
+adding clause: ~x(0, 1, 2, 66) V ~x(0, 2, 3, 100) V e(2, 2, 69) V e(1, 3, 99)
+adding clause: ~x(0, 1, 2, 66) V ~x(0, 5, 3, 106) V e(5, 2, 75) V e(1, 3, 99)
+adding clause: ~x(0, 2, 2, 68) V ~x(0, 3, 3, 102) V e(3, 2, 71) V e(2, 3, 101)
+adding clause: ~x(0, 2, 2, 68) V ~x(0, 6, 3, 108) V e(6, 2, 77) V e(2, 3, 101)
+adding clause: ~x(0, 3, 2, 70) V ~x(0, 7, 3, 110) V e(7, 2, 79) V e(3, 3, 103)
+adding clause: ~x(0, 4, 2, 72) V ~x(0, 5, 3, 106) V e(5, 2, 75) V e(4, 3, 105)
+adding clause: ~x(0, 4, 2, 72) V ~x(0, 8, 3, 112) V e(8, 2, 81) V e(4, 3, 105)
+adding clause: ~x(0, 5, 2, 74) V ~x(0, 6, 3, 108) V e(6, 2, 77) V e(5, 3, 107)
+adding clause: ~x(0, 5, 2, 74) V ~x(0, 9, 3, 114) V e(9, 2, 83) V e(5, 3, 107)
+adding clause: ~x(0, 6, 2, 76) V ~x(0, 7, 3, 110) V e(7, 2, 79) V e(6, 3, 109)
+adding clause: ~x(0, 6, 2, 76) V ~x(0, 10, 3, 116) V e(10, 2, 85) V e(6, 3, 109)
+adding clause: ~x(0, 7, 2, 78) V ~x(0, 11, 3, 118) V e(11, 2, 87) V e(7, 3, 111)
+adding clause: ~x(0, 8, 2, 80) V ~x(0, 9, 3, 114) V e(9, 2, 83) V e(8, 3, 113)
+adding clause: ~x(0, 8, 2, 80) V ~x(0, 12, 3, 120) V e(12, 2, 89) V e(8, 3, 113)
+adding clause: ~x(0, 9, 2, 82) V ~x(0, 10, 3, 116) V e(10, 2, 85) V e(9, 3, 115)
+adding clause: ~x(0, 9, 2, 82) V ~x(0, 13, 3, 122) V e(13, 2, 91) V e(9, 3, 115)
+adding clause: ~x(0, 10, 2, 84) V ~x(0, 11, 3, 118) V e(11, 2, 87) V e(10, 3, 117)
+adding clause: ~x(0, 10, 2, 84) V ~x(0, 14, 3, 124) V e(14, 2, 93) V e(10, 3, 117)
+adding clause: ~x(0, 11, 2, 86) V ~x(0, 15, 3, 126) V e(15, 2, 95) V e(11, 3, 119)
+adding clause: ~x(0, 12, 2, 88) V ~x(0, 13, 3, 122) V e(13, 2, 91) V e(12, 3, 121)
+adding clause: ~x(0, 13, 2, 90) V ~x(0, 14, 3, 124) V e(14, 2, 93) V e(13, 3, 123)
+adding clause: ~x(0, 14, 2, 92) V ~x(0, 15, 3, 126) V e(15, 2, 95) V e(14, 3, 125)
+adding clause: ~x(0, 14, 2, 92) V ~x(0, 15, 3, 126) V e(15, 2, 95) V e(14, 3, 125)
+An agent moves along an edge, or not at all...
+At most one agent is placed in each vertex at each time step...
+Establishing relation between epsilon and X variables...
+adding clause: ~e(0, 3, 97) V ~x(0, 0, 3, 96)
+adding clause: ~x(0, 0, 2, 64) V x(0, 0, 3, 96) V x(0, 1, 3, 98) V x(0, 4, 3, 104)
+adding clause: ~e(1, 3, 99) V ~x(0, 1, 3, 98)
+adding clause: ~x(0, 1, 2, 66) V x(0, 1, 3, 98) V x(0, 0, 3, 96) V x(0, 2, 3, 100) V x(0, 5, 3, 106)
+adding clause: ~e(2, 3, 101) V ~x(0, 2, 3, 100)
+adding clause: ~x(0, 2, 2, 68) V x(0, 2, 3, 100) V x(0, 1, 3, 98) V x(0, 3, 3, 102) V x(0, 6, 3, 108)
+adding clause: ~e(3, 3, 103) V ~x(0, 3, 3, 102)
+adding clause: ~x(0, 3, 2, 70) V x(0, 3, 3, 102) V x(0, 2, 3, 100) V x(0, 7, 3, 110)
+adding clause: ~e(4, 3, 105) V ~x(0, 4, 3, 104)
+adding clause: ~x(0, 4, 2, 72) V x(0, 4, 3, 104) V x(0, 0, 3, 96) V x(0, 5, 3, 106) V x(0, 8, 3, 112)
+adding clause: ~e(5, 3, 107) V ~x(0, 5, 3, 106)
+adding clause: ~x(0, 5, 2, 74) V x(0, 5, 3, 106) V x(0, 1, 3, 98) V x(0, 4, 3, 104) V x(0, 6, 3, 108) V x(0, 9, 3, 114)
+adding clause: ~e(6, 3, 109) V ~x(0, 6, 3, 108)
+adding clause: ~x(0, 6, 2, 76) V x(0, 6, 3, 108) V x(0, 2, 3, 100) V x(0, 5, 3, 106) V x(0, 7, 3, 110) V x(0, 10, 3, 116)
+adding clause: ~e(7, 3, 111) V ~x(0, 7, 3, 110)
+adding clause: ~x(0, 7, 2, 78) V x(0, 7, 3, 110) V x(0, 3, 3, 102) V x(0, 6, 3, 108) V x(0, 11, 3, 118)
+adding clause: ~e(8, 3, 113) V ~x(0, 8, 3, 112)
+adding clause: ~x(0, 8, 2, 80) V x(0, 8, 3, 112) V x(0, 4, 3, 104) V x(0, 9, 3, 114) V x(0, 12, 3, 120)
+adding clause: ~e(9, 3, 115) V ~x(0, 9, 3, 114)
+adding clause: ~x(0, 9, 2, 82) V x(0, 9, 3, 114) V x(0, 5, 3, 106) V x(0, 8, 3, 112) V x(0, 10, 3, 116) V x(0, 13, 3, 122)
+adding clause: ~e(10, 3, 117) V ~x(0, 10, 3, 116)
+adding clause: ~x(0, 10, 2, 84) V x(0, 10, 3, 116) V x(0, 6, 3, 108) V x(0, 9, 3, 114) V x(0, 11, 3, 118) V x(0, 14, 3, 124)
+adding clause: ~e(11, 3, 119) V ~x(0, 11, 3, 118)
+adding clause: ~x(0, 11, 2, 86) V x(0, 11, 3, 118) V x(0, 7, 3, 110) V x(0, 10, 3, 116) V x(0, 15, 3, 126)
+adding clause: ~e(12, 3, 121) V ~x(0, 12, 3, 120)
+adding clause: ~x(0, 12, 2, 88) V x(0, 12, 3, 120) V x(0, 8, 3, 112) V x(0, 13, 3, 122)
+adding clause: ~e(13, 3, 123) V ~x(0, 13, 3, 122)
+adding clause: ~x(0, 13, 2, 90) V x(0, 13, 3, 122) V x(0, 9, 3, 114) V x(0, 12, 3, 120) V x(0, 14, 3, 124)
+adding clause: ~e(14, 3, 125) V ~x(0, 14, 3, 124)
+adding clause: ~x(0, 14, 2, 92) V x(0, 14, 3, 124) V x(0, 10, 3, 116) V x(0, 13, 3, 122) V x(0, 15, 3, 126) V x(0, 15, 3, 126)
+adding clause: ~e(15, 3, 127) V ~x(0, 15, 3, 126)
+adding clause: ~x(0, 15, 2, 94) V x(0, 15, 3, 126) V x(0, 11, 3, 118) V x(0, 14, 3, 124) V x(0, 14, 3, 124)
+Goal arrangements for group { 1[2, 14] }
+Creating assumption: ~x(0, 0, 3, 96)
+Creating assumption: ~x(0, 1, 3, 98)
+Creating assumption: ~x(0, 2, 3, 100)
+Creating assumption: ~x(0, 3, 3, 102)
+Creating assumption: ~x(0, 4, 3, 104)
+Creating assumption: ~x(0, 5, 3, 106)
+Creating assumption: ~x(0, 6, 3, 108)
+Creating assumption: ~x(0, 7, 3, 110)
+Creating assumption: ~x(0, 8, 3, 112)
+Creating assumption: ~x(0, 9, 3, 114)
+Creating assumption: ~x(0, 10, 3, 116)
+Creating assumption: ~x(0, 11, 3, 118)
+Creating assumption: ~x(0, 12, 3, 120)
+Creating assumption: ~x(0, 13, 3, 122)
+Creating assumption: x(0, 14, 3, 124)
+Creating assumption: ~x(0, 15, 3, 126)
+Planned groups' assumptions for group { 1[2, 14] }
+c last restart ## conflicts  :  0 65 
+var x(0, 2, 0, 4) is true
+var x(1, 6, 0, 44) is true
+var x(2, 10, 0, 84) is true
+var x(3, 14, 0, 124) is true
+Solving group { 2[3, 15] } for makespan 3:
+creating vars for group { 2[3, 15] } for makespan 0
+var x for agent 0, vertex 0, and timestep 0 has id 0
+var epsilon for vertex 0, and timestep 0 has id 1
+var x for agent 0, vertex 1, and timestep 0 has id 2
+var epsilon for vertex 1, and timestep 0 has id 3
+var x for agent 0, vertex 2, and timestep 0 has id 4
+var epsilon for vertex 2, and timestep 0 has id 5
+var x for agent 0, vertex 3, and timestep 0 has id 6
+var epsilon for vertex 3, and timestep 0 has id 7
+var x for agent 0, vertex 4, and timestep 0 has id 8
+var epsilon for vertex 4, and timestep 0 has id 9
+var x for agent 0, vertex 5, and timestep 0 has id 10
+var epsilon for vertex 5, and timestep 0 has id 11
+var x for agent 0, vertex 6, and timestep 0 has id 12
+var epsilon for vertex 6, and timestep 0 has id 13
+var x for agent 0, vertex 7, and timestep 0 has id 14
+var epsilon for vertex 7, and timestep 0 has id 15
+var x for agent 0, vertex 8, and timestep 0 has id 16
+var epsilon for vertex 8, and timestep 0 has id 17
+var x for agent 0, vertex 9, and timestep 0 has id 18
+var epsilon for vertex 9, and timestep 0 has id 19
+var x for agent 0, vertex 10, and timestep 0 has id 20
+var epsilon for vertex 10, and timestep 0 has id 21
+var x for agent 0, vertex 11, and timestep 0 has id 22
+var epsilon for vertex 11, and timestep 0 has id 23
+var x for agent 0, vertex 12, and timestep 0 has id 24
+var epsilon for vertex 12, and timestep 0 has id 25
+var x for agent 0, vertex 13, and timestep 0 has id 26
+var epsilon for vertex 13, and timestep 0 has id 27
+var x for agent 0, vertex 14, and timestep 0 has id 28
+var epsilon for vertex 14, and timestep 0 has id 29
+var x for agent 0, vertex 15, and timestep 0 has id 30
+var epsilon for vertex 15, and timestep 0 has id 31
+Initial arrangement...
+adding clause: e(0, 0, 1)
+adding clause: ~x(0, 0, 0, 0)
+adding clause: e(1, 0, 3)
+adding clause: ~x(0, 1, 0, 2)
+adding clause: e(2, 0, 5)
+adding clause: ~x(0, 2, 0, 4)
+adding clause: ~e(3, 0, 7)
+adding clause: x(0, 3, 0, 6)
+adding clause: e(4, 0, 9)
+adding clause: ~x(0, 4, 0, 8)
+adding clause: e(5, 0, 11)
+adding clause: ~x(0, 5, 0, 10)
+adding clause: e(6, 0, 13)
+adding clause: ~x(0, 6, 0, 12)
+adding clause: e(7, 0, 15)
+adding clause: ~x(0, 7, 0, 14)
+adding clause: e(8, 0, 17)
+adding clause: ~x(0, 8, 0, 16)
+adding clause: e(9, 0, 19)
+adding clause: ~x(0, 9, 0, 18)
+adding clause: e(10, 0, 21)
+adding clause: ~x(0, 10, 0, 20)
+adding clause: e(11, 0, 23)
+adding clause: ~x(0, 11, 0, 22)
+adding clause: e(12, 0, 25)
+adding clause: ~x(0, 12, 0, 24)
+adding clause: e(13, 0, 27)
+adding clause: ~x(0, 13, 0, 26)
+adding clause: e(14, 0, 29)
+adding clause: ~x(0, 14, 0, 28)
+adding clause: e(15, 0, 31)
+adding clause: ~x(0, 15, 0, 30)
+creating vars for group { 2[3, 15] } for makespan 1
+var x for agent 0, vertex 0, and timestep 1 has id 32
+var epsilon for vertex 0, and timestep 1 has id 33
+var x for agent 0, vertex 1, and timestep 1 has id 34
+var epsilon for vertex 1, and timestep 1 has id 35
+var x for agent 0, vertex 2, and timestep 1 has id 36
+var epsilon for vertex 2, and timestep 1 has id 37
+var x for agent 0, vertex 3, and timestep 1 has id 38
+var epsilon for vertex 3, and timestep 1 has id 39
+var x for agent 0, vertex 4, and timestep 1 has id 40
+var epsilon for vertex 4, and timestep 1 has id 41
+var x for agent 0, vertex 5, and timestep 1 has id 42
+var epsilon for vertex 5, and timestep 1 has id 43
+var x for agent 0, vertex 6, and timestep 1 has id 44
+var epsilon for vertex 6, and timestep 1 has id 45
+var x for agent 0, vertex 7, and timestep 1 has id 46
+var epsilon for vertex 7, and timestep 1 has id 47
+var x for agent 0, vertex 8, and timestep 1 has id 48
+var epsilon for vertex 8, and timestep 1 has id 49
+var x for agent 0, vertex 9, and timestep 1 has id 50
+var epsilon for vertex 9, and timestep 1 has id 51
+var x for agent 0, vertex 10, and timestep 1 has id 52
+var epsilon for vertex 10, and timestep 1 has id 53
+var x for agent 0, vertex 11, and timestep 1 has id 54
+var epsilon for vertex 11, and timestep 1 has id 55
+var x for agent 0, vertex 12, and timestep 1 has id 56
+var epsilon for vertex 12, and timestep 1 has id 57
+var x for agent 0, vertex 13, and timestep 1 has id 58
+var epsilon for vertex 13, and timestep 1 has id 59
+var x for agent 0, vertex 14, and timestep 1 has id 60
+var epsilon for vertex 14, and timestep 1 has id 61
+var x for agent 0, vertex 15, and timestep 1 has id 62
+var epsilon for vertex 15, and timestep 1 has id 63
+The target vertex is vacant before the move, 
+and the source vertex will be vacant after it...
+adding clause: ~x(0, 0, 0, 0) V ~x(0, 1, 1, 34) V e(1, 0, 3) V e(0, 1, 33)
+adding clause: ~x(0, 0, 0, 0) V ~x(0, 4, 1, 40) V e(4, 0, 9) V e(0, 1, 33)
+adding clause: ~x(0, 1, 0, 2) V ~x(0, 2, 1, 36) V e(2, 0, 5) V e(1, 1, 35)
+adding clause: ~x(0, 1, 0, 2) V ~x(0, 5, 1, 42) V e(5, 0, 11) V e(1, 1, 35)
+adding clause: ~x(0, 2, 0, 4) V ~x(0, 3, 1, 38) V e(3, 0, 7) V e(2, 1, 37)
+adding clause: ~x(0, 2, 0, 4) V ~x(0, 6, 1, 44) V e(6, 0, 13) V e(2, 1, 37)
+adding clause: ~x(0, 3, 0, 6) V ~x(0, 7, 1, 46) V e(7, 0, 15) V e(3, 1, 39)
+adding clause: ~x(0, 4, 0, 8) V ~x(0, 5, 1, 42) V e(5, 0, 11) V e(4, 1, 41)
+adding clause: ~x(0, 4, 0, 8) V ~x(0, 8, 1, 48) V e(8, 0, 17) V e(4, 1, 41)
+adding clause: ~x(0, 5, 0, 10) V ~x(0, 6, 1, 44) V e(6, 0, 13) V e(5, 1, 43)
+adding clause: ~x(0, 5, 0, 10) V ~x(0, 9, 1, 50) V e(9, 0, 19) V e(5, 1, 43)
+adding clause: ~x(0, 6, 0, 12) V ~x(0, 7, 1, 46) V e(7, 0, 15) V e(6, 1, 45)
+adding clause: ~x(0, 6, 0, 12) V ~x(0, 10, 1, 52) V e(10, 0, 21) V e(6, 1, 45)
+adding clause: ~x(0, 7, 0, 14) V ~x(0, 11, 1, 54) V e(11, 0, 23) V e(7, 1, 47)
+adding clause: ~x(0, 8, 0, 16) V ~x(0, 9, 1, 50) V e(9, 0, 19) V e(8, 1, 49)
+adding clause: ~x(0, 8, 0, 16) V ~x(0, 12, 1, 56) V e(12, 0, 25) V e(8, 1, 49)
+adding clause: ~x(0, 9, 0, 18) V ~x(0, 10, 1, 52) V e(10, 0, 21) V e(9, 1, 51)
+adding clause: ~x(0, 9, 0, 18) V ~x(0, 13, 1, 58) V e(13, 0, 27) V e(9, 1, 51)
+adding clause: ~x(0, 10, 0, 20) V ~x(0, 11, 1, 54) V e(11, 0, 23) V e(10, 1, 53)
+adding clause: ~x(0, 10, 0, 20) V ~x(0, 14, 1, 60) V e(14, 0, 29) V e(10, 1, 53)
+adding clause: ~x(0, 11, 0, 22) V ~x(0, 15, 1, 62) V e(15, 0, 31) V e(11, 1, 55)
+adding clause: ~x(0, 12, 0, 24) V ~x(0, 13, 1, 58) V e(13, 0, 27) V e(12, 1, 57)
+adding clause: ~x(0, 13, 0, 26) V ~x(0, 14, 1, 60) V e(14, 0, 29) V e(13, 1, 59)
+adding clause: ~x(0, 14, 0, 28) V ~x(0, 15, 1, 62) V e(15, 0, 31) V e(14, 1, 61)
+adding clause: ~x(0, 14, 0, 28) V ~x(0, 15, 1, 62) V e(15, 0, 31) V e(14, 1, 61)
+An agent moves along an edge, or not at all...
+At most one agent is placed in each vertex at each time step...
+Establishing relation between epsilon and X variables...
+adding clause: ~e(0, 1, 33) V ~x(0, 0, 1, 32)
+adding clause: ~x(0, 0, 0, 0) V x(0, 0, 1, 32) V x(0, 1, 1, 34) V x(0, 4, 1, 40)
+adding clause: ~e(1, 1, 35) V ~x(0, 1, 1, 34)
+adding clause: ~x(0, 1, 0, 2) V x(0, 1, 1, 34) V x(0, 0, 1, 32) V x(0, 2, 1, 36) V x(0, 5, 1, 42)
+adding clause: ~e(2, 1, 37) V ~x(0, 2, 1, 36)
+adding clause: ~x(0, 2, 0, 4) V x(0, 2, 1, 36) V x(0, 1, 1, 34) V x(0, 3, 1, 38) V x(0, 6, 1, 44)
+adding clause: ~e(3, 1, 39) V ~x(0, 3, 1, 38)
+adding clause: ~x(0, 3, 0, 6) V x(0, 3, 1, 38) V x(0, 2, 1, 36) V x(0, 7, 1, 46)
+adding clause: ~e(4, 1, 41) V ~x(0, 4, 1, 40)
+adding clause: ~x(0, 4, 0, 8) V x(0, 4, 1, 40) V x(0, 0, 1, 32) V x(0, 5, 1, 42) V x(0, 8, 1, 48)
+adding clause: ~e(5, 1, 43) V ~x(0, 5, 1, 42)
+adding clause: ~x(0, 5, 0, 10) V x(0, 5, 1, 42) V x(0, 1, 1, 34) V x(0, 4, 1, 40) V x(0, 6, 1, 44) V x(0, 9, 1, 50)
+adding clause: ~e(6, 1, 45) V ~x(0, 6, 1, 44)
+adding clause: ~x(0, 6, 0, 12) V x(0, 6, 1, 44) V x(0, 2, 1, 36) V x(0, 5, 1, 42) V x(0, 7, 1, 46) V x(0, 10, 1, 52)
+adding clause: ~e(7, 1, 47) V ~x(0, 7, 1, 46)
+adding clause: ~x(0, 7, 0, 14) V x(0, 7, 1, 46) V x(0, 3, 1, 38) V x(0, 6, 1, 44) V x(0, 11, 1, 54)
+adding clause: ~e(8, 1, 49) V ~x(0, 8, 1, 48)
+adding clause: ~x(0, 8, 0, 16) V x(0, 8, 1, 48) V x(0, 4, 1, 40) V x(0, 9, 1, 50) V x(0, 12, 1, 56)
+adding clause: ~e(9, 1, 51) V ~x(0, 9, 1, 50)
+adding clause: ~x(0, 9, 0, 18) V x(0, 9, 1, 50) V x(0, 5, 1, 42) V x(0, 8, 1, 48) V x(0, 10, 1, 52) V x(0, 13, 1, 58)
+adding clause: ~e(10, 1, 53) V ~x(0, 10, 1, 52)
+adding clause: ~x(0, 10, 0, 20) V x(0, 10, 1, 52) V x(0, 6, 1, 44) V x(0, 9, 1, 50) V x(0, 11, 1, 54) V x(0, 14, 1, 60)
+adding clause: ~e(11, 1, 55) V ~x(0, 11, 1, 54)
+adding clause: ~x(0, 11, 0, 22) V x(0, 11, 1, 54) V x(0, 7, 1, 46) V x(0, 10, 1, 52) V x(0, 15, 1, 62)
+adding clause: ~e(12, 1, 57) V ~x(0, 12, 1, 56)
+adding clause: ~x(0, 12, 0, 24) V x(0, 12, 1, 56) V x(0, 8, 1, 48) V x(0, 13, 1, 58)
+adding clause: ~e(13, 1, 59) V ~x(0, 13, 1, 58)
+adding clause: ~x(0, 13, 0, 26) V x(0, 13, 1, 58) V x(0, 9, 1, 50) V x(0, 12, 1, 56) V x(0, 14, 1, 60)
+adding clause: ~e(14, 1, 61) V ~x(0, 14, 1, 60)
+adding clause: ~x(0, 14, 0, 28) V x(0, 14, 1, 60) V x(0, 10, 1, 52) V x(0, 13, 1, 58) V x(0, 15, 1, 62) V x(0, 15, 1, 62)
+adding clause: ~e(15, 1, 63) V ~x(0, 15, 1, 62)
+adding clause: ~x(0, 15, 0, 30) V x(0, 15, 1, 62) V x(0, 11, 1, 54) V x(0, 14, 1, 60) V x(0, 14, 1, 60)
+creating vars for group { 2[3, 15] } for makespan 2
+var x for agent 0, vertex 0, and timestep 2 has id 64
+var epsilon for vertex 0, and timestep 2 has id 65
+var x for agent 0, vertex 1, and timestep 2 has id 66
+var epsilon for vertex 1, and timestep 2 has id 67
+var x for agent 0, vertex 2, and timestep 2 has id 68
+var epsilon for vertex 2, and timestep 2 has id 69
+var x for agent 0, vertex 3, and timestep 2 has id 70
+var epsilon for vertex 3, and timestep 2 has id 71
+var x for agent 0, vertex 4, and timestep 2 has id 72
+var epsilon for vertex 4, and timestep 2 has id 73
+var x for agent 0, vertex 5, and timestep 2 has id 74
+var epsilon for vertex 5, and timestep 2 has id 75
+var x for agent 0, vertex 6, and timestep 2 has id 76
+var epsilon for vertex 6, and timestep 2 has id 77
+var x for agent 0, vertex 7, and timestep 2 has id 78
+var epsilon for vertex 7, and timestep 2 has id 79
+var x for agent 0, vertex 8, and timestep 2 has id 80
+var epsilon for vertex 8, and timestep 2 has id 81
+var x for agent 0, vertex 9, and timestep 2 has id 82
+var epsilon for vertex 9, and timestep 2 has id 83
+var x for agent 0, vertex 10, and timestep 2 has id 84
+var epsilon for vertex 10, and timestep 2 has id 85
+var x for agent 0, vertex 11, and timestep 2 has id 86
+var epsilon for vertex 11, and timestep 2 has id 87
+var x for agent 0, vertex 12, and timestep 2 has id 88
+var epsilon for vertex 12, and timestep 2 has id 89
+var x for agent 0, vertex 13, and timestep 2 has id 90
+var epsilon for vertex 13, and timestep 2 has id 91
+var x for agent 0, vertex 14, and timestep 2 has id 92
+var epsilon for vertex 14, and timestep 2 has id 93
+var x for agent 0, vertex 15, and timestep 2 has id 94
+var epsilon for vertex 15, and timestep 2 has id 95
+The target vertex is vacant before the move, 
+and the source vertex will be vacant after it...
+adding clause: ~x(0, 0, 1, 32) V ~x(0, 1, 2, 66) V e(1, 1, 35) V e(0, 2, 65)
+adding clause: ~x(0, 0, 1, 32) V ~x(0, 4, 2, 72) V e(4, 1, 41) V e(0, 2, 65)
+adding clause: ~x(0, 1, 1, 34) V ~x(0, 2, 2, 68) V e(2, 1, 37) V e(1, 2, 67)
+adding clause: ~x(0, 1, 1, 34) V ~x(0, 5, 2, 74) V e(5, 1, 43) V e(1, 2, 67)
+adding clause: ~x(0, 2, 1, 36) V ~x(0, 3, 2, 70) V e(3, 1, 39) V e(2, 2, 69)
+adding clause: ~x(0, 2, 1, 36) V ~x(0, 6, 2, 76) V e(6, 1, 45) V e(2, 2, 69)
+adding clause: ~x(0, 3, 1, 38) V ~x(0, 7, 2, 78) V e(7, 1, 47) V e(3, 2, 71)
+adding clause: ~x(0, 4, 1, 40) V ~x(0, 5, 2, 74) V e(5, 1, 43) V e(4, 2, 73)
+adding clause: ~x(0, 4, 1, 40) V ~x(0, 8, 2, 80) V e(8, 1, 49) V e(4, 2, 73)
+adding clause: ~x(0, 5, 1, 42) V ~x(0, 6, 2, 76) V e(6, 1, 45) V e(5, 2, 75)
+adding clause: ~x(0, 5, 1, 42) V ~x(0, 9, 2, 82) V e(9, 1, 51) V e(5, 2, 75)
+adding clause: ~x(0, 6, 1, 44) V ~x(0, 7, 2, 78) V e(7, 1, 47) V e(6, 2, 77)
+adding clause: ~x(0, 6, 1, 44) V ~x(0, 10, 2, 84) V e(10, 1, 53) V e(6, 2, 77)
+adding clause: ~x(0, 7, 1, 46) V ~x(0, 11, 2, 86) V e(11, 1, 55) V e(7, 2, 79)
+adding clause: ~x(0, 8, 1, 48) V ~x(0, 9, 2, 82) V e(9, 1, 51) V e(8, 2, 81)
+adding clause: ~x(0, 8, 1, 48) V ~x(0, 12, 2, 88) V e(12, 1, 57) V e(8, 2, 81)
+adding clause: ~x(0, 9, 1, 50) V ~x(0, 10, 2, 84) V e(10, 1, 53) V e(9, 2, 83)
+adding clause: ~x(0, 9, 1, 50) V ~x(0, 13, 2, 90) V e(13, 1, 59) V e(9, 2, 83)
+adding clause: ~x(0, 10, 1, 52) V ~x(0, 11, 2, 86) V e(11, 1, 55) V e(10, 2, 85)
+adding clause: ~x(0, 10, 1, 52) V ~x(0, 14, 2, 92) V e(14, 1, 61) V e(10, 2, 85)
+adding clause: ~x(0, 11, 1, 54) V ~x(0, 15, 2, 94) V e(15, 1, 63) V e(11, 2, 87)
+adding clause: ~x(0, 12, 1, 56) V ~x(0, 13, 2, 90) V e(13, 1, 59) V e(12, 2, 89)
+adding clause: ~x(0, 13, 1, 58) V ~x(0, 14, 2, 92) V e(14, 1, 61) V e(13, 2, 91)
+adding clause: ~x(0, 14, 1, 60) V ~x(0, 15, 2, 94) V e(15, 1, 63) V e(14, 2, 93)
+adding clause: ~x(0, 14, 1, 60) V ~x(0, 15, 2, 94) V e(15, 1, 63) V e(14, 2, 93)
+An agent moves along an edge, or not at all...
+At most one agent is placed in each vertex at each time step...
+Establishing relation between epsilon and X variables...
+adding clause: ~e(0, 2, 65) V ~x(0, 0, 2, 64)
+adding clause: ~x(0, 0, 1, 32) V x(0, 0, 2, 64) V x(0, 1, 2, 66) V x(0, 4, 2, 72)
+adding clause: ~e(1, 2, 67) V ~x(0, 1, 2, 66)
+adding clause: ~x(0, 1, 1, 34) V x(0, 1, 2, 66) V x(0, 0, 2, 64) V x(0, 2, 2, 68) V x(0, 5, 2, 74)
+adding clause: ~e(2, 2, 69) V ~x(0, 2, 2, 68)
+adding clause: ~x(0, 2, 1, 36) V x(0, 2, 2, 68) V x(0, 1, 2, 66) V x(0, 3, 2, 70) V x(0, 6, 2, 76)
+adding clause: ~e(3, 2, 71) V ~x(0, 3, 2, 70)
+adding clause: ~x(0, 3, 1, 38) V x(0, 3, 2, 70) V x(0, 2, 2, 68) V x(0, 7, 2, 78)
+adding clause: ~e(4, 2, 73) V ~x(0, 4, 2, 72)
+adding clause: ~x(0, 4, 1, 40) V x(0, 4, 2, 72) V x(0, 0, 2, 64) V x(0, 5, 2, 74) V x(0, 8, 2, 80)
+adding clause: ~e(5, 2, 75) V ~x(0, 5, 2, 74)
+adding clause: ~x(0, 5, 1, 42) V x(0, 5, 2, 74) V x(0, 1, 2, 66) V x(0, 4, 2, 72) V x(0, 6, 2, 76) V x(0, 9, 2, 82)
+adding clause: ~e(6, 2, 77) V ~x(0, 6, 2, 76)
+adding clause: ~x(0, 6, 1, 44) V x(0, 6, 2, 76) V x(0, 2, 2, 68) V x(0, 5, 2, 74) V x(0, 7, 2, 78) V x(0, 10, 2, 84)
+adding clause: ~e(7, 2, 79) V ~x(0, 7, 2, 78)
+adding clause: ~x(0, 7, 1, 46) V x(0, 7, 2, 78) V x(0, 3, 2, 70) V x(0, 6, 2, 76) V x(0, 11, 2, 86)
+adding clause: ~e(8, 2, 81) V ~x(0, 8, 2, 80)
+adding clause: ~x(0, 8, 1, 48) V x(0, 8, 2, 80) V x(0, 4, 2, 72) V x(0, 9, 2, 82) V x(0, 12, 2, 88)
+adding clause: ~e(9, 2, 83) V ~x(0, 9, 2, 82)
+adding clause: ~x(0, 9, 1, 50) V x(0, 9, 2, 82) V x(0, 5, 2, 74) V x(0, 8, 2, 80) V x(0, 10, 2, 84) V x(0, 13, 2, 90)
+adding clause: ~e(10, 2, 85) V ~x(0, 10, 2, 84)
+adding clause: ~x(0, 10, 1, 52) V x(0, 10, 2, 84) V x(0, 6, 2, 76) V x(0, 9, 2, 82) V x(0, 11, 2, 86) V x(0, 14, 2, 92)
+adding clause: ~e(11, 2, 87) V ~x(0, 11, 2, 86)
+adding clause: ~x(0, 11, 1, 54) V x(0, 11, 2, 86) V x(0, 7, 2, 78) V x(0, 10, 2, 84) V x(0, 15, 2, 94)
+adding clause: ~e(12, 2, 89) V ~x(0, 12, 2, 88)
+adding clause: ~x(0, 12, 1, 56) V x(0, 12, 2, 88) V x(0, 8, 2, 80) V x(0, 13, 2, 90)
+adding clause: ~e(13, 2, 91) V ~x(0, 13, 2, 90)
+adding clause: ~x(0, 13, 1, 58) V x(0, 13, 2, 90) V x(0, 9, 2, 82) V x(0, 12, 2, 88) V x(0, 14, 2, 92)
+adding clause: ~e(14, 2, 93) V ~x(0, 14, 2, 92)
+adding clause: ~x(0, 14, 1, 60) V x(0, 14, 2, 92) V x(0, 10, 2, 84) V x(0, 13, 2, 90) V x(0, 15, 2, 94) V x(0, 15, 2, 94)
+adding clause: ~e(15, 2, 95) V ~x(0, 15, 2, 94)
+adding clause: ~x(0, 15, 1, 62) V x(0, 15, 2, 94) V x(0, 11, 2, 86) V x(0, 14, 2, 92) V x(0, 14, 2, 92)
+creating vars for group { 2[3, 15] } for makespan 3
+var x for agent 0, vertex 0, and timestep 3 has id 96
+var epsilon for vertex 0, and timestep 3 has id 97
+var x for agent 0, vertex 1, and timestep 3 has id 98
+var epsilon for vertex 1, and timestep 3 has id 99
+var x for agent 0, vertex 2, and timestep 3 has id 100
+var epsilon for vertex 2, and timestep 3 has id 101
+var x for agent 0, vertex 3, and timestep 3 has id 102
+var epsilon for vertex 3, and timestep 3 has id 103
+var x for agent 0, vertex 4, and timestep 3 has id 104
+var epsilon for vertex 4, and timestep 3 has id 105
+var x for agent 0, vertex 5, and timestep 3 has id 106
+var epsilon for vertex 5, and timestep 3 has id 107
+var x for agent 0, vertex 6, and timestep 3 has id 108
+var epsilon for vertex 6, and timestep 3 has id 109
+var x for agent 0, vertex 7, and timestep 3 has id 110
+var epsilon for vertex 7, and timestep 3 has id 111
+var x for agent 0, vertex 8, and timestep 3 has id 112
+var epsilon for vertex 8, and timestep 3 has id 113
+var x for agent 0, vertex 9, and timestep 3 has id 114
+var epsilon for vertex 9, and timestep 3 has id 115
+var x for agent 0, vertex 10, and timestep 3 has id 116
+var epsilon for vertex 10, and timestep 3 has id 117
+var x for agent 0, vertex 11, and timestep 3 has id 118
+var epsilon for vertex 11, and timestep 3 has id 119
+var x for agent 0, vertex 12, and timestep 3 has id 120
+var epsilon for vertex 12, and timestep 3 has id 121
+var x for agent 0, vertex 13, and timestep 3 has id 122
+var epsilon for vertex 13, and timestep 3 has id 123
+var x for agent 0, vertex 14, and timestep 3 has id 124
+var epsilon for vertex 14, and timestep 3 has id 125
+var x for agent 0, vertex 15, and timestep 3 has id 126
+var epsilon for vertex 15, and timestep 3 has id 127
+The target vertex is vacant before the move, 
+and the source vertex will be vacant after it...
+adding clause: ~x(0, 0, 2, 64) V ~x(0, 1, 3, 98) V e(1, 2, 67) V e(0, 3, 97)
+adding clause: ~x(0, 0, 2, 64) V ~x(0, 4, 3, 104) V e(4, 2, 73) V e(0, 3, 97)
+adding clause: ~x(0, 1, 2, 66) V ~x(0, 2, 3, 100) V e(2, 2, 69) V e(1, 3, 99)
+adding clause: ~x(0, 1, 2, 66) V ~x(0, 5, 3, 106) V e(5, 2, 75) V e(1, 3, 99)
+adding clause: ~x(0, 2, 2, 68) V ~x(0, 3, 3, 102) V e(3, 2, 71) V e(2, 3, 101)
+adding clause: ~x(0, 2, 2, 68) V ~x(0, 6, 3, 108) V e(6, 2, 77) V e(2, 3, 101)
+adding clause: ~x(0, 3, 2, 70) V ~x(0, 7, 3, 110) V e(7, 2, 79) V e(3, 3, 103)
+adding clause: ~x(0, 4, 2, 72) V ~x(0, 5, 3, 106) V e(5, 2, 75) V e(4, 3, 105)
+adding clause: ~x(0, 4, 2, 72) V ~x(0, 8, 3, 112) V e(8, 2, 81) V e(4, 3, 105)
+adding clause: ~x(0, 5, 2, 74) V ~x(0, 6, 3, 108) V e(6, 2, 77) V e(5, 3, 107)
+adding clause: ~x(0, 5, 2, 74) V ~x(0, 9, 3, 114) V e(9, 2, 83) V e(5, 3, 107)
+adding clause: ~x(0, 6, 2, 76) V ~x(0, 7, 3, 110) V e(7, 2, 79) V e(6, 3, 109)
+adding clause: ~x(0, 6, 2, 76) V ~x(0, 10, 3, 116) V e(10, 2, 85) V e(6, 3, 109)
+adding clause: ~x(0, 7, 2, 78) V ~x(0, 11, 3, 118) V e(11, 2, 87) V e(7, 3, 111)
+adding clause: ~x(0, 8, 2, 80) V ~x(0, 9, 3, 114) V e(9, 2, 83) V e(8, 3, 113)
+adding clause: ~x(0, 8, 2, 80) V ~x(0, 12, 3, 120) V e(12, 2, 89) V e(8, 3, 113)
+adding clause: ~x(0, 9, 2, 82) V ~x(0, 10, 3, 116) V e(10, 2, 85) V e(9, 3, 115)
+adding clause: ~x(0, 9, 2, 82) V ~x(0, 13, 3, 122) V e(13, 2, 91) V e(9, 3, 115)
+adding clause: ~x(0, 10, 2, 84) V ~x(0, 11, 3, 118) V e(11, 2, 87) V e(10, 3, 117)
+adding clause: ~x(0, 10, 2, 84) V ~x(0, 14, 3, 124) V e(14, 2, 93) V e(10, 3, 117)
+adding clause: ~x(0, 11, 2, 86) V ~x(0, 15, 3, 126) V e(15, 2, 95) V e(11, 3, 119)
+adding clause: ~x(0, 12, 2, 88) V ~x(0, 13, 3, 122) V e(13, 2, 91) V e(12, 3, 121)
+adding clause: ~x(0, 13, 2, 90) V ~x(0, 14, 3, 124) V e(14, 2, 93) V e(13, 3, 123)
+adding clause: ~x(0, 14, 2, 92) V ~x(0, 15, 3, 126) V e(15, 2, 95) V e(14, 3, 125)
+adding clause: ~x(0, 14, 2, 92) V ~x(0, 15, 3, 126) V e(15, 2, 95) V e(14, 3, 125)
+An agent moves along an edge, or not at all...
+At most one agent is placed in each vertex at each time step...
+Establishing relation between epsilon and X variables...
+adding clause: ~e(0, 3, 97) V ~x(0, 0, 3, 96)
+adding clause: ~x(0, 0, 2, 64) V x(0, 0, 3, 96) V x(0, 1, 3, 98) V x(0, 4, 3, 104)
+adding clause: ~e(1, 3, 99) V ~x(0, 1, 3, 98)
+adding clause: ~x(0, 1, 2, 66) V x(0, 1, 3, 98) V x(0, 0, 3, 96) V x(0, 2, 3, 100) V x(0, 5, 3, 106)
+adding clause: ~e(2, 3, 101) V ~x(0, 2, 3, 100)
+adding clause: ~x(0, 2, 2, 68) V x(0, 2, 3, 100) V x(0, 1, 3, 98) V x(0, 3, 3, 102) V x(0, 6, 3, 108)
+adding clause: ~e(3, 3, 103) V ~x(0, 3, 3, 102)
+adding clause: ~x(0, 3, 2, 70) V x(0, 3, 3, 102) V x(0, 2, 3, 100) V x(0, 7, 3, 110)
+adding clause: ~e(4, 3, 105) V ~x(0, 4, 3, 104)
+adding clause: ~x(0, 4, 2, 72) V x(0, 4, 3, 104) V x(0, 0, 3, 96) V x(0, 5, 3, 106) V x(0, 8, 3, 112)
+adding clause: ~e(5, 3, 107) V ~x(0, 5, 3, 106)
+adding clause: ~x(0, 5, 2, 74) V x(0, 5, 3, 106) V x(0, 1, 3, 98) V x(0, 4, 3, 104) V x(0, 6, 3, 108) V x(0, 9, 3, 114)
+adding clause: ~e(6, 3, 109) V ~x(0, 6, 3, 108)
+adding clause: ~x(0, 6, 2, 76) V x(0, 6, 3, 108) V x(0, 2, 3, 100) V x(0, 5, 3, 106) V x(0, 7, 3, 110) V x(0, 10, 3, 116)
+adding clause: ~e(7, 3, 111) V ~x(0, 7, 3, 110)
+adding clause: ~x(0, 7, 2, 78) V x(0, 7, 3, 110) V x(0, 3, 3, 102) V x(0, 6, 3, 108) V x(0, 11, 3, 118)
+adding clause: ~e(8, 3, 113) V ~x(0, 8, 3, 112)
+adding clause: ~x(0, 8, 2, 80) V x(0, 8, 3, 112) V x(0, 4, 3, 104) V x(0, 9, 3, 114) V x(0, 12, 3, 120)
+adding clause: ~e(9, 3, 115) V ~x(0, 9, 3, 114)
+adding clause: ~x(0, 9, 2, 82) V x(0, 9, 3, 114) V x(0, 5, 3, 106) V x(0, 8, 3, 112) V x(0, 10, 3, 116) V x(0, 13, 3, 122)
+adding clause: ~e(10, 3, 117) V ~x(0, 10, 3, 116)
+adding clause: ~x(0, 10, 2, 84) V x(0, 10, 3, 116) V x(0, 6, 3, 108) V x(0, 9, 3, 114) V x(0, 11, 3, 118) V x(0, 14, 3, 124)
+adding clause: ~e(11, 3, 119) V ~x(0, 11, 3, 118)
+adding clause: ~x(0, 11, 2, 86) V x(0, 11, 3, 118) V x(0, 7, 3, 110) V x(0, 10, 3, 116) V x(0, 15, 3, 126)
+adding clause: ~e(12, 3, 121) V ~x(0, 12, 3, 120)
+adding clause: ~x(0, 12, 2, 88) V x(0, 12, 3, 120) V x(0, 8, 3, 112) V x(0, 13, 3, 122)
+adding clause: ~e(13, 3, 123) V ~x(0, 13, 3, 122)
+adding clause: ~x(0, 13, 2, 90) V x(0, 13, 3, 122) V x(0, 9, 3, 114) V x(0, 12, 3, 120) V x(0, 14, 3, 124)
+adding clause: ~e(14, 3, 125) V ~x(0, 14, 3, 124)
+adding clause: ~x(0, 14, 2, 92) V x(0, 14, 3, 124) V x(0, 10, 3, 116) V x(0, 13, 3, 122) V x(0, 15, 3, 126) V x(0, 15, 3, 126)
+adding clause: ~e(15, 3, 127) V ~x(0, 15, 3, 126)
+adding clause: ~x(0, 15, 2, 94) V x(0, 15, 3, 126) V x(0, 11, 3, 118) V x(0, 14, 3, 124) V x(0, 14, 3, 124)
+Goal arrangements for group { 2[3, 15] }
+Creating assumption: ~x(0, 0, 3, 96)
+Creating assumption: ~x(0, 1, 3, 98)
+Creating assumption: ~x(0, 2, 3, 100)
+Creating assumption: ~x(0, 3, 3, 102)
+Creating assumption: ~x(0, 4, 3, 104)
+Creating assumption: ~x(0, 5, 3, 106)
+Creating assumption: ~x(0, 6, 3, 108)
+Creating assumption: ~x(0, 7, 3, 110)
+Creating assumption: ~x(0, 8, 3, 112)
+Creating assumption: ~x(0, 9, 3, 114)
+Creating assumption: ~x(0, 10, 3, 116)
+Creating assumption: ~x(0, 11, 3, 118)
+Creating assumption: ~x(0, 12, 3, 120)
+Creating assumption: ~x(0, 13, 3, 122)
+Creating assumption: ~x(0, 14, 3, 124)
+Creating assumption: x(0, 15, 3, 126)
+Planned groups' assumptions for group { 2[3, 15] }
+Creating assumption: ~x(0, 2, 0, 4)
+Creating assumption: ~e(2, 0, 5)
+Creating assumption: ~x(0, 6, 1, 44)
+Creating assumption: ~e(6, 1, 45)
+Creating assumption: ~x(0, 10, 2, 84)
+Creating assumption: ~e(10, 2, 85)
+Creating assumption: ~x(0, 14, 3, 124)
+Creating assumption: ~e(14, 3, 125)
+c last restart ## conflicts  :  0 68 
+var x(0, 3, 0, 6) is true
+var x(1, 7, 0, 46) is true
+var x(2, 11, 0, 86) is true
+var x(3, 15, 0, 126) is true
+Solving group { 0[0, 8] } for makespan 3:
+creating vars for group { 0[0, 8] } for makespan 0
+var x for agent 0, vertex 0, and timestep 0 has id 0
+var epsilon for vertex 0, and timestep 0 has id 1
+var x for agent 0, vertex 1, and timestep 0 has id 2
+var epsilon for vertex 1, and timestep 0 has id 3
+var x for agent 0, vertex 2, and timestep 0 has id 4
+var epsilon for vertex 2, and timestep 0 has id 5
+var x for agent 0, vertex 3, and timestep 0 has id 6
+var epsilon for vertex 3, and timestep 0 has id 7
+var x for agent 0, vertex 4, and timestep 0 has id 8
+var epsilon for vertex 4, and timestep 0 has id 9
+var x for agent 0, vertex 5, and timestep 0 has id 10
+var epsilon for vertex 5, and timestep 0 has id 11
+var x for agent 0, vertex 6, and timestep 0 has id 12
+var epsilon for vertex 6, and timestep 0 has id 13
+var x for agent 0, vertex 7, and timestep 0 has id 14
+var epsilon for vertex 7, and timestep 0 has id 15
+var x for agent 0, vertex 8, and timestep 0 has id 16
+var epsilon for vertex 8, and timestep 0 has id 17
+var x for agent 0, vertex 9, and timestep 0 has id 18
+var epsilon for vertex 9, and timestep 0 has id 19
+var x for agent 0, vertex 10, and timestep 0 has id 20
+var epsilon for vertex 10, and timestep 0 has id 21
+var x for agent 0, vertex 11, and timestep 0 has id 22
+var epsilon for vertex 11, and timestep 0 has id 23
+var x for agent 0, vertex 12, and timestep 0 has id 24
+var epsilon for vertex 12, and timestep 0 has id 25
+var x for agent 0, vertex 13, and timestep 0 has id 26
+var epsilon for vertex 13, and timestep 0 has id 27
+var x for agent 0, vertex 14, and timestep 0 has id 28
+var epsilon for vertex 14, and timestep 0 has id 29
+var x for agent 0, vertex 15, and timestep 0 has id 30
+var epsilon for vertex 15, and timestep 0 has id 31
+Initial arrangement...
+adding clause: ~e(0, 0, 1)
+adding clause: x(0, 0, 0, 0)
+adding clause: e(1, 0, 3)
+adding clause: ~x(0, 1, 0, 2)
+adding clause: e(2, 0, 5)
+adding clause: ~x(0, 2, 0, 4)
+adding clause: e(3, 0, 7)
+adding clause: ~x(0, 3, 0, 6)
+adding clause: e(4, 0, 9)
+adding clause: ~x(0, 4, 0, 8)
+adding clause: e(5, 0, 11)
+adding clause: ~x(0, 5, 0, 10)
+adding clause: e(6, 0, 13)
+adding clause: ~x(0, 6, 0, 12)
+adding clause: e(7, 0, 15)
+adding clause: ~x(0, 7, 0, 14)
+adding clause: e(8, 0, 17)
+adding clause: ~x(0, 8, 0, 16)
+adding clause: e(9, 0, 19)
+adding clause: ~x(0, 9, 0, 18)
+adding clause: e(10, 0, 21)
+adding clause: ~x(0, 10, 0, 20)
+adding clause: e(11, 0, 23)
+adding clause: ~x(0, 11, 0, 22)
+adding clause: e(12, 0, 25)
+adding clause: ~x(0, 12, 0, 24)
+adding clause: e(13, 0, 27)
+adding clause: ~x(0, 13, 0, 26)
+adding clause: e(14, 0, 29)
+adding clause: ~x(0, 14, 0, 28)
+adding clause: e(15, 0, 31)
+adding clause: ~x(0, 15, 0, 30)
+creating vars for group { 0[0, 8] } for makespan 1
+var x for agent 0, vertex 0, and timestep 1 has id 32
+var epsilon for vertex 0, and timestep 1 has id 33
+var x for agent 0, vertex 1, and timestep 1 has id 34
+var epsilon for vertex 1, and timestep 1 has id 35
+var x for agent 0, vertex 2, and timestep 1 has id 36
+var epsilon for vertex 2, and timestep 1 has id 37
+var x for agent 0, vertex 3, and timestep 1 has id 38
+var epsilon for vertex 3, and timestep 1 has id 39
+var x for agent 0, vertex 4, and timestep 1 has id 40
+var epsilon for vertex 4, and timestep 1 has id 41
+var x for agent 0, vertex 5, and timestep 1 has id 42
+var epsilon for vertex 5, and timestep 1 has id 43
+var x for agent 0, vertex 6, and timestep 1 has id 44
+var epsilon for vertex 6, and timestep 1 has id 45
+var x for agent 0, vertex 7, and timestep 1 has id 46
+var epsilon for vertex 7, and timestep 1 has id 47
+var x for agent 0, vertex 8, and timestep 1 has id 48
+var epsilon for vertex 8, and timestep 1 has id 49
+var x for agent 0, vertex 9, and timestep 1 has id 50
+var epsilon for vertex 9, and timestep 1 has id 51
+var x for agent 0, vertex 10, and timestep 1 has id 52
+var epsilon for vertex 10, and timestep 1 has id 53
+var x for agent 0, vertex 11, and timestep 1 has id 54
+var epsilon for vertex 11, and timestep 1 has id 55
+var x for agent 0, vertex 12, and timestep 1 has id 56
+var epsilon for vertex 12, and timestep 1 has id 57
+var x for agent 0, vertex 13, and timestep 1 has id 58
+var epsilon for vertex 13, and timestep 1 has id 59
+var x for agent 0, vertex 14, and timestep 1 has id 60
+var epsilon for vertex 14, and timestep 1 has id 61
+var x for agent 0, vertex 15, and timestep 1 has id 62
+var epsilon for vertex 15, and timestep 1 has id 63
+The target vertex is vacant before the move, 
+and the source vertex will be vacant after it...
+adding clause: ~x(0, 0, 0, 0) V ~x(0, 1, 1, 34) V e(1, 0, 3) V e(0, 1, 33)
+adding clause: ~x(0, 0, 0, 0) V ~x(0, 4, 1, 40) V e(4, 0, 9) V e(0, 1, 33)
+adding clause: ~x(0, 1, 0, 2) V ~x(0, 2, 1, 36) V e(2, 0, 5) V e(1, 1, 35)
+adding clause: ~x(0, 1, 0, 2) V ~x(0, 5, 1, 42) V e(5, 0, 11) V e(1, 1, 35)
+adding clause: ~x(0, 2, 0, 4) V ~x(0, 3, 1, 38) V e(3, 0, 7) V e(2, 1, 37)
+adding clause: ~x(0, 2, 0, 4) V ~x(0, 6, 1, 44) V e(6, 0, 13) V e(2, 1, 37)
+adding clause: ~x(0, 3, 0, 6) V ~x(0, 7, 1, 46) V e(7, 0, 15) V e(3, 1, 39)
+adding clause: ~x(0, 4, 0, 8) V ~x(0, 5, 1, 42) V e(5, 0, 11) V e(4, 1, 41)
+adding clause: ~x(0, 4, 0, 8) V ~x(0, 8, 1, 48) V e(8, 0, 17) V e(4, 1, 41)
+adding clause: ~x(0, 5, 0, 10) V ~x(0, 6, 1, 44) V e(6, 0, 13) V e(5, 1, 43)
+adding clause: ~x(0, 5, 0, 10) V ~x(0, 9, 1, 50) V e(9, 0, 19) V e(5, 1, 43)
+adding clause: ~x(0, 6, 0, 12) V ~x(0, 7, 1, 46) V e(7, 0, 15) V e(6, 1, 45)
+adding clause: ~x(0, 6, 0, 12) V ~x(0, 10, 1, 52) V e(10, 0, 21) V e(6, 1, 45)
+adding clause: ~x(0, 7, 0, 14) V ~x(0, 11, 1, 54) V e(11, 0, 23) V e(7, 1, 47)
+adding clause: ~x(0, 8, 0, 16) V ~x(0, 9, 1, 50) V e(9, 0, 19) V e(8, 1, 49)
+adding clause: ~x(0, 8, 0, 16) V ~x(0, 12, 1, 56) V e(12, 0, 25) V e(8, 1, 49)
+adding clause: ~x(0, 9, 0, 18) V ~x(0, 10, 1, 52) V e(10, 0, 21) V e(9, 1, 51)
+adding clause: ~x(0, 9, 0, 18) V ~x(0, 13, 1, 58) V e(13, 0, 27) V e(9, 1, 51)
+adding clause: ~x(0, 10, 0, 20) V ~x(0, 11, 1, 54) V e(11, 0, 23) V e(10, 1, 53)
+adding clause: ~x(0, 10, 0, 20) V ~x(0, 14, 1, 60) V e(14, 0, 29) V e(10, 1, 53)
+adding clause: ~x(0, 11, 0, 22) V ~x(0, 15, 1, 62) V e(15, 0, 31) V e(11, 1, 55)
+adding clause: ~x(0, 12, 0, 24) V ~x(0, 13, 1, 58) V e(13, 0, 27) V e(12, 1, 57)
+adding clause: ~x(0, 13, 0, 26) V ~x(0, 14, 1, 60) V e(14, 0, 29) V e(13, 1, 59)
+adding clause: ~x(0, 14, 0, 28) V ~x(0, 15, 1, 62) V e(15, 0, 31) V e(14, 1, 61)
+adding clause: ~x(0, 14, 0, 28) V ~x(0, 15, 1, 62) V e(15, 0, 31) V e(14, 1, 61)
+An agent moves along an edge, or not at all...
+At most one agent is placed in each vertex at each time step...
+Establishing relation between epsilon and X variables...
+adding clause: ~e(0, 1, 33) V ~x(0, 0, 1, 32)
+adding clause: ~x(0, 0, 0, 0) V x(0, 0, 1, 32) V x(0, 1, 1, 34) V x(0, 4, 1, 40)
+adding clause: ~e(1, 1, 35) V ~x(0, 1, 1, 34)
+adding clause: ~x(0, 1, 0, 2) V x(0, 1, 1, 34) V x(0, 0, 1, 32) V x(0, 2, 1, 36) V x(0, 5, 1, 42)
+adding clause: ~e(2, 1, 37) V ~x(0, 2, 1, 36)
+adding clause: ~x(0, 2, 0, 4) V x(0, 2, 1, 36) V x(0, 1, 1, 34) V x(0, 3, 1, 38) V x(0, 6, 1, 44)
+adding clause: ~e(3, 1, 39) V ~x(0, 3, 1, 38)
+adding clause: ~x(0, 3, 0, 6) V x(0, 3, 1, 38) V x(0, 2, 1, 36) V x(0, 7, 1, 46)
+adding clause: ~e(4, 1, 41) V ~x(0, 4, 1, 40)
+adding clause: ~x(0, 4, 0, 8) V x(0, 4, 1, 40) V x(0, 0, 1, 32) V x(0, 5, 1, 42) V x(0, 8, 1, 48)
+adding clause: ~e(5, 1, 43) V ~x(0, 5, 1, 42)
+adding clause: ~x(0, 5, 0, 10) V x(0, 5, 1, 42) V x(0, 1, 1, 34) V x(0, 4, 1, 40) V x(0, 6, 1, 44) V x(0, 9, 1, 50)
+adding clause: ~e(6, 1, 45) V ~x(0, 6, 1, 44)
+adding clause: ~x(0, 6, 0, 12) V x(0, 6, 1, 44) V x(0, 2, 1, 36) V x(0, 5, 1, 42) V x(0, 7, 1, 46) V x(0, 10, 1, 52)
+adding clause: ~e(7, 1, 47) V ~x(0, 7, 1, 46)
+adding clause: ~x(0, 7, 0, 14) V x(0, 7, 1, 46) V x(0, 3, 1, 38) V x(0, 6, 1, 44) V x(0, 11, 1, 54)
+adding clause: ~e(8, 1, 49) V ~x(0, 8, 1, 48)
+adding clause: ~x(0, 8, 0, 16) V x(0, 8, 1, 48) V x(0, 4, 1, 40) V x(0, 9, 1, 50) V x(0, 12, 1, 56)
+adding clause: ~e(9, 1, 51) V ~x(0, 9, 1, 50)
+adding clause: ~x(0, 9, 0, 18) V x(0, 9, 1, 50) V x(0, 5, 1, 42) V x(0, 8, 1, 48) V x(0, 10, 1, 52) V x(0, 13, 1, 58)
+adding clause: ~e(10, 1, 53) V ~x(0, 10, 1, 52)
+adding clause: ~x(0, 10, 0, 20) V x(0, 10, 1, 52) V x(0, 6, 1, 44) V x(0, 9, 1, 50) V x(0, 11, 1, 54) V x(0, 14, 1, 60)
+adding clause: ~e(11, 1, 55) V ~x(0, 11, 1, 54)
+adding clause: ~x(0, 11, 0, 22) V x(0, 11, 1, 54) V x(0, 7, 1, 46) V x(0, 10, 1, 52) V x(0, 15, 1, 62)
+adding clause: ~e(12, 1, 57) V ~x(0, 12, 1, 56)
+adding clause: ~x(0, 12, 0, 24) V x(0, 12, 1, 56) V x(0, 8, 1, 48) V x(0, 13, 1, 58)
+adding clause: ~e(13, 1, 59) V ~x(0, 13, 1, 58)
+adding clause: ~x(0, 13, 0, 26) V x(0, 13, 1, 58) V x(0, 9, 1, 50) V x(0, 12, 1, 56) V x(0, 14, 1, 60)
+adding clause: ~e(14, 1, 61) V ~x(0, 14, 1, 60)
+adding clause: ~x(0, 14, 0, 28) V x(0, 14, 1, 60) V x(0, 10, 1, 52) V x(0, 13, 1, 58) V x(0, 15, 1, 62) V x(0, 15, 1, 62)
+adding clause: ~e(15, 1, 63) V ~x(0, 15, 1, 62)
+adding clause: ~x(0, 15, 0, 30) V x(0, 15, 1, 62) V x(0, 11, 1, 54) V x(0, 14, 1, 60) V x(0, 14, 1, 60)
+creating vars for group { 0[0, 8] } for makespan 2
+var x for agent 0, vertex 0, and timestep 2 has id 64
+var epsilon for vertex 0, and timestep 2 has id 65
+var x for agent 0, vertex 1, and timestep 2 has id 66
+var epsilon for vertex 1, and timestep 2 has id 67
+var x for agent 0, vertex 2, and timestep 2 has id 68
+var epsilon for vertex 2, and timestep 2 has id 69
+var x for agent 0, vertex 3, and timestep 2 has id 70
+var epsilon for vertex 3, and timestep 2 has id 71
+var x for agent 0, vertex 4, and timestep 2 has id 72
+var epsilon for vertex 4, and timestep 2 has id 73
+var x for agent 0, vertex 5, and timestep 2 has id 74
+var epsilon for vertex 5, and timestep 2 has id 75
+var x for agent 0, vertex 6, and timestep 2 has id 76
+var epsilon for vertex 6, and timestep 2 has id 77
+var x for agent 0, vertex 7, and timestep 2 has id 78
+var epsilon for vertex 7, and timestep 2 has id 79
+var x for agent 0, vertex 8, and timestep 2 has id 80
+var epsilon for vertex 8, and timestep 2 has id 81
+var x for agent 0, vertex 9, and timestep 2 has id 82
+var epsilon for vertex 9, and timestep 2 has id 83
+var x for agent 0, vertex 10, and timestep 2 has id 84
+var epsilon for vertex 10, and timestep 2 has id 85
+var x for agent 0, vertex 11, and timestep 2 has id 86
+var epsilon for vertex 11, and timestep 2 has id 87
+var x for agent 0, vertex 12, and timestep 2 has id 88
+var epsilon for vertex 12, and timestep 2 has id 89
+var x for agent 0, vertex 13, and timestep 2 has id 90
+var epsilon for vertex 13, and timestep 2 has id 91
+var x for agent 0, vertex 14, and timestep 2 has id 92
+var epsilon for vertex 14, and timestep 2 has id 93
+var x for agent 0, vertex 15, and timestep 2 has id 94
+var epsilon for vertex 15, and timestep 2 has id 95
+The target vertex is vacant before the move, 
+and the source vertex will be vacant after it...
+adding clause: ~x(0, 0, 1, 32) V ~x(0, 1, 2, 66) V e(1, 1, 35) V e(0, 2, 65)
+adding clause: ~x(0, 0, 1, 32) V ~x(0, 4, 2, 72) V e(4, 1, 41) V e(0, 2, 65)
+adding clause: ~x(0, 1, 1, 34) V ~x(0, 2, 2, 68) V e(2, 1, 37) V e(1, 2, 67)
+adding clause: ~x(0, 1, 1, 34) V ~x(0, 5, 2, 74) V e(5, 1, 43) V e(1, 2, 67)
+adding clause: ~x(0, 2, 1, 36) V ~x(0, 3, 2, 70) V e(3, 1, 39) V e(2, 2, 69)
+adding clause: ~x(0, 2, 1, 36) V ~x(0, 6, 2, 76) V e(6, 1, 45) V e(2, 2, 69)
+adding clause: ~x(0, 3, 1, 38) V ~x(0, 7, 2, 78) V e(7, 1, 47) V e(3, 2, 71)
+adding clause: ~x(0, 4, 1, 40) V ~x(0, 5, 2, 74) V e(5, 1, 43) V e(4, 2, 73)
+adding clause: ~x(0, 4, 1, 40) V ~x(0, 8, 2, 80) V e(8, 1, 49) V e(4, 2, 73)
+adding clause: ~x(0, 5, 1, 42) V ~x(0, 6, 2, 76) V e(6, 1, 45) V e(5, 2, 75)
+adding clause: ~x(0, 5, 1, 42) V ~x(0, 9, 2, 82) V e(9, 1, 51) V e(5, 2, 75)
+adding clause: ~x(0, 6, 1, 44) V ~x(0, 7, 2, 78) V e(7, 1, 47) V e(6, 2, 77)
+adding clause: ~x(0, 6, 1, 44) V ~x(0, 10, 2, 84) V e(10, 1, 53) V e(6, 2, 77)
+adding clause: ~x(0, 7, 1, 46) V ~x(0, 11, 2, 86) V e(11, 1, 55) V e(7, 2, 79)
+adding clause: ~x(0, 8, 1, 48) V ~x(0, 9, 2, 82) V e(9, 1, 51) V e(8, 2, 81)
+adding clause: ~x(0, 8, 1, 48) V ~x(0, 12, 2, 88) V e(12, 1, 57) V e(8, 2, 81)
+adding clause: ~x(0, 9, 1, 50) V ~x(0, 10, 2, 84) V e(10, 1, 53) V e(9, 2, 83)
+adding clause: ~x(0, 9, 1, 50) V ~x(0, 13, 2, 90) V e(13, 1, 59) V e(9, 2, 83)
+adding clause: ~x(0, 10, 1, 52) V ~x(0, 11, 2, 86) V e(11, 1, 55) V e(10, 2, 85)
+adding clause: ~x(0, 10, 1, 52) V ~x(0, 14, 2, 92) V e(14, 1, 61) V e(10, 2, 85)
+adding clause: ~x(0, 11, 1, 54) V ~x(0, 15, 2, 94) V e(15, 1, 63) V e(11, 2, 87)
+adding clause: ~x(0, 12, 1, 56) V ~x(0, 13, 2, 90) V e(13, 1, 59) V e(12, 2, 89)
+adding clause: ~x(0, 13, 1, 58) V ~x(0, 14, 2, 92) V e(14, 1, 61) V e(13, 2, 91)
+adding clause: ~x(0, 14, 1, 60) V ~x(0, 15, 2, 94) V e(15, 1, 63) V e(14, 2, 93)
+adding clause: ~x(0, 14, 1, 60) V ~x(0, 15, 2, 94) V e(15, 1, 63) V e(14, 2, 93)
+An agent moves along an edge, or not at all...
+At most one agent is placed in each vertex at each time step...
+Establishing relation between epsilon and X variables...
+adding clause: ~e(0, 2, 65) V ~x(0, 0, 2, 64)
+adding clause: ~x(0, 0, 1, 32) V x(0, 0, 2, 64) V x(0, 1, 2, 66) V x(0, 4, 2, 72)
+adding clause: ~e(1, 2, 67) V ~x(0, 1, 2, 66)
+adding clause: ~x(0, 1, 1, 34) V x(0, 1, 2, 66) V x(0, 0, 2, 64) V x(0, 2, 2, 68) V x(0, 5, 2, 74)
+adding clause: ~e(2, 2, 69) V ~x(0, 2, 2, 68)
+adding clause: ~x(0, 2, 1, 36) V x(0, 2, 2, 68) V x(0, 1, 2, 66) V x(0, 3, 2, 70) V x(0, 6, 2, 76)
+adding clause: ~e(3, 2, 71) V ~x(0, 3, 2, 70)
+adding clause: ~x(0, 3, 1, 38) V x(0, 3, 2, 70) V x(0, 2, 2, 68) V x(0, 7, 2, 78)
+adding clause: ~e(4, 2, 73) V ~x(0, 4, 2, 72)
+adding clause: ~x(0, 4, 1, 40) V x(0, 4, 2, 72) V x(0, 0, 2, 64) V x(0, 5, 2, 74) V x(0, 8, 2, 80)
+adding clause: ~e(5, 2, 75) V ~x(0, 5, 2, 74)
+adding clause: ~x(0, 5, 1, 42) V x(0, 5, 2, 74) V x(0, 1, 2, 66) V x(0, 4, 2, 72) V x(0, 6, 2, 76) V x(0, 9, 2, 82)
+adding clause: ~e(6, 2, 77) V ~x(0, 6, 2, 76)
+adding clause: ~x(0, 6, 1, 44) V x(0, 6, 2, 76) V x(0, 2, 2, 68) V x(0, 5, 2, 74) V x(0, 7, 2, 78) V x(0, 10, 2, 84)
+adding clause: ~e(7, 2, 79) V ~x(0, 7, 2, 78)
+adding clause: ~x(0, 7, 1, 46) V x(0, 7, 2, 78) V x(0, 3, 2, 70) V x(0, 6, 2, 76) V x(0, 11, 2, 86)
+adding clause: ~e(8, 2, 81) V ~x(0, 8, 2, 80)
+adding clause: ~x(0, 8, 1, 48) V x(0, 8, 2, 80) V x(0, 4, 2, 72) V x(0, 9, 2, 82) V x(0, 12, 2, 88)
+adding clause: ~e(9, 2, 83) V ~x(0, 9, 2, 82)
+adding clause: ~x(0, 9, 1, 50) V x(0, 9, 2, 82) V x(0, 5, 2, 74) V x(0, 8, 2, 80) V x(0, 10, 2, 84) V x(0, 13, 2, 90)
+adding clause: ~e(10, 2, 85) V ~x(0, 10, 2, 84)
+adding clause: ~x(0, 10, 1, 52) V x(0, 10, 2, 84) V x(0, 6, 2, 76) V x(0, 9, 2, 82) V x(0, 11, 2, 86) V x(0, 14, 2, 92)
+adding clause: ~e(11, 2, 87) V ~x(0, 11, 2, 86)
+adding clause: ~x(0, 11, 1, 54) V x(0, 11, 2, 86) V x(0, 7, 2, 78) V x(0, 10, 2, 84) V x(0, 15, 2, 94)
+adding clause: ~e(12, 2, 89) V ~x(0, 12, 2, 88)
+adding clause: ~x(0, 12, 1, 56) V x(0, 12, 2, 88) V x(0, 8, 2, 80) V x(0, 13, 2, 90)
+adding clause: ~e(13, 2, 91) V ~x(0, 13, 2, 90)
+adding clause: ~x(0, 13, 1, 58) V x(0, 13, 2, 90) V x(0, 9, 2, 82) V x(0, 12, 2, 88) V x(0, 14, 2, 92)
+adding clause: ~e(14, 2, 93) V ~x(0, 14, 2, 92)
+adding clause: ~x(0, 14, 1, 60) V x(0, 14, 2, 92) V x(0, 10, 2, 84) V x(0, 13, 2, 90) V x(0, 15, 2, 94) V x(0, 15, 2, 94)
+adding clause: ~e(15, 2, 95) V ~x(0, 15, 2, 94)
+adding clause: ~x(0, 15, 1, 62) V x(0, 15, 2, 94) V x(0, 11, 2, 86) V x(0, 14, 2, 92) V x(0, 14, 2, 92)
+creating vars for group { 0[0, 8] } for makespan 3
+var x for agent 0, vertex 0, and timestep 3 has id 96
+var epsilon for vertex 0, and timestep 3 has id 97
+var x for agent 0, vertex 1, and timestep 3 has id 98
+var epsilon for vertex 1, and timestep 3 has id 99
+var x for agent 0, vertex 2, and timestep 3 has id 100
+var epsilon for vertex 2, and timestep 3 has id 101
+var x for agent 0, vertex 3, and timestep 3 has id 102
+var epsilon for vertex 3, and timestep 3 has id 103
+var x for agent 0, vertex 4, and timestep 3 has id 104
+var epsilon for vertex 4, and timestep 3 has id 105
+var x for agent 0, vertex 5, and timestep 3 has id 106
+var epsilon for vertex 5, and timestep 3 has id 107
+var x for agent 0, vertex 6, and timestep 3 has id 108
+var epsilon for vertex 6, and timestep 3 has id 109
+var x for agent 0, vertex 7, and timestep 3 has id 110
+var epsilon for vertex 7, and timestep 3 has id 111
+var x for agent 0, vertex 8, and timestep 3 has id 112
+var epsilon for vertex 8, and timestep 3 has id 113
+var x for agent 0, vertex 9, and timestep 3 has id 114
+var epsilon for vertex 9, and timestep 3 has id 115
+var x for agent 0, vertex 10, and timestep 3 has id 116
+var epsilon for vertex 10, and timestep 3 has id 117
+var x for agent 0, vertex 11, and timestep 3 has id 118
+var epsilon for vertex 11, and timestep 3 has id 119
+var x for agent 0, vertex 12, and timestep 3 has id 120
+var epsilon for vertex 12, and timestep 3 has id 121
+var x for agent 0, vertex 13, and timestep 3 has id 122
+var epsilon for vertex 13, and timestep 3 has id 123
+var x for agent 0, vertex 14, and timestep 3 has id 124
+var epsilon for vertex 14, and timestep 3 has id 125
+var x for agent 0, vertex 15, and timestep 3 has id 126
+var epsilon for vertex 15, and timestep 3 has id 127
+The target vertex is vacant before the move, 
+and the source vertex will be vacant after it...
+adding clause: ~x(0, 0, 2, 64) V ~x(0, 1, 3, 98) V e(1, 2, 67) V e(0, 3, 97)
+adding clause: ~x(0, 0, 2, 64) V ~x(0, 4, 3, 104) V e(4, 2, 73) V e(0, 3, 97)
+adding clause: ~x(0, 1, 2, 66) V ~x(0, 2, 3, 100) V e(2, 2, 69) V e(1, 3, 99)
+adding clause: ~x(0, 1, 2, 66) V ~x(0, 5, 3, 106) V e(5, 2, 75) V e(1, 3, 99)
+adding clause: ~x(0, 2, 2, 68) V ~x(0, 3, 3, 102) V e(3, 2, 71) V e(2, 3, 101)
+adding clause: ~x(0, 2, 2, 68) V ~x(0, 6, 3, 108) V e(6, 2, 77) V e(2, 3, 101)
+adding clause: ~x(0, 3, 2, 70) V ~x(0, 7, 3, 110) V e(7, 2, 79) V e(3, 3, 103)
+adding clause: ~x(0, 4, 2, 72) V ~x(0, 5, 3, 106) V e(5, 2, 75) V e(4, 3, 105)
+adding clause: ~x(0, 4, 2, 72) V ~x(0, 8, 3, 112) V e(8, 2, 81) V e(4, 3, 105)
+adding clause: ~x(0, 5, 2, 74) V ~x(0, 6, 3, 108) V e(6, 2, 77) V e(5, 3, 107)
+adding clause: ~x(0, 5, 2, 74) V ~x(0, 9, 3, 114) V e(9, 2, 83) V e(5, 3, 107)
+adding clause: ~x(0, 6, 2, 76) V ~x(0, 7, 3, 110) V e(7, 2, 79) V e(6, 3, 109)
+adding clause: ~x(0, 6, 2, 76) V ~x(0, 10, 3, 116) V e(10, 2, 85) V e(6, 3, 109)
+adding clause: ~x(0, 7, 2, 78) V ~x(0, 11, 3, 118) V e(11, 2, 87) V e(7, 3, 111)
+adding clause: ~x(0, 8, 2, 80) V ~x(0, 9, 3, 114) V e(9, 2, 83) V e(8, 3, 113)
+adding clause: ~x(0, 8, 2, 80) V ~x(0, 12, 3, 120) V e(12, 2, 89) V e(8, 3, 113)
+adding clause: ~x(0, 9, 2, 82) V ~x(0, 10, 3, 116) V e(10, 2, 85) V e(9, 3, 115)
+adding clause: ~x(0, 9, 2, 82) V ~x(0, 13, 3, 122) V e(13, 2, 91) V e(9, 3, 115)
+adding clause: ~x(0, 10, 2, 84) V ~x(0, 11, 3, 118) V e(11, 2, 87) V e(10, 3, 117)
+adding clause: ~x(0, 10, 2, 84) V ~x(0, 14, 3, 124) V e(14, 2, 93) V e(10, 3, 117)
+adding clause: ~x(0, 11, 2, 86) V ~x(0, 15, 3, 126) V e(15, 2, 95) V e(11, 3, 119)
+adding clause: ~x(0, 12, 2, 88) V ~x(0, 13, 3, 122) V e(13, 2, 91) V e(12, 3, 121)
+adding clause: ~x(0, 13, 2, 90) V ~x(0, 14, 3, 124) V e(14, 2, 93) V e(13, 3, 123)
+adding clause: ~x(0, 14, 2, 92) V ~x(0, 15, 3, 126) V e(15, 2, 95) V e(14, 3, 125)
+adding clause: ~x(0, 14, 2, 92) V ~x(0, 15, 3, 126) V e(15, 2, 95) V e(14, 3, 125)
+An agent moves along an edge, or not at all...
+At most one agent is placed in each vertex at each time step...
+Establishing relation between epsilon and X variables...
+adding clause: ~e(0, 3, 97) V ~x(0, 0, 3, 96)
+adding clause: ~x(0, 0, 2, 64) V x(0, 0, 3, 96) V x(0, 1, 3, 98) V x(0, 4, 3, 104)
+adding clause: ~e(1, 3, 99) V ~x(0, 1, 3, 98)
+adding clause: ~x(0, 1, 2, 66) V x(0, 1, 3, 98) V x(0, 0, 3, 96) V x(0, 2, 3, 100) V x(0, 5, 3, 106)
+adding clause: ~e(2, 3, 101) V ~x(0, 2, 3, 100)
+adding clause: ~x(0, 2, 2, 68) V x(0, 2, 3, 100) V x(0, 1, 3, 98) V x(0, 3, 3, 102) V x(0, 6, 3, 108)
+adding clause: ~e(3, 3, 103) V ~x(0, 3, 3, 102)
+adding clause: ~x(0, 3, 2, 70) V x(0, 3, 3, 102) V x(0, 2, 3, 100) V x(0, 7, 3, 110)
+adding clause: ~e(4, 3, 105) V ~x(0, 4, 3, 104)
+adding clause: ~x(0, 4, 2, 72) V x(0, 4, 3, 104) V x(0, 0, 3, 96) V x(0, 5, 3, 106) V x(0, 8, 3, 112)
+adding clause: ~e(5, 3, 107) V ~x(0, 5, 3, 106)
+adding clause: ~x(0, 5, 2, 74) V x(0, 5, 3, 106) V x(0, 1, 3, 98) V x(0, 4, 3, 104) V x(0, 6, 3, 108) V x(0, 9, 3, 114)
+adding clause: ~e(6, 3, 109) V ~x(0, 6, 3, 108)
+adding clause: ~x(0, 6, 2, 76) V x(0, 6, 3, 108) V x(0, 2, 3, 100) V x(0, 5, 3, 106) V x(0, 7, 3, 110) V x(0, 10, 3, 116)
+adding clause: ~e(7, 3, 111) V ~x(0, 7, 3, 110)
+adding clause: ~x(0, 7, 2, 78) V x(0, 7, 3, 110) V x(0, 3, 3, 102) V x(0, 6, 3, 108) V x(0, 11, 3, 118)
+adding clause: ~e(8, 3, 113) V ~x(0, 8, 3, 112)
+adding clause: ~x(0, 8, 2, 80) V x(0, 8, 3, 112) V x(0, 4, 3, 104) V x(0, 9, 3, 114) V x(0, 12, 3, 120)
+adding clause: ~e(9, 3, 115) V ~x(0, 9, 3, 114)
+adding clause: ~x(0, 9, 2, 82) V x(0, 9, 3, 114) V x(0, 5, 3, 106) V x(0, 8, 3, 112) V x(0, 10, 3, 116) V x(0, 13, 3, 122)
+adding clause: ~e(10, 3, 117) V ~x(0, 10, 3, 116)
+adding clause: ~x(0, 10, 2, 84) V x(0, 10, 3, 116) V x(0, 6, 3, 108) V x(0, 9, 3, 114) V x(0, 11, 3, 118) V x(0, 14, 3, 124)
+adding clause: ~e(11, 3, 119) V ~x(0, 11, 3, 118)
+adding clause: ~x(0, 11, 2, 86) V x(0, 11, 3, 118) V x(0, 7, 3, 110) V x(0, 10, 3, 116) V x(0, 15, 3, 126)
+adding clause: ~e(12, 3, 121) V ~x(0, 12, 3, 120)
+adding clause: ~x(0, 12, 2, 88) V x(0, 12, 3, 120) V x(0, 8, 3, 112) V x(0, 13, 3, 122)
+adding clause: ~e(13, 3, 123) V ~x(0, 13, 3, 122)
+adding clause: ~x(0, 13, 2, 90) V x(0, 13, 3, 122) V x(0, 9, 3, 114) V x(0, 12, 3, 120) V x(0, 14, 3, 124)
+adding clause: ~e(14, 3, 125) V ~x(0, 14, 3, 124)
+adding clause: ~x(0, 14, 2, 92) V x(0, 14, 3, 124) V x(0, 10, 3, 116) V x(0, 13, 3, 122) V x(0, 15, 3, 126) V x(0, 15, 3, 126)
+adding clause: ~e(15, 3, 127) V ~x(0, 15, 3, 126)
+adding clause: ~x(0, 15, 2, 94) V x(0, 15, 3, 126) V x(0, 11, 3, 118) V x(0, 14, 3, 124) V x(0, 14, 3, 124)
+Goal arrangements for group { 0[0, 8] }
+Creating assumption: ~x(0, 0, 3, 96)
+Creating assumption: ~x(0, 1, 3, 98)
+Creating assumption: ~x(0, 2, 3, 100)
+Creating assumption: ~x(0, 3, 3, 102)
+Creating assumption: ~x(0, 4, 3, 104)
+Creating assumption: ~x(0, 5, 3, 106)
+Creating assumption: ~x(0, 6, 3, 108)
+Creating assumption: ~x(0, 7, 3, 110)
+Creating assumption: x(0, 8, 3, 112)
+Creating assumption: ~x(0, 9, 3, 114)
+Creating assumption: ~x(0, 10, 3, 116)
+Creating assumption: ~x(0, 11, 3, 118)
+Creating assumption: ~x(0, 12, 3, 120)
+Creating assumption: ~x(0, 13, 3, 122)
+Creating assumption: ~x(0, 14, 3, 124)
+Creating assumption: ~x(0, 15, 3, 126)
+Planned groups' assumptions for group { 0[0, 8] }
+Creating assumption: ~x(0, 2, 0, 4)
+Creating assumption: ~e(2, 0, 5)
+Creating assumption: ~x(0, 6, 1, 44)
+Creating assumption: ~e(6, 1, 45)
+Creating assumption: ~x(0, 10, 2, 84)
+Creating assumption: ~e(10, 2, 85)
+Creating assumption: ~x(0, 14, 3, 124)
+Creating assumption: ~e(14, 3, 125)
+Creating assumption: ~x(0, 3, 0, 6)
+Creating assumption: ~e(3, 0, 7)
+Creating assumption: ~x(0, 7, 1, 46)
+Creating assumption: ~e(7, 1, 47)
+Creating assumption: ~x(0, 11, 2, 86)
+Creating assumption: ~e(11, 2, 87)
+Creating assumption: ~x(0, 15, 3, 126)
+Creating assumption: ~e(15, 3, 127)
+c last restart ## conflicts  :  0 77 
+var x(0, 0, 0, 0) is true
+var x(1, 4, 0, 40) is true
+var x(2, 8, 0, 80) is true
+var x(3, 8, 0, 112) is true
+Solution makespan: 3
+Timestep 0:
+	1 # 2
+Timestep 1:
+	1 # 6
+Timestep 2:
+	1 # 10
+Timestep 3:
+	1 # 14
+
+Solution makespan: 3
+Timestep 0:
+	2 # 3
+Timestep 1:
+	2 # 7
+Timestep 2:
+	2 # 11
+Timestep 3:
+	2 # 15
+
+Solution makespan: 3
+Timestep 0:
+	0 # 0
+Timestep 1:
+	0 # 4
+Timestep 2:
+	0 # 8
+Timestep 3:
+	0 # 8
+
+Merged Solution makespan: 3
+Timestep 0:
+	1 # 2
+	2 # 3
+Timestep 1:
+	1 # 6
+	2 # 7
+Timestep 2:
+	1 # 10
+	2 # 11
+Timestep 3:
+	1 # 14
+	2 # 15
+Merged Solution makespan: 3
+Timestep 0:
+	1 # 2
+	2 # 3
+	0 # 0
+Timestep 1:
+	1 # 6
+	2 # 7
+	0 # 4
+Timestep 2:
+	1 # 10
+	2 # 11
+	0 # 8
+Timestep 3:
+	1 # 14
+	2 # 15
+	0 # 8
+Time elapsed: 0.012292
+Solved for makespan = 3
+Solution makespan: 3
+Timestep 0:
+	1 # 2
+	2 # 3
+	0 # 0
+Timestep 1:
+	1 # 6
+	2 # 7
+	0 # 4
+Timestep 2:
+	1 # 10
+	2 # 11
+	0 # 8
+Timestep 3:
+	1 # 14
+	2 # 15
+	0 # 8
+
+Solution found (SAT) for makespan 3
+Instance size:
+  agents: 3
+  vertices: 16
+  edges: 25
+
+Solver settings:
+  encoding: Simplified
+  search: UNSAT-SAT
+
+Solving CPU time: 0.012316 s
+

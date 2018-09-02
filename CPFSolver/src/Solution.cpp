@@ -7,58 +7,13 @@
 
 #include "Solution.h"
 
-/*
-void Solution::add(int agentID, int position) {
-	if ((unsigned) agentID + 1 > _positions.at(_current_timestep).size()) {
-		//_positions.at(_current_timestep).resize(agentID + 1, -1);
-		for (std::vector<int> &pos : _positions) {
-			pos.resize(agentID + 1, -1);
-		}
-	}
-
-	// If building the first timestep, everything is ok.
-	// Maybe check if coherent with initial arrangement on instance?
-	if (_current_timestep == 0) {
-		_positions.at(_current_timestep).at(agentID) = position;
-		return;
-	}
-	// Else, check if the agent made a valid move.
-	int previous = _positions.at(_current_timestep - 1).at(agentID);
-	// Either the agent stayed at the same vertex
-	if (previous == position) {
-		_positions.at(_current_timestep).at(agentID) = position;
-		return;
-	}
-	// Or it moved to a neighbouring vertex.
-	for (auto &v: _instance.get_neighbours(previous)) {
-		if (v == position) {
-			_positions.at(_current_timestep).at(agentID) = position;
-			return;
-		}
-	}
-}
-*/
-
-
 bool Solution::check() const {
 	//TODO Is there any unassigned agent for each timestep?
 	for (auto &agent: _positions) {
-		//if (timestep.size() != (unsigned) _instance.n_agents())
-		//	return false;
 		for (auto &agent_pos: agent.second)
 			if (agent_pos < 0 || agent_pos > _instance.n_vertices())
 				return false;
 	}
-	//TODO order agents by ID, and make sure that the IDs are sequential and unique
-
-	/*for (unsigned t = 0; t < _positions.size(); ++t) {
-		std::sort(_positions[t].begin(), _positions[t].end(),
-		          [this](const std::shared_ptr<Agent> &a1, const std::shared_ptr<Agent> &a2) {
-			          return a1->id() < a2->id();
-		          });
-	}*/
-
-
 	return true;
 }
 

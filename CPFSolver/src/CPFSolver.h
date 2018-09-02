@@ -56,9 +56,7 @@ private:
 	EncoderID *_encoder;
 	Search *_search;
 
-	// Increasing order of complexity
-	std::vector<std::shared_ptr<Group>> _groups;
-
+	int _force_ID;
 	int _verbose;
 	int _max_makespan;
 	long _timeout;
@@ -66,6 +64,9 @@ private:
 	int _n_sat_calls = 0;
 	int _n_unsat_calls = 0;
 	double _solve_time = 0;
+
+	// Increasing order of complexity
+	std::vector<std::shared_ptr<Group>> _groups;
 
 	// 0 - Unsolved
 	// 1 - Solution found (SAT)
@@ -77,29 +78,29 @@ private:
 
 public:
 	// Complete constructor:
-	CPFSolver(Instance &instance, std::string encoding, std::string search,
-	          int verbose, long timeout, int max_makespan);
+	CPFSolver(Instance &instance, std::string search, std::string encoding,
+	          int force_ID, int max_makespan, long timeout, int verbose = 0);
 
-	// Constructor with default maximum makespan.
-	CPFSolver(Instance &instance, std::string encoding, std::string search, int verbose,
-	          long timeout)
-			: CPFSolver(instance, std::move(encoding), std::move(search), verbose, timeout,
-			            instance.max_makespan()) {}
+	// Constructor with default timeout.
+	CPFSolver(Instance &instance, std::string search, std::string encoding,
+	          int force_ID, int max_makespan, int verbose = 0)
+			: CPFSolver(instance, std::move(search), std::move(encoding), force_ID, max_makespan, 172800, verbose) {}
 
 	// Constructor with default maximum makespan and timeout.
-	CPFSolver(Instance &instance, std::string encoding, std::string search, int verbose)
-			: CPFSolver(instance, std::move(encoding), std::move(search), verbose,
-			            172800 /* 48 hours */, instance.max_makespan()) {}
+	CPFSolver(Instance &instance, std::string search, std::string encoding, int force_ID, int verbose = 0)
+			: CPFSolver(instance, std::move(search), std::move(encoding),
+			            force_ID, instance.max_makespan(), 172800, verbose) {}
 
-	// Constructor with default maximum makespan, timeout and verbosity.
-	CPFSolver(Instance &instance, std::string encoding, std::string search)
-			: CPFSolver(instance, std::move(encoding),
-			            std::move(search), 0, 172800 /* 48 hours */, instance.max_makespan()) {}
+	// Constructor with default maximum makespan, timeout and independence detection.
+	CPFSolver(Instance &instance, std::string search, std::string encoding, int verbose = 0)
+			: CPFSolver(instance, std::move(search), std::move(encoding), -1,
+			            instance.max_makespan(), 172800, verbose) {}
 
-	// Minimal constructor. Default maximum makespan, timeout, verbosity, encoding and search.
+
+	// Minimal constructor. Default maximum makespan, timeout, independence detection, encoding and search.
 	explicit CPFSolver(Instance instance, int verbose = 0)
-			: CPFSolver(instance, (std::string &) "simplified", (std::string &) "UNSAT-SAT",
-			            0, 172800 /* 48 hours */, instance.max_makespan()) {}
+			: CPFSolver(instance, (std::string &) "UNSAT-SAT", (std::string &) "simplified",
+			            -1, instance.max_makespan(), 172800 /* 48 hours */, verbose) {}
 
 	~CPFSolver() {
 		delete _encoder;
@@ -122,6 +123,8 @@ private:
 	bool solve_for_makespan(int makespan);
 
 	bool solve_group_for_makespan(std::shared_ptr<Group> group, int makespan);
+
+	bool solve_group_for_makespan(std::shared_ptr<Group> group, int makespan, Glucose::vec<Glucose::Lit> &assumptions);
 
 	void group();
 

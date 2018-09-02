@@ -53,30 +53,16 @@ bool Instance::check() {
 	}
 	if (!ok) return false;
 
-	std::sort(_agents.begin(), _agents.end(), [this](const std::shared_ptr<Agent> &a1, const std::shared_ptr<Agent> &a2) {
-		return distance(a1->initial_position(), a1->goal_position())
-		       > distance(a2->initial_position(), a2->goal_position());
-	});
+	std::sort(_agents.begin(), _agents.end(),
+	          [this](const std::shared_ptr<Agent> &a1, const std::shared_ptr<Agent> &a2) {
+		          return distance(a1->initial_position(), a1->goal_position())
+		                 > distance(a2->initial_position(), a2->goal_position());
+	          });
 
 	return true;
 }
 
 int Instance::min_makespan() const {
-	/*int max_distance = 0;
-	int current_distance = 0;
-
-	//std::cout << "Agents' distances to their goals:" << std::endl;
-
-	for (Agent a : _agents) {
-		current_distance = _environment.distance(a.initial_position(), a.goal_position());
-		//std::cout << "Agent " << a.id() << " distance: " << current_distance << std::endl;
-		//std::cout << "Agent " << a.id() << " initial pos: " << a.initial_position() << std::endl;
-
-		if (current_distance > max_distance)
-			max_distance = current_distance;
-	}
-
-	return max_distance;*/
 	return distance(_agents[0]->initial_position(), _agents[0]->goal_position());
 }
 

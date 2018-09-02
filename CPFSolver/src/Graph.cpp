@@ -52,7 +52,6 @@ void Graph::add_edge(Vertex start, Vertex end, bool directed) {
 		add_vertex(end);
 	}
 
-	/*std::cout << "Adding (" << start << ", " << end << ")" << std::endl;*/
 	Edge e1(start, end);
 	_adjacencies.at(start).push_back(e1);
 
