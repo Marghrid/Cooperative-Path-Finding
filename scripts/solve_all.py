@@ -135,7 +135,7 @@ for filename in filenames:
     # all_commands.append(current_command)
 
     if not surynek:
-        current_command = get_command.get_solve_command(instance, search='UNSAT-SAT', verbosity=0, timeout=timeout)
+        current_command = get_command.get_solve_command(instance, search='UNSAT-SAT', verbosity=0, timeout=timeout, indep=1)
     else:
         current_command = get_command.get_sury_solve_command(instance, makespan=32)
 
@@ -160,5 +160,5 @@ while len(all_commands) > 0:
             thread = threading.Thread(target=run_in_thread_s, args=[current_command])
         thread.start()
     else:
-        # if n_threads > 20:
-        time.sleep(10)
+        if n_threads > 12:
+            time.sleep(10)
