@@ -113,7 +113,8 @@ Solution CPFSolver::solve() {
 		bool solved_all_groups = true;
 		for (std::shared_ptr<Group> group : _groups) {
 			if (!solve_group_for_makespan(group, current_makespan)) {
-				std::cout << "Couldn't plan group " << *group << std::endl;
+				if (_verbose > 1)
+					std::cout << "Couldn't plan group " << *group << std::endl;
 				solved_all_groups = false;
 				break;
 			} else {
