@@ -129,14 +129,16 @@ Solution CPFSolver::solve() {
 			continue;
 		}
 
-		std::cout << "Planned all groups. Checking for conflicts:" << std::endl;
+		if (_verbose > 1)
+			std::cout << "Planned all groups. Checking for conflicts:" << std::endl;
 		bool merged = false;
 		for (int i = _groups.size() - 1; i > 0; --i) {
 			for (int j = i - 1; j >= 0; --j) {
 				if (check_conflict(_groups[i], _groups[j])) {
 					//replan _groups[i]
-					std::cout << "Found a conflict between groups " << *_groups[i] << " and " << *_groups[j]
-					          << ". Replaning " << *_groups[i] << "." << std::endl;
+					if (_verbose > 1)
+						std::cout << "Found a conflict between groups " << *_groups[i] << " and " << *_groups[j]
+						          << ". Replaning " << *_groups[i] << "." << std::endl;
 					std::vector<std::shared_ptr<Group>> planned(_groups);
 					planned.erase(planned.begin() + i);
 					Glucose::vec<Glucose::Lit> assumptions_i;
@@ -145,8 +147,9 @@ Solution CPFSolver::solve() {
 					if (!solve_group_for_makespan(_groups[i], current_makespan, assumptions_i) ||
 					    check_conflict(_groups[i], _groups[j])) {
 						//replan _groups[j]
-						std::cout << "Could not replan " << *_groups[i]
-						          << ". Replaning " << *_groups[j] << "." << std::endl;
+						if (_verbose > 1)
+							std::cout << "Could not replan " << *_groups[i]
+							          << ". Replaning " << *_groups[j] << "." << std::endl;
 						std::vector<std::shared_ptr<Group>> planned(_groups);
 						planned.erase(planned.begin() + j);
 						Glucose::vec<Glucose::Lit> assumptions_j;
@@ -154,14 +157,17 @@ Solution CPFSolver::solve() {
 
 						if (!solve_group_for_makespan(_groups[j], current_makespan, assumptions_j) ||
 						    check_conflict(_groups[i], _groups[j])) {
-							std::cout << "Merging." << std::endl;
+							if (_verbose > 1)
+								std::cout << "Merging." << std::endl;
 							merge(i, j);
 							merged = true;
 							break;
 						}
 					}
 				} else {
-					std::cout << "No conflict between " << *_groups[i] << " and " << *_groups[j] << "." << std::endl;
+					if (_verbose > 1)
+						std::cout << "No conflict between " << *_groups[i] << " and " << *_groups[j] << "."
+						          << std::endl;
 				}
 			}
 			if (merged) {
@@ -206,44 +212,6 @@ Solution CPFSolver::solve() {
 
 	return _solution;
 }
-/*
-bool CPFSolver::solve_for_makespan(int makespan) {
-	if (_verbose > 0)
-		std::cout << "Solving for makespan " << makespan << ":" << std::endl;
-
-	_encoder->create_clauses_for_makespan(makespan);
-
-	Glucose::vec<Glucose::Lit> assumptions;
-	_encoder->create_goal_assumptions(assumptions, makespan);
-
-	bool satisfiable = false;
-
-	* The (false, true) arguments on solve() prenvent the solver from
-	 *  performing optimizations which could result in variable elimination.
-	 *  (view lines 172-187 on include/glucose/simp/SimpSolver.cc)
-	 * This is a problem because I use variables from one iteration to another,
-	 *  resulting in a call of solve() between their creation, and the creation
-	 *  of clauses containing them.
-	 * NOTE: I should find out how much impact these optimizations I'm
-	 *  preventing actually have.
-	 */ /*
-	try {
-		satisfiable = _solver.solve(assumptions, false, true);
-	} catch (Glucose::OutOfMemoryException e) {
-		_status = -1;
-		throw OutOfMemoryException("Out of memory declared by Glucose.");
-	}
-
-	if (!satisfiable) {
-		++_n_unsat_calls;
-		if (_verbose > 0)
-			std::cout << "No solution for makespan " << makespan << std::endl;
-		return false;
-	}
-
-	++_n_sat_calls;
-	return true;
-}*/
 
 // Used on constructors.
 void CPFSolver::create_encoder(std::string encoding) {
@@ -302,29 +270,21 @@ void CPFSolver::print_stats(std::ostream &os) const {
 	os << "Solver settings:" << "\n";
 	os << "  encoding: " << _encoder->name() << "\n";
 	os << "  search: " << _search->name() << "\n";
+	os << "  ID: " << ((_force_ID > 0) ? "yes" : "no") << "\n";;
 	os << "" << "\n";
 
 	os << "Solving CPU time: " << _solve_time << " s" << "\n";
 	os << "" << std::endl;
 }
 
-std::shared_ptr<Group> CPFSolver::get_conflicting_group(std::shared_ptr<Group> group) {
-	std::cout << "conflict: " << group->solver->conflict.size() << std::endl;
-	while (group->solver->conflict.size() > 0) {
-		std::cout << " " << group->solver->conflict.last().x / 2 << ", " << group->solver->conflict.last().x % 2
-		          << std::endl;
-		group->solver->conflict.pop();
-	}
-
-	return std::make_shared<Group>(_instance);
-}
-
 void CPFSolver::group() {
-	std::cout << "Grouping agents:" << std::endl;
+	if (_verbose > 1)
+		std::cout << "Grouping agents:" << std::endl;
 	_groups.clear();
 
 	if (_force_ID == 0 ||
 	    (_force_ID == -1 && (double) _instance.n_agents() / (double) _instance.n_vertices() > 0.5)) {
+		_force_ID = 0;
 		// If there are many agents, all agents go in one big group
 		std::shared_ptr<Group> all = std::make_shared<Group>(_instance);
 		for (std::shared_ptr<Agent> &agent : _instance.agents()) {
@@ -332,6 +292,7 @@ void CPFSolver::group() {
 		}
 		_groups.push_back(all);
 	} else {
+		_force_ID = 1;
 		std::vector<std::shared_ptr<Agent>> aux(_instance.agents());
 		while (!aux.empty()) {
 			// Each agent is added to its own group, and the groups are put in _groups
@@ -342,16 +303,16 @@ void CPFSolver::group() {
 			_groups.push_back(group);
 		}
 	}
+	if (_verbose > 1) {
+		for (auto g : _groups)
+			std::cout << *g << " ";
 
-	for (auto g : _groups)
-		std::cout << *g << " ";
-
-	std::cout << std::endl;
+		std::cout << std::endl;
+	}
 }
 
 Solution CPFSolver::merge_solutions() {
 	auto pg_it = _groups.begin();
-	std::cout << "\n" << **pg_it << std::endl;
 
 	Solution solution = (*pg_it)->solution;
 	++pg_it;
