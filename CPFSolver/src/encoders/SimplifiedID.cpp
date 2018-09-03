@@ -27,7 +27,7 @@ void SimplifiedID::create_vars_for_makespan(Group *group, int makespan) {
 	while (group->created_vars_makespan < makespan) {
 		++group->created_vars_makespan;
 
-		for (int j = 0; j < _instance.n_vertices(); ++j) {
+		for (unsigned j = 0; j < _instance.n_vertices(); ++j) {
 			for (unsigned k = 0; k < group->agents.size(); ++k) {
 
 				if (_verbose > 3)
@@ -75,7 +75,7 @@ void SimplifiedID::create_clauses_for_makespan(Group *group, int makespan) {
 			std::cout << "The target vertex is vacant before the move, \n"
 			          << "and the source vertex will be vacant after it..."
 			          << std::endl;
-		for (int k = 0; k < mu; ++k) {
+		for (unsigned k = 0; k < mu; ++k) {
 			for (auto &e: _instance.bidirectional_edges()) {
 				Glucose::vec<Glucose::Lit> lit_vec1;
 				Glucose::vec<Glucose::Lit> lit_vec2;
@@ -177,19 +177,19 @@ void SimplifiedID::create_clauses_for_makespan(Group *group, int makespan) {
 void SimplifiedID::create_initial_arrangement_clauses(const Group *group, unsigned long mu, unsigned int n) const {
 	// Initial arrangement:
 	if (_verbose > 3)
-		std::__1::cout << "Initial arrangement..." << std::__1::endl;
+		std::cout << "Initial arrangement..." << std::endl;
 	for (unsigned j = 0; j < n; ++j) {
 
 		// epsilon vars:
 		if (group->vertex_starts_empty[j]) {
 			if (_verbose > 3)
-				std::__1::cout << "adding clause: e(" << j << ", "
-				               << 0 << ", " << make_evar_id(j, 0, *group) << ")" << std::__1::endl;
+				std::cout << "adding clause: e(" << j << ", "
+				               << 0 << ", " << make_evar_id(j, 0, *group) << ")" << std::endl;
 			group->solver->addClause(Glucose::mkLit(make_evar_id(j, 0, *group)));
 		} else {
 			if (_verbose > 3)
-				std::__1::cout << "adding clause: ~e(" << j << ", "
-				               << 0 << ", " << make_evar_id(j, 0, *group) << ")" << std::__1::endl;
+				std::cout << "adding clause: ~e(" << j << ", "
+				               << 0 << ", " << make_evar_id(j, 0, *group) << ")" << std::endl;
 			group->solver->addClause(Glucose::mkLit(make_evar_id(j, 0, *group), true));
 		}
 
@@ -197,13 +197,13 @@ void SimplifiedID::create_initial_arrangement_clauses(const Group *group, unsign
 		for (unsigned k = 0; k < mu; ++k) {
 			if (j == group->agents[k]->initial_position()) {
 				if (_verbose > 3)
-					std::__1::cout << "adding clause: x(" << k << ", " << j << ", " << 0 << ", "
-					               << make_xvar_id(k, j, 0, *group) << ")" << std::__1::endl;
+					std::cout << "adding clause: x(" << k << ", " << j << ", " << 0 << ", "
+					               << make_xvar_id(k, j, 0, *group) << ")" << std::endl;
 				group->solver->addClause(Glucose::mkLit(make_xvar_id(k, j, 0, *group)));
 			} else {
 				if (_verbose > 3)
-					std::__1::cout << "adding clause: ~x(" << k << ", " << j << ", " << 0 << ", "
-					               << make_xvar_id(k, j, 0, *group) << ")" << std::__1::endl;
+					std::cout << "adding clause: ~x(" << k << ", " << j << ", " << 0 << ", "
+					               << make_xvar_id(k, j, 0, *group) << ")" << std::endl;
 				group->solver->addClause(Glucose::mkLit(make_xvar_id(k, j, 0, *group), true));
 			}
 		}
