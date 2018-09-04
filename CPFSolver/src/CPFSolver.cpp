@@ -36,6 +36,7 @@ CPFSolver::CPFSolver(Instance &instance, std::string search, std::string encodin
 }
 
 bool CPFSolver::solve_group_for_makespan(std::shared_ptr<Group> group, int makespan) {
+	if (group->last_solved_makespan == makespan) return true;
 	Glucose::vec<Glucose::Lit> assumptions;
 	return solve_group_for_makespan(group, makespan, assumptions);
 }
@@ -43,8 +44,6 @@ bool CPFSolver::solve_group_for_makespan(std::shared_ptr<Group> group, int makes
 bool CPFSolver::solve_group_for_makespan(std::shared_ptr<Group> group, int makespan,
                                          Glucose::vec<Glucose::Lit> &assumptions) {
 	bool satisfiable;
-
-	if (group->last_solved_makespan == makespan) return true;
 
 	if (_verbose > 0)
 		std::cout << "Solving group " << *group << " for makespan " << makespan << ":" << std::endl;
