@@ -7,6 +7,8 @@
 
 #include "Instance.h"
 
+#include <algorithm>
+#include <memory>
 #include <queue>
 #include <set>
 
@@ -34,7 +36,7 @@ std::ostream &operator<<(std::ostream &os, const Instance &inst) {
 
 bool Instance::check() {
 	// Are there as many non-empty vertices at the beginning and the end as agents?
-	int count = 0;
+	unsigned count = 0;
 	for (bool val : _vertex_starts_empty)
 		if (!val) ++count;
 	if (count != _agents.size()) return false;
@@ -46,7 +48,7 @@ bool Instance::check() {
 
 	// Are the IDs unique and sequential?
 	bool ok = false;
-	for (int i = 0; i < _agents.size(); ++i) {
+	for (unsigned i = 0; i < _agents.size(); ++i) {
 		for (const std::shared_ptr<Agent> &a : _agents) {
 			if (a->id() == i) ok = true;
 		}
