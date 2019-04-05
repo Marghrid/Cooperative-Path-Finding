@@ -85,7 +85,7 @@ function parse_Surynek_solution(sol_lines) {
     for(l in sol_lines) {
         // 1 # 2 ---> 1 (0)
         line = sol_lines[l];
-        line = line.replace(" # ", " ");
+        line = line.replace(" @ ", " ");
         line = line.replace(" ---> ", " ");
         line = line.replace(" (", " ");
         line = line.slice(0, -1);
@@ -116,9 +116,9 @@ function parse_M_solution(sol_lines) {
 
     for(l in sol_lines) {
     /*  Timestep 0:
-            0 # 5
-            1 # 8
-            2 # 1   */
+            0 @ 5
+            1 @ 8
+            2 @ 1   */
 
         line = sol_lines[l];
 
@@ -128,7 +128,7 @@ function parse_M_solution(sol_lines) {
             continue;
         }
 
-        line = line.replace(" # ", " ");
+        line = line.replace(" @ ", " ");
         /* 0 5
            1 8
            2 1  */

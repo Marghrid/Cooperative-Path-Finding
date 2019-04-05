@@ -2,8 +2,8 @@ let renderer, scene, camera, clock;
 
 function onResize() {
     'use strict'
-    let render_size = Math.min(600, window.innerWidth * 0.85, window.innerHeight * 0.85);
-    
+    let render_size = Math.min(6000000, window.innerWidth * 0.95, window.innerHeight * 0.95);
+    renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( render_size, render_size );
 }
 

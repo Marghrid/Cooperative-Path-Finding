@@ -90,6 +90,20 @@ function example6_button() {
 function example7_button() {
     get_example_file("grid_08x08_a024_s849");
 }
+function example8_button() {
+    get_example_file("logo1");
+}
+function example9_button() {
+    get_example_file("logo2");
+}
+
+function example10_button() {
+    get_example_file("logo3");
+}
+
+function example11_button() {
+    get_example_file("logo4");
+}
 
 
 function get_example_file(ex_name) {

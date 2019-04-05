@@ -6,12 +6,12 @@
   <title> Cooperative Path-Finding Instance Viewer </title>
   <style>
     body, button {
-      font-family: sans-serif;
-      font-size: 13px;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: .9em;
     }
 
-    p {
-      font-size: 15px;
+    body {
+      padding-left: 1.5em;
     }
 
   	main {
@@ -20,22 +20,26 @@
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      margin: 10px;
   	}
 
-    header {
+    footer {
+    	text-align: left;
+    	margin-top: 50px;
+    	font-size: .7em;
     }
 
-  	h1 {
-  		font-size: 18pt;
-  	}
+    a {
+      color: #4b6482;
+      text-decoration: none;
+      font-size: 1.05em;
+    }
 
-  	h2 {
-  		font-size: 16pt;
-  	}
+    a:hover {
+      color: #627faf;
+    }
 
     #file_loading_interface {
-      max-width: 300px;
+      max-width: 370px;
       padding-right: 20px;
     }
     #renderer_interface {
@@ -56,6 +60,11 @@
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
+      margin:0 50px 0 20px;
+    }
+
+    #file_load_div {
+      margin:0 50px 0 20px;
     }
 
     .example_button {
@@ -74,10 +83,8 @@
       font-weight: bold;
       flex-grow: 1;
     }
-
   </style>
   <script src="js/files_management.js"></script>
-
   <script src="js/three.js">    </script>
   <script src="js/global.js">   </script>
   <script src="js/agent.js">    </script>
@@ -95,19 +102,15 @@
 </head>
 
 <body>
-  <!--<header>
-	 <h1> Cooperative Path-Finding </h1>
-	 <h2> Instance viewer </h2>
-  </header>-->
+  <header>
+	 
+  </header>
   <main>
     <div id="file_loading_interface">
       <h1> Cooperative Path-Finding </h1>
       <h2> Instance viewer </h2>
-      <div id="file_load_div">
-  	   <p> Instance file: <input type="file" id="cpf_file" onchange="update_cpf_file_flag()"> </p>
-  	   <p> Solution file: <input type="file" id="sol_file" onchange="update_sol_file_flag()"> </p>
-       <button type="button" id="refresh_button" onclick="refresh_button()"> Refresh </button></p>
-      </div>
+      <p> This viewer was developed as a part of the project <a href="https://github.com/Marghrid/CPF"><strong>Satisfying Cooperative Path-Finding</strong></a>.</p>
+      <h4>Choose an example instance:</h4>
       <div id="example_buttons_div">
         <button type="button" class="example_button" onclick="example1_button()"> Grid 4x4, 4 agents </button>
         <button type="button" class="example_button" onclick="example2_button()"> Grid 4x4, 8 agents </button>
@@ -115,7 +118,16 @@
         <button type="button" class="example_button" onclick="example7_button()"> Grid 8x8, 24 agents </button>
         <button type="button" class="example_button" onclick="example4_button()"> Subway 1 </button>
         <button type="button" class="example_button" onclick="example5_button()"> Subway 2 </button>
-        <button type="button" class="example_button" onclick="example6_button()"> Bridges </button>
+        <button type="button" class="example_button" onclick="example6_button()"> Bridges 1 </button>
+        <button type="button" class="example_button" onclick="example8_button()"> Platforms 1 </button>
+        <button type="button" class="example_button" onclick="example10_button()"> Platforms 2 </button>
+        <button type="button" class="example_button" onclick="example11_button()"> Platforms 3 </button>
+      </div>
+      <h4>Or upload a new one:</h4>
+      <div id="file_load_div">
+  	  	<p> Instance file: <input type="file" id="cpf_file" onchange="update_cpf_file_flag()"> </p>
+  	  	<p> Solution file: <input type="file" id="sol_file" onchange="update_sol_file_flag()"> </p>
+      	<button type="button" id="refresh_button" onclick="refresh_button()"> Refresh </button></p>
       </div>
     </div>
   
@@ -127,5 +139,6 @@
     </div>
   </main>
 
+  <footer>Margarida Ferreira. 2018</footer>
 </body>
 </html>
