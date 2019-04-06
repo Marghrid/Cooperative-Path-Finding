@@ -50,6 +50,10 @@ CPFSolver/include/glucose/mtl/template.mk
 instances/*
 solutions/*
 stats_files/*
+IDinstances/*
+IDstats/*
+noIDstats/*
+
 **/table.csv
 
 **/core
