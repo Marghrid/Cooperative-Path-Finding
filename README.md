@@ -11,7 +11,7 @@ NTIA project: Cooperative Path-Finding
 
 **handmade_instances**: Instances created using Duarte's [CPFMaker](https://github.com/drcd1/CPFMaker).
 
-**website**: All files related to the insatnce viewer website.
+**website**: All files related to the instance viewer [website](https://web.tecnico.ulisboa.pt/~ist180832/CPF/).
 
 **glucose**: The SAT solver library
 
